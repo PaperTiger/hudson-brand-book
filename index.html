@@ -980,6 +980,128 @@
         height: clamp(90px, 28vw, 140px) !important;
       }
     }
+
+    /* ─── Clearspace Diagram Component ──────────────────────────
+       Reusable for any logo page. Set --cs-x on .cs-zone to
+       control the clearspace amount. Copy the .cs-outer block
+       and swap the logo src and definition text.
+    ─────────────────────────────────────────────────────────── */
+    .cs-outer {
+      background: #EBEBEB;
+      padding: 40px;
+      display: inline-flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .cs-zone {
+      background: rgba(116, 251, 215, 0.2);
+      padding: var(--cs-x, 36px);
+      position: relative;
+      display: inline-block;
+    }
+    .cs-logo-box {
+      background: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    /* H mark in the bottom clearspace strip — height = --cs-x exactly.
+       H_black.svg path fills the full viewBox, so no scaling correction needed. */
+    .cs-h-mark {
+      position: absolute;
+      height: var(--cs-x, 32px);
+      width: auto;
+      opacity: 0.25;
+      pointer-events: none;
+    }
+    /* Vertical dimension lines (top / bottom clearspace strips) */
+    .cs-dim-v {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 1px;
+      height: var(--cs-x, 36px);
+      background: rgba(0, 9, 19, 0.3);
+    }
+    .cs-dim-v.top    { top: 0; }
+    .cs-dim-v.bottom { bottom: 0; }
+    /* Horizontal dimension lines (left / right clearspace strips) */
+    .cs-dim-h {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      height: 1px;
+      width: var(--cs-x, 36px);
+      background: rgba(0, 9, 19, 0.3);
+    }
+    .cs-dim-h.left  { left: 0; }
+    .cs-dim-h.right { right: 0; }
+    /* Tick marks via pseudo-elements */
+    .cs-dim-v::before, .cs-dim-v::after {
+      content: '';
+      position: absolute;
+      left: -4px;
+      width: 9px;
+      height: 1px;
+      background: rgba(0, 9, 19, 0.3);
+    }
+    .cs-dim-v::before { top: 0; }
+    .cs-dim-v::after  { bottom: 0; }
+    .cs-dim-h::before, .cs-dim-h::after {
+      content: '';
+      position: absolute;
+      top: -4px;
+      height: 9px;
+      width: 1px;
+      background: rgba(0, 9, 19, 0.3);
+    }
+    .cs-dim-h::before { left: 0; }
+    .cs-dim-h::after  { right: 0; }
+    /* Dimension labels */
+    .cs-dim-v .cs-lbl {
+      position: absolute;
+      top: 50%;
+      left: 7px;
+      transform: translateY(-50%);
+      font-family: 'Founders Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 10px;
+      color: var(--charcoal);
+      line-height: 1;
+    }
+    .cs-dim-h .cs-lbl {
+      position: absolute;
+      left: 50%;
+      bottom: 6px;
+      transform: translateX(-50%);
+      font-family: 'Founders Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 10px;
+      color: var(--charcoal);
+      line-height: 1;
+    }
+    /* Definition row under the diagram */
+    .cs-def {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding-top: 14px;
+      font-size: 12px;
+      color: var(--charcoal);
+      font-family: 'Founders Grotesk Text', sans-serif;
+    }
+    .cs-def-x {
+      font-family: 'Founders Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 11px;
+      background: rgba(116, 251, 215, 0.5);
+      color: var(--charcoal);
+      padding: 2px 7px;
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+
   </style>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1187,24 +1309,44 @@
   </div>
   <div style="margin:0 32px 80px;">
     <div style="font-size:10px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--charcoal); margin-bottom:24px;">Clearspace</div>
-    <div style="display:flex; align-items:flex-start; gap:72px; flex-wrap:wrap;">
-      <div style="position:relative; display:inline-block; flex-shrink:0;">
-        <div style="border:1.5px dashed #C0C0C0; padding:32px; background:var(--white);">
-          <img src="images/logos/Hudson-County_full-logo_black.svg" style="max-width:280px; width:100%; height:auto;" alt="clearspace diagram">
+
+    <div style="display:flex; align-items:flex-start; gap:64px; flex-wrap:wrap;">
+
+      <!-- ─ Clearspace diagram ─────────────────────────────────
+           Reusable component: .cs-outer > .cs-zone[--cs-x] >
+           .cs-logo-box + four .cs-dim-v/.cs-dim-h indicators.
+           To use on another logo page: copy this block, change
+           the logo src, --cs-x value, and .cs-def text.
+      ──────────────────────────────────────────────────────── -->
+      <div class="cs-outer" style="flex-shrink:0;">
+        <div class="cs-zone" style="--cs-x: 32px;">
+          <div class="cs-logo-box">
+            <img src="images/logos/Hudson-County_full-logo_black.svg" style="max-width:280px; width:100%; height:auto; display:block;">
+          </div>
+          <div class="cs-dim-v top"><span class="cs-lbl">x</span></div>
+          <div class="cs-dim-v bottom"><span class="cs-lbl">x</span></div>
+          <div class="cs-dim-h left"><span class="cs-lbl">x</span></div>
+          <div class="cs-dim-h right"><span class="cs-lbl">x</span></div>
+          <!-- H logo mark in bottom strip: height = --cs-x, bottom-aligned with strip -->
+          <img src="images/logos/H_black.svg" class="cs-h-mark" alt=""
+               style="bottom:0; left:68%; transform:translateX(-50%);">
         </div>
-        <div style="position:absolute; top:0; left:50%; transform:translate(-50%,-100%); font-size:10px; font-weight:700; color:var(--charcoal); font-family:'Founders Grotesk',sans-serif; padding-bottom:4px; letter-spacing:0.06em;">x</div>
-        <div style="position:absolute; bottom:0; left:50%; transform:translate(-50%,100%); font-size:10px; font-weight:700; color:var(--charcoal); font-family:'Founders Grotesk',sans-serif; padding-top:4px; letter-spacing:0.06em;">x</div>
-        <div style="position:absolute; top:50%; left:0; transform:translate(-100%,-50%); font-size:10px; font-weight:700; color:var(--charcoal); font-family:'Founders Grotesk',sans-serif; padding-right:4px; letter-spacing:0.06em;">x</div>
-        <div style="position:absolute; top:50%; right:0; transform:translate(100%,-50%); font-size:10px; font-weight:700; color:var(--charcoal); font-family:'Founders Grotesk',sans-serif; padding-left:4px; letter-spacing:0.06em;">x</div>
+        <div class="cs-def">
+          <span class="cs-def-x">x</span>
+          <span>= cap height of the &#8220;H&#8221; in HUDSON</span>
+        </div>
       </div>
-      <div style="max-width:380px; padding-top:8px;">
+
+      <!-- ─ Description ──────────────────────────────────────── -->
+      <div style="max-width:360px; padding-top:8px; flex:1;">
         <div style="font-weight:600; font-size:14px; color:var(--charcoal); margin-bottom:10px;">Minimum clearspace = x</div>
-        <div style="font-size:14px; color:var(--charcoal); line-height:1.4;">The clearspace unit x equals the cap height of the "H" in the HUDSON wordmark. This unit scales proportionally with the logo at any reproduction size, ensuring the logo always has room to read clearly regardless of context.</div>
-        <div style="margin-top:20px; padding:16px 20px; background:#F5F5F5; border-left:3px solid var(--teal);">
-          <div style="font-size:11px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:var(--charcoal); margin-bottom:6px;">x = the cap height of the "H" in HUDSON</div>
-          <div style="font-size:12px; color:var(--charcoal); line-height:1.4;">Never place competing text, images, or graphic elements within this clearspace. This ensures the logo is always seen clearly and never feels crowded.</div>
+        <div style="font-size:14px; color:var(--charcoal); line-height:1.4;">The clearspace unit <strong>x</strong> equals the cap height of the &#8220;H&#8221; in the HUDSON wordmark. This unit scales proportionally with the logo at any reproduction size, ensuring the logo always has room to read clearly regardless of context.</div>
+        <div style="margin-top:20px; padding:16px 20px; background:rgba(116,251,215,0.12); border-left:3px solid var(--teal);">
+          <div style="font-size:11px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:var(--charcoal); margin-bottom:6px;">x = cap height of &#8220;H&#8221; in HUDSON</div>
+          <div style="font-size:12px; color:var(--charcoal); line-height:1.4;">Never place text, images, or graphic elements within the clearspace zone. The tinted area in the diagram represents the minimum protected region at any size.</div>
         </div>
       </div>
+
     </div>
   </div>
   </div>
