@@ -151,6 +151,8 @@ const BRAND = {
             { label: "Text only",     id: "hcnj-text-only" },
           ],
         },
+        { label: "Avatar",        id: "logo-avatar" },
+        { label: "What to avoid", id: "logo-avoid" },
       ],
     },
     {
