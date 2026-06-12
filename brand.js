@@ -199,7 +199,7 @@ const BRAND = {
       items: [
         { label: "Introduction",  id: "app-intro" },
         { label: "Swag samples",  id: "app-swag" },
-        { label: "In the wild",   id: "app-wild" },
+        { label: "Community",      id: "app-wild" },
       ],
     },
     {
