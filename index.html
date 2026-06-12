@@ -84,6 +84,7 @@
         user-select: none !important;
       }
       .nav-section-chevron {
+        display: block !important;
         width: 16px; height: 16px;
         color: var(--charcoal);
         flex-shrink: 0;
@@ -334,6 +335,10 @@
         min-height: 0 !important;
         max-height: 140px !important;
       }
+      /* Scale --cs-x proportionally with the reduced logo height (140px vs ~220px desktop) */
+      #logo-stacked .cs-zone {
+        --cs-x: 13px !important;
+      }
 
       /* ─── Fix #3: Hero images fill properly ─────────────────── */
       .page > [style*="padding:80px"] img {
@@ -546,6 +551,7 @@
       color: var(--charcoal);
       padding: 0 24px 8px;
     }
+    .nav-section-chevron { display: none; }
     .nav-link {
       display: block;
       padding: 8px 24px;
@@ -4437,7 +4443,7 @@
       </div>
 
       <!-- Right: icon grid placeholder -->
-      <div style="display:grid; grid-template-columns:repeat(6, 1fr); gap:2px; background:var(--light-gray);">
+      <div style="display:grid; grid-template-columns:repeat(6, 1fr); gap:1px; background:var(--light-gray);">
         <!-- Row 1 -->
         <div style="background:var(--cream); aspect-ratio:1; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:8px;">
           <div style="width:32px; height:32px; background:var(--light-gray); border-radius:2px;"></div>
