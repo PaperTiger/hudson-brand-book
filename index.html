@@ -330,7 +330,7 @@
       display: block;
     }
     .sidebar-label {
-      font-size: 10px;
+      font-size: 11px;
       font-weight: 500;
       letter-spacing: 0.12em;
       text-transform: uppercase;
@@ -343,7 +343,7 @@
       border-bottom: 1px solid var(--light-gray);
     }
     .nav-group-header {
-      font-size: 10px;
+      font-size: 11px;
       font-weight: 600;
       letter-spacing: 0.13em;
       text-transform: uppercase;
@@ -411,6 +411,43 @@
     .page[id] { outline: none; }
     .page.active { display: block; }
 
+    /* ─── Bottom page navigation ─────────────────────────────── */
+    .page-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: stretch;
+      border-top: 1px solid var(--light-gray);
+      padding: 0 48px;
+      margin-top: 48px;
+    }
+    .page-nav-link {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      padding: 28px 0;
+      text-decoration: none;
+      color: var(--charcoal);
+      transition: color 0.15s var(--ease);
+      max-width: 45%;
+    }
+    .page-nav-link:hover { color: var(--green); }
+    .page-nav-link:hover .page-nav-dir { color: var(--green); }
+    .page-nav-dir {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--warm-gray);
+      transition: color 0.15s var(--ease);
+    }
+    .page-nav-label {
+      font-family: 'Founders Grotesk', sans-serif;
+      font-size: 17px;
+      font-weight: 500;
+      line-height: 1.1;
+    }
+    .page-nav-next { text-align: right; align-items: flex-end; }
+
     /* ─── Hero ───────────────────────────────────────────────── */
     .hero {
       width: 100%;
@@ -448,7 +485,7 @@
       max-width: 900px;
     }
     .section-label {
-      font-size: 10px;
+      font-size: 11px;
       font-weight: 600;
       letter-spacing: 0.13em;
       text-transform: uppercase;
@@ -778,7 +815,7 @@
       padding: 40px 32px;
     }
     .app-context {
-      font-size: 10px;
+      font-size: 11px;
       font-weight: 600;
       letter-spacing: 0.12em;
       text-transform: uppercase;
@@ -811,7 +848,7 @@
       padding: 60px 32px;
     }
     .municipalities-label {
-      font-size: 10px;
+      font-size: 11px;
       font-weight: 600;
       letter-spacing: 0.13em;
       text-transform: uppercase;
@@ -834,7 +871,7 @@
       text-transform: uppercase;
     }
     .municipality-num {
-      font-size: 10px;
+      font-size: 11px;
       font-weight: 400;
       color: var(--teal);
       display: block;
@@ -1087,7 +1124,7 @@
       transform: translateY(-50%);
       font-family: 'Founders Grotesk', sans-serif;
       font-weight: 700;
-      font-size: 10px;
+      font-size: 11px;
       color: var(--charcoal);
       line-height: 1;
     }
@@ -1098,7 +1135,7 @@
       transform: translateX(-50%);
       font-family: 'Founders Grotesk', sans-serif;
       font-weight: 700;
-      font-size: 10px;
+      font-size: 11px;
       color: var(--charcoal);
       line-height: 1;
     }
@@ -2154,7 +2191,10 @@
             <span style="background:#FFFFFF; color:#000913; font-size:11px; font-weight:700; padding:3px 8px; letter-spacing:0.08em; display:inline-flex; align-items:center; gap:4px;"><svg width="9" height="7" viewBox="0 0 9 7" fill="none"><path stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M1 3.5l2.5 2.5 4.5-5"/></svg>AA</span>
             <span style="font-size:12px; color:#000913; font-weight:500;">4.29 : 1</span>
           </div>
-          <div style="margin-top:10px; font-size:11px; color:#000913; line-height:1.6;">Large text &amp; UI components pass AA.<br>Normal-size body text fails, avoid for running copy.</div>
+          <div style="margin-top:10px; font-size:11px; color:#000913; line-height:1.6;">
+            <div style="display:flex; align-items:baseline; gap:6px; margin-bottom:3px;"><span style="font-weight:700;">White</span><span style="opacity:0.7;">— headings, labels &amp; UI only</span></div>
+            <div style="display:flex; align-items:baseline; gap:6px;"><span style="font-weight:700;">Black</span><span style="opacity:0.7;">— body copy &amp; small text</span></div>
+          </div>
         </div>
       </div>
 
@@ -3705,7 +3745,7 @@
 <!-- ══════════════════════════════════════════════════════════
      JAVASCRIPT, Scroll-driven nav + smooth scroll
 ══════════════════════════════════════════════════════════════ -->
-<script src="brand.js?v=4"></script>
+<script src="brand.js?v=6"></script>
 
 <script>
 (function () {
@@ -3815,6 +3855,57 @@
       }
     });
   });
+
+  // ── Bottom prev/next navigation ──────────────────────────────
+  (function buildPageNav() {
+    const pages = [];
+    BRAND.nav.forEach(section => {
+      const groupLabel = section.group.replace(/&amp;/g, '&');
+      section.items.forEach(item => {
+        if (item.children) {
+          item.children.forEach(child => pages.push({ id: child.id, label: child.label, group: groupLabel }));
+        } else {
+          pages.push({ id: item.id, label: item.label, group: groupLabel });
+        }
+      });
+    });
+
+    pages.forEach((page, i) => {
+      const el = document.getElementById(page.id);
+      if (!el) return;
+      const prev = pages[i - 1];
+      const next = pages[i + 1];
+      if (!prev && !next) return;
+
+      const nav = document.createElement('nav');
+      nav.className = 'page-nav';
+      nav.setAttribute('aria-label', 'Page navigation');
+
+      let html = prev
+        ? `<a class="page-nav-link page-nav-prev" href="#${prev.id}" data-target="${prev.id}">
+             <span class="page-nav-dir">← Previous</span>
+             <span class="page-nav-label">${prev.label}</span>
+           </a>`
+        : '<span></span>';
+
+      if (next) {
+        html += `<a class="page-nav-link page-nav-next" href="#${next.id}" data-target="${next.id}">
+                   <span class="page-nav-dir">Next →</span>
+                   <span class="page-nav-label">${next.label}</span>
+                 </a>`;
+      }
+
+      nav.innerHTML = html;
+      el.appendChild(nav);
+
+      nav.querySelectorAll('a[data-target]').forEach(a => {
+        a.addEventListener('click', e => {
+          e.preventDefault();
+          showPage(a.getAttribute('data-target'), true);
+        });
+      });
+    });
+  })();
 
   const navHome = document.getElementById('nav-home');
   if (navHome) navHome.addEventListener('click', (e) => { e.preventDefault(); showPage('home', true); });

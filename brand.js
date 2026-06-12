@@ -302,14 +302,14 @@ function renderPalette(containerId, colors, minHeight) {
         <span>R</span><span>${r}</span>
         <span>G</span><span>${g}</span>
         <span>B</span><span>${b}</span>
-        <div style="grid-column:1/-1; height:5px;"></div>
+        <div style="grid-column:1/-1; height:7px;"></div>
         <span>C</span><span>${cm}</span>
         <span>M</span><span>${m}</span>
         <span>Y</span><span>${y}</span>
         <span>K</span><span>${k}</span>
-        <div style="grid-column:1/-1; height:5px;"></div>
+        <div style="grid-column:1/-1; height:7px;"></div>
         <span>#</span><span>${hex}</span>
-        <div style="grid-column:1/-1; height:5px;"></div>
+        <div style="grid-column:1/-1; height:7px;"></div>
         <span>P</span><span>---</span>
       </div>`;
   }
