@@ -90,7 +90,13 @@ Then find the Tailwind config block near the top of `index.html` and update the 
 
 ### 4. Color palette cards
 
-These populate the Primary palette and Secondary palette pages automatically. Update `BRAND.colors` with your palette data (hex, RGB, CMYK, name).
+These populate the Primary palette and Secondary palette pages automatically. For each color you only need `name`, `hex`, and `textColor` — RGB and CMYK are computed automatically:
+
+```js
+{ name: "Brand Blue", hex: "#0033CC", textColor: "#FFFFFF" }
+```
+
+Add `outline: "1px solid #C8C8C8"` for any very light swatch that needs a visible border.
 
 ### 5. Type specimens
 

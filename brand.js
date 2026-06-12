@@ -81,57 +81,25 @@ const BRAND = {
 
   /* ── 4. Colors ────────────────────────────────────────────────
      Drives the color palette card pages (Primary palette, Secondary palette).
-     rgb:  [R, G, B]
-     cmyk: [C, M, Y, K]
-     textColor: hex used for text/dots on top of the swatch.
-     outline:   optional box-shadow for light swatches that need a border.
+     Only hex, textColor, and (optionally) outline are needed — RGB and CMYK
+     are computed automatically by hexToRgb() and hexToCmyk() at render time.
+     textColor: hex for text/dots on top of the swatch (white or dark).
+     outline:   use "1px solid #C8C8C8" for light swatches needing a border.
   ──────────────────────────────────────────────────────────────── */
   colors: {
     primary: [
-      {
-        name: "Accent", hex: "#74FBD7", textColor: "#000913",
-        rgb: [116, 251, 215], cmyk: [54, 0, 14, 2],
-      },
-      {
-        name: "Primary", hex: "#003230", textColor: "#74FBD7",
-        rgb: [0, 50, 48], cmyk: [100, 0, 4, 80],
-      },
-      {
-        name: "Charcoal", hex: "#000913", textColor: "#FFFFFF",
-        rgb: [0, 9, 19], cmyk: [100, 53, 0, 93],
-      },
-      {
-        name: "White", hex: "#FFFFFF", textColor: "#000913",
-        rgb: [255, 255, 255], cmyk: [0, 0, 0, 0],
-        outline: "1px solid #C8C8C8",
-      },
+      { name: "Accent",   hex: "#74FBD7", textColor: "#000913" },
+      { name: "Primary",  hex: "#003230", textColor: "#74FBD7" },
+      { name: "Charcoal", hex: "#000913", textColor: "#FFFFFF" },
+      { name: "White",    hex: "#FFFFFF", textColor: "#000913", outline: "1px solid #C8C8C8" },
     ],
     secondary: [
-      {
-        name: "Blue",     hex: "#0004F5", textColor: "#74FBD7",
-        rgb: [0, 4, 245],    cmyk: [100, 98, 0, 4],
-      },
-      {
-        name: "Purple",   hex: "#6B1262", textColor: "#FFFFFF",
-        rgb: [107, 18, 98],  cmyk: [0, 83, 8, 58],
-      },
-      {
-        name: "Yellow",   hex: "#EBE825", textColor: "#000913",
-        rgb: [235, 232, 37], cmyk: [0, 1, 84, 8],
-      },
-      {
-        name: "Green",    hex: "#8AF161", textColor: "#000913",
-        rgb: [138, 241, 97], cmyk: [43, 0, 60, 5],
-      },
-      {
-        name: "Red",      hex: "#EB254D", textColor: "#000913",
-        rgb: [235, 37, 77],  cmyk: [0, 84, 67, 8],
-      },
-      {
-        name: "Gray",     hex: "#E3E3E3", textColor: "#000913",
-        rgb: [227, 227, 227], cmyk: [0, 0, 0, 11],
-        outline: "1px solid #C8C8C8",
-      },
+      { name: "Blue",   hex: "#0004F5", textColor: "#74FBD7" },
+      { name: "Purple", hex: "#6B1262", textColor: "#FFFFFF" },
+      { name: "Yellow", hex: "#EBE825", textColor: "#000913" },
+      { name: "Green",  hex: "#8AF161", textColor: "#000913" },
+      { name: "Red",    hex: "#EB254D", textColor: "#000913" },
+      { name: "Gray",   hex: "#E3E3E3", textColor: "#000913", outline: "1px solid #C8C8C8" },
     ],
   },
 
@@ -380,11 +348,32 @@ function initNavSectionToggles() {
 }
 
 
+/* Convert hex color to RGB array */
+function hexToRgb(hex) {
+  const h = hex.replace("#", "");
+  return [
+    parseInt(h.substring(0, 2), 16),
+    parseInt(h.substring(2, 4), 16),
+    parseInt(h.substring(4, 6), 16),
+  ];
+}
+
+/* Convert hex color to CMYK array (mathematical, not profile-aware) */
+function hexToCmyk(hex) {
+  const [r, g, b] = hexToRgb(hex).map(v => v / 255);
+  const k = 1 - Math.max(r, g, b);
+  if (k === 1) return [0, 0, 0, 100];
+  const c = Math.round(((1 - r - k) / (1 - k)) * 100);
+  const m = Math.round(((1 - g - k) / (1 - k)) * 100);
+  const y = Math.round(((1 - b - k) / (1 - k)) * 100);
+  return [c, m, y, Math.round(k * 100)];
+}
+
 /* Render a color palette grid from an array of color objects */
 function renderPalette(containerId, colors, minHeight) {
   function colorValues(c) {
-    const [r, g, b] = c.rgb;
-    const [cm, m, y, k] = c.cmyk;
+    const [r, g, b] = hexToRgb(c.hex);
+    const [cm, m, y, k] = hexToCmyk(c.hex);
     const hex = c.hex.replace("#", "");
     return `
       <div style="display:grid; grid-template-columns:14px 1fr; gap:0 10px; line-height:1.1;">
