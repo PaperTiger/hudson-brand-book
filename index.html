@@ -334,15 +334,6 @@
       }
       /* Scale down large logos inside the diagram */
       .cs-logo-box img { max-width: 100% !important; }
-      /* Stacked logo has min-height:200px which is too tall on mobile */
-      #logo-stacked .cs-logo-box img {
-        min-height: 0 !important;
-        max-height: 140px !important;
-      }
-      /* Scale --cs-x proportionally with the reduced logo height (140px vs ~220px desktop) */
-      #logo-stacked .cs-zone {
-        --cs-x: 13px !important;
-      }
 
       /* ─── Fix #3: Hero images fill properly ─────────────────── */
       .page > [style*="padding:80px"] img {
@@ -1765,22 +1756,50 @@
         </div>
       </div>
       <div style="order:1; display:flex; justify-content:center; align-items:center;">
-        <div class="cs-outer">
-          <div class="cs-zone" style="--cs-x: 21px;">
-            <div class="cs-logo-box">
-              <img src="images/logos/Hudson-County_logo-stacked_black.svg" alt="Hudson County full logo, stacked" style="min-height:200px; max-height:240px; width:auto; display:block;">
-            </div>
-            <div class="cs-dim-v top"><span class="cs-lbl">x</span></div>
-            <div class="cs-dim-v bottom"><span class="cs-lbl">x</span></div>
-            <div class="cs-dim-h left"><span class="cs-lbl">x</span></div>
-            <div class="cs-dim-h right"><span class="cs-lbl">x</span></div>
-            <img src="images/logos/H_black.svg" class="cs-h-mark" alt="" style="bottom:0; left:68%; transform:translateX(-50%);">
-          </div>
-          <div class="cs-def">
-            <span class="cs-def-x">x</span>
-            <span>= cap height of the &#8220;H&#8221; in HUDSON</span>
-          </div>
-        </div>
+        <!-- Static SVG clearspace diagram — scales at any viewport via viewBox -->
+        <svg viewBox="0 0 220 345" xmlns="http://www.w3.org/2000/svg"
+             style="width:100%;max-width:380px;display:block;margin:0 auto;"
+             aria-label="Clearspace diagram: minimum clearspace x on all four sides of the stacked logo">
+          <!-- teal clearspace zone -->
+          <rect x="18" y="18" width="184" height="273" fill="rgba(116,251,215,0.2)"/>
+          <!-- white logo field -->
+          <rect x="40" y="40" width="140" height="229" fill="#ffffff"/>
+          <!-- logo — PNG used instead of SVG to avoid SVG-in-SVG rendering bugs in Safari -->
+          <image href="images/logos/Hudson-County_logo-stacked_black.png"
+                 x="40" y="40" width="140" height="229" preserveAspectRatio="xMidYMid meet"/>
+          <!-- top clearspace strip dimension line -->
+          <line x1="110" y1="18" x2="110" y2="40" stroke="rgba(0,9,19,0.4)" stroke-width="1"/>
+          <line x1="105" y1="18"  x2="115" y2="18"  stroke="rgba(0,9,19,0.4)" stroke-width="1"/>
+          <line x1="105" y1="40"  x2="115" y2="40"  stroke="rgba(0,9,19,0.4)" stroke-width="1"/>
+          <text x="117" y="31"  font-family="'Founders Grotesk',sans-serif" font-size="9" font-weight="700" fill="#000913">x</text>
+          <!-- bottom clearspace strip dimension line -->
+          <line x1="110" y1="269" x2="110" y2="291" stroke="rgba(0,9,19,0.4)" stroke-width="1"/>
+          <line x1="105" y1="269" x2="115" y2="269" stroke="rgba(0,9,19,0.4)" stroke-width="1"/>
+          <line x1="105" y1="291" x2="115" y2="291" stroke="rgba(0,9,19,0.4)" stroke-width="1"/>
+          <text x="117" y="282" font-family="'Founders Grotesk',sans-serif" font-size="9" font-weight="700" fill="#000913">x</text>
+          <!-- left clearspace strip dimension line -->
+          <line x1="18" y1="154" x2="40" y2="154" stroke="rgba(0,9,19,0.4)" stroke-width="1"/>
+          <line x1="18" y1="149" x2="18" y2="159" stroke="rgba(0,9,19,0.4)" stroke-width="1"/>
+          <line x1="40" y1="149" x2="40" y2="159" stroke="rgba(0,9,19,0.4)" stroke-width="1"/>
+          <text x="20" y="150" font-family="'Founders Grotesk',sans-serif" font-size="9" font-weight="700" fill="#000913">x</text>
+          <!-- right clearspace strip dimension line -->
+          <line x1="180" y1="154" x2="202" y2="154" stroke="rgba(0,9,19,0.4)" stroke-width="1"/>
+          <line x1="180" y1="149" x2="180" y2="159" stroke="rgba(0,9,19,0.4)" stroke-width="1"/>
+          <line x1="202" y1="149" x2="202" y2="159" stroke="rgba(0,9,19,0.4)" stroke-width="1"/>
+          <text x="183" y="150" font-family="'Founders Grotesk',sans-serif" font-size="9" font-weight="700" fill="#000913">x</text>
+          <!-- H mark reference in bottom clearspace strip (height = x) -->
+          <image href="images/logos/H_black.svg"
+                 x="136" y="269" width="14" height="22"
+                 opacity="0.25" preserveAspectRatio="xMidYMid meet"/>
+          <!-- definition -->
+          <circle cx="28" cy="317" r="9" fill="#74FBD7"/>
+          <text x="28" y="321" text-anchor="middle"
+                font-family="'Founders Grotesk',sans-serif"
+                font-size="10" font-weight="700" fill="#003230">x</text>
+          <text x="42" y="321"
+                font-family="'Founders Grotesk Text',sans-serif"
+                font-size="8.5" fill="#000913">= cap height of the &#x201C;H&#x201D; in HUDSON</text>
+        </svg>
       </div>
     </div>
   </div>
