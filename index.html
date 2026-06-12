@@ -250,6 +250,10 @@
       .page [style*="grid-template-columns:repeat(5,1fr)"] {
         grid-template-columns: repeat(2, 1fr) !important;
       }
+      /* Prevent images from blowing past the aspect-ratio:1 cell height */
+      .page [style*="grid-template-columns:repeat(5,1fr)"] > div {
+        overflow: hidden;
+      }
       /* Ensure combo section has bottom padding before page-nav */
       .page > [style*="margin:0 32px 48px"][style*="border-top:1px solid var(--light-gray)"][style*="padding-top:48px"] {
         padding-bottom: 32px !important;
