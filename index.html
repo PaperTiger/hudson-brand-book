@@ -4361,6 +4361,30 @@
     if (parent) parent.setAttribute('aria-expanded', open ? 'true' : 'false');
   }
 
+  const landscapeChildIds = new Set(['photo-landscape-examples','photo-landscape-dos','photo-landscape-donts']);
+  const landscapeGroup = document.getElementById('nav-landscape-group');
+  const landscapeSub   = document.getElementById('nav-landscape-sub');
+
+  function setLandscapeExpanded(open) {
+    if (!landscapeGroup || !landscapeSub) return;
+    landscapeGroup.classList.toggle('open', open);
+    landscapeSub.classList.toggle('open', open);
+    const parent = landscapeGroup.querySelector('.nav-parent');
+    if (parent) parent.setAttribute('aria-expanded', open ? 'true' : 'false');
+  }
+
+  const communityPhotoChildIds = new Set(['photo-community-examples','photo-community-dos','photo-community-donts']);
+  const communityPhotoGroup = document.getElementById('nav-community-photo-group');
+  const communityPhotoSub   = document.getElementById('nav-community-photo-sub');
+
+  function setCommunityPhotoExpanded(open) {
+    if (!communityPhotoGroup || !communityPhotoSub) return;
+    communityPhotoGroup.classList.toggle('open', open);
+    communityPhotoSub.classList.toggle('open', open);
+    const parent = communityPhotoGroup.querySelector('.nav-parent');
+    if (parent) parent.setAttribute('aria-expanded', open ? 'true' : 'false');
+  }
+
   function closeSidebar() {
     sidebar.classList.remove('open');
     overlay.classList.remove('open');
@@ -4378,6 +4402,8 @@
     if (fgChildIds.has(targetId)) setFgExpanded(true);
     if (fullLogoChildIds.has(targetId)) setFullLogoExpanded(true);
     if (hcnjChildIds.has(targetId)) setHcnjExpanded(true);
+    if (landscapeChildIds.has(targetId)) setLandscapeExpanded(true);
+    if (communityPhotoChildIds.has(targetId)) setCommunityPhotoExpanded(true);
     // On mobile, open the section containing the active nav link
     if (window.innerWidth <= 768) {
       const activeNavLink = document.querySelector('.nav-link[data-target="' + targetId + '"]');
@@ -4420,6 +4446,14 @@
         const isOpen = hcnjGroup && hcnjGroup.classList.contains('open');
         setHcnjExpanded(!isOpen);
       }
+      if (target === 'photo-landscape-examples') {
+        const isOpen = landscapeGroup && landscapeGroup.classList.contains('open');
+        setLandscapeExpanded(!isOpen);
+      }
+      if (target === 'photo-community-examples') {
+        const isOpen = communityPhotoGroup && communityPhotoGroup.classList.contains('open');
+        setCommunityPhotoExpanded(!isOpen);
+      }
       showPage(target, true);
     });
   });
@@ -4437,6 +4471,10 @@
         setFullLogoExpanded(!fullLogoGroup.classList.contains('open'));
       } else if (expandable.id === 'nav-hcnj-group') {
         setHcnjExpanded(!hcnjGroup.classList.contains('open'));
+      } else if (expandable.id === 'nav-landscape-group') {
+        setLandscapeExpanded(!landscapeGroup.classList.contains('open'));
+      } else if (expandable.id === 'nav-community-photo-group') {
+        setCommunityPhotoExpanded(!communityPhotoGroup.classList.contains('open'));
       }
     });
   });
