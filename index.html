@@ -987,14 +987,16 @@
        and swap the logo src and definition text.
     ─────────────────────────────────────────────────────────── */
     .cs-outer {
-      background: #EBEBEB;
       padding: 40px;
-      display: inline-flex;
+      display: flex;
       flex-direction: column;
-      align-items: flex-start;
+      align-items: center;
+      border: 1px solid var(--light-gray);
+      width: 100%;
+      box-sizing: border-box;
     }
     .cs-zone {
-      background: rgba(116, 251, 215, 0.2);
+      background: color-mix(in srgb, var(--teal) 20%, transparent);
       padding: var(--cs-x, 36px);
       position: relative;
       display: inline-block;
@@ -1022,7 +1024,7 @@
       transform: translateX(-50%);
       width: 1px;
       height: var(--cs-x, 36px);
-      background: rgba(0, 9, 19, 0.3);
+      background: color-mix(in srgb, var(--charcoal) 30%, transparent);
     }
     .cs-dim-v.top    { top: 0; }
     .cs-dim-v.bottom { bottom: 0; }
@@ -1033,7 +1035,7 @@
       transform: translateY(-50%);
       height: 1px;
       width: var(--cs-x, 36px);
-      background: rgba(0, 9, 19, 0.3);
+      background: color-mix(in srgb, var(--charcoal) 30%, transparent);
     }
     .cs-dim-h.left  { left: 0; }
     .cs-dim-h.right { right: 0; }
@@ -1044,7 +1046,7 @@
       left: -4px;
       width: 9px;
       height: 1px;
-      background: rgba(0, 9, 19, 0.3);
+      background: color-mix(in srgb, var(--charcoal) 30%, transparent);
     }
     .cs-dim-v::before { top: 0; }
     .cs-dim-v::after  { bottom: 0; }
@@ -1054,7 +1056,7 @@
       top: -4px;
       height: 9px;
       width: 1px;
-      background: rgba(0, 9, 19, 0.3);
+      background: color-mix(in srgb, var(--charcoal) 30%, transparent);
     }
     .cs-dim-h::before { left: 0; }
     .cs-dim-h::after  { right: 0; }
@@ -1095,7 +1097,7 @@
       font-family: 'Founders Grotesk', sans-serif;
       font-weight: 700;
       font-size: 11px;
-      background: rgba(116, 251, 215, 0.5);
+      background: color-mix(in srgb, var(--teal) 50%, transparent);
       color: var(--charcoal);
       padding: 2px 7px;
       border-radius: 2px;
@@ -1207,59 +1209,58 @@
         <!-- TODO: Update for new client -->
         <p>The County Seal is the official emblem of Hudson County and the most authoritative mark in the identity system. It carries the weight of institutional heritage and is used exclusively in official government contexts, formal correspondence, legal documents, official proclamations, and ceremonial applications.</p>
         <p>The Seal is not a general-purpose logo. Its use signals formality, authority, and government action. It should never appear in casual or promotional communications, as this dilutes its significance and authority.</p>
-        <div class="divider"></div>
-        <p><strong>Primary use:</strong> Official government documents, resolutions, proclamations, legal correspondence, and formal certificates. The Seal communicates that content is official and carries the full authority of Hudson County government.</p>
-        <p><strong>Restrictions:</strong> Do not use the Seal in marketing materials, social media, merchandise, or general communications. Do not alter, crop, or distort the Seal in any way. Do not place the Seal on backgrounds that compromise its legibility or dignity.</p>
       </div>
     </div>
 
-  <div style="margin:0 32px 48px;">
-    <div style="font-size:10px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--charcoal); margin-bottom:20px;">Approved color variations</div>
-    <div class="logo-variations" style="display:grid; grid-template-columns:repeat(5,1fr); gap:2px; background:var(--light-gray);">
-      <div style="background:#FFFFFF; padding:32px 24px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; min-height:180px;">
-        <img src="images/logos/HCNJ_county-seal_black.svg" style="max-height:80px; width:auto;" alt="black on white">
-        <div style="font-size:10px; color:var(--charcoal); text-align:center; letter-spacing:0.06em; text-transform:uppercase;">Black on White</div>
-      </div>
-      <div style="background:#74FBD7; padding:32px 24px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; min-height:180px;">
-        <img src="images/logos/HCNJ_county-seal_deep-teal.svg" style="max-height:80px; width:auto;" alt="deep teal on liberty green">
-        <div style="font-size:10px; color:var(--green); text-align:center; letter-spacing:0.06em; text-transform:uppercase;">Deep Teal on Liberty Green</div>
-      </div>
-      <div style="background:#003230; padding:32px 24px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; min-height:180px;">
-        <img src="images/logos/HCNJ_county-seal_teal.svg" style="max-height:80px; width:auto;" alt="liberty green on deep teal">
-        <div style="font-size:10px; color:var(--teal); text-align:center; letter-spacing:0.06em; text-transform:uppercase;">Liberty Green on Deep Teal</div>
-      </div>
-      <div style="background:#003230; padding:32px 24px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; min-height:180px;">
-        <img src="images/logos/HCNJ_county-seal_green.svg" style="max-height:80px; width:auto;" alt="green on deep teal">
-        <div style="font-size:10px; color:var(--lime); text-align:center; letter-spacing:0.06em; text-transform:uppercase;">Green on Deep Teal</div>
-      </div>
-      <div style="background:#000913; padding:32px 24px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; min-height:180px;">
-        <img src="images/logos/HCNJ_county-seal_white.svg" style="max-height:80px; width:auto;" alt="white on black">
-        <div style="font-size:10px; color:var(--white); text-align:center; letter-spacing:0.06em; text-transform:uppercase;">White on Black</div>
-      </div>
-    </div>
-  </div>
-  <div style="margin:0 32px 80px;">
+  <!-- Clearspace — above color variations -->
+  <div style="margin:0 32px 48px; border-top:1px solid var(--light-gray); padding-top:48px;">
     <div style="font-size:10px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--charcoal); margin-bottom:24px;">Clearspace</div>
-    <div style="display:flex; align-items:flex-start; gap:72px; flex-wrap:wrap;">
-      <div style="position:relative; display:inline-block; flex-shrink:0;">
-        <div style="border:1.5px dashed #C0C0C0; padding:40px; background:var(--white);">
-          <img src="images/logos/HCNJ_county-seal_black.svg" style="max-height:140px; width:auto;" alt="clearspace diagram">
-        </div>
-        <div style="position:absolute; top:0; left:50%; transform:translate(-50%,-100%); font-size:10px; font-weight:700; color:var(--charcoal); font-family:'Founders Grotesk',sans-serif; padding-bottom:4px; letter-spacing:0.06em;">x</div>
-        <div style="position:absolute; bottom:0; left:50%; transform:translate(-50%,100%); font-size:10px; font-weight:700; color:var(--charcoal); font-family:'Founders Grotesk',sans-serif; padding-top:4px; letter-spacing:0.06em;">x</div>
-        <div style="position:absolute; top:50%; left:0; transform:translate(-100%,-50%); font-size:10px; font-weight:700; color:var(--charcoal); font-family:'Founders Grotesk',sans-serif; padding-right:4px; letter-spacing:0.06em;">x</div>
-        <div style="position:absolute; top:50%; right:0; transform:translate(100%,-50%); font-size:10px; font-weight:700; color:var(--charcoal); font-family:'Founders Grotesk',sans-serif; padding-left:4px; letter-spacing:0.06em;">x</div>
-      </div>
-      <div style="max-width:380px; padding-top:8px;">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:center;">
+
+      <!-- LEFT: description text -->
+      <div style="order:2; display:flex; flex-direction:column; justify-content:center; padding:32px;">
         <div style="font-weight:600; font-size:14px; color:var(--charcoal); margin-bottom:10px;">Minimum clearspace = x</div>
         <div style="font-size:14px; color:var(--charcoal); line-height:1.4;">The clearspace unit x equals the diameter of the inner ring of the seal. Maintain this distance on all four sides. On digital surfaces, round up to the nearest 8px grid unit.</div>
-        <div style="margin-top:20px; padding:16px 20px; background:#F5F5F5; border-left:3px solid var(--teal);">
-          <div style="font-size:11px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:var(--charcoal); margin-bottom:6px;">x = the diameter of the inner ring of the seal</div>
-          <div style="font-size:12px; color:var(--charcoal); line-height:1.4;">Never place competing text, images, or graphic elements within this clearspace. This ensures the logo is always seen clearly and never feels crowded.</div>
+        <div style="margin-top:20px; padding:16px 20px; background:var(--cream); border-left:3px solid var(--teal);">
+          <div style="font-size:11px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:var(--charcoal); margin-bottom:6px;">x = diameter of the inner ring of the seal</div>
+          <div style="font-size:12px; color:var(--charcoal); line-height:1.4;">Never place competing text, images, or graphic elements within this clearspace. This ensures the seal is always seen clearly and never feels crowded.</div>
         </div>
       </div>
+
+      <!-- RIGHT: diagram above "Minimum clearspace" label -->
+      <div style="order:1; display:flex; justify-content:center; align-items:center;">
+        <div class="cs-outer">
+          <div class="cs-zone" style="--cs-x: 50px;">
+            <div class="cs-logo-box">
+              <img src="images/logos/HCNJ_county-seal_black.svg" style="max-height:140px; width:auto; display:block;">
+            </div>
+            <div class="cs-dim-v top"><span class="cs-lbl">x</span></div>
+            <div class="cs-dim-v bottom"><span class="cs-lbl">x</span></div>
+            <div class="cs-dim-h left"><span class="cs-lbl">x</span></div>
+            <div class="cs-dim-h right"><span class="cs-lbl">x</span></div>
+          </div>
+          <div class="cs-def">
+            <span class="cs-def-x">x</span>
+            <span>= diameter of the inner ring of the seal</span>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
+
+  <!-- Primary use + Restrictions — 2 columns -->
+  <div style="margin:0 32px 48px; display:grid; grid-template-columns:1fr 1fr; gap:48px;">
+    <div style="border:1px solid var(--light-gray); padding:32px;">
+      <div style="font-size:10px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--charcoal); margin-bottom:16px;">Primary use</div>
+      <div style="font-size:18px; color:var(--charcoal); line-height:var(--lh-body);">Official government documents, resolutions, proclamations, legal correspondence, and formal certificates. The Seal communicates that content is official and carries the full authority of Hudson County government.</div>
+    </div>
+    <div style="border:1px solid var(--light-gray); padding:32px;">
+      <div style="font-size:10px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--charcoal); margin-bottom:16px;">Restrictions</div>
+      <div style="font-size:18px; color:var(--charcoal); line-height:var(--lh-body);">Do not alter, crop, or distort the Seal in any way. Do not place the Seal on backgrounds that compromise its legibility or dignity.</div>
+    </div>
+  </div>
+
   </div>
 
   <!-- ── HORIZONTAL LOGO ───────────────────────────────────────── -->
@@ -1276,79 +1277,54 @@
         <!-- TODO: Update for new client -->
         <p>The Horizontal logo is the primary brand identifier for Hudson County in most communications. It pairs the County Seal with the full name "Hudson County, New Jersey" set in type, combining the authority of the Seal with the legibility of the wordmark in a single horizontal unit.</p>
         <p>The Horizontal configuration performs best in wide-format contexts: website headers, letterhead, banners, presentations, and signage with horizontal space. It is the default logo when no specific format constraint exists.</p>
-        <div class="divider"></div>
-        <p><strong>Primary use:</strong> Website headers, letterhead, email signatures, presentation slides, horizontal banners, and any context offering sufficient horizontal space for the full lockup to breathe.</p>
-        <p><strong>Minimum size:</strong> The Horizontal logo should never appear smaller than 120px wide in digital applications, or 1 inch wide in print. Below these thresholds, switch to the Stacked or HCNJ Text configurations.</p>
       </div>
     </div>
 
-  <div style="margin:0 32px 48px;">
-    <div style="font-size:10px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--charcoal); margin-bottom:20px;">Approved color variations</div>
-    <div class="logo-variations" style="display:grid; grid-template-columns:repeat(5,1fr); gap:2px; background:var(--light-gray);">
-      <div style="background:#FFFFFF; padding:32px 24px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; min-height:180px;">
-        <img src="images/logos/Hudson-County_full-logo_black.svg" style="max-height:60px; width:auto;" alt="black on white">
-        <div style="font-size:10px; color:var(--charcoal); text-align:center; letter-spacing:0.06em; text-transform:uppercase;">Black on White</div>
-      </div>
-      <div style="background:#74FBD7; padding:32px 24px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; min-height:180px;">
-        <img src="images/logos/Hudson-County_full-logo_deep-teal.svg" style="max-height:60px; width:auto;" alt="deep teal on liberty green">
-        <div style="font-size:10px; color:var(--green); text-align:center; letter-spacing:0.06em; text-transform:uppercase;">Deep Teal on Liberty Green</div>
-      </div>
-      <div style="background:#003230; padding:32px 24px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; min-height:180px;">
-        <img src="images/logos/Hudson-County_full-logo_teal.svg" style="max-height:60px; width:auto;" alt="liberty green on deep teal">
-        <div style="font-size:10px; color:var(--teal); text-align:center; letter-spacing:0.06em; text-transform:uppercase;">Liberty Green on Deep Teal</div>
-      </div>
-      <div style="background:#003230; padding:32px 24px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; min-height:180px;">
-        <img src="images/logos/Hudson-County_full-logo_green.svg" style="max-height:60px; width:auto;" alt="green on deep teal">
-        <div style="font-size:10px; color:var(--lime); text-align:center; letter-spacing:0.06em; text-transform:uppercase;">Green on Deep Teal</div>
-      </div>
-      <div style="background:#000913; padding:32px 24px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; min-height:180px;">
-        <img src="images/logos/Hudson-County_full-logo_white.svg" style="max-height:60px; width:auto;" alt="white on black">
-        <div style="font-size:10px; color:var(--white); text-align:center; letter-spacing:0.06em; text-transform:uppercase;">White on Black</div>
-      </div>
-    </div>
-  </div>
-  <div style="margin:0 32px 80px;">
+  <!-- Clearspace — above color variations -->
+  <div style="margin:0 32px 48px; border-top:1px solid var(--light-gray); padding-top:48px;">
     <div style="font-size:10px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--charcoal); margin-bottom:24px;">Clearspace</div>
-
-    <div style="display:flex; align-items:flex-start; gap:64px; flex-wrap:wrap;">
-
-      <!-- ─ Clearspace diagram ─────────────────────────────────
-           Reusable component: .cs-outer > .cs-zone[--cs-x] >
-           .cs-logo-box + four .cs-dim-v/.cs-dim-h indicators.
-           To use on another logo page: copy this block, change
-           the logo src, --cs-x value, and .cs-def text.
-      ──────────────────────────────────────────────────────── -->
-      <div class="cs-outer" style="flex-shrink:0;">
-        <div class="cs-zone" style="--cs-x: 32px;">
-          <div class="cs-logo-box">
-            <img src="images/logos/Hudson-County_full-logo_black.svg" style="max-width:280px; width:100%; height:auto; display:block;">
-          </div>
-          <div class="cs-dim-v top"><span class="cs-lbl">x</span></div>
-          <div class="cs-dim-v bottom"><span class="cs-lbl">x</span></div>
-          <div class="cs-dim-h left"><span class="cs-lbl">x</span></div>
-          <div class="cs-dim-h right"><span class="cs-lbl">x</span></div>
-          <!-- H logo mark in bottom strip: height = --cs-x, bottom-aligned with strip -->
-          <img src="images/logos/H_black.svg" class="cs-h-mark" alt=""
-               style="bottom:0; left:68%; transform:translateX(-50%);">
-        </div>
-        <div class="cs-def">
-          <span class="cs-def-x">x</span>
-          <span>= cap height of the &#8220;H&#8221; in HUDSON</span>
-        </div>
-      </div>
-
-      <!-- ─ Description ──────────────────────────────────────── -->
-      <div style="max-width:360px; padding-top:8px; flex:1;">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:center;">
+      <div style="order:2; display:flex; flex-direction:column; justify-content:center; padding:32px;">
         <div style="font-weight:600; font-size:14px; color:var(--charcoal); margin-bottom:10px;">Minimum clearspace = x</div>
         <div style="font-size:14px; color:var(--charcoal); line-height:1.4;">The clearspace unit <strong>x</strong> equals the cap height of the &#8220;H&#8221; in the HUDSON wordmark. This unit scales proportionally with the logo at any reproduction size, ensuring the logo always has room to read clearly regardless of context.</div>
-        <div style="margin-top:20px; padding:16px 20px; background:rgba(116,251,215,0.12); border-left:3px solid var(--teal);">
+        <div style="margin-top:20px; padding:16px 20px; background:var(--cream); border-left:3px solid var(--teal);">
           <div style="font-size:11px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:var(--charcoal); margin-bottom:6px;">x = cap height of &#8220;H&#8221; in HUDSON</div>
           <div style="font-size:12px; color:var(--charcoal); line-height:1.4;">Never place text, images, or graphic elements within the clearspace zone. The tinted area in the diagram represents the minimum protected region at any size.</div>
         </div>
       </div>
-
+      <div style="order:1; display:flex; justify-content:center; align-items:center;">
+        <div class="cs-outer">
+          <div class="cs-zone" style="--cs-x: 32px;">
+            <div class="cs-logo-box">
+              <img src="images/logos/Hudson-County_full-logo_black.svg" style="max-width:280px; width:100%; height:auto; display:block;">
+            </div>
+            <div class="cs-dim-v top"><span class="cs-lbl">x</span></div>
+            <div class="cs-dim-v bottom"><span class="cs-lbl">x</span></div>
+            <div class="cs-dim-h left"><span class="cs-lbl">x</span></div>
+            <div class="cs-dim-h right"><span class="cs-lbl">x</span></div>
+            <img src="images/logos/H_black.svg" class="cs-h-mark" alt="" style="bottom:0; left:68%; transform:translateX(-50%);">
+          </div>
+          <div class="cs-def">
+            <span class="cs-def-x">x</span>
+            <span>= cap height of the &#8220;H&#8221; in HUDSON</span>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
+
+  <!-- Primary use + Minimum size — 2 columns -->
+  <div style="margin:0 32px 48px; display:grid; grid-template-columns:1fr 1fr; gap:48px;">
+    <div style="border:1px solid var(--light-gray); padding:32px;">
+      <div style="font-size:10px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--charcoal); margin-bottom:16px;">Primary use</div>
+      <div style="font-size:18px; color:var(--charcoal); line-height:var(--lh-body);">Website headers, letterhead, email signatures, presentation slides, horizontal banners, and any context offering sufficient horizontal space for the full lockup to breathe.</div>
+    </div>
+    <div style="border:1px solid var(--light-gray); padding:32px;">
+      <div style="font-size:10px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--charcoal); margin-bottom:16px;">Minimum size</div>
+      <div style="font-size:18px; color:var(--charcoal); line-height:var(--lh-body);">The Horizontal logo should never appear smaller than 120px wide in digital applications, or 1 inch wide in print. Below these thresholds, switch to the Stacked or HCNJ Text configurations.</div>
+    </div>
+  </div>
+
   </div>
 
   <!-- ── STACKED LOGO ─────────────────────────────────────────── -->
@@ -1365,59 +1341,54 @@
         <!-- TODO: Update for new client -->
         <p>The Stacked logo places the County Seal above the "Hudson County, New Jersey" wordmark in a centered, vertical configuration. It is the preferred format for square or near-square contexts where the Horizontal logo would be too wide or visually cramped.</p>
         <p>The Stacked configuration has a formal, centered quality that suits documents, signage, and printed materials where symmetry and gravity are appropriate to the context. It maintains full brand identification, Seal and name, in a more compact footprint.</p>
-        <div class="divider"></div>
-        <p><strong>Primary use:</strong> Square social media profiles, report covers, vertical signage panels, official documents, merchandise, and any context where a square or portrait format is available and horizontal space is limited.</p>
-        <p><strong>Minimum size:</strong> The Stacked logo should not appear smaller than 80px tall in digital use, or 0.75 inch tall in print. At smaller sizes, switch to the HCNJ Text or H mark.</p>
       </div>
     </div>
 
-  <div style="margin:0 32px 48px;">
-    <div style="font-size:10px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--charcoal); margin-bottom:20px;">Approved color variations</div>
-    <div class="logo-variations" style="display:grid; grid-template-columns:repeat(5,1fr); gap:2px; background:var(--light-gray);">
-      <div style="background:#FFFFFF; padding:32px 24px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; min-height:180px;">
-        <img src="images/logos/Hudson-County_logo-stacked_black.svg" style="max-height:80px; width:auto;" alt="black on white">
-        <div style="font-size:10px; color:var(--charcoal); text-align:center; letter-spacing:0.06em; text-transform:uppercase;">Black on White</div>
-      </div>
-      <div style="background:#74FBD7; padding:32px 24px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; min-height:180px;">
-        <img src="images/logos/Hudson-County_logo-stacked_deep-teal.svg" style="max-height:80px; width:auto;" alt="deep teal on liberty green">
-        <div style="font-size:10px; color:var(--green); text-align:center; letter-spacing:0.06em; text-transform:uppercase;">Deep Teal on Liberty Green</div>
-      </div>
-      <div style="background:#003230; padding:32px 24px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; min-height:180px;">
-        <img src="images/logos/Hudson-County_logo-stacked_teal.svg" style="max-height:80px; width:auto;" alt="liberty green on deep teal">
-        <div style="font-size:10px; color:var(--teal); text-align:center; letter-spacing:0.06em; text-transform:uppercase;">Liberty Green on Deep Teal</div>
-      </div>
-      <div style="background:#003230; padding:32px 24px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; min-height:180px;">
-        <img src="images/logos/Hudson-County_logo-stacked_green.svg" style="max-height:80px; width:auto;" alt="green on deep teal">
-        <div style="font-size:10px; color:var(--lime); text-align:center; letter-spacing:0.06em; text-transform:uppercase;">Green on Deep Teal</div>
-      </div>
-      <div style="background:#000913; padding:32px 24px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; min-height:180px;">
-        <img src="images/logos/Hudson-County_logo-stacked_white.svg" style="max-height:80px; width:auto;" alt="white on black">
-        <div style="font-size:10px; color:var(--white); text-align:center; letter-spacing:0.06em; text-transform:uppercase;">White on Black</div>
-      </div>
-    </div>
-  </div>
-  <div style="margin:0 32px 80px;">
+  <!-- Clearspace — above color variations -->
+  <div style="margin:0 32px 48px; border-top:1px solid var(--light-gray); padding-top:48px;">
     <div style="font-size:10px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--charcoal); margin-bottom:24px;">Clearspace</div>
-    <div style="display:flex; align-items:flex-start; gap:72px; flex-wrap:wrap;">
-      <div style="position:relative; display:inline-block; flex-shrink:0;">
-        <div style="border:1.5px dashed #C0C0C0; padding:36px; background:var(--white);">
-          <img src="images/logos/Hudson-County_logo-stacked_black.svg" style="max-height:160px; width:auto;" alt="clearspace diagram">
-        </div>
-        <div style="position:absolute; top:0; left:50%; transform:translate(-50%,-100%); font-size:10px; font-weight:700; color:var(--charcoal); font-family:'Founders Grotesk',sans-serif; padding-bottom:4px; letter-spacing:0.06em;">x</div>
-        <div style="position:absolute; bottom:0; left:50%; transform:translate(-50%,100%); font-size:10px; font-weight:700; color:var(--charcoal); font-family:'Founders Grotesk',sans-serif; padding-top:4px; letter-spacing:0.06em;">x</div>
-        <div style="position:absolute; top:50%; left:0; transform:translate(-100%,-50%); font-size:10px; font-weight:700; color:var(--charcoal); font-family:'Founders Grotesk',sans-serif; padding-right:4px; letter-spacing:0.06em;">x</div>
-        <div style="position:absolute; top:50%; right:0; transform:translate(100%,-50%); font-size:10px; font-weight:700; color:var(--charcoal); font-family:'Founders Grotesk',sans-serif; padding-left:4px; letter-spacing:0.06em;">x</div>
-      </div>
-      <div style="max-width:380px; padding-top:8px;">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:center;">
+      <div style="order:2; display:flex; flex-direction:column; justify-content:center; padding:32px;">
         <div style="font-weight:600; font-size:14px; color:var(--charcoal); margin-bottom:10px;">Minimum clearspace = x</div>
         <div style="font-size:14px; color:var(--charcoal); line-height:1.4;">The clearspace unit x equals the cap height of the "H" in the HUDSON wordmark within the logo. Apply this measurement consistently on all four sides, no other graphic elements, text, or borders should intrude within this zone.</div>
-        <div style="margin-top:20px; padding:16px 20px; background:#F5F5F5; border-left:3px solid var(--teal);">
+        <div style="margin-top:20px; padding:16px 20px; background:var(--cream); border-left:3px solid var(--teal);">
           <div style="font-size:11px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:var(--charcoal); margin-bottom:6px;">x = the cap height of the "H" in HUDSON</div>
           <div style="font-size:12px; color:var(--charcoal); line-height:1.4;">Never place competing text, images, or graphic elements within this clearspace. This ensures the logo is always seen clearly and never feels crowded.</div>
         </div>
       </div>
+      <div style="order:1; display:flex; justify-content:center; align-items:center;">
+        <div class="cs-outer">
+          <div class="cs-zone" style="--cs-x: 21px;">
+            <div class="cs-logo-box">
+              <img src="images/logos/Hudson-County_logo-stacked_black.svg" style="min-height:200px; max-height:240px; width:auto; display:block;">
+            </div>
+            <div class="cs-dim-v top"><span class="cs-lbl">x</span></div>
+            <div class="cs-dim-v bottom"><span class="cs-lbl">x</span></div>
+            <div class="cs-dim-h left"><span class="cs-lbl">x</span></div>
+            <div class="cs-dim-h right"><span class="cs-lbl">x</span></div>
+            <img src="images/logos/H_black.svg" class="cs-h-mark" alt="" style="bottom:0; left:68%; transform:translateX(-50%);">
+          </div>
+          <div class="cs-def">
+            <span class="cs-def-x">x</span>
+            <span>= cap height of the &#8220;H&#8221; in HUDSON</span>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
+
+  <!-- Primary use + Minimum size — 2 columns -->
+  <div style="margin:0 32px 48px; display:grid; grid-template-columns:1fr 1fr; gap:48px;">
+    <div style="border:1px solid var(--light-gray); padding:32px;">
+      <div style="font-size:10px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--charcoal); margin-bottom:16px;">Primary use</div>
+      <div style="font-size:18px; color:var(--charcoal); line-height:var(--lh-body);">Square social media profiles, report covers, vertical signage panels, official documents, merchandise, and any context where a square or portrait format is available and horizontal space is limited.</div>
+    </div>
+    <div style="border:1px solid var(--light-gray); padding:32px;">
+      <div style="font-size:10px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--charcoal); margin-bottom:16px;">Minimum size</div>
+      <div style="font-size:18px; color:var(--charcoal); line-height:var(--lh-body);">The Stacked logo should never appear smaller than 200px tall in digital use, or 1.5 inches tall in print. At smaller sizes, switch to the HCNJ Text or H mark.</div>
+    </div>
+  </div>
+
   </div>
 
   <!-- ── NO SEAL ──────────────────────────────────────────────── -->
@@ -1434,59 +1405,54 @@
         <!-- TODO: Update for new client -->
         <p>The Text Only configuration is the wordmark without the County Seal, full name typography only. It is used when the Seal is contextually inappropriate, when a lighter visual weight is needed, or when the application requires a purely typographic mark.</p>
         <p>This configuration is appropriate for department-level communications, informal County materials, digital contexts where the Seal renders poorly at small sizes, and any application where the Seal's ceremonial connotations would feel out of place.</p>
-        <div class="divider"></div>
-        <p><strong>Primary use:</strong> Department headers, internal communications, supporting materials in campaigns led by the primary logo, digital applications where the Seal does not reproduce cleanly, and sub-brand contexts where the Seal has already been established.</p>
-        <p><strong>Usage note:</strong> The Text Only mark must still carry the full name "Hudson County, New Jersey", it is not a license to abbreviate or further simplify the identity. If further simplification is required, use the HCNJ Text Only or H Logo Mark instead.</p>
       </div>
     </div>
 
-  <div style="margin:0 32px 48px;">
-    <div style="font-size:10px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--charcoal); margin-bottom:20px;">Approved color variations</div>
-    <div class="logo-variations" style="display:grid; grid-template-columns:repeat(5,1fr); gap:2px; background:var(--light-gray);">
-      <div style="background:#FFFFFF; padding:32px 24px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; min-height:180px;">
-        <img src="images/logos/Hudson-County_logo-text_black.svg" style="max-height:60px; width:auto;" alt="black on white">
-        <div style="font-size:10px; color:var(--charcoal); text-align:center; letter-spacing:0.06em; text-transform:uppercase;">Black on White</div>
-      </div>
-      <div style="background:#74FBD7; padding:32px 24px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; min-height:180px;">
-        <img src="images/logos/Hudson-County_logo-text_deep-teal.svg" style="max-height:60px; width:auto;" alt="deep teal on liberty green">
-        <div style="font-size:10px; color:var(--green); text-align:center; letter-spacing:0.06em; text-transform:uppercase;">Deep Teal on Liberty Green</div>
-      </div>
-      <div style="background:#003230; padding:32px 24px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; min-height:180px;">
-        <img src="images/logos/Hudson-County_logo-text_teal.svg" style="max-height:60px; width:auto;" alt="liberty green on deep teal">
-        <div style="font-size:10px; color:var(--teal); text-align:center; letter-spacing:0.06em; text-transform:uppercase;">Liberty Green on Deep Teal</div>
-      </div>
-      <div style="background:#003230; padding:32px 24px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; min-height:180px;">
-        <img src="images/logos/Hudson-County_logo-text_green.svg" style="max-height:60px; width:auto;" alt="green on deep teal">
-        <div style="font-size:10px; color:var(--lime); text-align:center; letter-spacing:0.06em; text-transform:uppercase;">Green on Deep Teal</div>
-      </div>
-      <div style="background:#000913; padding:32px 24px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; min-height:180px;">
-        <img src="images/logos/Hudson-County_logo-text_white.svg" style="max-height:60px; width:auto;" alt="white on black">
-        <div style="font-size:10px; color:var(--white); text-align:center; letter-spacing:0.06em; text-transform:uppercase;">White on Black</div>
-      </div>
-    </div>
-  </div>
-  <div style="margin:0 32px 80px;">
+  <!-- Clearspace — above color variations -->
+  <div style="margin:0 32px 48px; border-top:1px solid var(--light-gray); padding-top:48px;">
     <div style="font-size:10px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--charcoal); margin-bottom:24px;">Clearspace</div>
-    <div style="display:flex; align-items:flex-start; gap:72px; flex-wrap:wrap;">
-      <div style="position:relative; display:inline-block; flex-shrink:0;">
-        <div style="border:1.5px dashed #C0C0C0; padding:32px; background:var(--white);">
-          <img src="images/logos/Hudson-County_logo-text_black.svg" style="max-width:280px; width:100%; height:auto;" alt="clearspace diagram">
-        </div>
-        <div style="position:absolute; top:0; left:50%; transform:translate(-50%,-100%); font-size:10px; font-weight:700; color:var(--charcoal); font-family:'Founders Grotesk',sans-serif; padding-bottom:4px; letter-spacing:0.06em;">x</div>
-        <div style="position:absolute; bottom:0; left:50%; transform:translate(-50%,100%); font-size:10px; font-weight:700; color:var(--charcoal); font-family:'Founders Grotesk',sans-serif; padding-top:4px; letter-spacing:0.06em;">x</div>
-        <div style="position:absolute; top:50%; left:0; transform:translate(-100%,-50%); font-size:10px; font-weight:700; color:var(--charcoal); font-family:'Founders Grotesk',sans-serif; padding-right:4px; letter-spacing:0.06em;">x</div>
-        <div style="position:absolute; top:50%; right:0; transform:translate(100%,-50%); font-size:10px; font-weight:700; color:var(--charcoal); font-family:'Founders Grotesk',sans-serif; padding-left:4px; letter-spacing:0.06em;">x</div>
-      </div>
-      <div style="max-width:380px; padding-top:8px;">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:center;">
+      <div style="order:2; display:flex; flex-direction:column; justify-content:center; padding:32px;">
         <div style="font-weight:600; font-size:14px; color:var(--charcoal); margin-bottom:10px;">Minimum clearspace = x</div>
         <div style="font-size:14px; color:var(--charcoal); line-height:1.4;">The clearspace unit x equals the cap height of the "H" in the HUDSON wordmark. Maintain this clearspace on all sides at every reproduction size. On crowded layouts, prefer using the HCNJ Text mark rather than violating the clearspace.</div>
-        <div style="margin-top:20px; padding:16px 20px; background:#F5F5F5; border-left:3px solid var(--teal);">
+        <div style="margin-top:20px; padding:16px 20px; background:var(--cream); border-left:3px solid var(--teal);">
           <div style="font-size:11px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:var(--charcoal); margin-bottom:6px;">x = the cap height of the "H" in HUDSON</div>
           <div style="font-size:12px; color:var(--charcoal); line-height:1.4;">Never place competing text, images, or graphic elements within this clearspace. This ensures the logo is always seen clearly and never feels crowded.</div>
         </div>
       </div>
+      <div style="order:1; display:flex; justify-content:center; align-items:center;">
+        <div class="cs-outer">
+          <div class="cs-zone" style="--cs-x: 60px;">
+            <div class="cs-logo-box">
+              <img src="images/logos/Hudson-County_logo-text_black.svg" style="max-width:280px; width:100%; height:auto; display:block;">
+            </div>
+            <div class="cs-dim-v top"><span class="cs-lbl">x</span></div>
+            <div class="cs-dim-v bottom"><span class="cs-lbl">x</span></div>
+            <div class="cs-dim-h left"><span class="cs-lbl">x</span></div>
+            <div class="cs-dim-h right"><span class="cs-lbl">x</span></div>
+            <img src="images/logos/H_black.svg" class="cs-h-mark" alt="" style="bottom:0; left:68%; transform:translateX(-50%);">
+          </div>
+          <div class="cs-def">
+            <span class="cs-def-x">x</span>
+            <span>= cap height of the &#8220;H&#8221; in HUDSON</span>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
+
+  <!-- Primary use + Usage note — 2 columns -->
+  <div style="margin:0 32px 48px; display:grid; grid-template-columns:1fr 1fr; gap:48px;">
+    <div style="border:1px solid var(--light-gray); padding:32px;">
+      <div style="font-size:10px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--charcoal); margin-bottom:16px;">Primary use</div>
+      <div style="font-size:18px; color:var(--charcoal); line-height:var(--lh-body);">Department headers, internal communications, supporting materials in campaigns led by the primary logo, digital applications where the Seal does not reproduce cleanly, and sub-brand contexts where the Seal has already been established.</div>
+    </div>
+    <div style="border:1px solid var(--light-gray); padding:32px;">
+      <div style="font-size:10px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--charcoal); margin-bottom:16px;">Usage note</div>
+      <div style="font-size:18px; color:var(--charcoal); line-height:var(--lh-body);">The Text Only mark must still carry the full name "Hudson County, New Jersey", it is not a license to abbreviate or further simplify the identity. If further simplification is required, use the HCNJ Text Only or H Logo Mark instead.</div>
+    </div>
+  </div>
+
   </div>
 
   <!-- ── THE ICON ───────────────────────────────────────────── -->
@@ -1507,61 +1473,54 @@
       <div class="section-body">
         <!-- TODO: Update for new client -->
         <p>The H mark is the abstract icon for the Hudson County brand system, a single letterform that distills the identity to its most elemental form. Bold, geometric, and immediately readable, it is built for contexts where the full lockup would be too large, too complex, or already established.</p>
-        <p>The H stands for Hudson, but it also carries structural authority on its own. As a standalone mark on merchandise, app icons, social profiles, and environmental identifiers, it functions as a confident shorthand for the County without needing annotation.</p>
-        <div class="divider"></div>
-        <p><strong>Usage:</strong> The H mark is used as a standalone identifier where the full wordmark has already established brand context, app icons, social media profile images, favicon, merchandise, and environmental signage at scale. Never use the H mark as a replacement for the primary logo in official communications.</p>
-        <p><strong>Color:</strong> Teal on dark backgrounds, White on green or dark backgrounds, Deep Teal on white or cream, and Liberty Green on Deep Teal for high-contrast applications.</p>
+        <p>The H stands for Hudson — but its form carries a second meaning. The two vertical pillars of the letterform flow together at the crossbar like water, evoking the Hudson River that defines and unites the County. Structure and movement, identity and place, held in a single mark.</p>
       </div>
     </div>
 
-  <div style="margin:0 32px 48px;">
-    <div style="font-size:10px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--charcoal); margin-bottom:20px;">Approved color variations</div>
-    <div class="logo-variations" style="display:grid; grid-template-columns:repeat(5,1fr); gap:2px; background:var(--light-gray);">
-      <div style="background:#FFFFFF; padding:32px 24px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; min-height:180px;">
-        <img src="images/logos/H_black.svg" style="max-height:100px; width:auto;" alt="black on white">
-        <div style="font-size:10px; color:var(--charcoal); text-align:center; letter-spacing:0.06em; text-transform:uppercase;">Black on White</div>
-      </div>
-      <div style="background:#74FBD7; padding:32px 24px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; min-height:180px;">
-        <img src="images/logos/H_deep-teal.svg" style="max-height:100px; width:auto;" alt="deep teal on liberty green">
-        <div style="font-size:10px; color:var(--green); text-align:center; letter-spacing:0.06em; text-transform:uppercase;">Deep Teal on Liberty Green</div>
-      </div>
-      <div style="background:#003230; padding:32px 24px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; min-height:180px;">
-        <img src="images/logos/H_teal.svg" style="max-height:100px; width:auto;" alt="liberty green on deep teal">
-        <div style="font-size:10px; color:var(--teal); text-align:center; letter-spacing:0.06em; text-transform:uppercase;">Liberty Green on Deep Teal</div>
-      </div>
-      <div style="background:#003230; padding:32px 24px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; min-height:180px;">
-        <img src="images/logos/H_green.svg" style="max-height:100px; width:auto;" alt="green on deep teal">
-        <div style="font-size:10px; color:var(--lime); text-align:center; letter-spacing:0.06em; text-transform:uppercase;">Green on Deep Teal</div>
-      </div>
-      <div style="background:#000913; padding:32px 24px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; min-height:180px;">
-        <img src="images/logos/H_white.svg" style="max-height:100px; width:auto;" alt="white on black">
-        <div style="font-size:10px; color:var(--white); text-align:center; letter-spacing:0.06em; text-transform:uppercase;">White on Black</div>
-      </div>
-    </div>
-  </div>
-
-  <div style="margin:0 32px 80px;">
+  <!-- Clearspace — above color variations -->
+  <div style="margin:0 32px 48px; border-top:1px solid var(--light-gray); padding-top:48px;">
     <div style="font-size:10px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--charcoal); margin-bottom:24px;">Clearspace</div>
-    <div style="display:flex; align-items:flex-start; gap:72px; flex-wrap:wrap;">
-      <div style="position:relative; display:inline-block; flex-shrink:0;">
-        <div style="border:1.5px dashed #C0C0C0; padding:40px; background:var(--white);">
-          <img src="images/logos/H_black.svg" style="max-height:160px; width:auto;" alt="clearspace diagram">
-        </div>
-        <div style="position:absolute; top:0; left:50%; transform:translate(-50%,-100%); font-size:10px; font-weight:700; color:var(--charcoal); padding-bottom:4px; letter-spacing:0.06em;">x</div>
-        <div style="position:absolute; bottom:0; left:50%; transform:translate(-50%,100%); font-size:10px; font-weight:700; color:var(--charcoal); padding-top:4px; letter-spacing:0.06em;">x</div>
-        <div style="position:absolute; top:50%; left:0; transform:translate(-100%,-50%); font-size:10px; font-weight:700; color:var(--charcoal); padding-right:4px; letter-spacing:0.06em;">x</div>
-        <div style="position:absolute; top:50%; right:0; transform:translate(100%,-50%); font-size:10px; font-weight:700; color:var(--charcoal); padding-left:4px; letter-spacing:0.06em;">x</div>
-      </div>
-      <div style="max-width:380px; padding-top:8px;">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:center;">
+      <div style="order:2; display:flex; flex-direction:column; justify-content:center; padding:32px;">
         <div style="font-weight:600; font-size:14px; color:var(--charcoal); margin-bottom:10px;">Minimum clearspace = x</div>
         <div style="font-size:14px; color:var(--charcoal); line-height:1.4;">The clearspace unit x equals the width of the crossbar of the H letterform. Apply on all four sides at every reproduction size.</div>
-        <div style="margin-top:20px; padding:16px 20px; background:#F5F5F5; border-left:3px solid var(--teal);">
+        <div style="margin-top:20px; padding:16px 20px; background:var(--cream); border-left:3px solid var(--teal);">
           <div style="font-size:11px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:var(--charcoal); margin-bottom:6px;">x = width of the H crossbar</div>
           <div style="font-size:12px; color:var(--charcoal); line-height:1.4;">Never place competing text, images, or graphic elements within this clearspace zone.</div>
         </div>
       </div>
+      <div style="order:1; display:flex; justify-content:center; align-items:center;">
+        <div class="cs-outer">
+          <div class="cs-zone" style="--cs-x: 34px;">
+            <div class="cs-logo-box">
+              <img src="images/logos/H_black.svg" style="max-height:160px; width:auto; display:block;">
+            </div>
+            <div class="cs-dim-v top"><span class="cs-lbl">x</span></div>
+            <div class="cs-dim-v bottom"><span class="cs-lbl">x</span></div>
+            <div class="cs-dim-h left"><span class="cs-lbl">x</span></div>
+            <div class="cs-dim-h right"><span class="cs-lbl">x</span></div>
+          </div>
+          <div class="cs-def">
+            <span class="cs-def-x">x</span>
+            <span>= width of the crossbar of the H letterform</span>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
+
+  <!-- Usage + Color — 2 columns -->
+  <div style="margin:0 32px 48px; display:grid; grid-template-columns:1fr 1fr; gap:48px;">
+    <div style="border:1px solid var(--light-gray); padding:32px;">
+      <div style="font-size:10px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--charcoal); margin-bottom:16px;">Usage</div>
+      <div style="font-size:18px; color:var(--charcoal); line-height:var(--lh-body);">The H mark is the County's favicon across all digital properties — browser tabs, bookmarks, and app shortcuts. It is also used for merchandise and environmental signage at scale where the full wordmark has already established brand context. Never use the H mark as a replacement for the primary logo in official communications.</div>
+    </div>
+    <div style="border:1px solid var(--light-gray); padding:32px;">
+      <div style="font-size:10px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--charcoal); margin-bottom:16px;">Minimum size</div>
+      <div style="font-size:18px; color:var(--charcoal); line-height:var(--lh-body);">The H mark should never appear smaller than 24px in digital use, or 0.25 inches in print. Below this threshold the crossbar detail is lost and the mark becomes illegible.</div>
+    </div>
+  </div>
+
   </div>
 
 
@@ -1579,59 +1538,54 @@
       <div class="section-body">
         <p>The HCNJ Horizontal logo pairs the H mark with the "HCNJ" abbreviation in a compact, high-legibility lockup. It is designed for contexts where the full name is unnecessary, when the County's identity is already established, or when space constraints make the full wordmark impractical.</p>
         <p>The HCNJ Horizontal is the abbreviated identity: confident, direct, and built for speed. It performs well at both large display sizes and at smaller application scales, social media, report covers, merchandise, and communications directed at audiences already familiar with the brand.</p>
-        <div class="divider"></div>
-        <p><strong>Primary use:</strong> Digital communications, social media, branded merchandise, event materials, email templates, and any context where the audience is already familiar with Hudson County and abbreviated identification is appropriate.</p>
-        <p><strong>Not for:</strong> Official legal documents, formal government correspondence, or first-contact communications with audiences unfamiliar with the HCNJ abbreviation. In those contexts, use the Full Logo Horizontal or Stacked with the full name.</p>
       </div>
     </div>
 
-  <div style="margin:0 32px 48px;">
-    <div style="font-size:10px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--charcoal); margin-bottom:20px;">Approved color variations</div>
-    <div class="logo-variations" style="display:grid; grid-template-columns:repeat(5,1fr); gap:2px; background:var(--light-gray);">
-      <div style="background:#FFFFFF; padding:32px 24px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; min-height:180px;">
-        <img src="images/logos/HCNJ_logo-full_black.svg" style="max-height:80px; width:auto;" alt="black on white">
-        <div style="font-size:10px; color:var(--charcoal); text-align:center; letter-spacing:0.06em; text-transform:uppercase;">Black on White</div>
-      </div>
-      <div style="background:#74FBD7; padding:32px 24px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; min-height:180px;">
-        <img src="images/logos/HCNJ_logo-full_deep-teal.svg" style="max-height:80px; width:auto;" alt="deep teal on liberty green">
-        <div style="font-size:10px; color:var(--green); text-align:center; letter-spacing:0.06em; text-transform:uppercase;">Deep Teal on Liberty Green</div>
-      </div>
-      <div style="background:#003230; padding:32px 24px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; min-height:180px;">
-        <img src="images/logos/HCNJ_logo-full_teal.svg" style="max-height:80px; width:auto;" alt="liberty green on deep teal">
-        <div style="font-size:10px; color:var(--teal); text-align:center; letter-spacing:0.06em; text-transform:uppercase;">Liberty Green on Deep Teal</div>
-      </div>
-      <div style="background:#003230; padding:32px 24px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; min-height:180px;">
-        <img src="images/logos/HCNJ_logo-full_green.svg" style="max-height:80px; width:auto;" alt="green on deep teal">
-        <div style="font-size:10px; color:var(--lime); text-align:center; letter-spacing:0.06em; text-transform:uppercase;">Green on Deep Teal</div>
-      </div>
-      <div style="background:#000913; padding:32px 24px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; min-height:180px;">
-        <img src="images/logos/HCNJ_logo-full_white.svg" style="max-height:80px; width:auto;" alt="white on black">
-        <div style="font-size:10px; color:var(--white); text-align:center; letter-spacing:0.06em; text-transform:uppercase;">White on Black</div>
-      </div>
-    </div>
-  </div>
-  <div style="margin:0 32px 80px;">
+  <!-- Clearspace — above color variations -->
+  <div style="margin:0 32px 48px; border-top:1px solid var(--light-gray); padding-top:48px;">
     <div style="font-size:10px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--charcoal); margin-bottom:24px;">Clearspace</div>
-    <div style="display:flex; align-items:flex-start; gap:72px; flex-wrap:wrap;">
-      <div style="position:relative; display:inline-block; flex-shrink:0;">
-        <div style="border:1.5px dashed #C0C0C0; padding:36px; background:var(--white);">
-          <img src="images/logos/HCNJ_logo-full_black.svg" style="max-height:140px; width:auto;" alt="clearspace diagram">
-        </div>
-        <div style="position:absolute; top:0; left:50%; transform:translate(-50%,-100%); font-size:10px; font-weight:700; color:var(--charcoal); font-family:'Founders Grotesk',sans-serif; padding-bottom:4px; letter-spacing:0.06em;">x</div>
-        <div style="position:absolute; bottom:0; left:50%; transform:translate(-50%,100%); font-size:10px; font-weight:700; color:var(--charcoal); font-family:'Founders Grotesk',sans-serif; padding-top:4px; letter-spacing:0.06em;">x</div>
-        <div style="position:absolute; top:50%; left:0; transform:translate(-100%,-50%); font-size:10px; font-weight:700; color:var(--charcoal); font-family:'Founders Grotesk',sans-serif; padding-right:4px; letter-spacing:0.06em;">x</div>
-        <div style="position:absolute; top:50%; right:0; transform:translate(100%,-50%); font-size:10px; font-weight:700; color:var(--charcoal); font-family:'Founders Grotesk',sans-serif; padding-left:4px; letter-spacing:0.06em;">x</div>
-      </div>
-      <div style="max-width:380px; padding-top:8px;">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:center;">
+      <div style="order:2; display:flex; flex-direction:column; justify-content:center; padding:32px;">
         <div style="font-weight:600; font-size:14px; color:var(--charcoal); margin-bottom:10px;">Minimum clearspace = x</div>
         <div style="font-size:14px; color:var(--charcoal); line-height:1.4;">The clearspace unit x equals the cap height of the H letterform within the HCNJ Horizontal lockup. This measurement scales with the logo proportionally. Maintain x clearspace on all four sides at every reproduction size.</div>
-        <div style="margin-top:20px; padding:16px 20px; background:#F5F5F5; border-left:3px solid var(--teal);">
+        <div style="margin-top:20px; padding:16px 20px; background:var(--cream); border-left:3px solid var(--teal);">
           <div style="font-size:11px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:var(--charcoal); margin-bottom:6px;">x = the cap height of the H mark</div>
           <div style="font-size:12px; color:var(--charcoal); line-height:1.4;">Never place competing text, images, or graphic elements within this clearspace. This ensures the logo is always seen clearly and never feels crowded.</div>
         </div>
       </div>
+      <div style="order:1; display:flex; justify-content:center; align-items:center;">
+        <div class="cs-outer">
+          <div class="cs-zone" style="--cs-x: 32px;">
+            <div class="cs-logo-box">
+              <img src="images/logos/HCNJ_logo-full_black.svg" style="max-height:140px; width:auto; display:block;">
+            </div>
+            <div class="cs-dim-v top"><span class="cs-lbl">x</span></div>
+            <div class="cs-dim-v bottom"><span class="cs-lbl">x</span></div>
+            <div class="cs-dim-h left"><span class="cs-lbl">x</span></div>
+            <div class="cs-dim-h right"><span class="cs-lbl">x</span></div>
+            <img src="images/logos/H_black.svg" class="cs-h-mark" alt="" style="bottom:0; left:68%; transform:translateX(-50%);">
+          </div>
+          <div class="cs-def">
+            <span class="cs-def-x">x</span>
+            <span>= &#189; cap height of the H letterform within the lockup</span>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
+
+  <!-- Primary use + Not for — 2 columns -->
+  <div style="margin:0 32px 48px; display:grid; grid-template-columns:1fr 1fr; gap:48px;">
+    <div style="border:1px solid var(--light-gray); padding:32px;">
+      <div style="font-size:10px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--charcoal); margin-bottom:16px;">Primary use</div>
+      <div style="font-size:18px; color:var(--charcoal); line-height:var(--lh-body);">Digital communications, social media, branded merchandise, event materials, email templates, and any context where the audience is already familiar with Hudson County and abbreviated identification is appropriate.</div>
+    </div>
+    <div style="border:1px solid var(--light-gray); padding:32px;">
+      <div style="font-size:10px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--charcoal); margin-bottom:16px;">Not for</div>
+      <div style="font-size:18px; color:var(--charcoal); line-height:var(--lh-body);">Official legal documents, formal government correspondence, or first-contact communications with audiences unfamiliar with the HCNJ abbreviation. In those contexts, use the Full Logo Horizontal or Stacked with the full name.</div>
+    </div>
+  </div>
+
   </div>
 
   <!-- ── HCNJ WITH CRAIG ───────────────────────────────────────── -->
@@ -1647,59 +1601,54 @@
       <div class="section-body">
         <p>The HCNJ Text Lockup combines the HCNJ brand mark with the County Executive's signature and name, creating an official, executive-level identifier for communications issued under the County Executive's authority or personal brand alignment.</p>
         <p>This lockup establishes clear accountability and personal endorsement from the County Executive, without displacing the institutional County brand. The typographic hierarchy keeps the County identity primary, with the Craig signature as a secondary element below.</p>
-        <div class="divider"></div>
-        <p><strong>Primary use:</strong> County Executive communications, executive office letterhead, official statements and press materials attributed to the County Executive, and high-profile County announcements where executive endorsement is appropriate.</p>
-        <p><strong>Restrictions:</strong> This lockup is exclusively for communications issued by or on behalf of the County Executive's office. It must not be used in departmental, campaign, or general County communications. The signature element must not be extracted or used independently.</p>
       </div>
     </div>
 
-  <div style="margin:0 32px 48px;">
-    <div style="font-size:10px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--charcoal); margin-bottom:20px;">Approved color variations</div>
-    <div class="logo-variations" style="display:grid; grid-template-columns:repeat(5,1fr); gap:2px; background:var(--light-gray);">
-      <div style="background:#FFFFFF; padding:32px 24px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; min-height:180px;">
-        <img src="images/logos/HCNJ_lockup_black.svg" style="max-height:72px; width:auto;" alt="black on white">
-        <div style="font-size:10px; color:var(--charcoal); text-align:center; letter-spacing:0.06em; text-transform:uppercase;">Black on White</div>
-      </div>
-      <div style="background:#74FBD7; padding:32px 24px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; min-height:180px;">
-        <img src="images/logos/HCNJ_lockup_deep-teal.svg" style="max-height:72px; width:auto;" alt="deep teal on liberty green">
-        <div style="font-size:10px; color:var(--green); text-align:center; letter-spacing:0.06em; text-transform:uppercase;">Deep Teal on Liberty Green</div>
-      </div>
-      <div style="background:#003230; padding:32px 24px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; min-height:180px;">
-        <img src="images/logos/HCNJ_lockup_teal.svg" style="max-height:72px; width:auto;" alt="liberty green on deep teal">
-        <div style="font-size:10px; color:var(--teal); text-align:center; letter-spacing:0.06em; text-transform:uppercase;">Liberty Green on Deep Teal</div>
-      </div>
-      <div style="background:#003230; padding:32px 24px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; min-height:180px;">
-        <img src="images/logos/HCNJ_lockup_green.svg" style="max-height:72px; width:auto;" alt="green on deep teal">
-        <div style="font-size:10px; color:var(--lime); text-align:center; letter-spacing:0.06em; text-transform:uppercase;">Green on Deep Teal</div>
-      </div>
-      <div style="background:#000913; padding:32px 24px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; min-height:180px;">
-        <img src="images/logos/HCNJ_lockup_white.svg" style="max-height:72px; width:auto;" alt="white on black">
-        <div style="font-size:10px; color:var(--white); text-align:center; letter-spacing:0.06em; text-transform:uppercase;">White on Black</div>
-      </div>
-    </div>
-  </div>
-  <div style="margin:0 32px 80px;">
+  <!-- Clearspace — above color variations -->
+  <div style="margin:0 32px 48px; border-top:1px solid var(--light-gray); padding-top:48px;">
     <div style="font-size:10px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--charcoal); margin-bottom:24px;">Clearspace</div>
-    <div style="display:flex; align-items:flex-start; gap:72px; flex-wrap:wrap;">
-      <div style="position:relative; display:inline-block; flex-shrink:0;">
-        <div style="border:1.5px dashed #C0C0C0; padding:32px; background:var(--white);">
-          <img src="images/logos/HCNJ_lockup_black.svg" style="max-width:280px; width:100%; height:auto;" alt="clearspace diagram">
-        </div>
-        <div style="position:absolute; top:0; left:50%; transform:translate(-50%,-100%); font-size:10px; font-weight:700; color:var(--charcoal); font-family:'Founders Grotesk',sans-serif; padding-bottom:4px; letter-spacing:0.06em;">x</div>
-        <div style="position:absolute; bottom:0; left:50%; transform:translate(-50%,100%); font-size:10px; font-weight:700; color:var(--charcoal); font-family:'Founders Grotesk',sans-serif; padding-top:4px; letter-spacing:0.06em;">x</div>
-        <div style="position:absolute; top:50%; left:0; transform:translate(-100%,-50%); font-size:10px; font-weight:700; color:var(--charcoal); font-family:'Founders Grotesk',sans-serif; padding-right:4px; letter-spacing:0.06em;">x</div>
-        <div style="position:absolute; top:50%; right:0; transform:translate(100%,-50%); font-size:10px; font-weight:700; color:var(--charcoal); font-family:'Founders Grotesk',sans-serif; padding-left:4px; letter-spacing:0.06em;">x</div>
-      </div>
-      <div style="max-width:380px; padding-top:8px;">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:center;">
+      <div style="order:2; display:flex; flex-direction:column; justify-content:center; padding:32px;">
         <div style="font-weight:600; font-size:14px; color:var(--charcoal); margin-bottom:10px;">Minimum clearspace = x</div>
         <div style="font-size:14px; color:var(--charcoal); line-height:1.4;">The clearspace unit x equals the cap height of the H in the HCNJ portion of the lockup. Because this lockup includes a signature element extending below the main mark, apply x clearspace specifically to the outer bounding box of the entire composition.</div>
-        <div style="margin-top:20px; padding:16px 20px; background:#F5F5F5; border-left:3px solid var(--teal);">
+        <div style="margin-top:20px; padding:16px 20px; background:var(--cream); border-left:3px solid var(--teal);">
           <div style="font-size:11px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:var(--charcoal); margin-bottom:6px;">x = the cap height of the H in HCNJ</div>
           <div style="font-size:12px; color:var(--charcoal); line-height:1.4;">Never place competing text, images, or graphic elements within this clearspace. This ensures the logo is always seen clearly and never feels crowded.</div>
         </div>
       </div>
+      <div style="order:1; display:flex; justify-content:center; align-items:center;">
+        <div class="cs-outer">
+          <div class="cs-zone" style="--cs-x: 50px;">
+            <div class="cs-logo-box">
+              <img src="images/logos/HCNJ_lockup_black.svg" style="max-width:280px; width:100%; height:auto; display:block;">
+            </div>
+            <div class="cs-dim-v top"><span class="cs-lbl">x</span></div>
+            <div class="cs-dim-v bottom"><span class="cs-lbl">x</span></div>
+            <div class="cs-dim-h left"><span class="cs-lbl">x</span></div>
+            <div class="cs-dim-h right"><span class="cs-lbl">x</span></div>
+            <img src="images/logos/H_black.svg" class="cs-h-mark" alt="" style="bottom:0; left:68%; transform:translateX(-50%);">
+          </div>
+          <div class="cs-def">
+            <span class="cs-def-x">x</span>
+            <span>= &#189; cap height of the H in HCNJ</span>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
+
+  <!-- Primary use + Restrictions — 2 columns -->
+  <div style="margin:0 32px 48px; display:grid; grid-template-columns:1fr 1fr; gap:48px;">
+    <div style="border:1px solid var(--light-gray); padding:32px;">
+      <div style="font-size:10px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--charcoal); margin-bottom:16px;">Primary use</div>
+      <div style="font-size:18px; color:var(--charcoal); line-height:var(--lh-body);">Social media profile logos across all County accounts, County Executive communications, executive office letterhead, official statements and press materials attributed to the County Executive, and high-profile County announcements where executive endorsement is appropriate.</div>
+    </div>
+    <div style="border:1px solid var(--light-gray); padding:32px;">
+      <div style="font-size:10px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--charcoal); margin-bottom:16px;">Restrictions</div>
+      <div style="font-size:18px; color:var(--charcoal); line-height:var(--lh-body);">This lockup is exclusively for communications issued by or on behalf of the County Executive's office. It must not be used in departmental, campaign, or general County communications. The signature element must not be extracted or used independently.</div>
+    </div>
+  </div>
+
   </div>
 
   <!-- ── HCNJ TEXT ────────────────────────────────────────────── -->
@@ -1715,59 +1664,54 @@
       <div class="section-body">
         <p>The HCNJ Text Only mark is the pure typographic abbreviation, just the four letterforms, set in Founders Grotesk Condensed Bold. It is the most versatile and space-efficient mark in the system, capable of reading clearly at virtually any size from a 16px favicon to a large-format billboard.</p>
         <p>The typographic mark is bold and direct, it communicates county authority through weight and clarity rather than through an accompanying graphic element. This makes it ideal for digital interfaces, metadata contexts, and small-scale applications where graphical marks lose resolution.</p>
-        <div class="divider"></div>
-        <p><strong>Primary use:</strong> Favicons, app icons, social media handles, email headers, metadata contexts, sub-brand partnership lockups, co-branding applications, and any context requiring maximum legibility at minimum size.</p>
-        <p><strong>Usage note:</strong> The HCNJ Text Only mark is the most freely deployable mark in the system, but "most flexible" does not mean "lowest priority." It is a full brand identifier and must appear in approved colors, at approved sizes, with appropriate clearspace. It must never be set in any typeface other than Founders Grotesk Condensed Bold.</p>
       </div>
     </div>
 
-  <div style="margin:0 32px 48px;">
-    <div style="font-size:10px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--charcoal); margin-bottom:20px;">Approved color variations</div>
-    <div class="logo-variations" style="display:grid; grid-template-columns:repeat(5,1fr); gap:2px; background:var(--light-gray);">
-      <div style="background:#FFFFFF; padding:32px 24px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; min-height:180px;">
-        <img src="images/logos/HCNJ_text_black.svg" style="max-height:56px; width:auto;" alt="black on white">
-        <div style="font-size:10px; color:var(--charcoal); text-align:center; letter-spacing:0.06em; text-transform:uppercase;">Black on White</div>
-      </div>
-      <div style="background:#74FBD7; padding:32px 24px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; min-height:180px;">
-        <img src="images/logos/HCNJ_text_deep-teal.svg" style="max-height:56px; width:auto;" alt="deep teal on liberty green">
-        <div style="font-size:10px; color:var(--green); text-align:center; letter-spacing:0.06em; text-transform:uppercase;">Deep Teal on Liberty Green</div>
-      </div>
-      <div style="background:#003230; padding:32px 24px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; min-height:180px;">
-        <img src="images/logos/HCNJ_text_teal.svg" style="max-height:56px; width:auto;" alt="liberty green on deep teal">
-        <div style="font-size:10px; color:var(--teal); text-align:center; letter-spacing:0.06em; text-transform:uppercase;">Liberty Green on Deep Teal</div>
-      </div>
-      <div style="background:#003230; padding:32px 24px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; min-height:180px;">
-        <img src="images/logos/HCNJ_text_green.svg" style="max-height:56px; width:auto;" alt="green on deep teal">
-        <div style="font-size:10px; color:var(--lime); text-align:center; letter-spacing:0.06em; text-transform:uppercase;">Green on Deep Teal</div>
-      </div>
-      <div style="background:#000913; padding:32px 24px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; min-height:180px;">
-        <img src="images/logos/HCNJ_text_white.svg" style="max-height:56px; width:auto;" alt="white on black">
-        <div style="font-size:10px; color:var(--white); text-align:center; letter-spacing:0.06em; text-transform:uppercase;">White on Black</div>
-      </div>
-    </div>
-  </div>
-  <div style="margin:0 32px 80px;">
+  <!-- Clearspace — above color variations -->
+  <div style="margin:0 32px 48px; border-top:1px solid var(--light-gray); padding-top:48px;">
     <div style="font-size:10px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--charcoal); margin-bottom:24px;">Clearspace</div>
-    <div style="display:flex; align-items:flex-start; gap:72px; flex-wrap:wrap;">
-      <div style="position:relative; display:inline-block; flex-shrink:0;">
-        <div style="border:1.5px dashed #C0C0C0; padding:32px; background:var(--white);">
-          <img src="images/logos/HCNJ_text_black.svg" style="max-width:240px; width:100%; height:auto;" alt="clearspace diagram">
-        </div>
-        <div style="position:absolute; top:0; left:50%; transform:translate(-50%,-100%); font-size:10px; font-weight:700; color:var(--charcoal); font-family:'Founders Grotesk',sans-serif; padding-bottom:4px; letter-spacing:0.06em;">x</div>
-        <div style="position:absolute; bottom:0; left:50%; transform:translate(-50%,100%); font-size:10px; font-weight:700; color:var(--charcoal); font-family:'Founders Grotesk',sans-serif; padding-top:4px; letter-spacing:0.06em;">x</div>
-        <div style="position:absolute; top:50%; left:0; transform:translate(-100%,-50%); font-size:10px; font-weight:700; color:var(--charcoal); font-family:'Founders Grotesk',sans-serif; padding-right:4px; letter-spacing:0.06em;">x</div>
-        <div style="position:absolute; top:50%; right:0; transform:translate(100%,-50%); font-size:10px; font-weight:700; color:var(--charcoal); font-family:'Founders Grotesk',sans-serif; padding-left:4px; letter-spacing:0.06em;">x</div>
-      </div>
-      <div style="max-width:380px; padding-top:8px;">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:center;">
+      <div style="order:2; display:flex; flex-direction:column; justify-content:center; padding:32px;">
         <div style="font-weight:600; font-size:14px; color:var(--charcoal); margin-bottom:10px;">Minimum clearspace = x</div>
         <div style="font-size:14px; color:var(--charcoal); line-height:1.4;">The clearspace unit x equals the cap height of the H letterform. At small digital sizes (under 64px wide), a minimum of 8px clearspace is acceptable, but always strive to give the mark more space than the minimum when layout permits.</div>
-        <div style="margin-top:20px; padding:16px 20px; background:#F5F5F5; border-left:3px solid var(--teal);">
+        <div style="margin-top:20px; padding:16px 20px; background:var(--cream); border-left:3px solid var(--teal);">
           <div style="font-size:11px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:var(--charcoal); margin-bottom:6px;">x = the cap height of the H in HCNJ</div>
           <div style="font-size:12px; color:var(--charcoal); line-height:1.4;">Never place competing text, images, or graphic elements within this clearspace. This ensures the logo is always seen clearly and never feels crowded.</div>
         </div>
       </div>
+      <div style="order:1; display:flex; justify-content:center; align-items:center;">
+        <div class="cs-outer">
+          <div class="cs-zone" style="--cs-x: 29px;">
+            <div class="cs-logo-box">
+              <img src="images/logos/HCNJ_text_black.svg" style="max-width:160px; width:100%; height:auto; display:block;">
+            </div>
+            <div class="cs-dim-v top"><span class="cs-lbl">x</span></div>
+            <div class="cs-dim-v bottom"><span class="cs-lbl">x</span></div>
+            <div class="cs-dim-h left"><span class="cs-lbl">x</span></div>
+            <div class="cs-dim-h right"><span class="cs-lbl">x</span></div>
+            <img src="images/logos/H_black.svg" class="cs-h-mark" alt="" style="bottom:0; left:68%; transform:translateX(-50%);">
+          </div>
+          <div class="cs-def">
+            <span class="cs-def-x">x</span>
+            <span>= &#189; cap height of the &#8220;H&#8221; in HCNJ</span>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
+
+  <!-- Primary use + Usage note — 2 columns -->
+  <div style="margin:0 32px 48px; display:grid; grid-template-columns:1fr 1fr; gap:48px;">
+    <div style="border:1px solid var(--light-gray); padding:32px;">
+      <div style="font-size:10px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--charcoal); margin-bottom:16px;">Primary use</div>
+      <div style="font-size:18px; color:var(--charcoal); line-height:var(--lh-body);">Favicons, app icons, social media handles, email headers, metadata contexts, sub-brand partnership lockups, co-branding applications, and any context requiring maximum legibility at minimum size.</div>
+    </div>
+    <div style="border:1px solid var(--light-gray); padding:32px;">
+      <div style="font-size:10px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--charcoal); margin-bottom:16px;">Usage note</div>
+      <div style="font-size:18px; color:var(--charcoal); line-height:var(--lh-body);">The HCNJ Text Only mark is the most freely deployable mark in the system, but "most flexible" does not mean "lowest priority." It must appear in approved colors, at approved sizes, with appropriate clearspace, and must never be set in any typeface other than Founders Grotesk Condensed Bold.</div>
+    </div>
+  </div>
+
   </div>
 
   
