@@ -261,6 +261,26 @@
       --lh-body:      1.2;
       --lh-headline:  0.9;
       --ease:         cubic-bezier(.4,0,.2,1);
+
+      /* Nav UI */
+      --nav-hover-bg:  #F5F2EC;
+      --nav-active-bg: #EFF5F0;
+
+      /* Browser tab mockup — light mode */
+      --tab-light-shell:       #F1F3F4;
+      --tab-light-inactive:    #E4E6E8;
+      --tab-light-placeholder: #CCCCCC;
+      --tab-light-text:        #1A1A1A;
+      --tab-light-text-mid:    #555555;
+      --tab-light-text-muted:  #666666;
+
+      /* Browser tab mockup — dark mode */
+      --tab-dark-shell:        #2B2B2B;
+      --tab-dark-surface:      #3C3C3C;
+      --tab-dark-inactive:     #252525;
+      --tab-dark-placeholder:  #555555;
+      --tab-dark-text:         #F0F0F0;
+      --tab-dark-text-muted:   #AAAAAA;
     }
 
     /* ─── Reset ─────────────────────────────────────────────── */
@@ -341,14 +361,14 @@
       cursor: pointer;
     }
     .nav-link:hover {
-      background: #F5F2EC;
+      background: var(--nav-hover-bg);
       color: var(--green);
     }
     .nav-link.active {
       border-left-color: var(--green);
       color: var(--green);
       font-weight: 500;
-      background: #EFF5F0;
+      background: var(--nav-active-bg);
     }
 
     /* ─── Collapsible nav sub-sections ──────────────────────── */
@@ -1826,20 +1846,20 @@
         <!-- Light mode tab -->
         <div style="display:flex; flex-direction:column; align-items:flex-start; gap:10px;">
           <div style="font-size:11px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:var(--charcoal);">Light mode</div>
-          <div style="background:#F1F3F4; border-radius:8px 8px 0 0; padding:0; overflow:hidden; width:320px;">
+          <div style="background:var(--tab-light-shell); border-radius:8px 8px 0 0; padding:0; overflow:hidden; width:320px;">
             <div style="display:flex; align-items:stretch; padding:8px 8px 0; gap:2px;">
-              <div style="background:#FFFFFF; border-radius:6px 6px 0 0; padding:8px 12px; display:flex; align-items:center; gap:6px; flex:1; min-width:0;">
+              <div style="background:var(--white); border-radius:6px 6px 0 0; padding:8px 12px; display:flex; align-items:center; gap:6px; flex:1; min-width:0;">
                 <img src="images/logos/H_black.svg" style="width:16px; height:16px; flex-shrink:0;">
-                <span style="font-family:system-ui,sans-serif; font-size:12px; color:#1a1a1a; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">Hudson County, NJ</span>
+                <span style="font-family:system-ui,sans-serif; font-size:12px; color:var(--tab-light-text); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">Hudson County, NJ</span>
               </div>
-              <div style="background:#E4E6E8; border-radius:6px 6px 0 0; padding:8px 12px; display:flex; align-items:center; gap:6px; width:120px; opacity:0.6;">
-                <div style="width:16px; height:16px; background:#ccc; border-radius:2px; flex-shrink:0;"></div>
-                <span style="font-family:system-ui,sans-serif; font-size:12px; color:#555; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">New Tab</span>
+              <div style="background:var(--tab-light-inactive); border-radius:6px 6px 0 0; padding:8px 12px; display:flex; align-items:center; gap:6px; width:120px; opacity:0.6;">
+                <div style="width:16px; height:16px; background:var(--tab-light-placeholder); border-radius:2px; flex-shrink:0;"></div>
+                <span style="font-family:system-ui,sans-serif; font-size:12px; color:var(--tab-light-text-mid); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">New Tab</span>
               </div>
             </div>
-            <div style="background:#FFFFFF; margin:0 8px 8px; border-radius:4px; padding:6px 12px; display:flex; align-items:center; gap:8px;">
-              <div style="width:10px; height:10px; border-radius:50%; background:#ccc; flex-shrink:0;"></div>
-              <span style="font-family:system-ui,sans-serif; font-size:11px; color:#666;">hcnj.us</span>
+            <div style="background:var(--white); margin:0 8px 8px; border-radius:4px; padding:6px 12px; display:flex; align-items:center; gap:8px;">
+              <div style="width:10px; height:10px; border-radius:50%; background:var(--tab-light-placeholder); flex-shrink:0;"></div>
+              <span style="font-family:system-ui,sans-serif; font-size:11px; color:var(--tab-light-text-muted);">hcnj.us</span>
             </div>
           </div>
         </div>
@@ -1847,20 +1867,20 @@
         <!-- Dark mode tab -->
         <div style="display:flex; flex-direction:column; align-items:flex-start; gap:10px;">
           <div style="font-size:11px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:var(--charcoal);">Dark mode</div>
-          <div style="background:#2B2B2B; border-radius:8px 8px 0 0; padding:0; overflow:hidden; width:320px;">
+          <div style="background:var(--tab-dark-shell); border-radius:8px 8px 0 0; padding:0; overflow:hidden; width:320px;">
             <div style="display:flex; align-items:stretch; padding:8px 8px 0; gap:2px;">
-              <div style="background:#3C3C3C; border-radius:6px 6px 0 0; padding:8px 12px; display:flex; align-items:center; gap:6px; flex:1; min-width:0;">
+              <div style="background:var(--tab-dark-surface); border-radius:6px 6px 0 0; padding:8px 12px; display:flex; align-items:center; gap:6px; flex:1; min-width:0;">
                 <img src="images/logos/H_white.svg" style="width:16px; height:16px; flex-shrink:0;">
-                <span style="font-family:system-ui,sans-serif; font-size:12px; color:#f0f0f0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">Hudson County, NJ</span>
+                <span style="font-family:system-ui,sans-serif; font-size:12px; color:var(--tab-dark-text); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">Hudson County, NJ</span>
               </div>
-              <div style="background:#252525; border-radius:6px 6px 0 0; padding:8px 12px; display:flex; align-items:center; gap:6px; width:120px; opacity:0.6;">
-                <div style="width:16px; height:16px; background:#555; border-radius:2px; flex-shrink:0;"></div>
-                <span style="font-family:system-ui,sans-serif; font-size:12px; color:#aaa; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">New Tab</span>
+              <div style="background:var(--tab-dark-inactive); border-radius:6px 6px 0 0; padding:8px 12px; display:flex; align-items:center; gap:6px; width:120px; opacity:0.6;">
+                <div style="width:16px; height:16px; background:var(--tab-dark-placeholder); border-radius:2px; flex-shrink:0;"></div>
+                <span style="font-family:system-ui,sans-serif; font-size:12px; color:var(--tab-dark-text-muted); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">New Tab</span>
               </div>
             </div>
-            <div style="background:#3C3C3C; margin:0 8px 8px; border-radius:4px; padding:6px 12px; display:flex; align-items:center; gap:8px;">
-              <div style="width:10px; height:10px; border-radius:50%; background:#555; flex-shrink:0;"></div>
-              <span style="font-family:system-ui,sans-serif; font-size:11px; color:#aaa;">hcnj.us</span>
+            <div style="background:var(--tab-dark-surface); margin:0 8px 8px; border-radius:4px; padding:6px 12px; display:flex; align-items:center; gap:8px;">
+              <div style="width:10px; height:10px; border-radius:50%; background:var(--tab-dark-placeholder); flex-shrink:0;"></div>
+              <span style="font-family:system-ui,sans-serif; font-size:11px; color:var(--tab-dark-text-muted);">hcnj.us</span>
             </div>
           </div>
         </div>
@@ -1900,7 +1920,7 @@
         <div class="type-avoid-grid" style="display:grid; grid-template-columns:repeat(2,1fr); gap:2px; background:var(--light-gray);">
 
           <!-- 1: Low contrast -->
-          <div style="background:#E8F8F2; padding:32px 28px; min-height:260px; position:relative; display:flex; flex-direction:column; justify-content:center; align-items:center; overflow:hidden; gap:20px;">
+          <div style="background:var(--cream); padding:32px 28px; min-height:260px; position:relative; display:flex; flex-direction:column; justify-content:center; align-items:center; overflow:hidden; gap:20px;">
             <div style="position:absolute; top:14px; left:14px; font-size:10px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--charcoal);">Low contrast</div>
             <img src="images/logos/HCNJ_lockup_teal.svg" style="height:56px; width:auto; display:block;">
             <div style="position:absolute; top:14px; right:14px; width:20px; height:20px; background:#EB254D; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:10px; font-weight:700; color:#fff; line-height:1; flex-shrink:0;">✕</div>
