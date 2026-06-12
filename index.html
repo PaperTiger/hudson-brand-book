@@ -5,41 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Hudson County, Brand Identity</title>
   <style>
-    @font-face {
-      font-family: 'Founders Grotesk Condensed';
-      src: url('fonts/founders-grotesk-condensed-bold.woff2') format('woff2');
-      font-weight: 700;
-      font-style: normal;
-      font-display: swap;
-    }
-    @font-face {
-      font-family: 'Founders Grotesk';
-      src: url('fonts/founders-grotesk-medium.woff2') format('woff2');
-      font-weight: 500;
-      font-style: normal;
-      font-display: swap;
-    }
-    @font-face {
-      font-family: 'Founders Grotesk';
-      src: url('fonts/founders-grotesk-semibold.woff2') format('woff2');
-      font-weight: 600;
-      font-style: normal;
-      font-display: swap;
-    }
-    @font-face {
-      font-family: 'Founders Grotesk Text';
-      src: url('fonts/founders-grotesk-text-regular.woff2') format('woff2');
-      font-weight: 400;
-      font-style: normal;
-      font-display: swap;
-    }
-    @font-face {
-      font-family: 'Founders Grotesk Text';
-      src: url('fonts/founders-grotesk-text-semibold.woff2') format('woff2');
-      font-weight: 600;
-      font-style: normal;
-      font-display: swap;
-    }
+    /* @font-face rules injected by brand.js */
 
 
     /* ─── Accessibility ──────────────────────────────────────── */
@@ -289,20 +255,8 @@
   </style>
 
   <style>
-    /* ─── Variables ─────────────────────────────────────────── */
+    /* ─── Variables (colors injected by brand.js) ──────────── */
     :root {
-      --green:        #003230;
-      --teal:         #74FBD7;
-      --charcoal:     #000913;
-      --cream:        #FAFAFA;
-      --warm-gray:    #6B6B6B;
-      --light-gray:   #E3E3E3;
-      --white:        #FFFFFF;
-      --blue:         #0004F5;
-      --yellow:       #EBE825;
-      --purple:       #6B1262;
-      --lime:         #8AF161;
-      --amaranth:     #EB254D;
       --sidebar-w:    248px;
       --lh-body:      1.2;
       --lh-headline:  0.9;
@@ -1055,96 +1009,8 @@
     <span class="sidebar-label">Brand Identity</span>
   </a>
 
-  <!-- Visual Identity -->
-  <div class="nav-group">
-    <div class="nav-group-header">Visual identity</div>
-    <a class="nav-link active" href="#vi-intro" data-target="vi-intro">Introduction</a>
-  </div>
-
-  <!-- Logo & Mark -->
-  <div class="nav-group">
-    <div class="nav-group-header">Logo &amp; mark</div>
-    <a class="nav-link" href="#logo-seal" data-target="logo-seal">County seal</a>
-    <div class="nav-expandable" id="nav-full-logo-group">
-      <a class="nav-link nav-parent" href="#logo-horizontal" data-target="logo-horizontal">
-        Full logo
-        <svg class="nav-chevron" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="m6 9l6 6l6-6"/></svg>
-      </a>
-      <div class="nav-sub" id="nav-full-logo-sub">
-        <a class="nav-link nav-child" href="#logo-horizontal" data-target="logo-horizontal">Horizontal</a>
-        <a class="nav-link nav-child" href="#logo-stacked" data-target="logo-stacked">Stacked</a>
-        <a class="nav-link nav-child" href="#logo-text-only" data-target="logo-text-only">Text only</a>
-      </div>
-    </div>
-    <a class="nav-link" href="#h-logo-mark" data-target="h-logo-mark">H logo mark</a>
-    <div class="nav-expandable" id="nav-hcnj-group">
-      <a class="nav-link nav-parent" href="#hcnj-horizontal" data-target="hcnj-horizontal">
-        HCNJ logo
-        <svg class="nav-chevron" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="m6 9l6 6l6-6"/></svg>
-      </a>
-      <div class="nav-sub" id="nav-hcnj-sub">
-        <a class="nav-link nav-child" href="#hcnj-horizontal" data-target="hcnj-horizontal">Horizontal</a>
-        <a class="nav-link nav-child" href="#hcnj-text-lockup" data-target="hcnj-text-lockup">Text lockup</a>
-        <a class="nav-link nav-child" href="#hcnj-text-only" data-target="hcnj-text-only">Text only</a>
-      </div>
-    </div>
-  </div>
-
-  <!-- Color -->
-  <div class="nav-group">
-    <div class="nav-group-header">Color</div>
-    <a class="nav-link" href="#color-intro" data-target="color-intro">Introduction</a>
-    <a class="nav-link" href="#primary-palette" data-target="primary-palette">Primary palette</a>
-    <a class="nav-link" href="#secondary-palette" data-target="secondary-palette">Secondary palette</a>
-    <a class="nav-link" href="#color-combinations" data-target="color-combinations">Combinations &amp; accessibility</a>
-    <a class="nav-link" href="#color-pathways" data-target="color-pathways">Color pathways</a>
-  </div>
-
-  <!-- Typography -->
-  <div class="nav-group">
-    <div class="nav-group-header">Typography</div>
-    <a class="nav-link" href="#type-intro" data-target="type-intro">Introduction</a>
-    <div class="nav-expandable" id="nav-fg-group">
-      <a class="nav-link nav-parent" href="#fg-overview" data-target="fg-overview">
-        Founders Grotesk
-        <svg class="nav-chevron" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="m6 9l6 6l6-6"/></svg>
-      </a>
-      <div class="nav-sub" id="nav-fg-sub">
-        <a class="nav-link nav-child" href="#fg-overview" data-target="fg-overview">Overview</a>
-        <a class="nav-link nav-child" href="#fg-usage" data-target="fg-usage">Usage</a>
-        <a class="nav-link nav-child" href="#fg-specimen" data-target="fg-specimen">Type specimen</a>
-        <a class="nav-link nav-child" href="#fg-scale" data-target="fg-scale">Size &amp; scale</a>
-      </div>
-    </div>
-    <a class="nav-link" href="#google-fallback" data-target="google-fallback">Google fallback</a>
-    <a class="nav-link" href="#type-fallback" data-target="type-fallback">System fallback</a>
-    <a class="nav-link" href="#type-avoid" data-target="type-avoid">What to avoid</a>
-  </div>
-
-  <!-- Photography -->
-  <div class="nav-group">
-    <div class="nav-group-header">Photography</div>
-    <a class="nav-link" href="#photo-intro" data-target="photo-intro">Introduction</a>
-    <a class="nav-link" href="#photo-landscape-dos" data-target="photo-landscape-dos">Landscape: dos</a>
-    <a class="nav-link" href="#photo-landscape-donts" data-target="photo-landscape-donts">Landscape: don'ts</a>
-    <a class="nav-link" href="#photo-community-dos" data-target="photo-community-dos">Community: dos</a>
-    <a class="nav-link" href="#photo-community-donts" data-target="photo-community-donts">Community: don'ts</a>
-  </div>
-
-  <!-- Applications -->
-  <div class="nav-group">
-    <div class="nav-group-header">Applications</div>
-    <a class="nav-link" href="#app-intro" data-target="app-intro">Introduction</a>
-    <a class="nav-link" href="#app-swag" data-target="app-swag">Swag samples</a>
-    <a class="nav-link" href="#app-wild" data-target="app-wild">In the wild</a>
-  </div>
-
-  <!-- Iconography -->
-  <div class="nav-group">
-    <div class="nav-group-header">Iconography</div>
-    <a class="nav-link" href="#icon-intro" data-target="icon-intro">Introduction</a>
-    <a class="nav-link" href="#icon-library" data-target="icon-library">Icon library</a>
-  </div>
+  <!-- Nav groups rendered by brand.js -->
+  <div id="nav-groups"></div>
 
 </nav>
 
@@ -1168,11 +1034,8 @@
 
     <!-- Bottom row: meta left, seal right -->
     <div class="cover-bottom" style="display:flex; align-items:flex-end; justify-content:space-between; gap:20px;">
-      <div class="cover-meta">
-        <div style="font-weight:600;">Brand guidelines</div>
-        <div>Version 1.0</div>
-        <div>June 2026</div>
-        <div style="white-space:nowrap;">Prepared by Paper Tiger</div>
+      <div class="cover-meta" id="cover-meta">
+      <!-- Cover meta rendered by brand.js -->
       </div>
       <img class="cover-seal" src="images/logos/HCNJ_county-seal_deep-teal.svg" alt="Hudson County Seal" style="height:clamp(140px,15vw,260px); width:auto; flex-shrink:0;">
     </div>
@@ -1799,105 +1662,8 @@
       </div>
     </div>
 
-    <div class="resp-grid-2col" style="display:grid; grid-template-columns:1fr 1fr; gap:0;">
-
-      <!-- Liberty Green -->
-      <div style="background:#74FBD7; padding:32px 40px; display:flex; flex-direction:column; justify-content:space-between; min-height:384px;">
-        <div style="display:flex; align-items:center; gap:10px;">
-          <div style="width:8px; height:8px; border-radius:50%; background:#000913; flex-shrink:0;"></div>
-          <span style="font-size:16px; font-weight:600; color:#000913; letter-spacing:0.02em; line-height:1; font-family:inherit;">Liberty Green</span>
-        </div>
-        <div style="font-size:11px; color:#000913; font-family:inherit;">
-          <div style="display:grid; grid-template-columns:14px 1fr; gap:0 10px; line-height:1.1;">
-            <span>R</span><span>116</span>
-            <span>G</span><span>251</span>
-            <span>B</span><span>215</span>
-            <div style="grid-column:1/-1; height:5px;"></div>
-            <span>C</span><span>54</span>
-            <span>M</span><span>0</span>
-            <span>Y</span><span>14</span>
-            <span>K</span><span>2</span>
-            <div style="grid-column:1/-1; height:5px;"></div>
-            <span>#</span><span>74FBD7</span>
-            <div style="grid-column:1/-1; height:5px;"></div>
-            <span>P</span><span>---</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Deep Teal -->
-      <div style="background:#003230; padding:32px 40px; display:flex; flex-direction:column; justify-content:space-between; min-height:384px;">
-        <div style="display:flex; align-items:center; gap:10px;">
-          <div style="width:8px; height:8px; border-radius:50%; background:#74FBD7; flex-shrink:0;"></div>
-          <span style="font-size:16px; font-weight:600; color:#74FBD7; letter-spacing:0.02em; line-height:1; font-family:inherit;">Deep Teal</span>
-        </div>
-        <div style="font-size:11px; color:#74FBD7; font-family:inherit;">
-          <div style="display:grid; grid-template-columns:14px 1fr; gap:0 10px; line-height:1.1;">
-            <span>R</span><span>0</span>
-            <span>G</span><span>50</span>
-            <span>B</span><span>48</span>
-            <div style="grid-column:1/-1; height:5px;"></div>
-            <span>C</span><span>100</span>
-            <span>M</span><span>0</span>
-            <span>Y</span><span>4</span>
-            <span>K</span><span>80</span>
-            <div style="grid-column:1/-1; height:5px;"></div>
-            <span>#</span><span>003230</span>
-            <div style="grid-column:1/-1; height:5px;"></div>
-            <span>P</span><span>---</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Black -->
-      <div style="background:#000913; padding:32px 40px; display:flex; flex-direction:column; justify-content:space-between; min-height:384px;">
-        <div style="display:flex; align-items:center; gap:10px;">
-          <div style="width:8px; height:8px; border-radius:50%; background:#FFFFFF; flex-shrink:0;"></div>
-          <span style="font-size:16px; font-weight:600; color:#FFFFFF; letter-spacing:0.02em; line-height:1; font-family:inherit;">Charcoal</span>
-        </div>
-        <div style="font-size:11px; color:#FFFFFF; font-family:inherit;">
-          <div style="display:grid; grid-template-columns:14px 1fr; gap:0 10px; line-height:1.1;">
-            <span>R</span><span>0</span>
-            <span>G</span><span>9</span>
-            <span>B</span><span>19</span>
-            <div style="grid-column:1/-1; height:5px;"></div>
-            <span>C</span><span>100</span>
-            <span>M</span><span>53</span>
-            <span>Y</span><span>0</span>
-            <span>K</span><span>93</span>
-            <div style="grid-column:1/-1; height:5px;"></div>
-            <span>#</span><span>000913</span>
-            <div style="grid-column:1/-1; height:5px;"></div>
-            <span>P</span><span>---</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- White -->
-      <div style="background:#FFFFFF; padding:32px 40px; display:flex; flex-direction:column; justify-content:space-between; min-height:384px;">
-        <div style="display:flex; align-items:center; gap:10px;">
-          <div style="width:8px; height:8px; border-radius:50%; background:#000913; flex-shrink:0;"></div>
-          <span style="font-size:16px; font-weight:600; color:#000913; letter-spacing:0.02em; line-height:1; font-family:inherit;">white-01</span>
-        </div>
-        <div style="font-size:11px; color:#000913; font-family:inherit;">
-          <div style="display:grid; grid-template-columns:14px 1fr; gap:0 10px; line-height:1.1;">
-            <span>R</span><span>255</span>
-            <span>G</span><span>255</span>
-            <span>B</span><span>255</span>
-            <div style="grid-column:1/-1; height:5px;"></div>
-            <span>C</span><span>0</span>
-            <span>M</span><span>0</span>
-            <span>Y</span><span>0</span>
-            <span>K</span><span>0</span>
-            <div style="grid-column:1/-1; height:5px;"></div>
-            <span>#</span><span>FFFFFF</span>
-            <div style="grid-column:1/-1; height:5px;"></div>
-            <span>P</span><span>---</span>
-          </div>
-        </div>
-      </div>
-
-    </div>
+    <!-- Primary palette swatches rendered by brand.js -->
+    <div id="primary-palette-grid" class="resp-grid-2col" style="display:grid; grid-template-columns:1fr 1fr; gap:0;"></div>
 
   </div>
 
@@ -1914,154 +1680,8 @@
       </div>
     </div>
 
-    <div class="resp-grid-3col" style="display:grid; grid-template-columns:repeat(3,1fr); gap:0;">
-
-      <!-- Hudson Blue -->
-      <div style="background:#0004F5; padding:32px 40px; display:flex; flex-direction:column; justify-content:space-between; min-height:336px;">
-        <div style="display:flex; align-items:center; gap:10px;">
-          <div style="width:8px; height:8px; border-radius:50%; background:#74FBD7; flex-shrink:0;"></div>
-          <span style="font-size:16px; font-weight:600; color:#74FBD7; letter-spacing:0.02em; line-height:1; font-family:inherit;">Hudson Blue</span>
-        </div>
-        <div style="font-size:11px; color:#74FBD7; font-family:inherit;">
-          <div style="display:grid; grid-template-columns:14px 1fr; gap:0 10px; line-height:1.1;">
-            <span>R</span><span>0</span>
-            <span>G</span><span>4</span>
-            <span>B</span><span>245</span>
-            <div style="grid-column:1/-1; height:5px;"></div>
-            <span>C</span><span>100</span>
-            <span>M</span><span>98</span>
-            <span>Y</span><span>0</span>
-            <span>K</span><span>4</span>
-            <div style="grid-column:1/-1; height:5px;"></div>
-            <span>#</span><span>0004F5</span>
-            <div style="grid-column:1/-1; height:5px;"></div>
-            <span>P</span><span>---</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Purple -->
-      <div style="background:#6B1262; padding:32px 40px; display:flex; flex-direction:column; justify-content:space-between; min-height:336px;">
-        <div style="display:flex; align-items:center; gap:10px;">
-          <div style="width:8px; height:8px; border-radius:50%; background:#FFFFFF; flex-shrink:0;"></div>
-          <span style="font-size:16px; font-weight:600; color:#FFFFFF; letter-spacing:0.02em; line-height:1; font-family:inherit;">Purple</span>
-        </div>
-        <div style="font-size:11px; color:#FFFFFF; font-family:inherit;">
-          <div style="display:grid; grid-template-columns:14px 1fr; gap:0 10px; line-height:1.1;">
-            <span>R</span><span>107</span>
-            <span>G</span><span>18</span>
-            <span>B</span><span>98</span>
-            <div style="grid-column:1/-1; height:5px;"></div>
-            <span>C</span><span>0</span>
-            <span>M</span><span>83</span>
-            <span>Y</span><span>8</span>
-            <span>K</span><span>58</span>
-            <div style="grid-column:1/-1; height:5px;"></div>
-            <span>#</span><span>6B1262</span>
-            <div style="grid-column:1/-1; height:5px;"></div>
-            <span>P</span><span>---</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Flag Yellow -->
-      <div style="background:#EBE825; padding:32px 40px; display:flex; flex-direction:column; justify-content:space-between; min-height:336px;">
-        <div style="display:flex; align-items:center; gap:10px;">
-          <div style="width:8px; height:8px; border-radius:50%; background:#000913; flex-shrink:0;"></div>
-          <span style="font-size:16px; font-weight:600; color:#000913; letter-spacing:0.02em; line-height:1; font-family:inherit;">Flag Yellow</span>
-        </div>
-        <div style="font-size:11px; color:#000913; font-family:inherit;">
-          <div style="display:grid; grid-template-columns:14px 1fr; gap:0 10px; line-height:1.1;">
-            <span>R</span><span>235</span>
-            <span>G</span><span>232</span>
-            <span>B</span><span>37</span>
-            <div style="grid-column:1/-1; height:5px;"></div>
-            <span>C</span><span>0</span>
-            <span>M</span><span>1</span>
-            <span>Y</span><span>84</span>
-            <span>K</span><span>8</span>
-            <div style="grid-column:1/-1; height:5px;"></div>
-            <span>#</span><span>EBE825</span>
-            <div style="grid-column:1/-1; height:5px;"></div>
-            <span>P</span><span>---</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Green -->
-      <div style="background:#8AF161; padding:32px 40px; display:flex; flex-direction:column; justify-content:space-between; min-height:336px;">
-        <div style="display:flex; align-items:center; gap:10px;">
-          <div style="width:8px; height:8px; border-radius:50%; background:#000913; flex-shrink:0;"></div>
-          <span style="font-size:16px; font-weight:600; color:#000913; letter-spacing:0.02em; line-height:1; font-family:inherit;">Green</span>
-        </div>
-        <div style="font-size:11px; color:#000913; font-family:inherit;">
-          <div style="display:grid; grid-template-columns:14px 1fr; gap:0 10px; line-height:1.1;">
-            <span>R</span><span>138</span>
-            <span>G</span><span>241</span>
-            <span>B</span><span>97</span>
-            <div style="grid-column:1/-1; height:5px;"></div>
-            <span>C</span><span>43</span>
-            <span>M</span><span>0</span>
-            <span>Y</span><span>60</span>
-            <span>K</span><span>5</span>
-            <div style="grid-column:1/-1; height:5px;"></div>
-            <span>#</span><span>8AF161</span>
-            <div style="grid-column:1/-1; height:5px;"></div>
-            <span>P</span><span>---</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Amaranth -->
-      <div style="background:#EB254D; padding:32px 40px; display:flex; flex-direction:column; justify-content:space-between; min-height:336px;">
-        <div style="display:flex; align-items:center; gap:10px;">
-          <div style="width:8px; height:8px; border-radius:50%; background:#000913; flex-shrink:0;"></div>
-          <span style="font-size:16px; font-weight:600; color:#000913; letter-spacing:0.02em; line-height:1; font-family:inherit;">Amaranth</span>
-        </div>
-        <div style="font-size:11px; color:#000913; font-family:inherit;">
-          <div style="display:grid; grid-template-columns:14px 1fr; gap:0 10px; line-height:1.1;">
-            <span>R</span><span>235</span>
-            <span>G</span><span>37</span>
-            <span>B</span><span>77</span>
-            <div style="grid-column:1/-1; height:5px;"></div>
-            <span>C</span><span>0</span>
-            <span>M</span><span>84</span>
-            <span>Y</span><span>67</span>
-            <span>K</span><span>8</span>
-            <div style="grid-column:1/-1; height:5px;"></div>
-            <span>#</span><span>EB254D</span>
-            <div style="grid-column:1/-1; height:5px;"></div>
-            <span>P</span><span>---</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Gray -->
-      <div style="background:#E3E3E3; padding:32px 40px; display:flex; flex-direction:column; justify-content:space-between; min-height:336px; outline:1px solid #C8C8C8;">
-        <div style="display:flex; align-items:center; gap:10px;">
-          <div style="width:8px; height:8px; border-radius:50%; background:#000913; flex-shrink:0;"></div>
-          <span style="font-size:16px; font-weight:600; color:#000913; letter-spacing:0.02em; line-height:1; font-family:inherit;">Gray</span>
-        </div>
-        <div style="font-size:11px; color:#000913; font-family:inherit;">
-          <div style="display:grid; grid-template-columns:14px 1fr; gap:0 10px; line-height:1.1;">
-            <span>R</span><span>227</span>
-            <span>G</span><span>227</span>
-            <span>B</span><span>227</span>
-            <div style="grid-column:1/-1; height:5px;"></div>
-            <span>C</span><span>0</span>
-            <span>M</span><span>0</span>
-            <span>Y</span><span>0</span>
-            <span>K</span><span>11</span>
-            <div style="grid-column:1/-1; height:5px;"></div>
-            <span>#</span><span>E3E3E3</span>
-            <div style="grid-column:1/-1; height:5px;"></div>
-            <span>P</span><span>---</span>
-          </div>
-        </div>
-      </div>
-
-
-    </div>
+    <!-- Secondary palette swatches rendered by brand.js -->
+    <div id="secondary-palette-grid" class="resp-grid-3col" style="display:grid; grid-template-columns:repeat(3,1fr); gap:0;"></div>
 
   </div>
 
@@ -3735,6 +3355,8 @@
 <!-- ══════════════════════════════════════════════════════════
      JAVASCRIPT, Scroll-driven nav + smooth scroll
 ══════════════════════════════════════════════════════════════ -->
+<script src="brand.js"></script>
+
 <script>
 (function () {
   const links = document.querySelectorAll('.nav-link[data-target]');
@@ -3796,7 +3418,7 @@
     if (pushState) history.pushState({ page: targetId }, '', '#' + targetId);
     document.body.classList.toggle('on-home', targetId === 'home');
     const mLogo = document.getElementById('mobile-logo');
-    if (mLogo) mLogo.src = targetId === 'home' ? 'images/logos/HCNJ_text_teal.svg' : 'images/logos/HCNJ_text_deep-teal.svg';
+    if (mLogo) mLogo.src = 'images/logos/HCNJ_text_deep-teal.svg';
     closeSidebar();
   }
 
