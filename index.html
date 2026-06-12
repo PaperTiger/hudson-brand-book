@@ -4,9 +4,65 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Brand Identity</title><!-- set by brand.js -->
-  <style>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            'fg-condensed': ['"Founders Grotesk Condensed"', 'sans-serif'],
+            'fg':           ['"Founders Grotesk"', 'system-ui', '-apple-system', 'sans-serif'],
+            'fg-text':      ['"Founders Grotesk Text"', 'system-ui', '-apple-system', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+
+  <style type="text/tailwindcss">
     /* @font-face rules injected by brand.js */
 
+    @layer base {
+      :root {
+        --sidebar-w:    248px;
+        --lh-body:      1.2;
+        --lh-headline:  0.9;
+        --ease:         cubic-bezier(.4,0,.2,1);
+        --nav-hover-bg:  #F5F2EC;
+        --nav-active-bg: #EFF5F0;
+        --tab-light-shell:       #F1F3F4;
+        --tab-light-inactive:    #E4E6E8;
+        --tab-light-placeholder: #CCCCCC;
+        --tab-light-text:        #1A1A1A;
+        --tab-light-text-mid:    #555555;
+        --tab-light-text-muted:  #666666;
+        --tab-dark-shell:        #2B2B2B;
+        --tab-dark-surface:      #3C3C3C;
+        --tab-dark-inactive:     #252525;
+        --tab-dark-placeholder:  #555555;
+        --tab-dark-text:         #F0F0F0;
+        --tab-dark-text-muted:   #AAAAAA;
+      }
+      @media (min-width: 769px) and (max-width: 1024px) {
+        :root { --sidebar-w: 200px; }
+      }
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+      html { scroll-behavior: smooth; overflow-x: hidden; }
+      body {
+        font-family: 'Founders Grotesk Text', system-ui, -apple-system, sans-serif;
+        background: var(--cream);
+        color: var(--charcoal);
+        display: flex;
+        min-height: 100dvh;
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+      }
+      a { text-decoration: none; color: inherit; }
+      ul { list-style: none; }
+    }
+
+
+    @layer components {
 
     /* ─── Accessibility ──────────────────────────────────────── */
     .skip-link {
@@ -448,50 +504,6 @@
       /* What to avoid, tighter gap */
       .type-avoid-layout { gap: 0 48px !important; }
     }
-  </style>
-
-  <style>
-    /* ─── Variables (colors injected by brand.js) ──────────── */
-    :root {
-      --sidebar-w:    248px;
-      --lh-body:      1.2;
-      --lh-headline:  0.9;
-      --ease:         cubic-bezier(.4,0,.2,1);
-
-      /* Nav UI */
-      --nav-hover-bg:  #F5F2EC;
-      --nav-active-bg: #EFF5F0;
-
-      /* Browser tab mockup — light mode */
-      --tab-light-shell:       #F1F3F4;
-      --tab-light-inactive:    #E4E6E8;
-      --tab-light-placeholder: #CCCCCC;
-      --tab-light-text:        #1A1A1A;
-      --tab-light-text-mid:    #555555;
-      --tab-light-text-muted:  #666666;
-
-      /* Browser tab mockup — dark mode */
-      --tab-dark-shell:        #2B2B2B;
-      --tab-dark-surface:      #3C3C3C;
-      --tab-dark-inactive:     #252525;
-      --tab-dark-placeholder:  #555555;
-      --tab-dark-text:         #F0F0F0;
-      --tab-dark-text-muted:   #AAAAAA;
-    }
-
-    /* ─── Reset ─────────────────────────────────────────────── */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body {
-      font-family: 'Founders Grotesk Text', system-ui, -apple-system, sans-serif;
-      background: var(--cream);
-      color: var(--charcoal);
-      display: flex;
-      min-height: 100dvh;
-      -webkit-font-smoothing: antialiased;
-    }
-    a { text-decoration: none; color: inherit; }
-    ul { list-style: none; }
 
     /* ─── Sidebar ────────────────────────────────────────────── */
     .sidebar {
@@ -1357,6 +1369,7 @@
       flex-shrink: 0;
     }
 
+    } /* end @layer components */
   </style>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
