@@ -1132,13 +1132,28 @@
       columns: 3;
       column-gap: 2px;
     }
-    .masonry-grid img {
+    .masonry-grid img,
+    .masonry-grid .masonry-placeholder {
       width: 100%;
-      height: auto;
       display: block;
       break-inside: avoid;
       margin-bottom: 2px;
     }
+    .masonry-grid img { height: auto; }
+    .masonry-grid .masonry-placeholder {
+      aspect-ratio: 16/9;
+      background: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--charcoal);
+      opacity: 0.9;
+    }
+    .masonry-grid .masonry-placeholder span { opacity: 0.3; }
 
     } /* end @layer components */
   </style>
@@ -4117,15 +4132,15 @@
     </div>
 
     <div style="margin:0 32px 80px;">
-      <div class="app-img-grid" style="display:grid; grid-template-columns:repeat(3, 1fr); gap:2px; background:var(--light-gray);">
-        <div style="aspect-ratio:4/3; background-image:url('images/Brand in action/swag/7.webp'); background-size:cover; background-position:center;"></div>
-        <div style="aspect-ratio:4/3; background-image:url('images/Brand in action/swag/8.webp'); background-size:cover; background-position:center;"></div>
-        <div style="aspect-ratio:4/3; background-image:url('images/Brand in action/swag/9.webp'); background-size:cover; background-position:center;"></div>
-        <div style="aspect-ratio:4/3; background-image:url('images/Brand in action/swag/10.webp'); background-size:cover; background-position:center;"></div>
-        <div style="aspect-ratio:4/3; background-image:url('images/Brand in action/swag/image 31.webp'); background-size:cover; background-position:center;"></div>
-        <div style="aspect-ratio:4/3; background-image:url('images/Brand in action/swag/53.webp'); background-size:cover; background-position:center;"></div>
-        <div style="aspect-ratio:4/3; background-image:url('images/Brand in action/swag/54.webp'); background-size:cover; background-position:center;"></div>
-        <div style="aspect-ratio:4/3; background-image:url('images/Brand in action/swag/hudson-flag-teal.webp'); background-size:cover; background-position:center;"></div>
+      <div class="masonry-grid">
+        <img src="images/Brand in action/swag/7.webp" alt="Swag item">
+        <img src="images/Brand in action/swag/8.webp" alt="Swag item">
+        <img src="images/Brand in action/swag/9.webp" alt="Swag item">
+        <img src="images/Brand in action/swag/10.webp" alt="Swag item">
+        <img src="images/Brand in action/swag/image 31.webp" alt="Swag item">
+        <img src="images/Brand in action/swag/53.webp" alt="Swag item">
+        <img src="images/Brand in action/swag/54.webp" alt="Swag item">
+        <img src="images/Brand in action/swag/hudson-flag-teal.webp" alt="Swag item">
       </div>
     </div>
 
@@ -4166,25 +4181,13 @@
     </div>
 
     <div style="margin:0 32px 80px;">
-      <div class="app-img-grid" style="display:grid; grid-template-columns:repeat(3, 1fr); gap:2px; background:var(--light-gray);">
-        <div style="background:var(--white); aspect-ratio:16/9; display:flex; align-items:center; justify-content:center;">
-          <div style="font-size:11px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--charcoal); opacity:0.3;">Coming soon</div>
-        </div>
-        <div style="background:var(--white); aspect-ratio:16/9; display:flex; align-items:center; justify-content:center;">
-          <div style="font-size:11px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--charcoal); opacity:0.3;">Coming soon</div>
-        </div>
-        <div style="background:var(--white); aspect-ratio:16/9; display:flex; align-items:center; justify-content:center;">
-          <div style="font-size:11px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--charcoal); opacity:0.3;">Coming soon</div>
-        </div>
-        <div style="background:var(--white); aspect-ratio:16/9; display:flex; align-items:center; justify-content:center;">
-          <div style="font-size:11px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--charcoal); opacity:0.3;">Coming soon</div>
-        </div>
-        <div style="background:var(--white); aspect-ratio:16/9; display:flex; align-items:center; justify-content:center;">
-          <div style="font-size:11px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--charcoal); opacity:0.3;">Coming soon</div>
-        </div>
-        <div style="background:var(--white); aspect-ratio:16/9; display:flex; align-items:center; justify-content:center;">
-          <div style="font-size:11px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--charcoal); opacity:0.3;">Coming soon</div>
-        </div>
+      <div class="masonry-grid">
+        <div class="masonry-placeholder"><span>Coming soon</span></div>
+        <div class="masonry-placeholder"><span>Coming soon</span></div>
+        <div class="masonry-placeholder"><span>Coming soon</span></div>
+        <div class="masonry-placeholder"><span>Coming soon</span></div>
+        <div class="masonry-placeholder"><span>Coming soon</span></div>
+        <div class="masonry-placeholder"><span>Coming soon</span></div>
       </div>
     </div>
 
@@ -4193,18 +4196,12 @@
 
   <!-- ── ICONOGRAPHY INTRO ─────────────────────────────────── -->
   <div class="page" tabindex="-1" id="icon-intro">
-    <div class="portrait-intro" style="display:grid; grid-template-columns:1fr 1fr; height:100dvh; overflow:hidden;">
-      <div style="display:flex; flex-direction:column; padding:32px; box-sizing:border-box;">
-        <div style="font-size:11px; font-weight:600; letter-spacing:0.13em; text-transform:uppercase; color:var(--charcoal);">Iconography</div>
-        <p style="font-family:'Founders Grotesk',sans-serif; font-weight:400; font-size:clamp(24px,3.2vw,48px); line-height:1.0; letter-spacing:-0.02em; color:var(--charcoal); max-width:720px; margin:48px 0 0;">Inspired by our logo and sans-serif typeface Founders, our iconography utilizes simple forms to efficiently communicate ideas.</p>
-        <div style="flex:1;"></div>
-        <div style="max-width:480px;">
-          <!-- TODO: Update for new client -->
-          <p style="font-family:'Founders Grotesk Text',sans-serif; font-size:18px; line-height:var(--lh-body); color:var(--charcoal); margin:0;">The Hudson County icon system is built from the same geometric language as the wordmark. Icons are designed on a consistent grid, using strokes and forms that feel native to the brand rather than borrowed from a generic library.</p>
-        </div>
-      </div>
-      <div style="position:relative; overflow:hidden;">
-        <div style="position:absolute; bottom:0; right:0; width:88%; height:90%; background:#D6D0C8;"></div>
+    <div class="intro-layout">
+      <div style="font-size:11px; font-weight:600; letter-spacing:0.13em; text-transform:uppercase; color:var(--charcoal);">Iconography</div>
+      <p class="intro-statement">Inspired by our logo and sans-serif typeface Founders, our iconography utilizes simple forms to efficiently communicate ideas.</p>
+      <div style="flex:1;"></div>
+      <div class="intro-body">
+        <p>The Hudson County icon system is built from the same geometric language as the wordmark. Icons are designed on a consistent grid, using strokes and forms that feel native to the brand rather than borrowed from a generic library.</p>
       </div>
     </div>
   </div>
