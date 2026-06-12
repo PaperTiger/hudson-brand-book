@@ -4,6 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Brand Identity</title><!-- set by brand.js -->
+  <!-- Critical: hide all pages immediately before Tailwind CDN processes -->
+  <style>
+    .page { display: none; }
+    .page.active { display: block; }
+    .cover-page.active { display: flex; }
+  </style>
+
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -66,18 +73,10 @@
 
     /* ─── Accessibility ──────────────────────────────────────── */
     .skip-link {
-      position: absolute;
-      top: -48px;
-      left: 16px;
       background: var(--charcoal);
       color: var(--cream);
-      padding: 10px 18px;
-      font-size: 14px;
-      font-weight: 600;
-      border-radius: 0 0 4px 4px;
-      z-index: 9999;
-      text-decoration: none;
       transition: top 0.15s;
+      @apply absolute top-[-48px] left-4 px-[18px] py-[10px] text-[14px] font-semibold rounded-b z-[9999] no-underline;
     }
     .skip-link:focus { top: 0; }
     :focus-visible {
@@ -89,43 +88,22 @@
 
     /* ─── Mobile header ─────────────────────────────────────── */
     .mobile-header {
-      display: none;
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      height: 56px;
       background: var(--cream);
       border-bottom: 1px solid var(--light-gray);
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 20px;
-      z-index: 100;
+      @apply hidden fixed top-0 left-0 right-0 h-14 items-center justify-between px-5 z-[100];
     }
     .hamburger {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      gap: 5px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 8px;
-      margin-right: -8px;
+      @apply flex flex-col justify-center gap-[5px] bg-transparent border-0 cursor-pointer p-2 -mr-2;
     }
     .hamburger span {
-      display: block;
-      width: 22px;
-      height: 2px;
       background: var(--charcoal);
-      border-radius: 1px;
+      @apply block w-[22px] h-[2px] rounded-[1px];
     }
     .sidebar-overlay {
-      display: none;
-      position: fixed;
-      inset: 0;
       background: rgba(0, 9, 19, 0.5);
-      z-index: 150;
+      @apply hidden fixed inset-0 z-[150];
     }
-    .sidebar-overlay.open { display: block; }
+    .sidebar-overlay.open { @apply block; }
 
     /* ─── Responsive ─────────────────────────────────────────── */
     @media (max-width: 768px) {
@@ -621,42 +599,30 @@
     .hero--purple   { background: var(--purple); }
 
     .hero--split {
-      display: grid;
+      @apply grid min-h-[440px];
       grid-template-columns: 1fr 1fr;
-      min-height: 440px;
     }
     .hero-half {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 60px;
+      @apply flex items-center justify-center p-[60px];
     }
 
     /* ─── Content ────────────────────────────────────────────── */
     .section-content {
-      padding: 72px 32px 80px;
-      max-width: 900px;
+      @apply pt-[72px] px-8 pb-[80px] max-w-[900px];
     }
     .section-label {
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.13em;
-      text-transform: uppercase;
       color: var(--charcoal);
-      margin-bottom: 14px;
+      @apply text-[11px] font-semibold tracking-[0.13em] uppercase mb-[14px];
     }
     .section-title {
       font-family: 'Founders Grotesk', sans-serif;
-      font-weight: 600;
-      font-size: 34px;
-      line-height: 1;
       color: var(--charcoal);
-      margin-bottom: 28px;
+      @apply font-semibold text-[34px] leading-none mb-7;
     }
     .section-body {
-      font-size: 18px;
-      line-height: var(--lh-body);
       color: var(--charcoal);
+      line-height: var(--lh-body);
+      @apply text-[18px];
     }
     .section-body p + p { margin-top: 18px; }
     .section-body strong { font-weight: 600; color: var(--charcoal); }
@@ -664,71 +630,52 @@
     /* ─── Pull Quote ─────────────────────────────────────────── */
     .pull-quote {
       font-family: 'Founders Grotesk', sans-serif;
-      font-size: 22px;
-      font-weight: 400;
-      font-style: italic;
-      line-height: var(--lh-body);
       color: var(--green);
       border-left: 4px solid var(--teal);
-      padding: 20px 28px;
-      margin: 36px 0;
+      line-height: var(--lh-body);
+      @apply text-[22px] font-normal italic py-5 px-7 my-9;
     }
 
     /* ─── Trait Grid ─────────────────────────────────────────── */
     .trait-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 2px;
       background: var(--light-gray);
-      margin-top: 40px;
+      @apply grid gap-[2px] mt-10;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     }
     .trait-item {
       background: var(--white);
-      padding: 28px 24px;
+      @apply py-7 px-6;
     }
     .trait-yes {
       font-family: 'Founders Grotesk Condensed', sans-serif;
-      font-weight: 800;
-      font-size: 22px;
       color: var(--green);
-      letter-spacing: 0.01em;
-      line-height: 1;
+      @apply font-extrabold text-[22px] tracking-[0.01em] leading-none;
     }
     .trait-not {
-      font-size: 12px;
-      font-weight: 400;
       color: var(--charcoal);
-      margin-top: 6px;
-      text-decoration: line-through;
       text-decoration-color: var(--warm-gray);
+      @apply text-[12px] font-normal mt-[6px] line-through;
     }
 
     /* ─── Principles ─────────────────────────────────────────── */
     .principles-list {
-      margin-top: 40px;
       border-top: 1px solid var(--light-gray);
+      @apply mt-10;
     }
     .principle-item {
-      padding: 28px 0;
       border-bottom: 1px solid var(--light-gray);
-      display: grid;
+      @apply py-7 grid gap-5 items-start;
       grid-template-columns: 32px 1fr;
-      gap: 20px;
-      align-items: start;
     }
     .principle-num {
       font-family: 'Founders Grotesk Condensed', sans-serif;
-      font-size: 13px;
-      font-weight: 700;
       color: var(--teal);
-      padding-top: 3px;
+      @apply text-[13px] font-bold pt-[3px];
     }
     .principle-name {
       font-family: 'Founders Grotesk', sans-serif;
-      font-weight: 600;
-      font-size: 16px;
       color: var(--charcoal);
-      margin-bottom: 6px;
+      @apply font-semibold text-[16px] mb-[6px];
     }
     .principle-name em {
       font-style: italic;
@@ -736,20 +683,16 @@
       color: var(--charcoal);
     }
     .principle-desc {
-      font-size: 14px;
-      line-height: 1.2;
       color: var(--charcoal);
+      @apply text-[14px] leading-[1.2];
     }
 
     /* ─── Wordmark Display ───────────────────────────────────── */
     .wordmark-hero-text {
       font-family: 'Founders Grotesk Condensed', sans-serif;
-      font-weight: 900;
-      font-size: clamp(80px, 16vw, 200px);
-      letter-spacing: -0.01em;
-      line-height: 1;
       color: var(--white);
-      text-align: center;
+      font-size: clamp(80px, 16vw, 200px);
+      @apply font-black tracking-[-0.01em] leading-none text-center;
     }
     .wordmark-hero-text--green  { color: var(--green); }
     .wordmark-hero-text--teal   { color: var(--teal); }
@@ -758,319 +701,207 @@
 
     /* ─── Icon SVG ───────────────────────────────────────────── */
     .icon-display {
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      @apply flex items-center justify-center;
     }
     .icon-display svg {
-      width: 100%;
-      height: 100%;
-      max-width: 260px;
-      max-height: 260px;
+      @apply w-full h-full max-w-[260px] max-h-[260px];
     }
 
     /* ─── Color Modes Grid ───────────────────────────────────── */
     .color-modes {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
       background: var(--light-gray);
-      gap: 2px;
+      @apply grid gap-[2px];
+      grid-template-columns: repeat(4, 1fr);
     }
     .color-mode-cell {
-      padding: 48px 32px;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 24px;
+      @apply flex flex-col items-start gap-6 px-8 py-12;
     }
     .color-mode-label {
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      margin-top: auto;
+      @apply text-[11px] font-medium tracking-[0.08em] uppercase mt-auto;
     }
     .color-mode-wordmark {
       font-family: 'Founders Grotesk Condensed', sans-serif;
-      font-weight: 900;
-      font-size: 42px;
-      letter-spacing: 0.01em;
       line-height: var(--lh-headline);
+      @apply font-black text-[42px] tracking-[0.01em];
     }
 
     /* ─── Color Swatches ─────────────────────────────────────── */
     .color-hero-strip {
-      display: flex;
-      height: 100%;
-      min-height: 500px;
+      @apply flex h-full min-h-[500px];
     }
-    .color-strip { flex: 1; }
+    .color-strip { @apply flex-1; }
 
     .swatches {
-      display: grid;
+      @apply grid gap-6 mt-12;
       grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      gap: 24px;
-      margin-top: 48px;
     }
-    .swatch-card { }
     .swatch-block {
-      height: 120px;
-      border-radius: 4px;
-      margin-bottom: 14px;
+      @apply h-[120px] rounded-[4px] mb-[14px];
     }
     .swatch-name {
-      font-weight: 600;
-      font-size: 14px;
       color: var(--charcoal);
-      margin-bottom: 4px;
+      @apply font-semibold text-[14px] mb-1;
     }
     .swatch-values {
-      font-size: 12px;
       color: var(--charcoal);
-      line-height: 1.9;
       font-variant-numeric: tabular-nums;
-      white-space: pre-line;
+      @apply text-[12px] leading-[1.9] whitespace-pre-line;
     }
 
     .secondary-swatches {
-      display: flex;
-      gap: 2px;
       background: var(--light-gray);
-      margin-top: 48px;
-      border-radius: 2px;
-      overflow: hidden;
+      @apply flex gap-[2px] mt-12 rounded-[2px] overflow-hidden;
     }
     .secondary-swatch {
-      flex: 1;
-      padding: 40px 24px 28px;
-      min-height: 200px;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
+      @apply flex-1 flex flex-col justify-end min-h-[200px] pt-10 px-6 pb-7;
     }
     .secondary-swatch-name {
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
+      @apply text-[12px] font-semibold tracking-[0.06em] uppercase;
     }
     .secondary-swatch-hex {
-      font-size: 11px;
-      margin-top: 2px;
+      @apply text-[11px] mt-[2px];
     }
 
     /* ─── Type Specimen ──────────────────────────────────────── */
     .type-hero {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      justify-content: center;
-      padding: 80px;
-      gap: 0;
       background: var(--charcoal);
+      @apply flex flex-col items-start justify-center p-[80px] gap-0;
     }
     .type-sample-xl {
       font-family: 'Founders Grotesk Condensed', sans-serif;
-      font-weight: 900;
-      font-size: clamp(60px, 10vw, 140px);
       color: var(--white);
+      font-size: clamp(60px, 10vw, 140px);
       line-height: var(--lh-headline);
-      letter-spacing: -0.01em;
+      @apply font-black tracking-[-0.01em];
     }
     .type-sample-lg {
       font-family: 'Founders Grotesk Condensed', sans-serif;
-      font-weight: 700;
-      font-size: clamp(30px, 5vw, 60px);
       color: var(--teal);
+      font-size: clamp(30px, 5vw, 60px);
       line-height: var(--lh-headline);
-      margin-top: 16px;
+      @apply font-bold mt-4;
     }
     .type-sample-body {
       font-family: 'Founders Grotesk Text', sans-serif;
-      font-weight: 400;
-      font-size: 18px;
       color: var(--cream);
       line-height: var(--lh-body);
-      max-width: 540px;
-      margin-top: 24px;
+      @apply font-normal text-[18px] max-w-[540px] mt-6;
     }
 
     .type-table {
-      margin-top: 48px;
-      border-collapse: collapse;
-      width: 100%;
+      @apply mt-12 border-collapse w-full;
     }
     .type-table tr {
       border-bottom: 1px solid var(--light-gray);
     }
     .type-table th {
-      text-align: left;
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
       color: var(--charcoal);
-      padding: 0 0 12px;
+      @apply text-left text-[11px] font-semibold tracking-[0.1em] uppercase pb-3;
     }
     .type-table td {
-      padding: 20px 0;
-      font-size: 13px;
       color: var(--charcoal);
-      vertical-align: middle;
+      @apply py-5 text-[13px] align-middle;
     }
-    .type-table td:last-child { color: var(--charcoal); }
-    .type-specimen-cell { padding-right: 24px; }
+    .type-specimen-cell { @apply pr-6; }
 
     /* ─── Imagery Principles ─────────────────────────────────── */
     .imagery-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 2px;
       background: var(--light-gray);
-      margin-top: 40px;
+      @apply grid gap-[2px] mt-10;
+      grid-template-columns: repeat(2, 1fr);
     }
     .imagery-item {
       background: var(--white);
-      padding: 32px 28px;
+      @apply p-8 px-7;
     }
     .imagery-icon {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      margin-bottom: 16px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px;
+      @apply w-10 h-10 rounded-full mb-4 flex items-center justify-center text-[18px];
     }
     .imagery-heading {
-      font-weight: 600;
-      font-size: 15px;
       color: var(--charcoal);
-      margin-bottom: 8px;
+      @apply font-semibold text-[15px] mb-2;
     }
     .imagery-desc {
-      font-size: 13px;
-      line-height: 1.2;
       color: var(--charcoal);
+      @apply text-[13px] leading-[1.2];
     }
 
     /* ─── Applications Overview ──────────────────────────────── */
     .app-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2px;
       background: var(--light-gray);
-      margin-top: 40px;
+      @apply grid gap-[2px] mt-10;
+      grid-template-columns: repeat(3, 1fr);
     }
     .app-item {
       background: var(--cream);
-      padding: 40px 32px;
+      @apply py-10 px-8;
     }
     .app-context {
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
       color: var(--charcoal);
-      margin-bottom: 12px;
+      @apply text-[11px] font-semibold tracking-[0.12em] uppercase mb-3;
     }
     .app-name {
       font-family: 'Founders Grotesk', sans-serif;
-      font-weight: 600;
-      font-size: 20px;
       color: var(--charcoal);
-      margin-bottom: 10px;
+      @apply font-semibold text-[20px] mb-[10px];
     }
     .app-desc {
-      font-size: 13px;
-      line-height: var(--lh-body);
       color: var(--charcoal);
+      line-height: var(--lh-body);
+      @apply text-[13px];
     }
     .app-mark {
-      margin-top: 24px;
       font-family: 'Founders Grotesk Condensed', sans-serif;
-      font-weight: 900;
-      font-size: 32px;
-      letter-spacing: 0.01em;
+      @apply mt-6 font-black text-[32px] tracking-[0.01em];
     }
 
     /* ─── Municipalities Callout ─────────────────────────────── */
     .municipalities {
       background: var(--green);
-      padding: 60px 32px;
+      @apply py-[60px] px-8;
     }
     .municipalities-label {
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.13em;
-      text-transform: uppercase;
       color: var(--white);
-      margin-bottom: 32px;
+      @apply text-[11px] font-semibold tracking-[0.13em] uppercase mb-8;
     }
     .municipalities-grid {
-      display: grid;
+      @apply grid gap-1;
       grid-template-columns: repeat(4, 1fr);
-      gap: 4px;
     }
     .municipality {
       font-family: 'Founders Grotesk Condensed', sans-serif;
-      font-weight: 700;
-      font-size: 18px;
       color: var(--white);
-      letter-spacing: 0.03em;
-      padding: 10px 0;
       border-top: 1px solid rgba(255,255,255,0.2);
-      text-transform: uppercase;
+      @apply font-bold text-[18px] tracking-[0.03em] py-[10px] uppercase;
     }
     .municipality-num {
-      font-size: 11px;
-      font-weight: 400;
       color: var(--teal);
-      display: block;
-      margin-bottom: 2px;
+      @apply text-[11px] font-normal block mb-[2px];
     }
 
     /* ─── System diagram ─────────────────────────────────────── */
     .system-diagram {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 48px;
-      padding: 80px;
       background: var(--white);
-      flex-wrap: wrap;
+      @apply flex items-center justify-center gap-12 p-[80px] flex-wrap;
     }
     .system-element {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 16px;
+      @apply flex flex-col items-center gap-4;
     }
     .system-element-label {
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
       color: var(--charcoal);
+      @apply text-[11px] font-semibold tracking-[0.1em] uppercase;
     }
 
     /* ─── Full-width statement ───────────────────────────────── */
     .statement-block {
       background: var(--teal);
-      padding: 80px;
-      display: flex;
-      align-items: center;
-      min-height: 320px;
+      @apply flex items-center min-h-[320px] p-[80px];
     }
     .statement-text {
       font-family: 'Founders Grotesk Condensed', sans-serif;
-      font-weight: 700;
-      font-size: clamp(28px, 4vw, 52px);
       color: var(--charcoal);
-      line-height: 1;
-      max-width: 800px;
-      letter-spacing: -0.01em;
+      font-size: clamp(28px, 4vw, 52px);
+      @apply font-bold leading-none max-w-[800px] tracking-[-0.01em];
     }
     .statement-text em {
       font-style: italic;
@@ -1080,15 +911,14 @@
     /* ─── Final section ──────────────────────────────────────── */
     .final-block {
       background: var(--charcoal);
-      padding: 100px 32px;
+      @apply py-[100px] px-8;
     }
     .final-text {
       font-family: 'Founders Grotesk', sans-serif;
       font-size: clamp(18px, 2.5vw, 28px);
-      font-weight: 300;
-      line-height: var(--lh-body);
       color: var(--cream);
-      max-width: 720px;
+      line-height: var(--lh-body);
+      @apply font-light max-w-[720px];
     }
     .final-text strong {
       color: var(--white);
@@ -1099,42 +929,32 @@
     .text-white   { color: var(--white) !important; }
     .text-teal    { color: var(--teal) !important; }
     .text-green   { color: var(--green) !important; }
-    .opacity-60   { opacity: 0.6; }
+    .opacity-60   { @apply opacity-60; }
 
     .divider {
-      height: 1px;
       background: var(--light-gray);
-      margin: 40px 0;
+      @apply h-px my-10;
     }
 
     /* ─── Cover / Home page ──────────────────────────────────────── */
     /* ─── Intro page layout ─────────────────────────────────── */
     .intro-layout {
-      display: flex;
-      flex-direction: column;
-      height: 100dvh;
-      padding: 32px;
-      box-sizing: border-box;
+      @apply flex flex-col h-dvh p-8 box-border;
     }
     .intro-statement {
       font-family: 'Founders Grotesk', sans-serif;
-      font-weight: 400;
-      font-size: clamp(24px, 3.2vw, 48px);
-      line-height: 1.0;
-      letter-spacing: -0.02em;
       color: var(--charcoal);
-      max-width: 960px;
-      margin: 48px 0 0;
+      font-size: clamp(24px, 3.2vw, 48px);
+      @apply font-normal leading-none tracking-[-0.02em] max-w-[960px] mt-12;
     }
     .intro-body {
-      max-width: 520px;
+      @apply max-w-[520px];
     }
     .intro-body p {
       font-family: 'Founders Grotesk Text', sans-serif;
-      font-size: 18px;
-      line-height: var(--lh-body);
       color: var(--charcoal);
-      margin: 0 0 14px;
+      line-height: var(--lh-body);
+      @apply text-[18px] mb-[14px];
     }
     .intro-body p:last-child { margin-bottom: 0; }
     @media (max-width: 768px) {
@@ -1148,25 +968,18 @@
     .cover-page.active { display: flex; }
     .cover-page {
       background: var(--teal);
-      min-height: 100dvh;
-      height: 100dvh;
-      flex-direction: column;
-      padding: 32px;
-      box-sizing: border-box;
+      @apply flex-col min-h-dvh h-dvh p-8 box-border;
     }
     .cover-title {
       font-family: 'Founders Grotesk', sans-serif;
-      font-weight: 300;
       font-size: clamp(52px, 7.5vw, 116px);
       line-height: var(--lh-headline);
-      letter-spacing: -0.025em;
+      @apply font-light tracking-[-0.025em];
     }
     .cover-meta {
       font-family: 'Founders Grotesk', sans-serif;
-      font-size: 16px;
-      line-height: 1.3;
-      letter-spacing: 0.04em;
       color: var(--deep-teal);
+      @apply text-[16px] leading-[1.3] tracking-[0.04em];
     }
     /* Mobile header transforms on home page */
     body.on-home .mobile-header {
@@ -1196,26 +1009,17 @@
        and swap the logo src and definition text.
     ─────────────────────────────────────────────────────────── */
     .cs-outer {
-      padding: 40px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
       border: 1px solid var(--light-gray);
-      width: 100%;
-      box-sizing: border-box;
+      @apply flex flex-col items-center p-10 w-full box-border;
     }
     .cs-zone {
       background: color-mix(in srgb, var(--teal) 20%, transparent);
       padding: var(--cs-x, 36px);
-      position: relative;
-      display: inline-block;
+      @apply relative inline-block;
     }
     .cs-logo-box {
       background: var(--white);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
+      @apply flex items-center justify-center relative;
     }
     /* H mark in the bottom clearspace strip — height = --cs-x exactly.
        H_black.svg path fills the full viewBox, so no scaling correction needed. */
@@ -1294,23 +1098,15 @@
     }
     /* Definition row under the diagram */
     .cs-def {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding-top: 14px;
-      font-size: 12px;
-      color: var(--charcoal);
       font-family: 'Founders Grotesk Text', sans-serif;
+      color: var(--charcoal);
+      @apply flex items-center gap-2 pt-[14px] text-[12px];
     }
     .cs-def-x {
       font-family: 'Founders Grotesk', sans-serif;
-      font-weight: 700;
-      font-size: 11px;
       background: color-mix(in srgb, var(--teal) 50%, transparent);
       color: var(--charcoal);
-      padding: 2px 7px;
-      border-radius: 2px;
-      flex-shrink: 0;
+      @apply font-bold text-[11px] py-[2px] px-[7px] rounded-[2px] flex-shrink-0;
     }
 
     } /* end @layer components */
