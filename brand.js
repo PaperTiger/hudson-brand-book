@@ -187,19 +187,34 @@ const BRAND = {
     {
       group: "Photography",
       items: [
-        { label: "Introduction",        id: "photo-intro" },
-        { label: "Landscape: dos",      id: "photo-landscape-dos" },
-        { label: "Landscape: don'ts",   id: "photo-landscape-donts" },
-        { label: "Community: dos",      id: "photo-community-dos" },
-        { label: "Community: don'ts",   id: "photo-community-donts" },
+        { label: "Introduction", id: "photo-intro" },
+        {
+          label: "Landscapes", id: "photo-landscape-examples",
+          groupId: "nav-landscape-group", subId: "nav-landscape-sub",
+          children: [
+            { label: "Examples",  id: "photo-landscape-examples" },
+            { label: "Dos",       id: "photo-landscape-dos" },
+            { label: "Don'ts",    id: "photo-landscape-donts" },
+          ],
+        },
+        {
+          label: "Community", id: "photo-community-examples",
+          groupId: "nav-community-photo-group", subId: "nav-community-photo-sub",
+          children: [
+            { label: "Examples",  id: "photo-community-examples" },
+            { label: "Dos",       id: "photo-community-dos" },
+            { label: "Don'ts",    id: "photo-community-donts" },
+          ],
+        },
       ],
     },
     {
       group: "Applications",
       items: [
         { label: "Introduction",  id: "app-intro" },
-        { label: "Swag samples",  id: "app-swag" },
-        { label: "In the wild",   id: "app-wild" },
+        { label: "Swag",          id: "app-swag" },
+        { label: "Signage",       id: "app-signage" },
+        { label: "Digital media", id: "app-digital" },
       ],
     },
     {

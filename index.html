@@ -4,24 +4,90 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Brand Identity</title><!-- set by brand.js -->
+  <!-- Critical: synchronous layout styles applied before Tailwind CDN processes.
+       Without these, the initially-active page reflows when CDN injects its styles,
+       causing scroll position bugs (page height changes while user is on it). -->
   <style>
+    /* Hide all pages; show only the active one */
+    .page { display: none; }
+    .page.active { display: block; }
+    .cover-page.active { display: flex; }
+
+    /* Establish the flex shell so the active page already has the right
+       available width before CDN processes — prevents scroll-breaking reflow */
+    body { display: flex; min-height: 100dvh; overflow-x: hidden; }
+    .sidebar { width: var(--sidebar-w, 248px); position: fixed; top: 0; left: 0;
+               height: 100dvh; z-index: 200; }
+    .main { margin-left: var(--sidebar-w, 248px); flex: 1; min-height: 100dvh; }
+    .section-content { max-width: 900px; }
+  </style>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            'fg-condensed': ['"Founders Grotesk Condensed"', 'sans-serif'],
+            'fg':           ['"Founders Grotesk"', 'system-ui', '-apple-system', 'sans-serif'],
+            'fg-text':      ['"Founders Grotesk Text"', 'system-ui', '-apple-system', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+
+  <style type="text/tailwindcss">
     /* @font-face rules injected by brand.js */
 
+    @layer base {
+      :root {
+        --sidebar-w:    248px;
+        --lh-body:      1.2;
+        --lh-headline:  0.9;
+        --ease:         cubic-bezier(.4,0,.2,1);
+        --nav-hover-bg:  #F5F2EC;
+        --nav-active-bg: #EFF5F0;
+        --tab-light-shell:       #F1F3F4;
+        --tab-light-inactive:    #E4E6E8;
+        --tab-light-placeholder: #CCCCCC;
+        --tab-light-text:        #1A1A1A;
+        --tab-light-text-mid:    #555555;
+        --tab-light-text-muted:  #666666;
+        --tab-dark-shell:        #2B2B2B;
+        --tab-dark-surface:      #3C3C3C;
+        --tab-dark-inactive:     #252525;
+        --tab-dark-placeholder:  #555555;
+        --tab-dark-text:         #F0F0F0;
+        --tab-dark-text-muted:   #AAAAAA;
+      }
+      @media (min-width: 769px) and (max-width: 1024px) {
+        :root { --sidebar-w: 200px; }
+      }
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+      html { scroll-behavior: smooth; overflow-x: hidden; }
+      body {
+        font-family: 'Founders Grotesk Text', system-ui, -apple-system, sans-serif;
+        background: var(--cream);
+        color: var(--charcoal);
+        display: flex;
+        min-height: 100dvh;
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+      }
+      a { text-decoration: none; color: inherit; }
+      ul { list-style: none; }
+    }
+
+
+    @layer components {
 
     /* ─── Accessibility ──────────────────────────────────────── */
     .skip-link {
-      position: absolute;
-      top: -48px;
-      left: 16px;
       background: var(--charcoal);
       color: var(--cream);
-      padding: 10px 18px;
-      font-size: 14px;
-      font-weight: 600;
-      border-radius: 0 0 4px 4px;
-      z-index: 9999;
-      text-decoration: none;
       transition: top 0.15s;
+      @apply absolute top-[-48px] left-4 px-[18px] py-[10px] text-[14px] font-semibold rounded-b z-[9999] no-underline;
     }
     .skip-link:focus { top: 0; }
     :focus-visible {
@@ -33,43 +99,22 @@
 
     /* ─── Mobile header ─────────────────────────────────────── */
     .mobile-header {
-      display: none;
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      height: 56px;
       background: var(--cream);
       border-bottom: 1px solid var(--light-gray);
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 20px;
-      z-index: 100;
+      @apply hidden fixed top-0 left-0 right-0 h-14 items-center justify-between px-5 z-[100];
     }
     .hamburger {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      gap: 5px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 8px;
-      margin-right: -8px;
+      @apply flex flex-col justify-center gap-[5px] bg-transparent border-0 cursor-pointer p-2 -mr-2;
     }
     .hamburger span {
-      display: block;
-      width: 22px;
-      height: 2px;
       background: var(--charcoal);
-      border-radius: 1px;
+      @apply block w-[22px] h-[2px] rounded-[1px];
     }
     .sidebar-overlay {
-      display: none;
-      position: fixed;
-      inset: 0;
       background: rgba(0, 9, 19, 0.5);
-      z-index: 150;
+      @apply hidden fixed inset-0 z-[150];
     }
-    .sidebar-overlay.open { display: block; }
+    .sidebar-overlay.open { @apply block; }
 
     /* ─── Responsive ─────────────────────────────────────────── */
     @media (max-width: 768px) {
@@ -249,6 +294,7 @@
       /* ─── 5-col color combo swatches → 2-col ───────────────── */
       .page [style*="grid-template-columns:repeat(5,1fr)"] {
         grid-template-columns: repeat(2, 1fr) !important;
+        align-items: start !important;
       }
       /* Prevent images from blowing past the aspect-ratio:1 cell height */
       .page [style*="grid-template-columns:repeat(5,1fr)"] > div {
@@ -448,150 +494,70 @@
       /* What to avoid, tighter gap */
       .type-avoid-layout { gap: 0 48px !important; }
     }
-  </style>
-
-  <style>
-    /* ─── Variables (colors injected by brand.js) ──────────── */
-    :root {
-      --sidebar-w:    248px;
-      --lh-body:      1.2;
-      --lh-headline:  0.9;
-      --ease:         cubic-bezier(.4,0,.2,1);
-
-      /* Nav UI */
-      --nav-hover-bg:  #F5F2EC;
-      --nav-active-bg: #EFF5F0;
-
-      /* Browser tab mockup — light mode */
-      --tab-light-shell:       #F1F3F4;
-      --tab-light-inactive:    #E4E6E8;
-      --tab-light-placeholder: #CCCCCC;
-      --tab-light-text:        #1A1A1A;
-      --tab-light-text-mid:    #555555;
-      --tab-light-text-muted:  #666666;
-
-      /* Browser tab mockup — dark mode */
-      --tab-dark-shell:        #2B2B2B;
-      --tab-dark-surface:      #3C3C3C;
-      --tab-dark-inactive:     #252525;
-      --tab-dark-placeholder:  #555555;
-      --tab-dark-text:         #F0F0F0;
-      --tab-dark-text-muted:   #AAAAAA;
-    }
-
-    /* ─── Reset ─────────────────────────────────────────────── */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body {
-      font-family: 'Founders Grotesk Text', system-ui, -apple-system, sans-serif;
-      background: var(--cream);
-      color: var(--charcoal);
-      display: flex;
-      min-height: 100dvh;
-      -webkit-font-smoothing: antialiased;
-    }
-    a { text-decoration: none; color: inherit; }
-    ul { list-style: none; }
 
     /* ─── Sidebar ────────────────────────────────────────────── */
     .sidebar {
       width: var(--sidebar-w);
       height: 100dvh;
-      position: fixed;
-      top: 0; left: 0;
       background: var(--white);
       border-right: 1px solid var(--light-gray);
-      overflow-y: auto;
-      overflow-x: hidden;
-      z-index: 200;
-      display: flex;
-      flex-direction: column;
+      @apply fixed top-0 left-0 overflow-y-auto overflow-x-hidden z-[200] flex flex-col;
     }
     .sidebar::-webkit-scrollbar { width: 4px; }
     .sidebar::-webkit-scrollbar-track { background: transparent; }
     .sidebar::-webkit-scrollbar-thumb { background: var(--light-gray); border-radius: 2px; }
 
     .sidebar-brand {
-      padding: 24px;
       border-bottom: 1px solid var(--light-gray);
-      flex-shrink: 0;
+      @apply p-6 flex-shrink-0;
     }
     .sidebar-wordmark {
       font-family: 'Founders Grotesk Condensed', sans-serif;
-      font-weight: 900;
-      font-size: 26px;
-      letter-spacing: 0.02em;
       color: var(--green);
-      line-height: 1;
-      display: block;
+      @apply font-black text-[26px] tracking-[0.02em] leading-none block;
     }
     .sidebar-label {
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
       color: var(--charcoal);
-      margin-top: 5px;
+      @apply text-[11px] font-medium tracking-[0.12em] uppercase mt-[5px];
     }
 
     .nav-group {
-      padding: 14px 0;
       border-bottom: 1px solid var(--light-gray);
+      @apply py-[14px];
     }
     .nav-group-header {
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.13em;
-      text-transform: uppercase;
       color: var(--charcoal);
-      padding: 0 24px 8px;
+      @apply text-[11px] font-semibold tracking-[0.13em] uppercase px-6 pb-2;
     }
-    .nav-section-chevron { display: none; }
+    .nav-section-chevron { @apply hidden; }
     .nav-link {
-      display: block;
-      padding: 8px 24px;
-      font-size: 13px;
-      font-weight: 400;
       color: var(--charcoal);
       border-left: 3px solid transparent;
       transition: background 0.12s var(--ease), color 0.12s var(--ease), border-color 0.12s var(--ease);
-      cursor: pointer;
+      @apply block py-2 px-6 text-[13px] font-normal cursor-pointer;
     }
-    .nav-link:hover {
-      background: var(--nav-hover-bg);
-      color: var(--green);
-    }
+    .nav-link:hover { background: var(--nav-hover-bg); color: var(--green); }
     .nav-link.active {
       border-left-color: var(--green);
       color: var(--green);
-      font-weight: 500;
       background: var(--nav-active-bg);
+      @apply font-medium;
     }
 
     /* ─── Collapsible nav sub-sections ──────────────────────── */
-    .nav-expandable { position: relative; }
-    .nav-parent {
-      display: flex !important;
-      justify-content: space-between;
-      align-items: center;
-    }
+    .nav-expandable { @apply relative; }
+    .nav-parent { @apply flex justify-between items-center; }
     .nav-chevron {
-      flex-shrink: 0;
-      width: 14px;
-      height: 14px;
       color: currentColor;
       transition: transform 0.18s ease;
-      margin-right: 2px;
       transform: rotate(-90deg);
-      cursor: pointer;
+      @apply flex-shrink-0 w-[14px] h-[14px] mr-[2px] cursor-pointer;
     }
-    .nav-expandable.open > .nav-parent .nav-chevron {
-      transform: rotate(0deg);
-    }
+    .nav-expandable.open > .nav-parent .nav-chevron { transform: rotate(0deg); }
     .nav-sub {
-      overflow: hidden;
       max-height: 0;
       transition: max-height 0.22s ease;
+      @apply overflow-hidden;
     }
     .nav-sub.open { max-height: 500px; }
     .nav-child { padding-left: 36px !important; font-size: 12px !important; }
@@ -599,61 +565,41 @@
     /* ─── Main ───────────────────────────────────────────────── */
     .main {
       margin-left: var(--sidebar-w);
-      flex: 1;
       min-height: 100dvh;
+      @apply flex-1;
     }
 
     /* ─── Pages ──────────────────────────────────────────────── */
-    .page { display: none; }
+    .page { @apply hidden; }
     .page[id] { outline: none; }
-    .page.active { display: block; }
+    .page.active { @apply block; }
 
     /* ─── Bottom page navigation ─────────────────────────────── */
     .page-nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: stretch;
       border-top: 1px solid var(--light-gray);
-      padding: 0 48px;
-      margin-top: 48px;
+      @apply flex justify-between items-stretch px-12 mt-12;
     }
     .page-nav-link {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      padding: 28px 0;
-      text-decoration: none;
       color: var(--charcoal);
       transition: color 0.15s var(--ease);
-      max-width: 45%;
+      @apply flex flex-col gap-[6px] py-7 no-underline max-w-[45%];
     }
     .page-nav-link:hover { color: var(--green); }
     .page-nav-link:hover .page-nav-dir { color: var(--green); }
     .page-nav-dir {
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
       color: var(--warm-gray);
       transition: color 0.15s var(--ease);
+      @apply text-[11px] font-semibold tracking-[0.1em] uppercase;
     }
     .page-nav-label {
       font-family: 'Founders Grotesk', sans-serif;
-      font-size: 17px;
-      font-weight: 500;
-      line-height: 1.1;
+      @apply text-[17px] font-medium leading-[1.1];
     }
-    .page-nav-next { text-align: right; align-items: flex-end; }
+    .page-nav-next { @apply text-right items-end; }
 
     /* ─── Hero ───────────────────────────────────────────────── */
     .hero {
-      width: 100%;
-      min-height: 500px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      overflow: hidden;
+      @apply w-full min-h-[500px] flex items-center justify-center relative overflow-hidden;
     }
     .hero--green    { background: var(--green); }
     .hero--teal     { background: var(--teal); }
@@ -665,42 +611,30 @@
     .hero--purple   { background: var(--purple); }
 
     .hero--split {
-      display: grid;
+      @apply grid min-h-[440px];
       grid-template-columns: 1fr 1fr;
-      min-height: 440px;
     }
     .hero-half {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 60px;
+      @apply flex items-center justify-center p-[60px];
     }
 
     /* ─── Content ────────────────────────────────────────────── */
     .section-content {
-      padding: 72px 32px 80px;
-      max-width: 900px;
+      @apply pt-[72px] px-8 pb-[80px] max-w-[900px];
     }
     .section-label {
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.13em;
-      text-transform: uppercase;
       color: var(--charcoal);
-      margin-bottom: 14px;
+      @apply text-[11px] font-semibold tracking-[0.13em] uppercase mb-[14px];
     }
     .section-title {
       font-family: 'Founders Grotesk', sans-serif;
-      font-weight: 600;
-      font-size: 34px;
-      line-height: 1;
       color: var(--charcoal);
-      margin-bottom: 28px;
+      @apply font-semibold text-[34px] leading-none mb-7;
     }
     .section-body {
-      font-size: 18px;
-      line-height: var(--lh-body);
       color: var(--charcoal);
+      line-height: var(--lh-body);
+      @apply text-[18px];
     }
     .section-body p + p { margin-top: 18px; }
     .section-body strong { font-weight: 600; color: var(--charcoal); }
@@ -708,71 +642,52 @@
     /* ─── Pull Quote ─────────────────────────────────────────── */
     .pull-quote {
       font-family: 'Founders Grotesk', sans-serif;
-      font-size: 22px;
-      font-weight: 400;
-      font-style: italic;
-      line-height: var(--lh-body);
       color: var(--green);
       border-left: 4px solid var(--teal);
-      padding: 20px 28px;
-      margin: 36px 0;
+      line-height: var(--lh-body);
+      @apply text-[22px] font-normal italic py-5 px-7 my-9;
     }
 
     /* ─── Trait Grid ─────────────────────────────────────────── */
     .trait-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 2px;
       background: var(--light-gray);
-      margin-top: 40px;
+      @apply grid gap-[2px] mt-10;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     }
     .trait-item {
       background: var(--white);
-      padding: 28px 24px;
+      @apply py-7 px-6;
     }
     .trait-yes {
       font-family: 'Founders Grotesk Condensed', sans-serif;
-      font-weight: 800;
-      font-size: 22px;
       color: var(--green);
-      letter-spacing: 0.01em;
-      line-height: 1;
+      @apply font-extrabold text-[22px] tracking-[0.01em] leading-none;
     }
     .trait-not {
-      font-size: 12px;
-      font-weight: 400;
       color: var(--charcoal);
-      margin-top: 6px;
-      text-decoration: line-through;
       text-decoration-color: var(--warm-gray);
+      @apply text-[12px] font-normal mt-[6px] line-through;
     }
 
     /* ─── Principles ─────────────────────────────────────────── */
     .principles-list {
-      margin-top: 40px;
       border-top: 1px solid var(--light-gray);
+      @apply mt-10;
     }
     .principle-item {
-      padding: 28px 0;
       border-bottom: 1px solid var(--light-gray);
-      display: grid;
+      @apply py-7 grid gap-5 items-start;
       grid-template-columns: 32px 1fr;
-      gap: 20px;
-      align-items: start;
     }
     .principle-num {
       font-family: 'Founders Grotesk Condensed', sans-serif;
-      font-size: 13px;
-      font-weight: 700;
       color: var(--teal);
-      padding-top: 3px;
+      @apply text-[13px] font-bold pt-[3px];
     }
     .principle-name {
       font-family: 'Founders Grotesk', sans-serif;
-      font-weight: 600;
-      font-size: 16px;
       color: var(--charcoal);
-      margin-bottom: 6px;
+      @apply font-semibold text-[16px] mb-[6px];
     }
     .principle-name em {
       font-style: italic;
@@ -780,20 +695,16 @@
       color: var(--charcoal);
     }
     .principle-desc {
-      font-size: 14px;
-      line-height: 1.2;
       color: var(--charcoal);
+      @apply text-[14px] leading-[1.2];
     }
 
     /* ─── Wordmark Display ───────────────────────────────────── */
     .wordmark-hero-text {
       font-family: 'Founders Grotesk Condensed', sans-serif;
-      font-weight: 900;
-      font-size: clamp(80px, 16vw, 200px);
-      letter-spacing: -0.01em;
-      line-height: 1;
       color: var(--white);
-      text-align: center;
+      font-size: clamp(80px, 16vw, 200px);
+      @apply font-black tracking-[-0.01em] leading-none text-center;
     }
     .wordmark-hero-text--green  { color: var(--green); }
     .wordmark-hero-text--teal   { color: var(--teal); }
@@ -802,319 +713,213 @@
 
     /* ─── Icon SVG ───────────────────────────────────────────── */
     .icon-display {
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      @apply flex items-center justify-center;
     }
     .icon-display svg {
-      width: 100%;
-      height: 100%;
-      max-width: 260px;
-      max-height: 260px;
+      @apply w-full h-full max-w-[260px] max-h-[260px];
     }
 
     /* ─── Color Modes Grid ───────────────────────────────────── */
     .color-modes {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
       background: var(--light-gray);
-      gap: 2px;
+      @apply grid gap-[2px];
+      grid-template-columns: repeat(4, 1fr);
     }
     .color-mode-cell {
-      padding: 48px 32px;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 24px;
+      @apply flex flex-col items-start gap-6 px-8 py-12;
     }
     .color-mode-label {
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      margin-top: auto;
+      @apply text-[11px] font-medium tracking-[0.08em] uppercase mt-auto;
     }
     .color-mode-wordmark {
       font-family: 'Founders Grotesk Condensed', sans-serif;
-      font-weight: 900;
-      font-size: 42px;
-      letter-spacing: 0.01em;
       line-height: var(--lh-headline);
+      @apply font-black text-[42px] tracking-[0.01em];
+    }
+
+    /* ─── 5-col combo grids: prevent last-row single item from
+         stretching taller than aspect-ratio:1 dictates ──────── */
+    .page [style*="grid-template-columns:repeat(5,1fr)"] {
+      align-items: start;
     }
 
     /* ─── Color Swatches ─────────────────────────────────────── */
     .color-hero-strip {
-      display: flex;
-      height: 100%;
-      min-height: 500px;
+      @apply flex h-full min-h-[500px];
     }
-    .color-strip { flex: 1; }
+    .color-strip { @apply flex-1; }
 
     .swatches {
-      display: grid;
+      @apply grid gap-6 mt-12;
       grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      gap: 24px;
-      margin-top: 48px;
     }
-    .swatch-card { }
     .swatch-block {
-      height: 120px;
-      border-radius: 4px;
-      margin-bottom: 14px;
+      @apply h-[120px] rounded-[4px] mb-[14px];
     }
     .swatch-name {
-      font-weight: 600;
-      font-size: 14px;
       color: var(--charcoal);
-      margin-bottom: 4px;
+      @apply font-semibold text-[14px] mb-1;
     }
     .swatch-values {
-      font-size: 12px;
       color: var(--charcoal);
-      line-height: 1.9;
       font-variant-numeric: tabular-nums;
-      white-space: pre-line;
+      @apply text-[12px] leading-[1.9] whitespace-pre-line;
     }
 
     .secondary-swatches {
-      display: flex;
-      gap: 2px;
       background: var(--light-gray);
-      margin-top: 48px;
-      border-radius: 2px;
-      overflow: hidden;
+      @apply flex gap-[2px] mt-12 rounded-[2px] overflow-hidden;
     }
     .secondary-swatch {
-      flex: 1;
-      padding: 40px 24px 28px;
-      min-height: 200px;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
+      @apply flex-1 flex flex-col justify-end min-h-[200px] pt-10 px-6 pb-7;
     }
     .secondary-swatch-name {
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
+      @apply text-[12px] font-semibold tracking-[0.06em] uppercase;
     }
     .secondary-swatch-hex {
-      font-size: 11px;
-      margin-top: 2px;
+      @apply text-[11px] mt-[2px];
     }
 
     /* ─── Type Specimen ──────────────────────────────────────── */
     .type-hero {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      justify-content: center;
-      padding: 80px;
-      gap: 0;
       background: var(--charcoal);
+      @apply flex flex-col items-start justify-center p-[80px] gap-0;
     }
     .type-sample-xl {
       font-family: 'Founders Grotesk Condensed', sans-serif;
-      font-weight: 900;
-      font-size: clamp(60px, 10vw, 140px);
       color: var(--white);
+      font-size: clamp(60px, 10vw, 140px);
       line-height: var(--lh-headline);
-      letter-spacing: -0.01em;
+      @apply font-black tracking-[-0.01em];
     }
     .type-sample-lg {
       font-family: 'Founders Grotesk Condensed', sans-serif;
-      font-weight: 700;
-      font-size: clamp(30px, 5vw, 60px);
       color: var(--teal);
+      font-size: clamp(30px, 5vw, 60px);
       line-height: var(--lh-headline);
-      margin-top: 16px;
+      @apply font-bold mt-4;
     }
     .type-sample-body {
       font-family: 'Founders Grotesk Text', sans-serif;
-      font-weight: 400;
-      font-size: 18px;
       color: var(--cream);
       line-height: var(--lh-body);
-      max-width: 540px;
-      margin-top: 24px;
+      @apply font-normal text-[18px] max-w-[540px] mt-6;
     }
 
     .type-table {
-      margin-top: 48px;
-      border-collapse: collapse;
-      width: 100%;
+      @apply mt-12 border-collapse w-full;
     }
     .type-table tr {
       border-bottom: 1px solid var(--light-gray);
     }
     .type-table th {
-      text-align: left;
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
       color: var(--charcoal);
-      padding: 0 0 12px;
+      @apply text-left text-[11px] font-semibold tracking-[0.1em] uppercase pb-3;
     }
     .type-table td {
-      padding: 20px 0;
-      font-size: 13px;
       color: var(--charcoal);
-      vertical-align: middle;
+      @apply py-5 text-[13px] align-middle;
     }
-    .type-table td:last-child { color: var(--charcoal); }
-    .type-specimen-cell { padding-right: 24px; }
+    .type-specimen-cell { @apply pr-6; }
 
     /* ─── Imagery Principles ─────────────────────────────────── */
     .imagery-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 2px;
       background: var(--light-gray);
-      margin-top: 40px;
+      @apply grid gap-[2px] mt-10;
+      grid-template-columns: repeat(2, 1fr);
     }
     .imagery-item {
       background: var(--white);
-      padding: 32px 28px;
+      @apply p-8 px-7;
     }
     .imagery-icon {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      margin-bottom: 16px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px;
+      @apply w-10 h-10 rounded-full mb-4 flex items-center justify-center text-[18px];
     }
     .imagery-heading {
-      font-weight: 600;
-      font-size: 15px;
       color: var(--charcoal);
-      margin-bottom: 8px;
+      @apply font-semibold text-[15px] mb-2;
     }
     .imagery-desc {
-      font-size: 13px;
-      line-height: 1.2;
       color: var(--charcoal);
+      @apply text-[13px] leading-[1.2];
     }
 
     /* ─── Applications Overview ──────────────────────────────── */
     .app-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2px;
       background: var(--light-gray);
-      margin-top: 40px;
+      @apply grid gap-[2px] mt-10;
+      grid-template-columns: repeat(3, 1fr);
     }
     .app-item {
       background: var(--cream);
-      padding: 40px 32px;
+      @apply py-10 px-8;
     }
     .app-context {
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
       color: var(--charcoal);
-      margin-bottom: 12px;
+      @apply text-[11px] font-semibold tracking-[0.12em] uppercase mb-3;
     }
     .app-name {
       font-family: 'Founders Grotesk', sans-serif;
-      font-weight: 600;
-      font-size: 20px;
       color: var(--charcoal);
-      margin-bottom: 10px;
+      @apply font-semibold text-[20px] mb-[10px];
     }
     .app-desc {
-      font-size: 13px;
-      line-height: var(--lh-body);
       color: var(--charcoal);
+      line-height: var(--lh-body);
+      @apply text-[13px];
     }
     .app-mark {
-      margin-top: 24px;
       font-family: 'Founders Grotesk Condensed', sans-serif;
-      font-weight: 900;
-      font-size: 32px;
-      letter-spacing: 0.01em;
+      @apply mt-6 font-black text-[32px] tracking-[0.01em];
     }
 
     /* ─── Municipalities Callout ─────────────────────────────── */
     .municipalities {
       background: var(--green);
-      padding: 60px 32px;
+      @apply py-[60px] px-8;
     }
     .municipalities-label {
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.13em;
-      text-transform: uppercase;
       color: var(--white);
-      margin-bottom: 32px;
+      @apply text-[11px] font-semibold tracking-[0.13em] uppercase mb-8;
     }
     .municipalities-grid {
-      display: grid;
+      @apply grid gap-1;
       grid-template-columns: repeat(4, 1fr);
-      gap: 4px;
     }
     .municipality {
       font-family: 'Founders Grotesk Condensed', sans-serif;
-      font-weight: 700;
-      font-size: 18px;
       color: var(--white);
-      letter-spacing: 0.03em;
-      padding: 10px 0;
       border-top: 1px solid rgba(255,255,255,0.2);
-      text-transform: uppercase;
+      @apply font-bold text-[18px] tracking-[0.03em] py-[10px] uppercase;
     }
     .municipality-num {
-      font-size: 11px;
-      font-weight: 400;
       color: var(--teal);
-      display: block;
-      margin-bottom: 2px;
+      @apply text-[11px] font-normal block mb-[2px];
     }
 
     /* ─── System diagram ─────────────────────────────────────── */
     .system-diagram {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 48px;
-      padding: 80px;
       background: var(--white);
-      flex-wrap: wrap;
+      @apply flex items-center justify-center gap-12 p-[80px] flex-wrap;
     }
     .system-element {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 16px;
+      @apply flex flex-col items-center gap-4;
     }
     .system-element-label {
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
       color: var(--charcoal);
+      @apply text-[11px] font-semibold tracking-[0.1em] uppercase;
     }
 
     /* ─── Full-width statement ───────────────────────────────── */
     .statement-block {
       background: var(--teal);
-      padding: 80px;
-      display: flex;
-      align-items: center;
-      min-height: 320px;
+      @apply flex items-center min-h-[320px] p-[80px];
     }
     .statement-text {
       font-family: 'Founders Grotesk Condensed', sans-serif;
-      font-weight: 700;
-      font-size: clamp(28px, 4vw, 52px);
       color: var(--charcoal);
-      line-height: 1;
-      max-width: 800px;
-      letter-spacing: -0.01em;
+      font-size: clamp(28px, 4vw, 52px);
+      @apply font-bold leading-none max-w-[800px] tracking-[-0.01em];
     }
     .statement-text em {
       font-style: italic;
@@ -1124,15 +929,14 @@
     /* ─── Final section ──────────────────────────────────────── */
     .final-block {
       background: var(--charcoal);
-      padding: 100px 32px;
+      @apply py-[100px] px-8;
     }
     .final-text {
       font-family: 'Founders Grotesk', sans-serif;
       font-size: clamp(18px, 2.5vw, 28px);
-      font-weight: 300;
-      line-height: var(--lh-body);
       color: var(--cream);
-      max-width: 720px;
+      line-height: var(--lh-body);
+      @apply font-light max-w-[720px];
     }
     .final-text strong {
       color: var(--white);
@@ -1143,42 +947,32 @@
     .text-white   { color: var(--white) !important; }
     .text-teal    { color: var(--teal) !important; }
     .text-green   { color: var(--green) !important; }
-    .opacity-60   { opacity: 0.6; }
+    .opacity-60   { @apply opacity-60; }
 
     .divider {
-      height: 1px;
       background: var(--light-gray);
-      margin: 40px 0;
+      @apply h-px my-10;
     }
 
     /* ─── Cover / Home page ──────────────────────────────────────── */
     /* ─── Intro page layout ─────────────────────────────────── */
     .intro-layout {
-      display: flex;
-      flex-direction: column;
-      height: 100dvh;
-      padding: 32px;
-      box-sizing: border-box;
+      @apply flex flex-col h-dvh p-8 box-border;
     }
     .intro-statement {
       font-family: 'Founders Grotesk', sans-serif;
-      font-weight: 400;
-      font-size: clamp(24px, 3.2vw, 48px);
-      line-height: 1.0;
-      letter-spacing: -0.02em;
       color: var(--charcoal);
-      max-width: 960px;
-      margin: 48px 0 0;
+      font-size: clamp(24px, 3.2vw, 48px);
+      @apply font-normal leading-none tracking-[-0.02em] max-w-[960px] mt-12;
     }
     .intro-body {
-      max-width: 520px;
+      @apply max-w-[520px];
     }
     .intro-body p {
       font-family: 'Founders Grotesk Text', sans-serif;
-      font-size: 18px;
-      line-height: var(--lh-body);
       color: var(--charcoal);
-      margin: 0 0 14px;
+      line-height: var(--lh-body);
+      @apply text-[18px] mb-[14px];
     }
     .intro-body p:last-child { margin-bottom: 0; }
     @media (max-width: 768px) {
@@ -1192,25 +986,18 @@
     .cover-page.active { display: flex; }
     .cover-page {
       background: var(--teal);
-      min-height: 100dvh;
-      height: 100dvh;
-      flex-direction: column;
-      padding: 32px;
-      box-sizing: border-box;
+      @apply flex-col min-h-dvh h-dvh p-8 box-border;
     }
     .cover-title {
       font-family: 'Founders Grotesk', sans-serif;
-      font-weight: 300;
       font-size: clamp(52px, 7.5vw, 116px);
       line-height: var(--lh-headline);
-      letter-spacing: -0.025em;
+      @apply font-light tracking-[-0.025em];
     }
     .cover-meta {
       font-family: 'Founders Grotesk', sans-serif;
-      font-size: 16px;
-      line-height: 1.3;
-      letter-spacing: 0.04em;
       color: var(--deep-teal);
+      @apply text-[16px] leading-[1.3] tracking-[0.04em];
     }
     /* Mobile header transforms on home page */
     body.on-home .mobile-header {
@@ -1240,26 +1027,17 @@
        and swap the logo src and definition text.
     ─────────────────────────────────────────────────────────── */
     .cs-outer {
-      padding: 40px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
       border: 1px solid var(--light-gray);
-      width: 100%;
-      box-sizing: border-box;
+      @apply flex flex-col items-center p-10 w-full box-border;
     }
     .cs-zone {
       background: color-mix(in srgb, var(--teal) 20%, transparent);
       padding: var(--cs-x, 36px);
-      position: relative;
-      display: inline-block;
+      @apply relative inline-block;
     }
     .cs-logo-box {
       background: var(--white);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
+      @apply flex items-center justify-center relative;
     }
     /* H mark in the bottom clearspace strip — height = --cs-x exactly.
        H_black.svg path fills the full viewBox, so no scaling correction needed. */
@@ -1338,25 +1116,46 @@
     }
     /* Definition row under the diagram */
     .cs-def {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding-top: 14px;
-      font-size: 12px;
-      color: var(--charcoal);
       font-family: 'Founders Grotesk Text', sans-serif;
+      color: var(--charcoal);
+      @apply flex items-center gap-2 pt-[14px] text-[12px];
     }
     .cs-def-x {
       font-family: 'Founders Grotesk', sans-serif;
-      font-weight: 700;
-      font-size: 11px;
       background: color-mix(in srgb, var(--teal) 50%, transparent);
       color: var(--charcoal);
-      padding: 2px 7px;
-      border-radius: 2px;
-      flex-shrink: 0;
+      @apply font-bold text-[11px] py-[2px] px-[7px] rounded-[2px] flex-shrink-0;
     }
 
+    /* ─── Masonry photo grid ─────────────────────────────────── */
+    .masonry-grid {
+      columns: 3;
+      column-gap: 2px;
+    }
+    .masonry-grid img,
+    .masonry-grid .masonry-placeholder {
+      width: 100%;
+      display: block;
+      break-inside: avoid;
+      margin-bottom: 2px;
+    }
+    .masonry-grid img { height: auto; }
+    .masonry-grid .masonry-placeholder {
+      aspect-ratio: 16/9;
+      background: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--charcoal);
+      opacity: 0.9;
+    }
+    .masonry-grid .masonry-placeholder span { opacity: 0.3; }
+
+    } /* end @layer components */
   </style>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -2793,7 +2592,7 @@
           </div>
 
           <!-- 5: On busy background -->
-          <div style="background-image:url('images/scenic-city-skyline.png'); background-size:cover; background-position:center; padding:32px 28px; min-height:260px; position:relative; display:flex; flex-direction:column; justify-content:center; align-items:center; overflow:hidden; gap:20px;">
+          <div style="background-image:url('images/scenic-city-skyline.webp'); background-size:cover; background-position:center; padding:32px 28px; min-height:260px; position:relative; display:flex; flex-direction:column; justify-content:center; align-items:center; overflow:hidden; gap:20px;">
             <div style="position:absolute; top:14px; left:14px; font-size:11px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--white); text-shadow:0 1px 3px rgba(0,0,0,0.6);">Busy background</div>
             <img src="images/logos/Hudson-County_full-logo_white.svg" alt="" style="height:50px; width:auto; display:block;">
             <div style="position:absolute; top:14px; right:14px; width:20px; height:20px; background:#EB254D; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:700; color:#fff; line-height:1; flex-shrink:0;">✕</div>
@@ -3952,11 +3751,34 @@
           <p style="font-family:'Founders Grotesk Text',sans-serif; font-size:18px; line-height:var(--lh-body); color:var(--charcoal); margin:0;">Hudson County's photography direction is documentary in spirit, grounded in the daily life of the county and the communities that make it. Imagery is not used to project aspiration or sell a vision. It is used to reflect reality honestly, and in doing so, build trust.</p>
         </div>
       </div>
-      <!-- Right: portrait image placeholder, anchored bottom-right -->
+      <!-- Right: portrait image -->
       <div style="position:relative; overflow:hidden;">
-        <div style="position:absolute; bottom:0; right:0; width:88%; height:90%; background:#D6D0C8; display:flex; align-items:center; justify-content:center;">
-          <div style="font-size:11px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--charcoal); opacity:0.3;">Image coming</div>
-        </div>
+        <div style="position:absolute; bottom:0; right:0; width:88%; height:90%; background-image:url('images/dome-rotunda-courthouse.webp'); background-size:cover; background-position:center;"></div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ── LANDSCAPE: EXAMPLES ──────────────────────────────────── -->
+  <div class="page" tabindex="-1" id="photo-landscape-examples">
+    <div class="section-content">
+      <div class="section-label">Photography — Landscapes</div>
+      <h2 class="section-title">Examples</h2>
+      <div class="section-body">
+        <p>Architectural, environmental, and scenic photography of Hudson County. These images capture the built environment, public spaces, and civic character of the county. Use them across print collateral, digital backgrounds, and report covers.</p>
+      </div>
+    </div>
+    <div style="margin:0 32px 80px;">
+      <div class="masonry-grid">
+        <img src="images/dome-rotunda-courthouse.webp" alt="Dome rotunda courthouse interior">
+        <img src="images/scenic-city-skyline.webp" alt="City skyline">
+        <img src="images/jersey-city-brownstones.webp" alt="Jersey City brownstones">
+        <img src="images/old-building-interior-1.webp" alt="Historic building interior">
+        <img src="images/Scenic City Skyline 2.webp" alt="City skyline alternate">
+        <img src="images/old-building-interior-2.webp" alt="Historic building interior detail">
+        <img src="images/jersey-city-historic-brownstones-van-vorst-park 1 (1).webp" alt="Van Vorst Park brownstones">
+        <img src="images/pexels-alejandro.webp" alt="Street level neighborhood">
+        <img src="images/pexels-joel-zar-307187367-13570767 1.webp" alt="Urban landscape">
       </div>
     </div>
   </div>
@@ -3977,7 +3799,7 @@
       <div style="display:grid; grid-template-columns:1fr 1fr; gap:0 16px;">
 
         <div style="padding-bottom:40px;">
-          <div style="height:240px; background-image:url('images/dome-rotunda-courthouse.png'); background-size:cover; background-position:center top; margin-bottom:14px;"></div>
+          <div style="height:240px; background-image:url('images/dome-rotunda-courthouse.webp'); background-size:cover; background-position:center top; margin-bottom:14px;"></div>
           <div style="display:flex; align-items:flex-start; gap:10px;">
             <div style="width:20px; height:20px; background:var(--green); border-radius:50%; flex-shrink:0; display:flex; align-items:center; justify-content:center; margin-top:1px;">
               <svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
@@ -3987,7 +3809,7 @@
         </div>
 
         <div style="padding-bottom:40px;">
-          <div style="height:240px; background-image:url('images/jersey-city-brownstones.png'); background-size:cover; background-position:center; margin-bottom:14px;"></div>
+          <div style="height:240px; background-image:url('images/jersey-city-brownstones.webp'); background-size:cover; background-position:center; margin-bottom:14px;"></div>
           <div style="display:flex; align-items:flex-start; gap:10px;">
             <div style="width:20px; height:20px; background:var(--green); border-radius:50%; flex-shrink:0; display:flex; align-items:center; justify-content:center; margin-top:1px;">
               <svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
@@ -3997,7 +3819,7 @@
         </div>
 
         <div style="padding-bottom:40px;">
-          <div style="height:240px; background-image:url('images/scenic-city-skyline.png'); background-size:cover; background-position:center; margin-bottom:14px;"></div>
+          <div style="height:240px; background-image:url('images/scenic-city-skyline.webp'); background-size:cover; background-position:center; margin-bottom:14px;"></div>
           <div style="display:flex; align-items:flex-start; gap:10px;">
             <div style="width:20px; height:20px; background:var(--green); border-radius:50%; flex-shrink:0; display:flex; align-items:center; justify-content:center; margin-top:1px;">
               <svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
@@ -4007,7 +3829,7 @@
         </div>
 
         <div style="padding-bottom:40px;">
-          <div style="height:240px; background-image:url('images/old-building-interior-1.png'); background-size:cover; background-position:center; margin-bottom:14px;"></div>
+          <div style="height:240px; background-image:url('images/old-building-interior-1.webp'); background-size:cover; background-position:center; margin-bottom:14px;"></div>
           <div style="display:flex; align-items:flex-start; gap:10px;">
             <div style="width:20px; height:20px; background:var(--green); border-radius:50%; flex-shrink:0; display:flex; align-items:center; justify-content:center; margin-top:1px;">
               <svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
@@ -4017,7 +3839,7 @@
         </div>
 
         <div style="padding-bottom:40px;">
-          <div style="height:240px; background-image:url('images/old-building-interior-2.png'); background-size:cover; background-position:center; margin-bottom:14px;"></div>
+          <div style="height:240px; background-image:url('images/old-building-interior-2.webp'); background-size:cover; background-position:center; margin-bottom:14px;"></div>
           <div style="display:flex; align-items:flex-start; gap:10px;">
             <div style="width:20px; height:20px; background:var(--green); border-radius:50%; flex-shrink:0; display:flex; align-items:center; justify-content:center; margin-top:1px;">
               <svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
@@ -4027,7 +3849,7 @@
         </div>
 
         <div style="padding-bottom:40px;">
-          <div style="height:240px; background-image:url('images/pexels-alejandro.png'); background-size:cover; background-position:center; margin-bottom:14px;"></div>
+          <div style="height:240px; background-image:url('images/pexels-alejandro.webp'); background-size:cover; background-position:center; margin-bottom:14px;"></div>
           <div style="display:flex; align-items:flex-start; gap:10px;">
             <div style="width:20px; height:20px; background:var(--green); border-radius:50%; flex-shrink:0; display:flex; align-items:center; justify-content:center; margin-top:1px;">
               <svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
@@ -4056,7 +3878,7 @@
       <div style="display:grid; grid-template-columns:1fr 1fr; gap:0 16px;">
 
         <div style="padding-bottom:40px;">
-          <div style="height:240px; background-image:url('images/scenic-city-skyline.png'); background-size:cover; background-position:center; margin-bottom:14px; filter:saturate(0.2) brightness(1.15);"></div>
+          <div style="height:240px; background-image:url('images/scenic-city-skyline.webp'); background-size:cover; background-position:center; margin-bottom:14px; filter:saturate(0.2) brightness(1.15);"></div>
           <div style="display:flex; align-items:flex-start; gap:10px;">
             <div style="width:20px; height:20px; background:#EB254D; border-radius:50%; flex-shrink:0; display:flex; align-items:center; justify-content:center; margin-top:1px;">
               <svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M18 6L6 18M6 6l12 12"/></svg>
@@ -4066,7 +3888,7 @@
         </div>
 
         <div style="padding-bottom:40px;">
-          <div style="height:240px; background-image:url('images/jersey-city-brownstones.png'); background-size:cover; background-position:center; margin-bottom:14px; filter:brightness(1.6) contrast(1.1);"></div>
+          <div style="height:240px; background-image:url('images/jersey-city-brownstones.webp'); background-size:cover; background-position:center; margin-bottom:14px; filter:brightness(1.6) contrast(1.1);"></div>
           <div style="display:flex; align-items:flex-start; gap:10px;">
             <div style="width:20px; height:20px; background:#EB254D; border-radius:50%; flex-shrink:0; display:flex; align-items:center; justify-content:center; margin-top:1px;">
               <svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M18 6L6 18M6 6l12 12"/></svg>
@@ -4076,7 +3898,7 @@
         </div>
 
         <div style="padding-bottom:40px;">
-          <div style="height:240px; background-image:url('images/dome-rotunda-courthouse.png'); background-size:cover; background-position:center top; margin-bottom:14px; filter:hue-rotate(180deg) saturate(0.5);"></div>
+          <div style="height:240px; background-image:url('images/dome-rotunda-courthouse.webp'); background-size:cover; background-position:center top; margin-bottom:14px; filter:hue-rotate(180deg) saturate(0.5);"></div>
           <div style="display:flex; align-items:flex-start; gap:10px;">
             <div style="width:20px; height:20px; background:#EB254D; border-radius:50%; flex-shrink:0; display:flex; align-items:center; justify-content:center; margin-top:1px;">
               <svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M18 6L6 18M6 6l12 12"/></svg>
@@ -4086,9 +3908,7 @@
         </div>
 
         <div style="padding-bottom:40px;">
-          <div style="height:240px; background:#D8E4E0; display:flex; align-items:center; justify-content:center; margin-bottom:14px;">
-            <div style="font-size:11px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--charcoal); opacity:0.35;">Sample image</div>
-          </div>
+          <div style="height:240px; background-image:url('images/Scenic City Skyline 2.webp'); background-size:cover; background-position:center; margin-bottom:14px; filter:saturate(0.1) brightness(1.2) contrast(1.1);"></div>
           <div style="display:flex; align-items:flex-start; gap:10px;">
             <div style="width:20px; height:20px; background:#EB254D; border-radius:50%; flex-shrink:0; display:flex; align-items:center; justify-content:center; margin-top:1px;">
               <svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M18 6L6 18M6 6l12 12"/></svg>
@@ -4098,9 +3918,7 @@
         </div>
 
         <div style="padding-bottom:40px;">
-          <div style="height:240px; background:#D8E4E0; display:flex; align-items:center; justify-content:center; margin-bottom:14px;">
-            <div style="font-size:11px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--charcoal); opacity:0.35;">Sample image</div>
-          </div>
+          <div style="height:240px; background-image:url('images/pexels-joel-zar-307187367-13570767 1.webp'); background-size:cover; background-position:center; margin-bottom:14px; filter:brightness(1.8) contrast(0.85) saturate(0.4);"></div>
           <div style="display:flex; align-items:flex-start; gap:10px;">
             <div style="width:20px; height:20px; background:#EB254D; border-radius:50%; flex-shrink:0; display:flex; align-items:center; justify-content:center; margin-top:1px;">
               <svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M18 6L6 18M6 6l12 12"/></svg>
@@ -4110,9 +3928,7 @@
         </div>
 
         <div style="padding-bottom:40px;">
-          <div style="height:240px; background:#D8E4E0; display:flex; align-items:center; justify-content:center; margin-bottom:14px;">
-            <div style="font-size:11px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--charcoal); opacity:0.35;">Sample image</div>
-          </div>
+          <div style="height:240px; background-image:url('images/jersey-city-historic-brownstones-van-vorst-park 1 (1).webp'); background-size:cover; background-position:center; margin-bottom:14px; filter:saturate(2.2) contrast(1.3) brightness(1.1);"></div>
           <div style="display:flex; align-items:flex-start; gap:10px;">
             <div style="width:20px; height:20px; background:#EB254D; border-radius:50%; flex-shrink:0; display:flex; align-items:center; justify-content:center; margin-top:1px;">
               <svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M18 6L6 18M6 6l12 12"/></svg>
@@ -4121,6 +3937,26 @@
           </div>
         </div>
 
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ── COMMUNITY: EXAMPLES ──────────────────────────────────── -->
+  <div class="page" tabindex="-1" id="photo-community-examples">
+    <div class="section-content">
+      <div class="section-label">Photography — Community</div>
+      <h2 class="section-title">Examples</h2>
+      <div class="section-body">
+        <p>Documentary photography of Hudson County residents, employees, and community members in their own environments. Candid, unposed, and rooted in real moments. These images set the standard for community photography across county communications.</p>
+      </div>
+    </div>
+    <div style="margin:0 32px 80px;">
+      <div class="masonry-grid">
+        <img src="images/community/craig-guy-1.webp" alt="Community member">
+        <img src="images/community/2CWDX7RSYFDZLK6PGRS5GXBDDE 1.webp" alt="Community event">
+        <img src="images/community/craig-guy-2.webp" alt="Community member">
+        <img src="images/community/2CWDX7RSYFDZLK6PGRS5GXBDDE 2-1.webp" alt="Community gathering">
       </div>
     </div>
   </div>
@@ -4141,7 +3977,7 @@
       <div style="display:grid; grid-template-columns:1fr 1fr; gap:0 16px;">
 
         <div style="padding-bottom:40px;">
-          <div style="height:240px; background-image:url('images/craig-guy-1.png'); background-size:cover; background-position:center top; margin-bottom:14px;"></div>
+          <div style="height:240px; background-image:url('images/community/craig-guy-1.webp'); background-size:cover; background-position:center top; margin-bottom:14px;"></div>
           <div style="display:flex; align-items:flex-start; gap:10px;">
             <div style="width:20px; height:20px; background:var(--green); border-radius:50%; flex-shrink:0; display:flex; align-items:center; justify-content:center; margin-top:1px;">
               <svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
@@ -4151,7 +3987,17 @@
         </div>
 
         <div style="padding-bottom:40px;">
-          <div style="height:240px; background-image:url('images/pexels-mathias.png'); background-size:cover; background-position:center; margin-bottom:14px;"></div>
+          <div style="height:240px; background-image:url('images/community/craig-guy-2.webp'); background-size:cover; background-position:center 30%; margin-bottom:14px;"></div>
+          <div style="display:flex; align-items:flex-start; gap:10px;">
+            <div style="width:20px; height:20px; background:var(--green); border-radius:50%; flex-shrink:0; display:flex; align-items:center; justify-content:center; margin-top:1px;">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+            </div>
+            <div style="font-size:13px; color:var(--charcoal); line-height:1.5;">Include the full age spectrum of the county — children, working adults, and seniors are all part of the story.</div>
+          </div>
+        </div>
+
+        <div style="padding-bottom:40px;">
+          <div style="height:240px; background-image:url('images/community/2CWDX7RSYFDZLK6PGRS5GXBDDE 1.webp'); background-size:cover; background-position:center; margin-bottom:14px;"></div>
           <div style="display:flex; align-items:flex-start; gap:10px;">
             <div style="width:20px; height:20px; background:var(--green); border-radius:50%; flex-shrink:0; display:flex; align-items:center; justify-content:center; margin-top:1px;">
               <svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
@@ -4161,42 +4007,12 @@
         </div>
 
         <div style="padding-bottom:40px;">
-          <div style="height:240px; background-image:url('images/pexels-greg.png'); background-size:cover; background-position:center; margin-bottom:14px;"></div>
+          <div style="height:240px; background-image:url('images/community/2CWDX7RSYFDZLK6PGRS5GXBDDE 2-1.webp'); background-size:cover; background-position:center; margin-bottom:14px;"></div>
           <div style="display:flex; align-items:flex-start; gap:10px;">
             <div style="width:20px; height:20px; background:var(--green); border-radius:50%; flex-shrink:0; display:flex; align-items:center; justify-content:center; margin-top:1px;">
               <svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
             </div>
-            <div style="font-size:13px; color:var(--charcoal); line-height:1.5;">Prioritize connection and candid interaction over polished portraiture.</div>
-          </div>
-        </div>
-
-        <div style="padding-bottom:40px;">
-          <div style="height:240px; background-image:url('images/pexels-juan.png'); background-size:cover; background-position:center; margin-bottom:14px;"></div>
-          <div style="display:flex; align-items:flex-start; gap:10px;">
-            <div style="width:20px; height:20px; background:var(--green); border-radius:50%; flex-shrink:0; display:flex; align-items:center; justify-content:center; margin-top:1px;">
-              <svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
-            </div>
-            <div style="font-size:13px; color:var(--charcoal); line-height:1.5;">Show community members in their own environments, parks, streets, community centers, transit.</div>
-          </div>
-        </div>
-
-        <div style="padding-bottom:40px;">
-          <div style="height:240px; background-image:url('images/pexels-alejandro.png'); background-size:cover; background-position:center; margin-bottom:14px;"></div>
-          <div style="display:flex; align-items:flex-start; gap:10px;">
-            <div style="width:20px; height:20px; background:var(--green); border-radius:50%; flex-shrink:0; display:flex; align-items:center; justify-content:center; margin-top:1px;">
-              <svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
-            </div>
-            <div style="font-size:13px; color:var(--charcoal); line-height:1.5;">Let natural light and environment define the mood rather than studio setups.</div>
-          </div>
-        </div>
-
-        <div style="padding-bottom:40px;">
-          <div style="height:240px; background-image:url('images/craig-guy-1.png'); background-size:cover; background-position:center 30%; margin-bottom:14px;"></div>
-          <div style="display:flex; align-items:flex-start; gap:10px;">
-            <div style="width:20px; height:20px; background:var(--green); border-radius:50%; flex-shrink:0; display:flex; align-items:center; justify-content:center; margin-top:1px;">
-              <svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
-            </div>
-            <div style="font-size:13px; color:var(--charcoal); line-height:1.5;">Include the full age spectrum of the county, children, working adults, and seniors are all part of the story.</div>
+            <div style="font-size:13px; color:var(--charcoal); line-height:1.5;">Show community members in their own environments — parks, streets, community centers, transit.</div>
           </div>
         </div>
 
@@ -4220,7 +4036,7 @@
       <div style="display:grid; grid-template-columns:1fr 1fr; gap:0 16px;">
 
         <div style="padding-bottom:40px;">
-          <div style="height:240px; background-image:url('images/pexels-mathias.png'); background-size:cover; background-position:center; margin-bottom:14px; filter:saturate(0) brightness(1.1);"></div>
+          <div style="height:240px; background-image:url('images/pexels-mathias.webp'); background-size:cover; background-position:center; margin-bottom:14px; filter:saturate(0) brightness(1.1);"></div>
           <div style="display:flex; align-items:flex-start; gap:10px;">
             <div style="width:20px; height:20px; background:#EB254D; border-radius:50%; flex-shrink:0; display:flex; align-items:center; justify-content:center; margin-top:1px;">
               <svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M18 6L6 18M6 6l12 12"/></svg>
@@ -4230,9 +4046,7 @@
         </div>
 
         <div style="padding-bottom:40px;">
-          <div style="height:240px; background:#D8E4E0; display:flex; align-items:center; justify-content:center; margin-bottom:14px;">
-            <div style="font-size:11px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--charcoal); opacity:0.35;">Sample image</div>
-          </div>
+          <div style="height:240px; background-image:url('images/pexels-kelly-26585856 (1) 1.webp'); background-size:cover; background-position:center; margin-bottom:14px; filter:brightness(1.5) contrast(1.2) saturate(0.15);"></div>
           <div style="display:flex; align-items:flex-start; gap:10px;">
             <div style="width:20px; height:20px; background:#EB254D; border-radius:50%; flex-shrink:0; display:flex; align-items:center; justify-content:center; margin-top:1px;">
               <svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M18 6L6 18M6 6l12 12"/></svg>
@@ -4242,9 +4056,7 @@
         </div>
 
         <div style="padding-bottom:40px;">
-          <div style="height:240px; background:#D8E4E0; display:flex; align-items:center; justify-content:center; margin-bottom:14px;">
-            <div style="font-size:11px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--charcoal); opacity:0.35;">Sample image</div>
-          </div>
+          <div style="height:240px; background-image:url('images/pexels-malcolm-garret-3023588-9663878 2.webp'); background-size:cover; background-position:center; margin-bottom:14px; filter:brightness(1.6) contrast(1.1) saturate(0.2);"></div>
           <div style="display:flex; align-items:flex-start; gap:10px;">
             <div style="width:20px; height:20px; background:#EB254D; border-radius:50%; flex-shrink:0; display:flex; align-items:center; justify-content:center; margin-top:1px;">
               <svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M18 6L6 18M6 6l12 12"/></svg>
@@ -4254,9 +4066,7 @@
         </div>
 
         <div style="padding-bottom:40px;">
-          <div style="height:240px; background:#D8E4E0; display:flex; align-items:center; justify-content:center; margin-bottom:14px;">
-            <div style="font-size:11px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--charcoal); opacity:0.35;">Sample image</div>
-          </div>
+          <div style="height:240px; background-image:url('images/pexels-chethan-prabhu-1263444-2405002 2.webp'); background-size:cover; background-position:center; margin-bottom:14px; filter:blur(1.5px) brightness(1.25) saturate(0.3);"></div>
           <div style="display:flex; align-items:flex-start; gap:10px;">
             <div style="width:20px; height:20px; background:#EB254D; border-radius:50%; flex-shrink:0; display:flex; align-items:center; justify-content:center; margin-top:1px;">
               <svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M18 6L6 18M6 6l12 12"/></svg>
@@ -4266,9 +4076,7 @@
         </div>
 
         <div style="padding-bottom:40px;">
-          <div style="height:240px; background:#D8E4E0; display:flex; align-items:center; justify-content:center; margin-bottom:14px;">
-            <div style="font-size:11px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--charcoal); opacity:0.35;">Sample image</div>
-          </div>
+          <div style="height:240px; background-image:url('images/pexels-chris-f-38966-16920355 2.webp'); background-size:cover; background-position:center; margin-bottom:14px; filter:saturate(0) brightness(0.75) contrast(1.2);"></div>
           <div style="display:flex; align-items:flex-start; gap:10px;">
             <div style="width:20px; height:20px; background:#EB254D; border-radius:50%; flex-shrink:0; display:flex; align-items:center; justify-content:center; margin-top:1px;">
               <svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M18 6L6 18M6 6l12 12"/></svg>
@@ -4278,9 +4086,7 @@
         </div>
 
         <div style="padding-bottom:40px;">
-          <div style="height:240px; background:#D8E4E0; display:flex; align-items:center; justify-content:center; margin-bottom:14px;">
-            <div style="font-size:11px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--charcoal); opacity:0.35;">Sample image</div>
-          </div>
+          <div style="height:240px; background-image:url('images/2CWDX7RSYFDZLK6PGRS5GXBDDE 2.webp'); background-size:cover; background-position:center; margin-bottom:14px; filter:brightness(1.4) contrast(1.3) saturate(1.8);"></div>
           <div style="display:flex; align-items:flex-start; gap:10px;">
             <div style="width:20px; height:20px; background:#EB254D; border-radius:50%; flex-shrink:0; display:flex; align-items:center; justify-content:center; margin-top:1px;">
               <svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M18 6L6 18M6 6l12 12"/></svg>
@@ -4307,9 +4113,7 @@
         </div>
       </div>
       <div style="position:relative; overflow:hidden;">
-        <div style="position:absolute; bottom:0; right:0; width:88%; height:90%; background:#D6D0C8; display:flex; align-items:center; justify-content:center;">
-          <div style="font-size:11px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--charcoal); opacity:0.3;">Image coming</div>
-        </div>
+        <div style="position:absolute; bottom:0; right:0; width:88%; height:90%; background-image:url('images/Brand in action/swag/image 31.webp'); background-size:cover; background-position:center;"></div>
       </div>
     </div>
   </div>
@@ -4320,7 +4124,7 @@
 
     <div class="section-content">
       <div class="section-label">Applications</div>
-      <h2 class="section-title">Swag samples</h2>
+      <h2 class="section-title">Swag</h2>
       <div class="section-body">
         <p>Branded merchandise extends the Hudson County identity into everyday objects. From staff apparel to community giveaways, each item should carry the mark with the same consistency and intent applied across all other surfaces. The identity should feel considered, not printed as an afterthought.</p>
         <p>The examples below document approved swag applications. Imagery will be updated as samples are produced.</p>
@@ -4328,99 +4132,59 @@
     </div>
 
     <div style="margin:0 32px 80px;">
-      <div class="app-img-grid" style="display:grid; grid-template-columns:repeat(3, 1fr); gap:2px; background:var(--light-gray);">
-        <div style="background:var(--white); aspect-ratio:4/3; display:flex; align-items:center; justify-content:center;">
-          <div style="text-align:center;">
-            <div style="font-size:11px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--charcoal); opacity:0.3; margin-bottom:8px;">Image coming</div>
-            <div style="width:32px; height:1px; background:var(--light-gray); margin:0 auto;"></div>
-          </div>
-        </div>
-        <div style="background:var(--white); aspect-ratio:4/3; display:flex; align-items:center; justify-content:center;">
-          <div style="text-align:center;">
-            <div style="font-size:11px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--charcoal); opacity:0.3; margin-bottom:8px;">Image coming</div>
-            <div style="width:32px; height:1px; background:var(--light-gray); margin:0 auto;"></div>
-          </div>
-        </div>
-        <div style="background:var(--white); aspect-ratio:4/3; display:flex; align-items:center; justify-content:center;">
-          <div style="text-align:center;">
-            <div style="font-size:11px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--charcoal); opacity:0.3; margin-bottom:8px;">Image coming</div>
-            <div style="width:32px; height:1px; background:var(--light-gray); margin:0 auto;"></div>
-          </div>
-        </div>
-        <div style="background:var(--white); aspect-ratio:4/3; display:flex; align-items:center; justify-content:center;">
-          <div style="text-align:center;">
-            <div style="font-size:11px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--charcoal); opacity:0.3; margin-bottom:8px;">Image coming</div>
-            <div style="width:32px; height:1px; background:var(--light-gray); margin:0 auto;"></div>
-          </div>
-        </div>
-        <div style="background:var(--white); aspect-ratio:4/3; display:flex; align-items:center; justify-content:center;">
-          <div style="text-align:center;">
-            <div style="font-size:11px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--charcoal); opacity:0.3; margin-bottom:8px;">Image coming</div>
-            <div style="width:32px; height:1px; background:var(--light-gray); margin:0 auto;"></div>
-          </div>
-        </div>
-        <div style="background:var(--white); aspect-ratio:4/3; display:flex; align-items:center; justify-content:center;">
-          <div style="text-align:center;">
-            <div style="font-size:11px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--charcoal); opacity:0.3; margin-bottom:8px;">Image coming</div>
-            <div style="width:32px; height:1px; background:var(--light-gray); margin:0 auto;"></div>
-          </div>
-        </div>
+      <div class="masonry-grid">
+        <img src="images/Brand in action/swag/7.webp" alt="Swag item">
+        <img src="images/Brand in action/swag/8.webp" alt="Swag item">
+        <img src="images/Brand in action/swag/9.webp" alt="Swag item">
+        <img src="images/Brand in action/swag/10.webp" alt="Swag item">
+        <img src="images/Brand in action/swag/image 31.webp" alt="Swag item">
+        <img src="images/Brand in action/swag/53.webp" alt="Swag item">
+        <img src="images/Brand in action/swag/54.webp" alt="Swag item">
+        <img src="images/Brand in action/swag/hudson-flag-teal.webp" alt="Swag item">
       </div>
     </div>
 
   </div>
 
 
-  <!-- ── IN THE WILD ───────────────────────────────────────────── -->
-  <div class="page" tabindex="-1" id="app-wild">
+  <!-- ── SIGNAGE ───────────────────────────────────────────────── -->
+  <div class="page" tabindex="-1" id="app-signage">
 
     <div class="section-content">
       <div class="section-label">Applications</div>
-      <h2 class="section-title">In the wild</h2>
+      <h2 class="section-title">Signage</h2>
       <div class="section-body">
-        <p>The brand in real-world context, photographed in the environments where it actually lives. Bus shelters, health center doors, court documents, park signs, and community events. These images document the system doing its job: communicating clearly, consistently, and with dignity across every surface and scale.</p>
-        <p>Photography will be added as the brand is deployed in the field.</p>
+        <p>The brand applied to environmental and physical signage — bus shelters, park signs, event displays, and civic installations. These images document how the identity performs at scale in real spaces.</p>
       </div>
     </div>
 
     <div style="margin:0 32px 80px;">
-      <div class="app-img-grid" style="display:grid; grid-template-columns:repeat(3, 1fr); gap:2px; background:var(--light-gray);">
-        <div style="background:var(--white); aspect-ratio:4/3; display:flex; align-items:center; justify-content:center;">
-          <div style="text-align:center;">
-            <div style="font-size:11px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--charcoal); opacity:0.3; margin-bottom:8px;">Image coming</div>
-            <div style="width:32px; height:1px; background:var(--light-gray); margin:0 auto;"></div>
-          </div>
-        </div>
-        <div style="background:var(--white); aspect-ratio:4/3; display:flex; align-items:center; justify-content:center;">
-          <div style="text-align:center;">
-            <div style="font-size:11px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--charcoal); opacity:0.3; margin-bottom:8px;">Image coming</div>
-            <div style="width:32px; height:1px; background:var(--light-gray); margin:0 auto;"></div>
-          </div>
-        </div>
-        <div style="background:var(--white); aspect-ratio:4/3; display:flex; align-items:center; justify-content:center;">
-          <div style="text-align:center;">
-            <div style="font-size:11px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--charcoal); opacity:0.3; margin-bottom:8px;">Image coming</div>
-            <div style="width:32px; height:1px; background:var(--light-gray); margin:0 auto;"></div>
-          </div>
-        </div>
-        <div style="background:var(--white); aspect-ratio:4/3; display:flex; align-items:center; justify-content:center;">
-          <div style="text-align:center;">
-            <div style="font-size:11px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--charcoal); opacity:0.3; margin-bottom:8px;">Image coming</div>
-            <div style="width:32px; height:1px; background:var(--light-gray); margin:0 auto;"></div>
-          </div>
-        </div>
-        <div style="background:var(--white); aspect-ratio:4/3; display:flex; align-items:center; justify-content:center;">
-          <div style="text-align:center;">
-            <div style="font-size:11px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--charcoal); opacity:0.3; margin-bottom:8px;">Image coming</div>
-            <div style="width:32px; height:1px; background:var(--light-gray); margin:0 auto;"></div>
-          </div>
-        </div>
-        <div style="background:var(--white); aspect-ratio:4/3; display:flex; align-items:center; justify-content:center;">
-          <div style="text-align:center;">
-            <div style="font-size:11px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--charcoal); opacity:0.3; margin-bottom:8px;">Image coming</div>
-            <div style="width:32px; height:1px; background:var(--light-gray); margin:0 auto;"></div>
-          </div>
-        </div>
+      <div class="masonry-grid">
+        <img src="images/Brand in action/signage/6.webp" alt="Signage in context">
+        <img src="images/Brand in action/signage/hudson-flag-teal.webp" alt="Hudson County flag teal">
+        <img src="images/Brand in action/signage/Slide 16_9 - 117.webp" alt="Signage application">
+      </div>
+    </div>
+
+  </div>
+
+
+  <!-- ── DIGITAL MEDIA ──────────────────────────────────────────── -->
+  <div class="page" tabindex="-1" id="app-digital">
+
+    <div class="section-content">
+      <div class="section-label">Applications</div>
+      <h2 class="section-title">Digital media</h2>
+      <div class="section-body">
+        <p>Social media graphics, digital banners, email headers, and web assets. The brand applied across owned digital channels. Examples will be added as digital templates are produced.</p>
+      </div>
+    </div>
+
+    <div style="margin:0 32px 80px;">
+      <div class="masonry-grid">
+        <img src="images/digital-media/Frame 2271.webp" alt="Digital media example">
+        <img src="images/digital-media/Frame 48097486.webp" alt="Digital media example">
+        <img src="images/digital-media/Frame 48097487.webp" alt="Digital media example">
       </div>
     </div>
 
@@ -4429,20 +4193,12 @@
 
   <!-- ── ICONOGRAPHY INTRO ─────────────────────────────────── -->
   <div class="page" tabindex="-1" id="icon-intro">
-    <div class="portrait-intro" style="display:grid; grid-template-columns:1fr 1fr; height:100dvh; overflow:hidden;">
-      <div style="display:flex; flex-direction:column; padding:32px; box-sizing:border-box;">
-        <div style="font-size:11px; font-weight:600; letter-spacing:0.13em; text-transform:uppercase; color:var(--charcoal);">Iconography</div>
-        <p style="font-family:'Founders Grotesk',sans-serif; font-weight:400; font-size:clamp(24px,3.2vw,48px); line-height:1.0; letter-spacing:-0.02em; color:var(--charcoal); max-width:720px; margin:48px 0 0;">Inspired by our logo and sans-serif typeface Founders, our iconography utilizes simple forms to efficiently communicate ideas.</p>
-        <div style="flex:1;"></div>
-        <div style="max-width:480px;">
-          <!-- TODO: Update for new client -->
-          <p style="font-family:'Founders Grotesk Text',sans-serif; font-size:18px; line-height:var(--lh-body); color:var(--charcoal); margin:0;">The Hudson County icon system is built from the same geometric language as the wordmark. Icons are designed on a consistent grid, using strokes and forms that feel native to the brand rather than borrowed from a generic library.</p>
-        </div>
-      </div>
-      <div style="position:relative; overflow:hidden;">
-        <div style="position:absolute; bottom:0; right:0; width:88%; height:90%; background:#D6D0C8; display:flex; align-items:center; justify-content:center;">
-          <div style="font-size:11px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--charcoal); opacity:0.3;">Image coming</div>
-        </div>
+    <div class="intro-layout">
+      <div style="font-size:11px; font-weight:600; letter-spacing:0.13em; text-transform:uppercase; color:var(--charcoal);">Iconography</div>
+      <p class="intro-statement">Inspired by our logo and sans-serif typeface Founders, our iconography utilizes simple forms to efficiently communicate ideas.</p>
+      <div style="flex:1;"></div>
+      <div class="intro-body">
+        <p>The Hudson County icon system is built from the same geometric language as the wordmark. Icons are designed on a consistent grid, using strokes and forms that feel native to the brand rather than borrowed from a generic library.</p>
       </div>
     </div>
   </div>
@@ -4602,6 +4358,30 @@
     if (parent) parent.setAttribute('aria-expanded', open ? 'true' : 'false');
   }
 
+  const landscapeChildIds = new Set(['photo-landscape-examples','photo-landscape-dos','photo-landscape-donts']);
+  const landscapeGroup = document.getElementById('nav-landscape-group');
+  const landscapeSub   = document.getElementById('nav-landscape-sub');
+
+  function setLandscapeExpanded(open) {
+    if (!landscapeGroup || !landscapeSub) return;
+    landscapeGroup.classList.toggle('open', open);
+    landscapeSub.classList.toggle('open', open);
+    const parent = landscapeGroup.querySelector('.nav-parent');
+    if (parent) parent.setAttribute('aria-expanded', open ? 'true' : 'false');
+  }
+
+  const communityPhotoChildIds = new Set(['photo-community-examples','photo-community-dos','photo-community-donts']);
+  const communityPhotoGroup = document.getElementById('nav-community-photo-group');
+  const communityPhotoSub   = document.getElementById('nav-community-photo-sub');
+
+  function setCommunityPhotoExpanded(open) {
+    if (!communityPhotoGroup || !communityPhotoSub) return;
+    communityPhotoGroup.classList.toggle('open', open);
+    communityPhotoSub.classList.toggle('open', open);
+    const parent = communityPhotoGroup.querySelector('.nav-parent');
+    if (parent) parent.setAttribute('aria-expanded', open ? 'true' : 'false');
+  }
+
   function closeSidebar() {
     sidebar.classList.remove('open');
     overlay.classList.remove('open');
@@ -4619,6 +4399,8 @@
     if (fgChildIds.has(targetId)) setFgExpanded(true);
     if (fullLogoChildIds.has(targetId)) setFullLogoExpanded(true);
     if (hcnjChildIds.has(targetId)) setHcnjExpanded(true);
+    if (landscapeChildIds.has(targetId)) setLandscapeExpanded(true);
+    if (communityPhotoChildIds.has(targetId)) setCommunityPhotoExpanded(true);
     // On mobile, open the section containing the active nav link
     if (window.innerWidth <= 768) {
       const activeNavLink = document.querySelector('.nav-link[data-target="' + targetId + '"]');
@@ -4661,6 +4443,14 @@
         const isOpen = hcnjGroup && hcnjGroup.classList.contains('open');
         setHcnjExpanded(!isOpen);
       }
+      if (target === 'photo-landscape-examples') {
+        const isOpen = landscapeGroup && landscapeGroup.classList.contains('open');
+        setLandscapeExpanded(!isOpen);
+      }
+      if (target === 'photo-community-examples') {
+        const isOpen = communityPhotoGroup && communityPhotoGroup.classList.contains('open');
+        setCommunityPhotoExpanded(!isOpen);
+      }
       showPage(target, true);
     });
   });
@@ -4678,6 +4468,10 @@
         setFullLogoExpanded(!fullLogoGroup.classList.contains('open'));
       } else if (expandable.id === 'nav-hcnj-group') {
         setHcnjExpanded(!hcnjGroup.classList.contains('open'));
+      } else if (expandable.id === 'nav-landscape-group') {
+        setLandscapeExpanded(!landscapeGroup.classList.contains('open'));
+      } else if (expandable.id === 'nav-community-photo-group') {
+        setCommunityPhotoExpanded(!communityPhotoGroup.classList.contains('open'));
       }
     });
   });
