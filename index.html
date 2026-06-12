@@ -1127,6 +1127,19 @@
       @apply font-bold text-[11px] py-[2px] px-[7px] rounded-[2px] flex-shrink-0;
     }
 
+    /* ─── Masonry photo grid ─────────────────────────────────── */
+    .masonry-grid {
+      columns: 3;
+      column-gap: 2px;
+    }
+    .masonry-grid img {
+      width: 100%;
+      height: auto;
+      display: block;
+      break-inside: avoid;
+      margin-bottom: 2px;
+    }
+
     } /* end @layer components */
   </style>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -3731,6 +3744,31 @@
   </div>
 
 
+  <!-- ── LANDSCAPE: EXAMPLES ──────────────────────────────────── -->
+  <div class="page" tabindex="-1" id="photo-landscape-examples">
+    <div class="section-content">
+      <div class="section-label">Photography — Landscapes</div>
+      <h2 class="section-title">Examples</h2>
+      <div class="section-body">
+        <p>Architectural, environmental, and scenic photography of Hudson County. These images capture the built environment, public spaces, and civic character of the county. Use them across print collateral, digital backgrounds, and report covers.</p>
+      </div>
+    </div>
+    <div style="margin:0 32px 80px;">
+      <div class="masonry-grid">
+        <img src="images/dome-rotunda-courthouse.webp" alt="Dome rotunda courthouse interior">
+        <img src="images/scenic-city-skyline.webp" alt="City skyline">
+        <img src="images/jersey-city-brownstones.webp" alt="Jersey City brownstones">
+        <img src="images/old-building-interior-1.webp" alt="Historic building interior">
+        <img src="images/Scenic City Skyline 2.webp" alt="City skyline alternate">
+        <img src="images/old-building-interior-2.webp" alt="Historic building interior detail">
+        <img src="images/jersey-city-historic-brownstones-van-vorst-park 1 (1).webp" alt="Van Vorst Park brownstones">
+        <img src="images/pexels-alejandro.webp" alt="Street level neighborhood">
+        <img src="images/pexels-joel-zar-307187367-13570767 1.webp" alt="Urban landscape">
+      </div>
+    </div>
+  </div>
+
+
   <!-- ── LANDSCAPE: DOS ────────────────────────────────────────── -->
   <div class="page" tabindex="-1" id="photo-landscape-dos">
     <div class="photo-layout" style="display:grid; grid-template-columns:280px 1fr; gap:0 64px; padding:56px 48px 80px; box-sizing:border-box; align-items:start;">
@@ -3889,6 +3927,26 @@
   </div>
 
 
+  <!-- ── COMMUNITY: EXAMPLES ──────────────────────────────────── -->
+  <div class="page" tabindex="-1" id="photo-community-examples">
+    <div class="section-content">
+      <div class="section-label">Photography — Community</div>
+      <h2 class="section-title">Examples</h2>
+      <div class="section-body">
+        <p>Documentary photography of Hudson County residents, employees, and community members in their own environments. Candid, unposed, and rooted in real moments. These images set the standard for community photography across county communications.</p>
+      </div>
+    </div>
+    <div style="margin:0 32px 80px;">
+      <div class="masonry-grid">
+        <img src="images/community/craig-guy-1.webp" alt="Community member">
+        <img src="images/community/2CWDX7RSYFDZLK6PGRS5GXBDDE 1.webp" alt="Community event">
+        <img src="images/community/craig-guy-2.webp" alt="Community member">
+        <img src="images/community/2CWDX7RSYFDZLK6PGRS5GXBDDE 2-1.webp" alt="Community gathering">
+      </div>
+    </div>
+  </div>
+
+
   <!-- ── COMMUNITY: DOS ────────────────────────────────────────── -->
   <div class="page" tabindex="-1" id="photo-community-dos">
     <div class="photo-layout" style="display:grid; grid-template-columns:280px 1fr; gap:0 64px; padding:56px 48px 80px; box-sizing:border-box; align-items:start;">
@@ -3914,7 +3972,17 @@
         </div>
 
         <div style="padding-bottom:40px;">
-          <div style="height:240px; background-image:url('images/pexels-mathias.webp'); background-size:cover; background-position:center; margin-bottom:14px;"></div>
+          <div style="height:240px; background-image:url('images/community/craig-guy-2.webp'); background-size:cover; background-position:center 30%; margin-bottom:14px;"></div>
+          <div style="display:flex; align-items:flex-start; gap:10px;">
+            <div style="width:20px; height:20px; background:var(--green); border-radius:50%; flex-shrink:0; display:flex; align-items:center; justify-content:center; margin-top:1px;">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+            </div>
+            <div style="font-size:13px; color:var(--charcoal); line-height:1.5;">Include the full age spectrum of the county — children, working adults, and seniors are all part of the story.</div>
+          </div>
+        </div>
+
+        <div style="padding-bottom:40px;">
+          <div style="height:240px; background-image:url('images/community/2CWDX7RSYFDZLK6PGRS5GXBDDE 1.webp'); background-size:cover; background-position:center; margin-bottom:14px;"></div>
           <div style="display:flex; align-items:flex-start; gap:10px;">
             <div style="width:20px; height:20px; background:var(--green); border-radius:50%; flex-shrink:0; display:flex; align-items:center; justify-content:center; margin-top:1px;">
               <svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
@@ -3924,42 +3992,12 @@
         </div>
 
         <div style="padding-bottom:40px;">
-          <div style="height:240px; background-image:url('images/pexels-greg.webp'); background-size:cover; background-position:center; margin-bottom:14px;"></div>
+          <div style="height:240px; background-image:url('images/community/2CWDX7RSYFDZLK6PGRS5GXBDDE 2-1.webp'); background-size:cover; background-position:center; margin-bottom:14px;"></div>
           <div style="display:flex; align-items:flex-start; gap:10px;">
             <div style="width:20px; height:20px; background:var(--green); border-radius:50%; flex-shrink:0; display:flex; align-items:center; justify-content:center; margin-top:1px;">
               <svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
             </div>
-            <div style="font-size:13px; color:var(--charcoal); line-height:1.5;">Prioritize connection and candid interaction over polished portraiture.</div>
-          </div>
-        </div>
-
-        <div style="padding-bottom:40px;">
-          <div style="height:240px; background-image:url('images/pexels-juan.webp'); background-size:cover; background-position:center; margin-bottom:14px;"></div>
-          <div style="display:flex; align-items:flex-start; gap:10px;">
-            <div style="width:20px; height:20px; background:var(--green); border-radius:50%; flex-shrink:0; display:flex; align-items:center; justify-content:center; margin-top:1px;">
-              <svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
-            </div>
-            <div style="font-size:13px; color:var(--charcoal); line-height:1.5;">Show community members in their own environments, parks, streets, community centers, transit.</div>
-          </div>
-        </div>
-
-        <div style="padding-bottom:40px;">
-          <div style="height:240px; background-image:url('images/pexels-alejandro.webp'); background-size:cover; background-position:center; margin-bottom:14px;"></div>
-          <div style="display:flex; align-items:flex-start; gap:10px;">
-            <div style="width:20px; height:20px; background:var(--green); border-radius:50%; flex-shrink:0; display:flex; align-items:center; justify-content:center; margin-top:1px;">
-              <svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
-            </div>
-            <div style="font-size:13px; color:var(--charcoal); line-height:1.5;">Let natural light and environment define the mood rather than studio setups.</div>
-          </div>
-        </div>
-
-        <div style="padding-bottom:40px;">
-          <div style="height:240px; background-image:url('images/community/craig-guy-2.webp'); background-size:cover; background-position:center 30%; margin-bottom:14px;"></div>
-          <div style="display:flex; align-items:flex-start; gap:10px;">
-            <div style="width:20px; height:20px; background:var(--green); border-radius:50%; flex-shrink:0; display:flex; align-items:center; justify-content:center; margin-top:1px;">
-              <svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
-            </div>
-            <div style="font-size:13px; color:var(--charcoal); line-height:1.5;">Include the full age spectrum of the county, children, working adults, and seniors are all part of the story.</div>
+            <div style="font-size:13px; color:var(--charcoal); line-height:1.5;">Show community members in their own environments — parks, streets, community centers, transit.</div>
           </div>
         </div>
 
@@ -4071,7 +4109,7 @@
 
     <div class="section-content">
       <div class="section-label">Applications</div>
-      <h2 class="section-title">Swag samples</h2>
+      <h2 class="section-title">Swag</h2>
       <div class="section-body">
         <p>Branded merchandise extends the Hudson County identity into everyday objects. From staff apparel to community giveaways, each item should carry the mark with the same consistency and intent applied across all other surfaces. The identity should feel considered, not printed as an afterthought.</p>
         <p>The examples below document approved swag applications. Imagery will be updated as samples are produced.</p>
@@ -4094,26 +4132,59 @@
   </div>
 
 
-  <!-- ── COMMUNITY ────────────────────────────────────────────── -->
-  <div class="page" tabindex="-1" id="app-wild">
+  <!-- ── SIGNAGE ───────────────────────────────────────────────── -->
+  <div class="page" tabindex="-1" id="app-signage">
 
     <div class="section-content">
       <div class="section-label">Applications</div>
-      <h2 class="section-title">Community</h2>
+      <h2 class="section-title">Signage</h2>
       <div class="section-body">
-        <p>Hudson County residents and the brand in real-world context. Community events, signage in the field, and the identity as it lives across surfaces and scales. These images document the mark doing its job.</p>
+        <p>The brand applied to environmental and physical signage — bus shelters, park signs, event displays, and civic installations. These images document how the identity performs at scale in real spaces.</p>
+      </div>
+    </div>
+
+    <div style="margin:0 32px 80px;">
+      <div class="masonry-grid">
+        <img src="images/Brand in action/signage/6.webp" alt="Signage in context">
+        <img src="images/Brand in action/signage/hudson-flag-teal.webp" alt="Hudson County flag teal">
+        <img src="images/Brand in action/signage/Slide 16_9 - 117.webp" alt="Signage application">
+      </div>
+    </div>
+
+  </div>
+
+
+  <!-- ── DIGITAL MEDIA ──────────────────────────────────────────── -->
+  <div class="page" tabindex="-1" id="app-digital">
+
+    <div class="section-content">
+      <div class="section-label">Applications</div>
+      <h2 class="section-title">Digital media</h2>
+      <div class="section-body">
+        <p>Social media graphics, digital banners, email headers, and web assets. The brand applied across owned digital channels. Examples will be added as digital templates are produced.</p>
       </div>
     </div>
 
     <div style="margin:0 32px 80px;">
       <div class="app-img-grid" style="display:grid; grid-template-columns:repeat(3, 1fr); gap:2px; background:var(--light-gray);">
-        <div style="aspect-ratio:4/3; background-image:url('images/community/2CWDX7RSYFDZLK6PGRS5GXBDDE 1.webp'); background-size:cover; background-position:center;"></div>
-        <div style="aspect-ratio:4/3; background-image:url('images/community/2CWDX7RSYFDZLK6PGRS5GXBDDE 2-1.webp'); background-size:cover; background-position:center;"></div>
-        <div style="aspect-ratio:4/3; background-image:url('images/community/craig-guy-1.webp'); background-size:cover; background-position:center top;"></div>
-        <div style="aspect-ratio:4/3; background-image:url('images/community/craig-guy-2.webp'); background-size:cover; background-position:center;"></div>
-        <div style="aspect-ratio:4/3; background-image:url('images/Brand in action/signage/6.webp'); background-size:cover; background-position:center;"></div>
-        <div style="aspect-ratio:4/3; background-image:url('images/Brand in action/signage/Slide 16_9 - 117.webp'); background-size:cover; background-position:center;"></div>
-        <div style="aspect-ratio:4/3; background-image:url('images/Brand in action/signage/hudson-flag-teal.webp'); background-size:cover; background-position:center;"></div>
+        <div style="background:var(--white); aspect-ratio:16/9; display:flex; align-items:center; justify-content:center;">
+          <div style="font-size:11px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--charcoal); opacity:0.3;">Coming soon</div>
+        </div>
+        <div style="background:var(--white); aspect-ratio:16/9; display:flex; align-items:center; justify-content:center;">
+          <div style="font-size:11px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--charcoal); opacity:0.3;">Coming soon</div>
+        </div>
+        <div style="background:var(--white); aspect-ratio:16/9; display:flex; align-items:center; justify-content:center;">
+          <div style="font-size:11px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--charcoal); opacity:0.3;">Coming soon</div>
+        </div>
+        <div style="background:var(--white); aspect-ratio:16/9; display:flex; align-items:center; justify-content:center;">
+          <div style="font-size:11px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--charcoal); opacity:0.3;">Coming soon</div>
+        </div>
+        <div style="background:var(--white); aspect-ratio:16/9; display:flex; align-items:center; justify-content:center;">
+          <div style="font-size:11px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--charcoal); opacity:0.3;">Coming soon</div>
+        </div>
+        <div style="background:var(--white); aspect-ratio:16/9; display:flex; align-items:center; justify-content:center;">
+          <div style="font-size:11px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--charcoal); opacity:0.3;">Coming soon</div>
+        </div>
       </div>
     </div>
 
