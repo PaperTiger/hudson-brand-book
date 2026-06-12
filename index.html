@@ -4,11 +4,22 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Brand Identity</title><!-- set by brand.js -->
-  <!-- Critical: hide all pages immediately before Tailwind CDN processes -->
+  <!-- Critical: synchronous layout styles applied before Tailwind CDN processes.
+       Without these, the initially-active page reflows when CDN injects its styles,
+       causing scroll position bugs (page height changes while user is on it). -->
   <style>
+    /* Hide all pages; show only the active one */
     .page { display: none; }
     .page.active { display: block; }
     .cover-page.active { display: flex; }
+
+    /* Establish the flex shell so the active page already has the right
+       available width before CDN processes — prevents scroll-breaking reflow */
+    body { display: flex; min-height: 100dvh; overflow-x: hidden; }
+    .sidebar { width: var(--sidebar-w, 248px); position: fixed; top: 0; left: 0;
+               height: 100dvh; z-index: 200; }
+    .main { margin-left: var(--sidebar-w, 248px); flex: 1; min-height: 100dvh; }
+    .section-content { max-width: 900px; }
   </style>
 
   <script src="https://cdn.tailwindcss.com"></script>
