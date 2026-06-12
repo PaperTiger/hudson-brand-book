@@ -257,7 +257,7 @@ function injectFonts() {
 
 /* Render sidebar navigation from BRAND.nav */
 function renderNav() {
-  const CHEVRON = `<svg class="nav-chevron" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="m6 9l6 6l6-6"/></svg>`;
+  const CHEVRON = `<svg class="nav-chevron" aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="m6 9l6 6l6-6"/></svg>`;
 
   const html = BRAND.nav.map(section => {
     const items = section.items.map(item => {
@@ -267,7 +267,7 @@ function renderNav() {
         ).join("");
         return `
         <div class="nav-expandable" id="${item.groupId}">
-          <a class="nav-link nav-parent" href="#${item.id}" data-target="${item.id}">
+          <a class="nav-link nav-parent" href="#${item.id}" data-target="${item.id}" aria-expanded="false">
             ${item.label}
             ${CHEVRON}
           </a>
