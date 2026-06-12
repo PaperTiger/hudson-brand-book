@@ -258,8 +258,9 @@ function injectFonts() {
 /* Render sidebar navigation from BRAND.nav */
 function renderNav() {
   const CHEVRON = `<svg class="nav-chevron" aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="m6 9l6 6l6-6"/></svg>`;
+  const SECTION_CHEVRON = `<svg class="nav-section-chevron" aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="m6 9l6 6l6-6"/></svg>`;
 
-  const html = BRAND.nav.map(section => {
+  const html = BRAND.nav.map((section, sIdx) => {
     const items = section.items.map(item => {
       if (item.children) {
         const children = item.children.map(c =>
@@ -279,15 +280,44 @@ function renderNav() {
       return `<a class="nav-link" href="#${item.id}" data-target="${item.id}">${item.label}</a>`;
     }).join("");
 
+    // First section (Logo & mark) open by default on mobile
+    const openByDefault = sIdx === 0 ? ' open' : '';
     return `
-    <div class="nav-group">
-      <div class="nav-group-header">${section.group}</div>
-      ${items}
+    <div class="nav-group${openByDefault}" data-nav-section="${sIdx}">
+      <div class="nav-group-header" role="button" aria-expanded="${sIdx === 0 ? 'true' : 'false'}">
+        ${section.group}
+        ${SECTION_CHEVRON}
+      </div>
+      <div class="nav-group-items">
+        ${items}
+      </div>
     </div>`;
   }).join("");
 
   const container = document.getElementById("nav-groups");
-  if (container) container.innerHTML = html;
+  if (container) {
+    container.innerHTML = html;
+    initNavSectionToggles();
+  }
+}
+
+function initNavSectionToggles() {
+  document.querySelectorAll('.nav-group-header[role="button"]').forEach(header => {
+    header.addEventListener('click', function() {
+      if (window.innerWidth > 768) return;
+      const group = this.closest('.nav-group');
+      const isOpen = group.classList.contains('open');
+      document.querySelectorAll('.nav-group').forEach(g => {
+        g.classList.remove('open');
+        const h = g.querySelector('.nav-group-header[role="button"]');
+        if (h) h.setAttribute('aria-expanded', 'false');
+      });
+      if (!isOpen) {
+        group.classList.add('open');
+        this.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
 }
 
 

@@ -75,7 +75,28 @@
     @media (max-width: 768px) {
       .mobile-header { display: flex; }
       .sidebar-brand { padding: 20px !important; }
-      .nav-group-header { padding: 0 20px 8px !important; }
+      .nav-group-header {
+        padding: 12px 20px !important;
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        cursor: pointer !important;
+        user-select: none !important;
+      }
+      .nav-section-chevron {
+        width: 16px; height: 16px;
+        color: var(--charcoal);
+        flex-shrink: 0;
+        transition: transform 0.2s ease;
+        transform: rotate(-90deg);
+      }
+      .nav-group.open .nav-section-chevron { transform: rotate(0deg); }
+      .nav-group-items {
+        overflow: hidden;
+        max-height: 0;
+        transition: max-height 0.25s ease;
+      }
+      .nav-group.open .nav-group-items { max-height: 800px; }
       .nav-link { padding: 8px 20px !important; }
 
       .sidebar {
@@ -123,7 +144,7 @@
       .fg-overview-grid {
         display: flex !important;
         flex-direction: column !important;
-        min-height: calc(100vh - 56px) !important;
+        min-height: calc(100dvh - 56px) !important;
         padding: 24px 20px 40px !important;
       }
       .fg-overview-right    { order: 1; width: 100%; overflow: hidden; }
@@ -160,7 +181,7 @@
 
       /* ─── Intro pages ────────────────────────────────────────── */
       .intro-layout {
-        height: calc(100vh - 56px) !important;
+        height: calc(100dvh - 56px) !important;
         padding: 20px !important;
       }
 
@@ -178,7 +199,7 @@
       .portrait-intro {
         display: flex !important;
         flex-direction: column !important;
-        height: calc(100vh - 56px) !important;
+        height: calc(100dvh - 56px) !important;
       }
       .portrait-intro > div:first-child { padding: 20px !important; flex: 1; }
       .portrait-intro > div:last-child { display: none !important; }
@@ -228,6 +249,10 @@
       .page [style*="grid-template-columns:repeat(5,1fr)"] {
         grid-template-columns: repeat(2, 1fr) !important;
       }
+      /* Ensure combo section has bottom padding before page-nav */
+      .page > [style*="margin:0 32px 48px"][style*="border-top:1px solid var(--light-gray)"][style*="padding-top:48px"] {
+        padding-bottom: 32px !important;
+      }
 
       /* ─── Reduce inset section margins ─────────────────────── */
       .page > [style*="margin:0 32px"] {
@@ -235,14 +260,8 @@
         margin-right: 16px !important;
       }
 
-      /* ─── Clearspace diagram ────────────────────────────────── */
-      .cs-outer {
-        padding: 16px !important;
-        overflow-x: auto;
-      }
-
       /* ─── Page navigation ───────────────────────────────────── */
-      .page-nav        { padding: 0 16px !important; margin-top: 24px !important; }
+      .page-nav        { padding: 0 16px !important; margin-top: 48px !important; }
       .page-nav-label  { font-size: 14px !important; }
       .page-nav-dir    { font-size: 10px !important; }
       .page-nav-link   { gap: 4px !important; padding: 20px 0 !important; }
@@ -299,6 +318,74 @@
       /* ─── Favicon size swatches – allow wrapping ────────────── */
       .page [style*="gap:64px"][style*="flex-wrap:wrap"] {
         gap: 32px !important;
+      }
+
+      /* ─── Fix #3: Clearspace diagrams ──────────────────────── */
+      /* Don't create a scroll container — it causes iOS scroll delay  */
+      .cs-outer {
+        overflow: visible !important;
+        padding: 12px !important;
+        touch-action: pan-y;
+      }
+      /* Scale down large logos inside the diagram */
+      .cs-logo-box img { max-width: 100% !important; }
+      /* Stacked logo has min-height:200px which is too tall on mobile */
+      #logo-stacked .cs-logo-box img {
+        min-height: 0 !important;
+        max-height: 140px !important;
+      }
+
+      /* ─── Fix #3: Hero images fill properly ─────────────────── */
+      .page > [style*="padding:80px"] img {
+        max-width: 70% !important;
+        max-height: 160px !important;
+      }
+
+      /* ─── Fix #5: Type specimen — size number above specimen ─── */
+      .page [style*="align-items:baseline"][style*="flex-wrap:wrap"] {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 6px !important;
+      }
+      /* Prevent huge display text from overflowing its row */
+      .page [style*="font-size:96px"],
+      .page [style*="font-size:73px"],
+      .page [style*="font-size:64px"],
+      .page [style*="font-size:55px"],
+      .page [style*="font-size:48px"] {
+        font-size: clamp(36px, 12vw, 64px) !important;
+      }
+      .page [style*="font-size:42px"] { font-size: clamp(28px, 9vw, 42px) !important; }
+      .page [style*="font-size:32px"] { font-size: clamp(22px, 7vw, 32px) !important; }
+      /* Specimen section container margin */
+      .page > [style*="margin:0 32px 80px"] {
+        margin-left: 16px !important;
+        margin-right: 16px !important;
+      }
+
+      /* ─── Fix #4: Color pathways — sticky color name ─────────── */
+      .resp-inset { margin: 0 0 48px !important; }
+      /* Make pathway color name cells sticky on the left */
+      .resp-inset > div > div:nth-child(11n+1):not(:first-child) {
+        position: sticky;
+        left: 0;
+        background: #fff;
+        z-index: 2;
+        border-right: 1px solid var(--light-gray);
+        min-width: 80px;
+      }
+
+      /* ─── Fix #6: Size & scale horizontal scroll ─────────────── */
+      .fg-scale-layout {
+        display: flex !important;
+        flex-direction: column !important;
+        padding: 24px 0 48px !important;
+      }
+      .fg-scale-desc { padding: 0 20px; margin-bottom: 32px; }
+      .fg-scale-table-wrap {
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+        padding: 0 16px !important;
       }
     }
 
@@ -400,7 +487,7 @@
       background: var(--cream);
       color: var(--charcoal);
       display: flex;
-      min-height: 100vh;
+      min-height: 100dvh;
       -webkit-font-smoothing: antialiased;
     }
     a { text-decoration: none; color: inherit; }
@@ -409,7 +496,7 @@
     /* ─── Sidebar ────────────────────────────────────────────── */
     .sidebar {
       width: var(--sidebar-w);
-      height: 100vh;
+      height: 100dvh;
       position: fixed;
       top: 0; left: 0;
       background: var(--white);
@@ -512,7 +599,7 @@
     .main {
       margin-left: var(--sidebar-w);
       flex: 1;
-      min-height: 100vh;
+      min-height: 100dvh;
     }
 
     /* ─── Pages ──────────────────────────────────────────────── */
@@ -1068,7 +1155,7 @@
     .intro-layout {
       display: flex;
       flex-direction: column;
-      height: 100vh;
+      height: 100dvh;
       padding: 32px;
       box-sizing: border-box;
     }
@@ -1095,7 +1182,7 @@
     .intro-body p:last-child { margin-bottom: 0; }
     @media (max-width: 768px) {
       .intro-layout {
-        height: calc(100vh - 56px);
+        height: calc(100dvh - 56px);
         padding: 20px;
       }
       .intro-statement { font-size: clamp(20px, 5vw, 32px); margin-top: 32px; }
@@ -1104,8 +1191,8 @@
     .cover-page.active { display: flex; }
     .cover-page {
       background: var(--teal);
-      min-height: 100vh;
-      height: 100vh;
+      min-height: 100dvh;
+      height: 100dvh;
       flex-direction: column;
       padding: 32px;
       box-sizing: border-box;
@@ -1135,8 +1222,8 @@
     @media (max-width: 768px) {
       .cover-page {
         padding: 40px 20px 20px !important;
-        height: calc(100vh - 56px) !important;
-        min-height: calc(100vh - 56px) !important;
+        height: calc(100dvh - 56px) !important;
+        min-height: calc(100dvh - 56px) !important;
       }
       .cover-bottom {
         align-items: flex-end;
@@ -3203,7 +3290,7 @@
 
   <!-- ── FOUNDERS GROTESK OVERVIEW ────────────────────────── -->
   <div class="page" tabindex="-1" id="fg-overview">
-    <div class="fg-overview-grid" style="background:var(--green); min-height:100vh; padding:36px 48px 56px; box-sizing:border-box; display:grid; grid-template-columns:300px 1fr; grid-template-rows:1fr auto; gap:0 48px; overflow:hidden;">
+    <div class="fg-overview-grid" style="background:var(--green); min-height:100dvh; padding:36px 48px 56px; box-sizing:border-box; display:grid; grid-template-columns:300px 1fr; grid-template-rows:1fr auto; gap:0 48px; overflow:hidden;">
 
       <!-- Left col row 1: description pinned top -->
       <div class="fg-overview-left" style="grid-column:1; grid-row:1; font-family:'Founders Grotesk Text',sans-serif; font-size:14px; line-height:1.4; color:var(--teal); align-self:start;">
@@ -3825,7 +3912,7 @@
 
   <!-- ── PHOTOGRAPHY INTRO ────────────────────────────────────── -->
   <div class="page" tabindex="-1" id="photo-intro">
-    <div class="portrait-intro" style="display:grid; grid-template-columns:1fr 1fr; height:100vh; overflow:hidden;">
+    <div class="portrait-intro" style="display:grid; grid-template-columns:1fr 1fr; height:100dvh; overflow:hidden;">
       <!-- Left: intro content -->
       <div style="display:flex; flex-direction:column; padding:32px; box-sizing:border-box;">
         <div style="font-size:11px; font-weight:600; letter-spacing:0.13em; text-transform:uppercase; color:var(--charcoal);">Photography</div>
@@ -4180,7 +4267,7 @@
 
   <!-- ── APPLICATION INTRODUCTION ────────────────────────────── -->
   <div class="page" tabindex="-1" id="app-intro">
-    <div class="portrait-intro" style="display:grid; grid-template-columns:1fr 1fr; height:100vh; overflow:hidden;">
+    <div class="portrait-intro" style="display:grid; grid-template-columns:1fr 1fr; height:100dvh; overflow:hidden;">
       <div style="display:flex; flex-direction:column; padding:32px; box-sizing:border-box;">
         <div style="font-size:11px; font-weight:600; letter-spacing:0.13em; text-transform:uppercase; color:var(--charcoal);">Applications</div>
         <p style="font-family:'Founders Grotesk',sans-serif; font-weight:400; font-size:clamp(24px,3.2vw,48px); line-height:1.0; letter-spacing:-0.02em; color:var(--charcoal); max-width:720px; margin:48px 0 0;">Every surface. Every scale.</p>
@@ -4313,7 +4400,7 @@
 
   <!-- ── ICONOGRAPHY INTRO ─────────────────────────────────── -->
   <div class="page" tabindex="-1" id="icon-intro">
-    <div class="portrait-intro" style="display:grid; grid-template-columns:1fr 1fr; height:100vh; overflow:hidden;">
+    <div class="portrait-intro" style="display:grid; grid-template-columns:1fr 1fr; height:100dvh; overflow:hidden;">
       <div style="display:flex; flex-direction:column; padding:32px; box-sizing:border-box;">
         <div style="font-size:11px; font-weight:600; letter-spacing:0.13em; text-transform:uppercase; color:var(--charcoal);">Iconography</div>
         <p style="font-family:'Founders Grotesk',sans-serif; font-weight:400; font-size:clamp(24px,3.2vw,48px); line-height:1.0; letter-spacing:-0.02em; color:var(--charcoal); max-width:720px; margin:48px 0 0;">Inspired by our logo and sans-serif typeface Founders, our iconography utilizes simple forms to efficiently communicate ideas.</p>
@@ -4438,7 +4525,7 @@
 <!-- ══════════════════════════════════════════════════════════
      JAVASCRIPT, Scroll-driven nav + smooth scroll
 ══════════════════════════════════════════════════════════════ -->
-<script src="brand.js?v=6"></script>
+<script src="brand.js?v=8"></script>
 
 <script>
 (function () {
@@ -4503,6 +4590,23 @@
     if (fgChildIds.has(targetId)) setFgExpanded(true);
     if (fullLogoChildIds.has(targetId)) setFullLogoExpanded(true);
     if (hcnjChildIds.has(targetId)) setHcnjExpanded(true);
+    // On mobile, open the section containing the active nav link
+    if (window.innerWidth <= 768) {
+      const activeNavLink = document.querySelector('.nav-link[data-target="' + targetId + '"]');
+      if (activeNavLink) {
+        const section = activeNavLink.closest('.nav-group');
+        if (section) {
+          document.querySelectorAll('.nav-group').forEach(g => {
+            g.classList.remove('open');
+            const h = g.querySelector('.nav-group-header[role="button"]');
+            if (h) h.setAttribute('aria-expanded', 'false');
+          });
+          section.classList.add('open');
+          const h = section.querySelector('.nav-group-header[role="button"]');
+          if (h) h.setAttribute('aria-expanded', 'true');
+        }
+      }
+    }
     window.scrollTo(0, 0);
     if (pushState) history.pushState({ page: targetId }, '', '#' + targetId);
     document.body.classList.toggle('on-home', targetId === 'home');
