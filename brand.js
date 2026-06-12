@@ -1,85 +1,99 @@
-/* ─────────────────────────────────────────────────────────────────
-   Hudson County Brand Configuration
-   Single source of truth for tokens, typography, color data, and nav.
-───────────────────────────────────────────────────────────────── */
+/* ═══════════════════════════════════════════════════════════════════
+   BRAND BOOK — CONFIGURATION
+   ───────────────────────────────────────────────────────────────────
+   Start here. Everything below drives the brand book automatically.
+   Work through each section in order:
+
+     1. meta        — org name, document title, logo paths
+     2. tokens      — CSS custom properties (colors used in CSS/inline styles)
+     3. typography  — font files and families
+     4. colors      — color palette cards (primary + secondary)
+     5. specimens   — sample text used on the Typography pages
+     6. nav         — sidebar navigation structure
+
+   After configuring, replace each page's content stub in index.html
+   with real content. See SETUP.md for a step-by-step guide.
+═══════════════════════════════════════════════════════════════════ */
+
 const BRAND = {
 
+  /* ── 1. Meta ─────────────────────────────────────────────────
+     nameLine1 / nameLine2 split across two lines on the cover.
+     sidebarLogoImage: SVG shown in the sidebar header.
+     coverSealImage:   SVG shown on the cover page.
+  ──────────────────────────────────────────────────────────────── */
   meta: {
-    county:           "Hudson County, New Jersey",
-    nameLine1:        "Hudson County,",
-    nameLine2:        "New Jersey",
+    county:           "[Org Name]",
+    nameLine1:        "[Org Name]",
+    nameLine2:        "",
     title:            "Brand guidelines",
     version:          "Version 1.0",
-    date:             "June 2026",
-    preparedBy:       "Paper Tiger",
-    sidebarLogoImage: "images/logos/HCNJ_text_deep-teal.svg",
-    coverSealImage:   "images/logos/HCNJ_county-seal_deep-teal.svg",
+    date:             "2025",
+    preparedBy:       "[Studio Name]",
+    sidebarLogoImage: "images/logos/logo-sidebar.svg",
+    coverSealImage:   "images/logos/logo-cover.svg",
   },
 
-  /* ── Type specimen copy ───────────────────────────────────── */
-  specimens: {
-    // Display — Founders Grotesk Condensed Bold
-    display96:  "HCNJ",
-    display73:  "Hudson County",
-    display64:  "Government that works",
-    display48:  "For every community in New Jersey",
-    // Headlines — Founders Grotesk Semibold
-    headline42: "Essential county services",
-    headline32: "Services for 700,000 residents",
-    headline24: "Connecting people to their county government",
-    headline21: "Accessible government starts with clear communication",
-    // Body — Founders Grotesk Text (and fallback fonts)
-    body18:     "Hudson County provides essential services to more than 700,000 residents.",
-    body16:     "Hudson County provides essential services to more than 700,000 residents across 12 municipalities. Every document, every sign, every screen is a chance to make that relationship clearer and more trusted.",
-    body14:     "Hudson County provides essential services to more than 700,000 residents across 12 municipalities. Every document, every sign, every screen is a chance to make that relationship clearer and more trusted. The brand must function at every size, from street signage to digital interfaces.",
-    body12:     "Caption and supporting text. Hudson County provides essential services to more than 700,000 residents across 12 municipalities.",
-    sentence:   "Hudson County provides essential services to more than 700,000 residents across 12 municipalities.",
-    // "What to avoid" page specimens
-    avoidText:      "Hudson County is a county in the U.S. state of New Jersey, its smallest and most densely populated.",
-    avoidTextPart1: "Hudson County",
-    avoidTextPart2: "is a county in the U.S. state of New Jersey, its smallest and most densely populated.",
-    // Fallback font sections (sentence + generic note)
-    fallbackGoogle16: "Hudson County provides essential services to more than 700,000 residents across 12 municipalities. When brand fonts are unavailable, DM Sans provides a clean, modern alternative with excellent on-screen legibility.",
-    fallbackSystem16: "Hudson County provides essential services to more than 700,000 residents across 12 municipalities. When brand fonts are unavailable, Arial maintains clarity and legibility across all system environments.",
-  },
-
-  /* ── CSS custom properties ────────────────────────────────── */
+  /* ── 2. Tokens ────────────────────────────────────────────────
+     These become CSS custom properties on :root, e.g. var(--primary).
+     Used throughout the CSS and inline styles in index.html.
+     Keep the key names or do a find-replace on index.html if you
+     rename them.
+  ──────────────────────────────────────────────────────────────── */
   tokens: {
-    green:        "#003230",
-    teal:         "#74FBD7",
-    charcoal:     "#000913",
-    cream:        "#FAFAFA",
-    "warm-gray":  "#6B6B6B",
-    "light-gray": "#E3E3E3",
+    /* Core brand colors — update these first */
+    primary:      "#003230",   /* dark brand color (backgrounds, headers) */
+    accent:       "#74FBD7",   /* light accent (highlights, links) */
+    charcoal:     "#000913",   /* near-black for body text */
+    cream:        "#FAFAFA",   /* near-white backgrounds */
+    "warm-gray":  "#6B6B6B",   /* secondary text */
+    "light-gray": "#E3E3E3",   /* borders, dividers */
     white:        "#FFFFFF",
+
+    /* Secondary palette — used in color combination examples */
     blue:         "#0004F5",
     yellow:       "#EBE825",
     purple:       "#6B1262",
     lime:         "#8AF161",
     amaranth:     "#EB254D",
+
+    /* Alias — keep in sync with 'primary' above */
     "deep-teal":  "#003230",
+    green:        "#003230",
+    teal:         "#74FBD7",
   },
 
-  /* ── Font faces ───────────────────────────────────────────── */
+  /* ── 3. Typography ────────────────────────────────────────────
+     Add one entry per font file in the fonts/ folder.
+     family: CSS font-family name used in stylesheets.
+     weight: numeric CSS font-weight.
+     file:   path relative to index.html.
+  ──────────────────────────────────────────────────────────────── */
   typography: {
     fonts: [
-      { family: "Founders Grotesk Condensed", weight: 700, file: "fonts/founders-grotesk-condensed-bold.woff2" },
-      { family: "Founders Grotesk",           weight: 500, file: "fonts/founders-grotesk-medium.woff2" },
-      { family: "Founders Grotesk",           weight: 600, file: "fonts/founders-grotesk-semibold.woff2" },
-      { family: "Founders Grotesk Text",      weight: 400, file: "fonts/founders-grotesk-text-regular.woff2" },
-      { family: "Founders Grotesk Text",      weight: 600, file: "fonts/founders-grotesk-text-semibold.woff2" },
+      { family: "Brand Font Condensed", weight: 700, file: "fonts/brand-condensed-bold.woff2" },
+      { family: "Brand Font",           weight: 500, file: "fonts/brand-medium.woff2" },
+      { family: "Brand Font",           weight: 600, file: "fonts/brand-semibold.woff2" },
+      { family: "Brand Font Text",      weight: 400, file: "fonts/brand-text-regular.woff2" },
+      { family: "Brand Font Text",      weight: 600, file: "fonts/brand-text-semibold.woff2" },
     ],
   },
 
-  /* ── Color palettes ───────────────────────────────────────── */
+  /* ── 4. Colors ────────────────────────────────────────────────
+     Drives the color palette card pages (Primary palette, Secondary palette).
+     rgb:  [R, G, B]
+     cmyk: [C, M, Y, K]
+     textColor: hex used for text/dots on top of the swatch.
+     outline:   optional box-shadow for light swatches that need a border.
+  ──────────────────────────────────────────────────────────────── */
   colors: {
     primary: [
       {
-        name: "Liberty Green", hex: "#74FBD7", textColor: "#000913",
+        name: "Accent", hex: "#74FBD7", textColor: "#000913",
         rgb: [116, 251, 215], cmyk: [54, 0, 14, 2],
       },
       {
-        name: "Deep Teal", hex: "#003230", textColor: "#74FBD7",
+        name: "Primary", hex: "#003230", textColor: "#74FBD7",
         rgb: [0, 50, 48], cmyk: [100, 0, 4, 80],
       },
       {
@@ -87,40 +101,71 @@ const BRAND = {
         rgb: [0, 9, 19], cmyk: [100, 53, 0, 93],
       },
       {
-        name: "white-01", hex: "#FFFFFF", textColor: "#000913",
+        name: "White", hex: "#FFFFFF", textColor: "#000913",
         rgb: [255, 255, 255], cmyk: [0, 0, 0, 0],
+        outline: "1px solid #C8C8C8",
       },
     ],
     secondary: [
       {
-        name: "Hudson Blue", hex: "#0004F5", textColor: "#74FBD7",
-        rgb: [0, 4, 245], cmyk: [100, 98, 0, 4],
+        name: "Blue",     hex: "#0004F5", textColor: "#74FBD7",
+        rgb: [0, 4, 245],    cmyk: [100, 98, 0, 4],
       },
       {
-        name: "Purple", hex: "#6B1262", textColor: "#FFFFFF",
-        rgb: [107, 18, 98], cmyk: [0, 83, 8, 58],
+        name: "Purple",   hex: "#6B1262", textColor: "#FFFFFF",
+        rgb: [107, 18, 98],  cmyk: [0, 83, 8, 58],
       },
       {
-        name: "Flag Yellow", hex: "#EBE825", textColor: "#000913",
+        name: "Yellow",   hex: "#EBE825", textColor: "#000913",
         rgb: [235, 232, 37], cmyk: [0, 1, 84, 8],
       },
       {
-        name: "Green", hex: "#8AF161", textColor: "#000913",
+        name: "Green",    hex: "#8AF161", textColor: "#000913",
         rgb: [138, 241, 97], cmyk: [43, 0, 60, 5],
       },
       {
-        name: "Amaranth", hex: "#EB254D", textColor: "#000913",
-        rgb: [235, 37, 77], cmyk: [0, 84, 67, 8],
+        name: "Red",      hex: "#EB254D", textColor: "#000913",
+        rgb: [235, 37, 77],  cmyk: [0, 84, 67, 8],
       },
       {
-        name: "Gray", hex: "#E3E3E3", textColor: "#000913",
+        name: "Gray",     hex: "#E3E3E3", textColor: "#000913",
         rgb: [227, 227, 227], cmyk: [0, 0, 0, 11],
         outline: "1px solid #C8C8C8",
       },
     ],
   },
 
-  /* ── Navigation structure ─────────────────────────────────── */
+  /* ── 5. Specimens ─────────────────────────────────────────────
+     Sample text rendered on the Typography pages via data-brand="specimens.x".
+     Replace with org-relevant copy — a tagline, mission statement, etc.
+  ──────────────────────────────────────────────────────────────── */
+  specimens: {
+    display96:  "[ORG]",
+    display73:  "[Org Name]",
+    display64:  "[Primary tagline]",
+    display48:  "[Secondary tagline or descriptor]",
+    headline42: "[Section headline]",
+    headline32: "[Section subheadline]",
+    headline24: "[Supporting headline copy]",
+    headline21: "[Longer supporting headline copy that wraps]",
+    body18:     "[Org Name] provides [services] to [audience].",
+    body16:     "[Org Name] provides [services] to [audience]. Every document, every sign, every screen is a chance to make that relationship clearer and more trusted.",
+    body14:     "[Org Name] provides [services] to [audience]. Every document, every sign, every screen is a chance to make that relationship clearer and more trusted. The brand must function at every size, from street signage to digital interfaces.",
+    body12:     "Caption and supporting text. [Org Name] provides [services] to [audience].",
+    sentence:   "[Org Name] provides [services] to [audience].",
+    avoidText:      "[Sample sentence for the 'what to avoid' examples.]",
+    avoidTextPart1: "[Org Name]",
+    avoidTextPart2: "[rest of sample sentence for avoid examples.]",
+    fallbackGoogle16: "[Org Name] provides [services] to [audience]. When brand fonts are unavailable, [Google Font] provides a clean, modern alternative with excellent on-screen legibility.",
+    fallbackSystem16: "[Org Name] provides [services] to [audience]. When brand fonts are unavailable, Arial maintains clarity and legibility across all system environments.",
+  },
+
+  /* ── 6. Navigation ────────────────────────────────────────────
+     Drives the sidebar. Each group becomes a section header.
+     Items with children render as expandable dropdowns — you must
+     also register their groupId in the routing script in index.html
+     (see SETUP.md §6 for instructions).
+  ──────────────────────────────────────────────────────────────── */
   nav: [
     {
       group: "Visual identity",
@@ -170,12 +215,12 @@ const BRAND = {
       items: [
         { label: "Introduction", id: "type-intro" },
         {
-          label: "Founders Grotesk", id: "fg-overview",
+          label: "Brand typeface", id: "fg-overview",
           groupId: "nav-fg-group", subId: "nav-fg-sub",
           children: [
-            { label: "Overview",      id: "fg-overview" },
-            { label: "Usage",         id: "fg-usage" },
-            { label: "Type specimen", id: "fg-specimen" },
+            { label: "Overview",         id: "fg-overview" },
+            { label: "Usage",            id: "fg-usage" },
+            { label: "Type specimen",    id: "fg-specimen" },
             { label: "Size &amp; scale", id: "fg-scale" },
           ],
         },
@@ -295,7 +340,6 @@ function renderNav() {
       return `<a class="nav-link" href="#${item.id}" data-target="${item.id}">${item.label}</a>`;
     }).join("");
 
-    // First section (Logo & mark) open by default on mobile
     const openByDefault = sIdx === 0 ? ' open' : '';
     return `
     <div class="nav-group${openByDefault}" data-nav-section="${sIdx}">
@@ -390,7 +434,7 @@ function renderCoverMeta() {
 
 /* Fill data-brand (text) and data-brand-src (image src) from BRAND config */
 function renderContent() {
-  document.title = `${BRAND.meta.nameLine1} ${BRAND.meta.nameLine2}, Brand Identity`;
+  document.title = `${BRAND.meta.nameLine1} ${BRAND.meta.nameLine2} Brand Identity`;
 
   document.querySelectorAll('[data-brand-src]').forEach(el => {
     const val = resolveKey(el.getAttribute('data-brand-src'));
