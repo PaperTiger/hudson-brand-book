@@ -294,6 +294,7 @@
       /* ─── 5-col color combo swatches → 2-col ───────────────── */
       .page [style*="grid-template-columns:repeat(5,1fr)"] {
         grid-template-columns: repeat(2, 1fr) !important;
+        align-items: start !important;
       }
       /* Prevent images from blowing past the aspect-ratio:1 cell height */
       .page [style*="grid-template-columns:repeat(5,1fr)"] > div {
@@ -734,6 +735,12 @@
       font-family: 'Founders Grotesk Condensed', sans-serif;
       line-height: var(--lh-headline);
       @apply font-black text-[42px] tracking-[0.01em];
+    }
+
+    /* ─── 5-col combo grids: prevent last-row single item from
+         stretching taller than aspect-ratio:1 dictates ──────── */
+    .page [style*="grid-template-columns:repeat(5,1fr)"] {
+      align-items: start;
     }
 
     /* ─── Color Swatches ─────────────────────────────────────── */
