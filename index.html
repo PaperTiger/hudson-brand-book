@@ -141,7 +141,11 @@
       }
       .fg-scale-desc { margin-bottom: 40px; }
       .fg-scale-table-wrap { overflow-x: auto; }
-      .fg-scale-table-wrap > div { min-width: 540px; column-gap: 16px !important; }
+      .fg-scale-table-wrap > div {
+        grid-template-columns: 160px 72px 96px 160px 96px !important;
+        column-gap: 16px !important;
+        min-width: 600px;
+      }
 
       /* ─── What to avoid ─────────────────────────────────────── */
       .type-avoid-layout {
@@ -244,8 +248,10 @@
       .page-nav-link   { gap: 4px !important; padding: 20px 0 !important; }
 
       /* ─── Color palette grids ───────────────────────────────── */
-      #primary-palette-grid   { grid-template-columns: 1fr !important; }
-      #secondary-palette-grid { grid-template-columns: repeat(2, 1fr) !important; }
+      #primary-palette-grid   { grid-template-columns: 1fr !important; gap: 0 !important; }
+      #secondary-palette-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 0 !important; }
+      #primary-palette-grid > div,
+      #secondary-palette-grid > div { padding: 28px 24px !important; }
 
       /* ─── Color combinations page (3-col) → 1-col ──────────── */
       .combo-grid { grid-template-columns: 1fr !important; margin: 0 16px 48px !important; }
@@ -1128,7 +1134,7 @@
     }
     @media (max-width: 768px) {
       .cover-page {
-        padding: 20px !important;
+        padding: 40px 20px 20px !important;
         height: calc(100vh - 56px) !important;
         min-height: calc(100vh - 56px) !important;
       }
