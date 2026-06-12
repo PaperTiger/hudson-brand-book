@@ -5,11 +5,42 @@
 const BRAND = {
 
   meta: {
-    county:     "Hudson County, New Jersey",
-    title:      "Brand guidelines",
-    version:    "Version 1.0",
-    date:       "June 2026",
-    preparedBy: "Paper Tiger",
+    county:           "Hudson County, New Jersey",
+    nameLine1:        "Hudson County,",
+    nameLine2:        "New Jersey",
+    title:            "Brand guidelines",
+    version:          "Version 1.0",
+    date:             "June 2026",
+    preparedBy:       "Paper Tiger",
+    sidebarLogoImage: "images/logos/HCNJ_text_deep-teal.svg",
+    coverSealImage:   "images/logos/HCNJ_county-seal_deep-teal.svg",
+  },
+
+  /* ── Type specimen copy ───────────────────────────────────── */
+  specimens: {
+    // Display — Founders Grotesk Condensed Bold
+    display96:  "HCNJ",
+    display73:  "Hudson County",
+    display64:  "Government that works",
+    display48:  "For every community in New Jersey",
+    // Headlines — Founders Grotesk Semibold
+    headline42: "Essential county services",
+    headline32: "Services for 700,000 residents",
+    headline24: "Connecting people to their county government",
+    headline21: "Accessible government starts with clear communication",
+    // Body — Founders Grotesk Text (and fallback fonts)
+    body18:     "Hudson County provides essential services to more than 700,000 residents.",
+    body16:     "Hudson County provides essential services to more than 700,000 residents across 12 municipalities. Every document, every sign, every screen is a chance to make that relationship clearer and more trusted.",
+    body14:     "Hudson County provides essential services to more than 700,000 residents across 12 municipalities. Every document, every sign, every screen is a chance to make that relationship clearer and more trusted. The brand must function at every size, from street signage to digital interfaces.",
+    body12:     "Caption and supporting text. Hudson County provides essential services to more than 700,000 residents across 12 municipalities.",
+    sentence:   "Hudson County provides essential services to more than 700,000 residents across 12 municipalities.",
+    // "What to avoid" page specimens
+    avoidText:      "Hudson County is a county in the U.S. state of New Jersey, its smallest and most densely populated.",
+    avoidTextPart1: "Hudson County",
+    avoidTextPart2: "is a county in the U.S. state of New Jersey, its smallest and most densely populated.",
+    // Fallback font sections (sentence + generic note)
+    fallbackGoogle16: "Hudson County provides essential services to more than 700,000 residents across 12 municipalities. When brand fonts are unavailable, DM Sans provides a clean, modern alternative with excellent on-screen legibility.",
+    fallbackSystem16: "Hudson County provides essential services to more than 700,000 residents across 12 municipalities. When brand fonts are unavailable, Arial maintains clarity and legibility across all system environments.",
   },
 
   /* ── CSS custom properties ────────────────────────────────── */
@@ -190,6 +221,7 @@ const BRAND = {
   renderPalette("primary-palette-grid",   BRAND.colors.primary,   384);
   renderPalette("secondary-palette-grid", BRAND.colors.secondary, 336);
   renderCoverMeta();
+  renderContent();
 })();
 
 
@@ -307,4 +339,23 @@ function renderCoverMeta() {
     <div>${m.version}</div>
     <div>${m.date}</div>
     <div style="white-space:nowrap;">Prepared by ${m.preparedBy}</div>`;
+}
+
+/* Fill data-brand (text) and data-brand-src (image src) from BRAND config */
+function renderContent() {
+  document.title = `${BRAND.meta.nameLine1} ${BRAND.meta.nameLine2}, Brand Identity`;
+
+  document.querySelectorAll('[data-brand-src]').forEach(el => {
+    const val = resolveKey(el.getAttribute('data-brand-src'));
+    if (val) el.src = val;
+  });
+
+  document.querySelectorAll('[data-brand]').forEach(el => {
+    const val = resolveKey(el.getAttribute('data-brand'));
+    if (val !== undefined) el.textContent = val;
+  });
+}
+
+function resolveKey(path) {
+  return path.split('.').reduce((obj, k) => (obj != null ? obj[k] : undefined), BRAND);
 }
