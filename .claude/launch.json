@@ -3,8 +3,8 @@
   "configurations": [
     {
       "name": "brand-book",
-      "runtimeExecutable": "python3",
-      "runtimeArgs": ["-m", "http.server", "8743"],
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["serve", "-l", "8743", "/Users/jasondebiak/Library/Mobile Documents/com~apple~CloudDocs/1 Projects/Hudson County/hudson-brand-book"],
       "port": 8743
     }
   ]

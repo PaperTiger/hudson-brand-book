@@ -141,6 +141,7 @@
       }
       .fg-scale-desc { margin-bottom: 40px; }
       .fg-scale-table-wrap { overflow-x: auto; }
+      .fg-scale-table-wrap > div { min-width: 540px; column-gap: 16px !important; }
 
       /* ─── What to avoid ─────────────────────────────────────── */
       .type-avoid-layout {
@@ -191,6 +192,108 @@
 
       /* ─── Swag / In The Wild image grids ────────────────────── */
       .app-img-grid { grid-template-columns: 1fr 1fr !important; }
+
+      /* ─── Prevent root horizontal scroll ───────────────────── */
+      html, body { overflow-x: hidden; }
+
+      /* ─── Hero / banner areas ───────────────────────────────── */
+      .page > [style*="padding:80px"] {
+        padding: 32px 24px !important;
+        min-height: 220px !important;
+        overflow: hidden !important;
+      }
+      .page > [style*="padding:80px"] img {
+        max-width: 75% !important;
+        max-height: 180px !important;
+        width: auto !important;
+      }
+      /* H-logo mark 2-col hero cells */
+      .hlogo-2col > div {
+        padding: 40px 24px !important;
+        min-height: 180px !important;
+      }
+
+      /* ─── All inline 2-column grids → single column ─────────── */
+      .page [style*="grid-template-columns:1fr 1fr"],
+      .page [style*="grid-template-columns: 1fr 1fr"] {
+        grid-template-columns: 1fr !important;
+        gap: 24px !important;
+      }
+
+      /* ─── 5-col color combo swatches → 2-col ───────────────── */
+      .page [style*="grid-template-columns:repeat(5,1fr)"] {
+        grid-template-columns: repeat(2, 1fr) !important;
+      }
+
+      /* ─── Reduce inset section margins ─────────────────────── */
+      .page > [style*="margin:0 32px"] {
+        margin-left: 16px !important;
+        margin-right: 16px !important;
+      }
+
+      /* ─── Clearspace diagram ────────────────────────────────── */
+      .cs-outer {
+        padding: 16px !important;
+        overflow-x: auto;
+      }
+
+      /* ─── Page navigation ───────────────────────────────────── */
+      .page-nav        { padding: 0 16px !important; margin-top: 24px !important; }
+      .page-nav-label  { font-size: 14px !important; }
+      .page-nav-dir    { font-size: 10px !important; }
+      .page-nav-link   { gap: 4px !important; padding: 20px 0 !important; }
+
+      /* ─── Color palette grids ───────────────────────────────── */
+      #primary-palette-grid   { grid-template-columns: 1fr !important; }
+      #secondary-palette-grid { grid-template-columns: repeat(2, 1fr) !important; }
+
+      /* ─── Color combinations page (3-col) → 1-col ──────────── */
+      .combo-grid { grid-template-columns: 1fr !important; margin: 0 16px 48px !important; }
+
+      /* ─── Photo caption grids ───────────────────────────────── */
+      .page [style*="grid-template-columns:1fr 1fr; gap:0 16px"],
+      .page [style*="grid-template-columns: 1fr 1fr; gap:0 16px"] {
+        grid-template-columns: 1fr !important;
+        gap: 16px !important;
+      }
+
+      /* ─── Cover seal ────────────────────────────────────────── */
+      .cover-seal { height: clamp(90px, 25vw, 130px) !important; }
+
+      /* ─── Info cards (primary-use / min-size boxes) ─────────── */
+      .page [style*="border:1px solid var(--light-gray)"][style*="padding:32px"] {
+        padding: 20px !important;
+      }
+
+      /* ─── Clearspace padding inner boxes ────────────────────── */
+      .page [style*="padding:16px 20px"] {
+        padding: 12px 14px !important;
+      }
+
+      /* ─── color-pathways / app pages – large margin blocks ──── */
+      .page > [style*="margin:0 32px 80px"] {
+        margin-left: 16px !important;
+        margin-right: 16px !important;
+      }
+
+      /* ─── 280px+1fr two-col layouts (avatar, type, photo pages) */
+      .page > [style*="grid-template-columns:280px 1fr"],
+      .page > [style*="grid-template-columns: 280px 1fr"] {
+        grid-template-columns: 1fr !important;
+        gap: 0 !important;
+        padding: 32px 24px 48px !important;
+      }
+
+      /* ─── Avatar circles – scale down from 180px ───────────── */
+      .page [style*="width:180px"][style*="border-radius:50%"] {
+        width: clamp(80px, 22vw, 140px) !important;
+        height: clamp(80px, 22vw, 140px) !important;
+      }
+
+      /* ─── Favicon size swatches – allow wrapping ────────────── */
+      .page [style*="gap:64px"][style*="flex-wrap:wrap"] {
+        gap: 32px !important;
+      }
     }
 
     /* ─── Tablet (769–1024px) ───────────────────────────────── */
