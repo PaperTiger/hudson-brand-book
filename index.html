@@ -509,101 +509,65 @@
     .sidebar {
       width: var(--sidebar-w);
       height: 100dvh;
-      position: fixed;
-      top: 0; left: 0;
       background: var(--white);
       border-right: 1px solid var(--light-gray);
-      overflow-y: auto;
-      overflow-x: hidden;
-      z-index: 200;
-      display: flex;
-      flex-direction: column;
+      @apply fixed top-0 left-0 overflow-y-auto overflow-x-hidden z-[200] flex flex-col;
     }
     .sidebar::-webkit-scrollbar { width: 4px; }
     .sidebar::-webkit-scrollbar-track { background: transparent; }
     .sidebar::-webkit-scrollbar-thumb { background: var(--light-gray); border-radius: 2px; }
 
     .sidebar-brand {
-      padding: 24px;
       border-bottom: 1px solid var(--light-gray);
-      flex-shrink: 0;
+      @apply p-6 flex-shrink-0;
     }
     .sidebar-wordmark {
       font-family: 'Founders Grotesk Condensed', sans-serif;
-      font-weight: 900;
-      font-size: 26px;
-      letter-spacing: 0.02em;
       color: var(--green);
-      line-height: 1;
-      display: block;
+      @apply font-black text-[26px] tracking-[0.02em] leading-none block;
     }
     .sidebar-label {
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
       color: var(--charcoal);
-      margin-top: 5px;
+      @apply text-[11px] font-medium tracking-[0.12em] uppercase mt-[5px];
     }
 
     .nav-group {
-      padding: 14px 0;
       border-bottom: 1px solid var(--light-gray);
+      @apply py-[14px];
     }
     .nav-group-header {
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.13em;
-      text-transform: uppercase;
       color: var(--charcoal);
-      padding: 0 24px 8px;
+      @apply text-[11px] font-semibold tracking-[0.13em] uppercase px-6 pb-2;
     }
-    .nav-section-chevron { display: none; }
+    .nav-section-chevron { @apply hidden; }
     .nav-link {
-      display: block;
-      padding: 8px 24px;
-      font-size: 13px;
-      font-weight: 400;
       color: var(--charcoal);
       border-left: 3px solid transparent;
       transition: background 0.12s var(--ease), color 0.12s var(--ease), border-color 0.12s var(--ease);
-      cursor: pointer;
+      @apply block py-2 px-6 text-[13px] font-normal cursor-pointer;
     }
-    .nav-link:hover {
-      background: var(--nav-hover-bg);
-      color: var(--green);
-    }
+    .nav-link:hover { background: var(--nav-hover-bg); color: var(--green); }
     .nav-link.active {
       border-left-color: var(--green);
       color: var(--green);
-      font-weight: 500;
       background: var(--nav-active-bg);
+      @apply font-medium;
     }
 
     /* ─── Collapsible nav sub-sections ──────────────────────── */
-    .nav-expandable { position: relative; }
-    .nav-parent {
-      display: flex !important;
-      justify-content: space-between;
-      align-items: center;
-    }
+    .nav-expandable { @apply relative; }
+    .nav-parent { @apply flex justify-between items-center; }
     .nav-chevron {
-      flex-shrink: 0;
-      width: 14px;
-      height: 14px;
       color: currentColor;
       transition: transform 0.18s ease;
-      margin-right: 2px;
       transform: rotate(-90deg);
-      cursor: pointer;
+      @apply flex-shrink-0 w-[14px] h-[14px] mr-[2px] cursor-pointer;
     }
-    .nav-expandable.open > .nav-parent .nav-chevron {
-      transform: rotate(0deg);
-    }
+    .nav-expandable.open > .nav-parent .nav-chevron { transform: rotate(0deg); }
     .nav-sub {
-      overflow: hidden;
       max-height: 0;
       transition: max-height 0.22s ease;
+      @apply overflow-hidden;
     }
     .nav-sub.open { max-height: 500px; }
     .nav-child { padding-left: 36px !important; font-size: 12px !important; }
@@ -611,61 +575,41 @@
     /* ─── Main ───────────────────────────────────────────────── */
     .main {
       margin-left: var(--sidebar-w);
-      flex: 1;
       min-height: 100dvh;
+      @apply flex-1;
     }
 
     /* ─── Pages ──────────────────────────────────────────────── */
-    .page { display: none; }
+    .page { @apply hidden; }
     .page[id] { outline: none; }
-    .page.active { display: block; }
+    .page.active { @apply block; }
 
     /* ─── Bottom page navigation ─────────────────────────────── */
     .page-nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: stretch;
       border-top: 1px solid var(--light-gray);
-      padding: 0 48px;
-      margin-top: 48px;
+      @apply flex justify-between items-stretch px-12 mt-12;
     }
     .page-nav-link {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      padding: 28px 0;
-      text-decoration: none;
       color: var(--charcoal);
       transition: color 0.15s var(--ease);
-      max-width: 45%;
+      @apply flex flex-col gap-[6px] py-7 no-underline max-w-[45%];
     }
     .page-nav-link:hover { color: var(--green); }
     .page-nav-link:hover .page-nav-dir { color: var(--green); }
     .page-nav-dir {
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
       color: var(--warm-gray);
       transition: color 0.15s var(--ease);
+      @apply text-[11px] font-semibold tracking-[0.1em] uppercase;
     }
     .page-nav-label {
       font-family: 'Founders Grotesk', sans-serif;
-      font-size: 17px;
-      font-weight: 500;
-      line-height: 1.1;
+      @apply text-[17px] font-medium leading-[1.1];
     }
-    .page-nav-next { text-align: right; align-items: flex-end; }
+    .page-nav-next { @apply text-right items-end; }
 
     /* ─── Hero ───────────────────────────────────────────────── */
     .hero {
-      width: 100%;
-      min-height: 500px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      overflow: hidden;
+      @apply w-full min-h-[500px] flex items-center justify-center relative overflow-hidden;
     }
     .hero--green    { background: var(--green); }
     .hero--teal     { background: var(--teal); }
