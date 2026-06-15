@@ -1558,41 +1558,20 @@
         </div>
       </div>
       <div style="order:1; display:flex; justify-content:center; align-items:center;">
-        <!-- Static SVG clearspace diagram — scales at any viewport via viewBox -->
-        <svg viewBox="0 0 220 345" xmlns="http://www.w3.org/2000/svg"
-             style="width:100%;max-width:380px;display:block;margin:0 auto;"
-             aria-label="Clearspace diagram: minimum clearspace x on all four sides of the stacked logo">
-          <!-- teal clearspace zone -->
-          <rect x="18" y="18" width="184" height="273" fill="rgba(116,251,215,0.2)"/>
-          <!-- white logo field -->
-          <rect x="40" y="40" width="140" height="229" fill="#ffffff"/>
-          <!-- logo — PNG used instead of SVG to avoid SVG-in-SVG rendering bugs in Safari -->
-          <image href="images/logos/Hudson-County_logo-stacked_black.png"
-                 x="40" y="40" width="140" height="229" preserveAspectRatio="xMidYMid meet"/>
-          <!-- top clearspace strip dimension line -->
-          <line x1="110" y1="18" x2="110" y2="40" stroke="rgba(0,9,19,0.4)" stroke-width="1"/>
-          <line x1="105" y1="18"  x2="115" y2="18"  stroke="rgba(0,9,19,0.4)" stroke-width="1"/>
-          <line x1="105" y1="40"  x2="115" y2="40"  stroke="rgba(0,9,19,0.4)" stroke-width="1"/>
-          <text x="117" y="31"  font-family="'Founders Grotesk',sans-serif" font-size="9" font-weight="700" fill="#000913">x</text>
-          <!-- bottom clearspace strip dimension line -->
-          <line x1="110" y1="269" x2="110" y2="291" stroke="rgba(0,9,19,0.4)" stroke-width="1"/>
-          <line x1="105" y1="269" x2="115" y2="269" stroke="rgba(0,9,19,0.4)" stroke-width="1"/>
-          <line x1="105" y1="291" x2="115" y2="291" stroke="rgba(0,9,19,0.4)" stroke-width="1"/>
-          <text x="117" y="282" font-family="'Founders Grotesk',sans-serif" font-size="9" font-weight="700" fill="#000913">x</text>
-          <!-- left clearspace strip dimension line -->
-          <line x1="18" y1="154" x2="40" y2="154" stroke="rgba(0,9,19,0.4)" stroke-width="1"/>
-          <line x1="18" y1="149" x2="18" y2="159" stroke="rgba(0,9,19,0.4)" stroke-width="1"/>
-          <line x1="40" y1="149" x2="40" y2="159" stroke="rgba(0,9,19,0.4)" stroke-width="1"/>
-          <text x="20" y="150" font-family="'Founders Grotesk',sans-serif" font-size="9" font-weight="700" fill="#000913">x</text>
-          <!-- right clearspace strip dimension line -->
-          <line x1="180" y1="154" x2="202" y2="154" stroke="rgba(0,9,19,0.4)" stroke-width="1"/>
-          <line x1="180" y1="149" x2="180" y2="159" stroke="rgba(0,9,19,0.4)" stroke-width="1"/>
-          <line x1="202" y1="149" x2="202" y2="159" stroke="rgba(0,9,19,0.4)" stroke-width="1"/>
-          <text x="183" y="150" font-family="'Founders Grotesk',sans-serif" font-size="9" font-weight="700" fill="#000913">x</text>
-        </svg>
-        <div class="cs-def">
-          <span class="cs-def-x">x</span>
-          <span>= cap height of the &#8220;H&#8221; in HUDSON</span>
+        <div class="cs-outer">
+          <div class="cs-zone" style="--cs-x: 32px;">
+            <div class="cs-logo-box">
+              <img src="images/logos/Hudson-County_logo-stacked_black.svg" alt="Hudson County stacked logo" style="max-width:160px; width:100%; height:auto; display:block;">
+            </div>
+            <div class="cs-dim-v top"><span class="cs-lbl">x</span></div>
+            <div class="cs-dim-v bottom"><span class="cs-lbl">x</span></div>
+            <div class="cs-dim-h left"><span class="cs-lbl">x</span></div>
+            <div class="cs-dim-h right"><span class="cs-lbl">x</span></div>
+          </div>
+          <div class="cs-def">
+            <span class="cs-def-x">x</span>
+            <span>= cap height of the &#8220;H&#8221; in HUDSON</span>
+          </div>
         </div>
       </div>
     </div>
@@ -1825,7 +1804,7 @@
   <div class="page" tabindex="-1" id="logo-text-only-small">
 
     <!-- Hero -->
-    <div style="background:var(--cream); border-bottom:1px solid var(--light-gray); padding:80px; display:flex; align-items:center; justify-content:center; min-height:340px;">
+    <div style="background:var(--teal); border-bottom:1px solid var(--deep-teal); padding:80px; display:flex; align-items:center; justify-content:center; min-height:340px;">
       <img src="images/logos/HCNJ_text-only_small_black.svg" alt="HCNJ small-size logo" style="max-width:480px; width:70%; height:auto;">
     </div>
 
@@ -2109,9 +2088,9 @@
     <div style="display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:center;">
       <div style="order:2; display:flex; flex-direction:column; justify-content:center; padding:32px;">
         <div style="font-weight:600; font-size:14px; color:var(--charcoal); margin-bottom:10px;">Minimum clearspace = x</div>
-        <div style="font-size:14px; color:var(--charcoal); line-height:1.4;">The clearspace unit x equals the cap height of the H letterform within the HCNJ Horizontal lockup. This measurement scales with the logo proportionally. Maintain x clearspace on all four sides at every reproduction size.</div>
+        <div style="font-size:14px; color:var(--charcoal); line-height:1.4;">The clearspace unit x equals half the cap height of the H mark within the HCNJ Horizontal lockup. This measurement scales with the logo proportionally. Maintain x clearspace on all four sides at every reproduction size.</div>
         <div style="margin-top:20px; padding:16px 20px; background:var(--cream); border-left:3px solid var(--teal);">
-          <div style="font-size:11px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:var(--charcoal); margin-bottom:6px;">x = the cap height of the H mark</div>
+          <div style="font-size:11px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:var(--charcoal); margin-bottom:6px;">x = &#189; cap height of the H mark</div>
           <div style="font-size:14px; color:var(--charcoal); line-height:1.4;">Never place competing text, images, or graphic elements within this clearspace. This ensures the logo is always seen clearly and never feels crowded.</div>
         </div>
       </div>
@@ -2128,7 +2107,7 @@
           </div>
           <div class="cs-def">
             <span class="cs-def-x">x</span>
-            <span>= cap height of the H mark</span>
+            <span>= &#189; cap height of the H mark</span>
           </div>
         </div>
       </div>
@@ -2263,9 +2242,9 @@
     <div style="display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:center;">
       <div style="order:2; display:flex; flex-direction:column; justify-content:center; padding:32px;">
         <div style="font-weight:600; font-size:14px; color:var(--charcoal); margin-bottom:10px;">Minimum clearspace = x</div>
-        <div style="font-size:14px; color:var(--charcoal); line-height:1.4;">The clearspace unit x equals the cap height of the H in the HCNJ portion of the lockup. Because this lockup includes a signature element extending below the main mark, apply x clearspace specifically to the outer bounding box of the entire composition.</div>
+        <div style="font-size:14px; color:var(--charcoal); line-height:1.4;">The clearspace unit x equals half the cap height of the H in the HCNJ portion of the lockup. Because this lockup includes a signature element extending below the main mark, apply x clearspace specifically to the outer bounding box of the entire composition.</div>
         <div style="margin-top:20px; padding:16px 20px; background:var(--cream); border-left:3px solid var(--teal);">
-          <div style="font-size:11px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:var(--charcoal); margin-bottom:6px;">x = the cap height of the H in HCNJ</div>
+          <div style="font-size:11px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:var(--charcoal); margin-bottom:6px;">x = &#189; cap height of the H in HCNJ</div>
           <div style="font-size:14px; color:var(--charcoal); line-height:1.4;">Never place competing text, images, or graphic elements within this clearspace. This ensures the logo is always seen clearly and never feels crowded.</div>
         </div>
       </div>
@@ -2282,7 +2261,7 @@
           </div>
           <div class="cs-def">
             <span class="cs-def-x">x</span>
-            <span>= cap height of the H in HCNJ</span>
+            <span>= &#189; cap height of the H in HCNJ</span>
           </div>
         </div>
       </div>
@@ -2398,9 +2377,9 @@
     <div style="display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:center;">
       <div style="order:2; display:flex; flex-direction:column; justify-content:center; padding:32px;">
         <div style="font-weight:600; font-size:14px; color:var(--charcoal); margin-bottom:10px;">Minimum clearspace = x</div>
-        <div style="font-size:14px; color:var(--charcoal); line-height:1.4;">The clearspace unit x equals the cap height of the H letterform. At small digital sizes (under 64px wide), a minimum of 8px clearspace is acceptable, but always strive to give the mark more space than the minimum when layout permits.</div>
+        <div style="font-size:14px; color:var(--charcoal); line-height:1.4;">The clearspace unit x equals half the cap height of the H letterform. At small digital sizes (under 64px wide), a minimum of 8px clearspace is acceptable, but always strive to give the mark more space than the minimum when layout permits.</div>
         <div style="margin-top:20px; padding:16px 20px; background:var(--cream); border-left:3px solid var(--teal);">
-          <div style="font-size:11px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:var(--charcoal); margin-bottom:6px;">x = the cap height of the H in HCNJ</div>
+          <div style="font-size:11px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:var(--charcoal); margin-bottom:6px;">x = &#189; cap height of the H in HCNJ</div>
           <div style="font-size:14px; color:var(--charcoal); line-height:1.4;">Never place competing text, images, or graphic elements within this clearspace. This ensures the logo is always seen clearly and never feels crowded.</div>
         </div>
       </div>
@@ -2417,7 +2396,7 @@
           </div>
           <div class="cs-def">
             <span class="cs-def-x">x</span>
-            <span>= cap height of the H in HCNJ</span>
+            <span>= &#189; cap height of the H in HCNJ</span>
           </div>
         </div>
       </div>
