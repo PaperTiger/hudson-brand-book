@@ -23,6 +23,7 @@
   </style>
 
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
   <script>
     tailwind.config = {
       theme: {
@@ -1805,17 +1806,134 @@
 
     <!-- Hero -->
     <div style="background:var(--teal); border-bottom:1px solid var(--deep-teal); padding:80px; display:flex; align-items:center; justify-content:center; min-height:340px;">
-      <img src="images/logos/HCNJ_text-only_small_black.svg" alt="HCNJ small-size logo" style="max-width:480px; width:70%; height:auto;">
+      <img src="images/logos/HCNJ_text-only_small_black.svg" alt="HCNJ small-size logo" style="max-width:480px; width:70%; height:auto; filter:invert(11%) sepia(99%) saturate(1052%) hue-rotate(153deg) brightness(97%);">
     </div>
 
     <div class="section-content">
       <div class="section-label">Full Logo</div>
       <h2 class="section-title">Text only</h2>
       <div class="section-body">
-        <p>When the Full Logo Text Only is reproduced below 200px wide, the stacked type becomes too small to read clearly. This compact variant condenses the layout so all text remains legible at small sizes — on digital thumbnails, app icons, badges, and tight print applications.</p>
+        <p>When the Full Logo Text Only is reproduced below 200px wide, the stacked type becomes too small to read clearly. This compact variant condenses the layout so all text remains legible at small sizes: on digital thumbnails, app icons, badges, and tight print applications.</p>
         <p>Do not use the standard full logo below 200px wide. Do not use this small-size variant at large sizes where the standard logo should be used instead.</p>
       </div>
     </div>
+
+  <!-- Clearspace — above color variations -->
+  <div style="margin:0 32px 48px; border-top:1px solid var(--light-gray); padding-top:48px;">
+    <div style="font-size:11px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--charcoal); margin-bottom:24px;">Clearspace</div>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:center;">
+      <div style="order:2; display:flex; flex-direction:column; justify-content:center; padding:32px;">
+        <div style="font-weight:600; font-size:14px; color:var(--charcoal); margin-bottom:10px;">Minimum clearspace = x</div>
+        <div style="font-size:14px; color:var(--charcoal); line-height:1.4;">The clearspace unit x equals the cap height of the "H" in the HUDSON wordmark. Maintain this clearspace on all sides at every reproduction size. On very crowded layouts, prefer stepping up to the standard Full Logo Text Only variant rather than violating the clearspace.</div>
+        <div style="margin-top:20px; padding:16px 20px; background:var(--cream); border-left:3px solid var(--teal);">
+          <div style="font-size:11px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:var(--charcoal); margin-bottom:6px;">x = cap height of the &#8220;H&#8221; in HUDSON</div>
+          <div style="font-size:14px; color:var(--charcoal); line-height:1.4;">Never place competing text, images, or graphic elements within this clearspace. This ensures the mark is always seen clearly and never feels crowded.</div>
+        </div>
+      </div>
+      <div style="order:1; display:flex; justify-content:center; align-items:center;">
+        <div class="cs-outer">
+          <div class="cs-zone" style="--cs-x: 28px;">
+            <div class="cs-logo-box">
+              <img src="images/logos/HCNJ_text-only_small_black.svg" alt="Full Logo Text Only small" style="max-width:120px; width:100%; height:auto; display:block;">
+            </div>
+            <div class="cs-dim-v top"><span class="cs-lbl">x</span></div>
+            <div class="cs-dim-v bottom"><span class="cs-lbl">x</span></div>
+            <div class="cs-dim-h left"><span class="cs-lbl">x</span></div>
+            <div class="cs-dim-h right"><span class="cs-lbl">x</span></div>
+          </div>
+          <div class="cs-def">
+            <span class="cs-def-x">x</span>
+            <span>= cap height of the &#8220;H&#8221; in HUDSON</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Primary use + Usage note — 2 columns -->
+  <div style="margin:0 32px 48px; display:grid; grid-template-columns:1fr 1fr; gap:48px;">
+    <div style="border:1px solid var(--light-gray); padding:32px;">
+      <div style="font-size:11px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--charcoal); margin-bottom:16px;">Primary use</div>
+      <div style="font-size:18px; color:var(--charcoal); line-height:var(--lh-body);">Digital thumbnails, app icons, social badges, small-format print, and any context where the standard Full Logo Text Only would fall below 200px wide.</div>
+    </div>
+    <div style="border:1px solid var(--light-gray); padding:32px;">
+      <div style="font-size:11px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--charcoal); margin-bottom:16px;">Usage note</div>
+      <div style="font-size:18px; color:var(--charcoal); line-height:var(--lh-body);">This is a size-specific variant, not an alternative identity. It must appear in the same approved colors as the standard Full Logo. Never use it at large sizes where the standard mark is legible, and never set it in any typeface other than Founders Grotesk Condensed Bold.</div>
+    </div>
+  </div>
+
+  <!-- Approved color combinations -->
+  <div style="margin:0 32px 48px; border-top:1px solid var(--light-gray); padding-top:48px;">
+    <div style="font-size:11px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--charcoal); margin-bottom:24px;">Approved color combinations</div>
+    <div style="display:grid; grid-template-columns:repeat(5,1fr); gap:0;">
+      <div style="background:#0004F5; aspect-ratio:1; padding:24px; display:flex; flex-direction:column; align-items:center;">
+        <div style="flex:1; display:flex; align-items:center; justify-content:center; width:100%;">
+          <img src="images/logos/HCNJ_text-only_small_black.svg" alt="" style="max-width:72%; max-height:72%; width:auto; height:auto; display:block; filter:invert(80%) sepia(53%) saturate(571%) hue-rotate(110deg) brightness(99%);">
+        </div>
+        <div style="font-size:11px; text-align:center; color:#74FBD7; line-height:1.4; padding-top:10px;">Liberty Green on Hudson Blue</div>
+      </div>
+      <div style="background:#74FBD7; aspect-ratio:1; padding:24px; display:flex; flex-direction:column; align-items:center;">
+        <div style="flex:1; display:flex; align-items:center; justify-content:center; width:100%;">
+          <img src="images/logos/HCNJ_text-only_small_black.svg" alt="" style="max-width:72%; max-height:72%; width:auto; height:auto; display:block; filter:invert(11%) sepia(99%) saturate(1052%) hue-rotate(153deg) brightness(97%);">
+        </div>
+        <div style="font-size:11px; text-align:center; color:#003230; line-height:1.4; padding-top:10px;">Deep Teal on Liberty Green</div>
+      </div>
+      <div style="background:#003230; aspect-ratio:1; padding:24px; display:flex; flex-direction:column; align-items:center;">
+        <div style="flex:1; display:flex; align-items:center; justify-content:center; width:100%;">
+          <img src="images/logos/HCNJ_text-only_small_black.svg" alt="" style="max-width:72%; max-height:72%; width:auto; height:auto; display:block; filter:invert(72%) sepia(40%) saturate(650%) hue-rotate(60deg) brightness(103%);">
+        </div>
+        <div style="font-size:11px; text-align:center; color:#8AF161; line-height:1.4; padding-top:10px;">Green on Deep Teal</div>
+      </div>
+      <div style="background:#003230; aspect-ratio:1; padding:24px; display:flex; flex-direction:column; align-items:center;">
+        <div style="flex:1; display:flex; align-items:center; justify-content:center; width:100%;">
+          <img src="images/logos/HCNJ_text-only_small_black.svg" alt="" style="max-width:72%; max-height:72%; width:auto; height:auto; display:block; filter:invert(80%) sepia(53%) saturate(571%) hue-rotate(110deg) brightness(99%);">
+        </div>
+        <div style="font-size:11px; text-align:center; color:#74FBD7; line-height:1.4; padding-top:10px;">Liberty Green on Deep Teal</div>
+      </div>
+      <div style="background:#8AF161; aspect-ratio:1; padding:24px; display:flex; flex-direction:column; align-items:center;">
+        <div style="flex:1; display:flex; align-items:center; justify-content:center; width:100%;">
+          <img src="images/logos/HCNJ_text-only_small_black.svg" alt="" style="max-width:72%; max-height:72%; width:auto; height:auto; display:block; filter:invert(11%) sepia(99%) saturate(1052%) hue-rotate(153deg) brightness(97%);">
+        </div>
+        <div style="font-size:11px; text-align:center; color:#003230; line-height:1.4; padding-top:10px;">Deep Teal on Green</div>
+      </div>
+      <div style="background:#EBE825; aspect-ratio:1; padding:24px; display:flex; flex-direction:column; align-items:center;">
+        <div style="flex:1; display:flex; align-items:center; justify-content:center; width:100%;">
+          <img src="images/logos/HCNJ_text-only_small_black.svg" alt="" style="max-width:72%; max-height:72%; width:auto; height:auto; display:block; filter:invert(11%) sepia(99%) saturate(1052%) hue-rotate(153deg) brightness(97%);">
+        </div>
+        <div style="font-size:11px; text-align:center; color:#003230; line-height:1.4; padding-top:10px;">Deep Teal on Flag Yellow</div>
+      </div>
+      <div style="background:#6B1262; aspect-ratio:1; padding:24px; display:flex; flex-direction:column; align-items:center;">
+        <div style="flex:1; display:flex; align-items:center; justify-content:center; width:100%;">
+          <img src="images/logos/HCNJ_text-only_small_black.svg" alt="" style="max-width:72%; max-height:72%; width:auto; height:auto; display:block; filter:invert(80%) sepia(53%) saturate(571%) hue-rotate(110deg) brightness(99%);">
+        </div>
+        <div style="font-size:11px; text-align:center; color:#74FBD7; line-height:1.4; padding-top:10px;">Liberty Green on Purple</div>
+      </div>
+      <div style="background:#FFFFFF; aspect-ratio:1; padding:24px; display:flex; flex-direction:column; align-items:center;">
+        <div style="flex:1; display:flex; align-items:center; justify-content:center; width:100%;">
+          <img src="images/logos/HCNJ_text-only_small_black.svg" alt="" style="max-width:72%; max-height:72%; width:auto; height:auto; display:block;">
+        </div>
+        <div style="font-size:11px; text-align:center; color:#000913; line-height:1.4; padding-top:10px;">Charcoal on White</div>
+      </div>
+      <div style="background:#000913; aspect-ratio:1; padding:24px; display:flex; flex-direction:column; align-items:center;">
+        <div style="flex:1; display:flex; align-items:center; justify-content:center; width:100%;">
+          <img src="images/logos/HCNJ_text-only_small_black.svg" alt="" style="max-width:72%; max-height:72%; width:auto; height:auto; display:block; filter:invert(100%);">
+        </div>
+        <div style="font-size:11px; text-align:center; color:#FFFFFF; line-height:1.4; padding-top:10px;">White on Charcoal</div>
+      </div>
+      <div style="background:#E3E3E3; aspect-ratio:1; padding:24px; display:flex; flex-direction:column; align-items:center;">
+        <div style="flex:1; display:flex; align-items:center; justify-content:center; width:100%;">
+          <img src="images/logos/HCNJ_text-only_small_black.svg" alt="" style="max-width:72%; max-height:72%; width:auto; height:auto; display:block;">
+        </div>
+        <div style="font-size:11px; text-align:center; color:#000913; line-height:1.4; padding-top:10px;">Charcoal on Gray</div>
+      </div>
+      <div style="background:#EB254D; aspect-ratio:1; padding:24px; display:flex; flex-direction:column; align-items:center;">
+        <div style="flex:1; display:flex; align-items:center; justify-content:center; width:100%;">
+          <img src="images/logos/HCNJ_text-only_small_black.svg" alt="" style="max-width:72%; max-height:72%; width:auto; height:auto; display:block; filter:invert(100%);">
+        </div>
+        <div style="font-size:11px; text-align:center; color:#FFFFFF; line-height:1.4; padding-top:10px;">White on Amaranth</div>
+      </div>
+    </div>
+  </div>
 
     <!-- Size threshold diagram -->
     <div style="margin:0 32px 48px; border-top:1px solid var(--light-gray); padding-top:48px;">
@@ -1824,7 +1942,7 @@
 
         <!-- Standard logo at threshold -->
         <div style="border:1px solid var(--light-gray); padding:32px; display:flex; flex-direction:column; align-items:center; gap:20px;">
-          <div style="font-size:10px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--warm-gray);">Standard logo — use above 200px</div>
+          <div style="font-size:10px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--warm-gray);">Standard logo: use above 200px</div>
           <div style="width:200px; padding:16px 0; border-bottom:2px solid #6B1262; position:relative;">
             <img src="images/logos/Hudson-County_logo-text_deep-teal.svg" alt="Standard logo at 200px" style="width:200px; height:auto; display:block;">
             <div style="position:absolute; bottom:-20px; left:50%; transform:translateX(-50%); font-size:10px; font-weight:700; color:#6B1262; white-space:nowrap;">200px</div>
@@ -1834,7 +1952,7 @@
 
         <!-- Small variant -->
         <div style="border:1px solid var(--light-gray); padding:32px; display:flex; flex-direction:column; align-items:center; gap:20px;">
-          <div style="font-size:10px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--warm-gray);">Small-size variant — use below 200px</div>
+          <div style="font-size:10px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--warm-gray);">Small-size variant: use below 200px</div>
           <div style="display:flex; flex-direction:column; align-items:center; gap:16px;">
             <div style="position:relative; display:inline-block;">
               <img src="images/logos/HCNJ_text-only_small_black.svg" alt="Small logo at 160px" style="width:160px; height:auto; display:block; border-bottom:2px solid #6B1262;">
@@ -1849,12 +1967,6 @@
         </div>
 
       </div>
-    </div>
-
-    <!-- Color variants note -->
-    <div style="margin:0 32px 56px; border-top:1px solid var(--light-gray); padding-top:48px;">
-      <div style="font-size:11px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--charcoal); margin-bottom:16px;">Color usage</div>
-      <div style="font-size:15px; color:var(--charcoal); line-height:1.6; max-width:600px;">Apply the same approved color combinations as the standard Full Logo Text Only. Use Charcoal on light backgrounds, White or Liberty Green on dark backgrounds. Never use unapproved color combinations at any size.</div>
     </div>
 
   </div>
@@ -1875,11 +1987,11 @@
 
       <!-- Step 1: Horizontal ≥300px -->
       <div style="display:grid; grid-template-columns:1fr 1fr; gap:0; border:1px solid var(--light-gray); margin-bottom:2px;">
-        <div style="background:var(--charcoal); padding:32px 40px; display:flex; flex-direction:column; align-items:flex-start; justify-content:center; gap:20px; min-height:160px;">
-          <img src="images/logos/Hudson-County_full-logo_white.svg" alt="Full Logo Horizontal" style="width:300px; height:auto; display:block;">
-          <div style="font-size:10px; font-weight:700; color:rgba(255,255,255,0.5); letter-spacing:0.1em; text-transform:uppercase;">← 300px →</div>
+        <div style="background:var(--deep-teal); padding:32px 40px; display:flex; flex-direction:column; align-items:flex-start; justify-content:center; gap:20px; min-height:160px;">
+          <img src="images/logos/Hudson-County_full-logo_teal.svg" alt="Full Logo Horizontal" style="width:300px; height:auto; display:block;">
+          <div style="font-size:10px; font-weight:700; color:rgba(116,251,215,0.5); letter-spacing:0.1em; text-transform:uppercase;">← 300px →</div>
         </div>
-        <div style="padding:32px 40px; display:flex; flex-direction:column; justify-content:center; border-left:4px solid var(--teal);">
+        <div style="padding:32px 40px; display:flex; flex-direction:column; justify-content:center;">
           <div style="font-size:11px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--warm-gray); margin-bottom:8px;">≥ 300px wide</div>
           <div style="font-size:18px; font-weight:600; color:var(--charcoal); margin-bottom:8px;">Horizontal</div>
           <div style="font-size:14px; color:var(--charcoal); line-height:1.6;">The preferred logo. Use whenever space allows. The seal and full wordmark are both legible at this size.</div>
@@ -1888,12 +2000,12 @@
 
       <!-- Step 2: Text Lockup 200–300px -->
       <div style="display:grid; grid-template-columns:1fr 1fr; gap:0; border:1px solid var(--light-gray); margin-bottom:2px;">
-        <div style="background:var(--charcoal); padding:32px 40px; display:flex; flex-direction:column; align-items:flex-start; justify-content:center; gap:20px; min-height:160px;">
-          <img src="images/logos/Hudson-County_logo-text_white.svg" alt="Full Logo Text Lockup" style="width:200px; height:auto; display:block;">
-          <div style="font-size:10px; font-weight:700; color:rgba(255,255,255,0.5); letter-spacing:0.1em; text-transform:uppercase;">← 200px →</div>
+        <div style="background:var(--deep-teal); padding:32px 40px; display:flex; flex-direction:column; align-items:flex-start; justify-content:center; gap:20px; min-height:160px;">
+          <img src="images/logos/Hudson-County_logo-text_teal.svg" alt="Full Logo Text Lockup" style="width:200px; height:auto; display:block;">
+          <div style="font-size:10px; font-weight:700; color:rgba(116,251,215,0.5); letter-spacing:0.1em; text-transform:uppercase;">← 200px →</div>
         </div>
-        <div style="padding:32px 40px; display:flex; flex-direction:column; justify-content:center; border-left:4px solid #6B1262;">
-          <div style="font-size:11px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--warm-gray); margin-bottom:8px;">200 – 300px wide</div>
+        <div style="padding:32px 40px; display:flex; flex-direction:column; justify-content:center;">
+          <div style="font-size:11px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--warm-gray); margin-bottom:8px;">&#8805; 200px wide</div>
           <div style="font-size:18px; font-weight:600; color:var(--charcoal); margin-bottom:8px;">Text lockup</div>
           <div style="font-size:14px; color:var(--charcoal); line-height:1.6;">When the horizontal logo is too wide, the text lockup drops the seal and presents the full county name in a condensed vertical format.</div>
         </div>
@@ -1901,11 +2013,11 @@
 
       <!-- Step 3: Text Only <200px -->
       <div style="display:grid; grid-template-columns:1fr 1fr; gap:0; border:1px solid var(--light-gray);">
-        <div style="background:var(--charcoal); padding:32px 40px; display:flex; flex-direction:column; align-items:flex-start; justify-content:center; gap:20px; min-height:160px;">
-          <img src="images/logos/HCNJ_text-only_small_black.svg" alt="Full Logo Text Only" style="width:120px; height:auto; display:block; filter:invert(1);">
-          <div style="font-size:10px; font-weight:700; color:rgba(255,255,255,0.5); letter-spacing:0.1em; text-transform:uppercase;">← 120px →</div>
+        <div style="background:var(--deep-teal); padding:32px 40px; display:flex; flex-direction:column; align-items:flex-start; justify-content:center; gap:20px; min-height:160px;">
+          <img src="images/logos/HCNJ_text-only_small_black.svg" alt="Full Logo Text Only" style="width:120px; height:auto; display:block; filter:invert(80%) sepia(53%) saturate(571%) hue-rotate(110deg) brightness(99%);">
+          <div style="font-size:10px; font-weight:700; color:rgba(116,251,215,0.5); letter-spacing:0.1em; text-transform:uppercase;">← 120px →</div>
         </div>
-        <div style="padding:32px 40px; display:flex; flex-direction:column; justify-content:center; border-left:4px solid var(--charcoal);">
+        <div style="padding:32px 40px; display:flex; flex-direction:column; justify-content:center;">
           <div style="font-size:11px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--warm-gray); margin-bottom:8px;">&lt; 200px wide</div>
           <div style="font-size:18px; font-weight:600; color:var(--charcoal); margin-bottom:8px;">Text only</div>
           <div style="font-size:14px; color:var(--charcoal); line-height:1.6;">At very small sizes, use the compact text-only variant. The condensed layout keeps all essential text legible where the full wordmark would become unreadable.</div>
@@ -1915,7 +2027,7 @@
       <!-- Summary rule -->
       <div style="margin-top:32px; padding:20px 24px; background:var(--cream); border-left:3px solid #6B1262; display:flex; gap:24px; align-items:baseline;">
         <div style="font-size:11px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:#6B1262; white-space:nowrap;">Size rule</div>
-        <div style="font-size:14px; color:var(--charcoal); line-height:1.6;">≥ 300px → Horizontal &nbsp;|&nbsp; 200–300px → Text lockup &nbsp;|&nbsp; &lt; 200px → Text only. Never scale any variant below its minimum — always step down to the next variant instead.</div>
+        <div style="font-size:14px; color:var(--charcoal); line-height:1.6;">≥ 300px → Horizontal &nbsp;|&nbsp; 200–300px → Text lockup &nbsp;|&nbsp; &lt; 200px → Text only. Never scale any variant below its minimum; always step down to the next variant instead.</div>
       </div>
 
     </div>
@@ -2506,11 +2618,11 @@
 
       <!-- Step 1: Horizontal ≥200px -->
       <div style="display:grid; grid-template-columns:1fr 1fr; gap:0; border:1px solid var(--light-gray); margin-bottom:2px;">
-        <div style="background:var(--charcoal); padding:32px 40px; display:flex; flex-direction:column; align-items:flex-start; justify-content:center; gap:20px; min-height:160px;">
-          <img src="images/logos/HCNJ_logo-full_white.svg" alt="HCNJ Horizontal" style="width:250px; height:auto; display:block;">
-          <div style="font-size:10px; font-weight:700; color:rgba(255,255,255,0.5); letter-spacing:0.1em; text-transform:uppercase;">← 250px →</div>
+        <div style="background:var(--deep-teal); padding:32px 40px; display:flex; flex-direction:column; align-items:flex-start; justify-content:center; gap:20px; min-height:160px;">
+          <img src="images/logos/HCNJ_logo-full_teal.svg" alt="HCNJ Horizontal" style="width:250px; height:auto; display:block;">
+          <div style="font-size:10px; font-weight:700; color:rgba(116,251,215,0.5); letter-spacing:0.1em; text-transform:uppercase;">← 250px →</div>
         </div>
-        <div style="padding:32px 40px; display:flex; flex-direction:column; justify-content:center; border-left:4px solid var(--teal);">
+        <div style="padding:32px 40px; display:flex; flex-direction:column; justify-content:center;">
           <div style="font-size:11px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--warm-gray); margin-bottom:8px;">≥ 200px wide</div>
           <div style="font-size:18px; font-weight:600; color:var(--charcoal); margin-bottom:8px;">HCNJ Horizontal</div>
           <div style="font-size:14px; color:var(--charcoal); line-height:1.6;">The preferred logo. Use whenever space allows. The H mark and full HCNJ wordmark are both legible.</div>
@@ -2519,11 +2631,11 @@
 
       <!-- Step 2: Text Lockup 150–200px -->
       <div style="display:grid; grid-template-columns:1fr 1fr; gap:0; border:1px solid var(--light-gray); margin-bottom:2px;">
-        <div style="background:var(--charcoal); padding:32px 40px; display:flex; flex-direction:column; align-items:flex-start; justify-content:center; gap:20px; min-height:160px;">
-          <img src="images/logos/HCNJ_lockup_white.svg" alt="HCNJ Text Lockup" style="width:150px; height:auto; display:block;">
-          <div style="font-size:10px; font-weight:700; color:rgba(255,255,255,0.5); letter-spacing:0.1em; text-transform:uppercase;">← 150px →</div>
+        <div style="background:var(--deep-teal); padding:32px 40px; display:flex; flex-direction:column; align-items:flex-start; justify-content:center; gap:20px; min-height:160px;">
+          <img src="images/logos/HCNJ_lockup_teal.svg" alt="HCNJ Text Lockup" style="width:150px; height:auto; display:block;">
+          <div style="font-size:10px; font-weight:700; color:rgba(116,251,215,0.5); letter-spacing:0.1em; text-transform:uppercase;">← 150px →</div>
         </div>
-        <div style="padding:32px 40px; display:flex; flex-direction:column; justify-content:center; border-left:4px solid #6B1262;">
+        <div style="padding:32px 40px; display:flex; flex-direction:column; justify-content:center;">
           <div style="font-size:11px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--warm-gray); margin-bottom:8px;">150 – 200px wide</div>
           <div style="font-size:18px; font-weight:600; color:var(--charcoal); margin-bottom:8px;">HCNJ Text Lockup</div>
           <div style="font-size:14px; color:var(--charcoal); line-height:1.6;">When the horizontal logo is too wide for the space, the text lockup maintains full identity with the Craig Guy name and signature in a tighter vertical format.</div>
@@ -2532,21 +2644,21 @@
 
       <!-- Step 3: Text Only <150px -->
       <div style="display:grid; grid-template-columns:1fr 1fr; gap:0; border:1px solid var(--light-gray);">
-        <div style="background:var(--charcoal); padding:32px 40px; display:flex; flex-direction:column; align-items:flex-start; justify-content:center; gap:20px; min-height:160px;">
-          <img src="images/logos/HCNJ_text_white.svg" alt="HCNJ Text Only" style="width:100px; height:auto; display:block;">
-          <div style="font-size:10px; font-weight:700; color:rgba(255,255,255,0.5); letter-spacing:0.1em; text-transform:uppercase;">← 100px →</div>
+        <div style="background:var(--deep-teal); padding:32px 40px; display:flex; flex-direction:column; align-items:flex-start; justify-content:center; gap:20px; min-height:160px;">
+          <img src="images/logos/HCNJ_text_teal.svg" alt="HCNJ Text Only" style="width:100px; height:auto; display:block;">
+          <div style="font-size:10px; font-weight:700; color:rgba(116,251,215,0.5); letter-spacing:0.1em; text-transform:uppercase;">← 100px →</div>
         </div>
-        <div style="padding:32px 40px; display:flex; flex-direction:column; justify-content:center; border-left:4px solid var(--charcoal);">
+        <div style="padding:32px 40px; display:flex; flex-direction:column; justify-content:center;">
           <div style="font-size:11px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--warm-gray); margin-bottom:8px;">&lt; 150px wide</div>
           <div style="font-size:18px; font-weight:600; color:var(--charcoal); margin-bottom:8px;">HCNJ Text Only</div>
-          <div style="font-size:14px; color:var(--charcoal); line-height:1.6;">At very small sizes, drop to the HCNJ wordmark alone. Clean and legible even at tight digital scales — app icons, badges, and small-format print.</div>
+          <div style="font-size:14px; color:var(--charcoal); line-height:1.6;">At very small sizes, drop to the HCNJ wordmark alone. Clean and legible even at tight digital scales: app icons, badges, and small-format print.</div>
         </div>
       </div>
 
       <!-- Summary rule -->
       <div style="margin-top:32px; padding:20px 24px; background:var(--cream); border-left:3px solid #6B1262; display:flex; gap:24px; align-items:baseline;">
         <div style="font-size:11px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:#6B1262; white-space:nowrap;">Size rule</div>
-        <div style="font-size:14px; color:var(--charcoal); line-height:1.6;">≥ 200px → Horizontal &nbsp;|&nbsp; 150–200px → Text Lockup &nbsp;|&nbsp; &lt; 150px → Text Only. Never scale any variant below its minimum — always step down to the next variant instead.</div>
+        <div style="font-size:14px; color:var(--charcoal); line-height:1.6;">≥ 200px → Horizontal &nbsp;|&nbsp; 150–200px → Text Lockup &nbsp;|&nbsp; &lt; 150px → Text Only. Never scale any variant below its minimum; always step down to the next variant instead.</div>
       </div>
 
     </div>
@@ -2608,6 +2720,14 @@
             <div style="font-size:11px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:var(--charcoal); text-align:center; line-height:1.6;">Teal on<br>Blue</div>
           </div>
 
+        </div>
+
+        <!-- Download avatars -->
+        <div style="padding-top:8px;">
+          <button onclick="downloadAvatarZip(this)" style="display:inline-flex; align-items:center; gap:8px; font-family:'Founders Grotesk',sans-serif; font-size:13px; font-weight:600; background:var(--charcoal); color:var(--white); border:none; cursor:pointer; padding:10px 20px; border-radius:2px; letter-spacing:0.03em;">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v12m0 0l-4-4m4 4l4-4M4 20h16"/></svg>
+            Download avatars as ZIP
+          </button>
         </div>
 
         <!-- Favicon section (right column, under avatars) -->
@@ -2813,7 +2933,7 @@
 
       <!-- Variant 2: Full Logo Text Only -->
       <div style="display:flex; flex-direction:column; align-items:center; gap:16px; width:100%;">
-        <div style="font-size:10px; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; color:var(--warm-gray);">Full Logo — Text Only</div>
+        <div style="font-size:10px; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; color:var(--warm-gray);">Full Logo: Text Only</div>
         <div class="cosponsor-lockup" style="display:flex; align-items:center; gap:0;">
           <img src="images/logos/HCNJ_text_white.svg" alt="Full Logo Text Only" style="height:48px; width:auto;">
           <div class="cosponsor-pipe" style="width:1px; height:48px; background:#FFFFFF; margin:0 32px; opacity:0.4; flex-shrink:0;"></div>
@@ -2833,7 +2953,7 @@
       <h2 class="section-title">Co-sponsorship lockup</h2>
       <div class="section-body">
         <p>When Hudson County co-sponsors or partners with an external organization, a standard lockup joins the HCNJ logo with the partner's logo using a vertical pipe separator. Two logo variants are approved for co-sponsorship use: the HCNJ Text Lockup and the Full Logo Text Only.</p>
-        <p>The pipe acts as a neutral divider — it carries no hierarchy. Both logos should appear at equal optical weight. Never use the County Seal or H mark in a co-sponsorship lockup.</p>
+        <p>The pipe acts as a neutral divider; it carries no hierarchy. Both logos should appear at equal optical weight. Never use the County Seal or H mark in a co-sponsorship lockup.</p>
       </div>
     </div>
 
@@ -2933,7 +3053,7 @@
             </div>
           </div>
           <div style="padding:20px 24px; border-top:1px solid var(--light-gray);">
-            <div style="font-weight:600; font-size:13px; color:var(--charcoal); margin-bottom:4px;">Full Logo — Text Only</div>
+            <div style="font-weight:600; font-size:13px; color:var(--charcoal); margin-bottom:4px;">Full Logo: Text Only</div>
             <div style="font-size:13px; color:var(--warm-gray); line-height:1.5;">Use for general County-level co-sponsorship where institutional identity is sufficient and no executive alignment is needed.</div>
           </div>
         </div>
@@ -4523,7 +4643,7 @@
     <div style="margin:0 32px 80px;">
       <div class="masonry-grid">
         <img src="images/Brand in action/signage/6.webp" alt="Signage in context">
-        <img src="images/Brand in action/signage/hudson-flag-teal.webp" alt="Hudson County flag teal">
+        <img src="images/Brand in action/signage/Flag_04_Mockup_BYLD.webp" alt="Hudson County flag mockup">
         <img src="images/Brand in action/signage/Slide 16_9 - 117.webp" alt="Signage application">
       </div>
     </div>
@@ -4909,6 +5029,61 @@
   const initial = location.hash.slice(1) || 'home';
   showPage(initial, true);
 })();
+</script>
+
+<script>
+async function downloadAvatarZip(btn) {
+  const original = btn.innerHTML;
+  btn.disabled = true;
+  btn.innerHTML = 'Generating…';
+
+  const avatars = [
+    { bg: '#8AF161', logo: 'images/logos/HCNJ_lockup_teal.svg',      name: 'avatar-teal-on-green.png' },
+    { bg: '#74FBD7', logo: 'images/logos/HCNJ_lockup_deep-teal.svg', name: 'avatar-deep-teal-on-teal.png' },
+    { bg: '#6B1262', logo: 'images/logos/HCNJ_lockup_teal.svg',      name: 'avatar-teal-on-purple.png' },
+    { bg: '#0004F5', logo: 'images/logos/HCNJ_lockup_teal.svg',      name: 'avatar-teal-on-blue.png' },
+  ];
+
+  const SIZE = 1000;
+  const zip = new JSZip();
+
+  for (const av of avatars) {
+    const canvas = document.createElement('canvas');
+    canvas.width = SIZE;
+    canvas.height = SIZE;
+    const ctx = canvas.getContext('2d');
+
+    ctx.fillStyle = av.bg;
+    ctx.fillRect(0, 0, SIZE, SIZE);
+
+    const img = await new Promise((resolve, reject) => {
+      const i = new Image();
+      i.onload = () => resolve(i);
+      i.onerror = reject;
+      i.src = av.logo;
+    });
+
+    const logoW = SIZE * 0.70;
+    const logoH = img.naturalHeight ? logoW * (img.naturalHeight / img.naturalWidth) : logoW;
+    ctx.drawImage(img, (SIZE - logoW) / 2, (SIZE - logoH) / 2, logoW, logoH);
+
+    const blob = await new Promise(res => canvas.toBlob(res, 'image/png'));
+    zip.file(av.name, blob);
+  }
+
+  const zipBlob = await zip.generateAsync({ type: 'blob' });
+  const url = URL.createObjectURL(zipBlob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'hcnj-avatars.zip';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+
+  btn.disabled = false;
+  btn.innerHTML = original;
+}
 </script>
 
 </body>
