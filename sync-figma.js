@@ -267,6 +267,45 @@ async function push(token, fileKey) {
   console.log(`  ${fontCount * 3} typography variables (family + weight + file × ${fontCount} fonts)`);
 }
 
+// ── PULL LOGOS: Figma Logos page → images/logos/*.svg ────────────
+
+async function pullLogos(token, fileKey) {
+  console.log('Pulling logos from Figma...');
+
+  // Get file tree to find the Logos page and its top-level frames
+  const file = await figmaGet(token, fileKey, '?depth=2');
+  const logosPage = file.document.children.find(p => p.name === 'Logos');
+  if (!logosPage) throw new Error('No "Logos" page found in Figma file.');
+
+  const frames = logosPage.children.filter(n => n.type === 'FRAME' && !n.name.startsWith('_'));
+  if (frames.length === 0) {
+    console.log('No logo frames found on the Logos page (frames starting with _ are skipped).');
+    return;
+  }
+
+  const ids = frames.map(f => f.id).join(',');
+  const exportRes = await figmaGet(token, fileKey, `/images?ids=${ids}&format=svg&svg_include_id=false`);
+  const images = exportRes.images;
+
+  const outDir = path.join(__dirname, 'images', 'logos');
+  if (!fs.existsSync(outDir)) fs.mkdirSync(outDir, { recursive: true });
+
+  for (const frame of frames) {
+    const url = images[frame.id];
+    if (!url) { console.warn(`  ⚠ No export URL for "${frame.name}"`); continue; }
+
+    const res = await fetch(url);
+    if (!res.ok) throw new Error(`Failed to download SVG for "${frame.name}": ${res.status}`);
+    const svg = await res.text();
+
+    const filename = frame.name.endsWith('.svg') ? frame.name : `${frame.name}.svg`;
+    fs.writeFileSync(path.join(outDir, filename), svg);
+    console.log(`  ✓ images/logos/${filename}`);
+  }
+
+  console.log(`✓ ${frames.length} logo(s) saved to images/logos/`);
+}
+
 // ── CLI ───────────────────────────────────────────────────────────
 
 async function main() {
@@ -276,10 +315,11 @@ async function main() {
     console.log(`
 sync-figma.js — Sync brand.js ↔ Figma
 
-  node sync-figma.js pull   Pull from Figma → update brand.js
-  node sync-figma.js push   Push from brand.js → update Figma
+  node sync-figma.js pull         Pull from Figma → update brand.js
+  node sync-figma.js push         Push from brand.js → update Figma
+  node sync-figma.js pull-logos   Export SVGs from Figma Logos page → images/logos/
 
-Syncs: colors (tokens + palette) and typography (family, weight, file)
+Syncs: colors (tokens + palette), typography (family, weight, file), logos (SVG export)
 
 Figma file: https://www.figma.com/design/qfgcG4lTk8FAPUGNEd2N2j
     `);
@@ -288,10 +328,11 @@ Figma file: https://www.figma.com/design/qfgcG4lTk8FAPUGNEd2N2j
 
   const { figmaToken, figmaFileKey } = loadConfig();
 
-  if (command === 'pull')      await pull(figmaToken, figmaFileKey);
-  else if (command === 'push') await push(figmaToken, figmaFileKey);
+  if (command === 'pull')            await pull(figmaToken, figmaFileKey);
+  else if (command === 'push')       await push(figmaToken, figmaFileKey);
+  else if (command === 'pull-logos') await pullLogos(figmaToken, figmaFileKey);
   else {
-    console.error(`Unknown command: "${command}". Use pull or push.`);
+    console.error(`Unknown command: "${command}". Use pull, push, or pull-logos.`);
     process.exit(1);
   }
 }
