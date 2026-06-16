@@ -2861,6 +2861,14 @@
         </div>
 
       </div>
+
+      <!-- Download favicons -->
+      <div style="padding-top:32px; border-top:1px solid var(--light-gray); margin-top:40px;">
+        <button onclick="downloadFaviconZip(this)" style="display:inline-flex; align-items:center; gap:8px; font-family:'Founders Grotesk',sans-serif; font-size:13px; font-weight:600; background:var(--charcoal); color:var(--white); border:none; cursor:pointer; padding:10px 20px; border-radius:2px; letter-spacing:0.03em;">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v12m0 0l-4-4m4 4l4-4M4 20h16"/></svg>
+          Download favicons as ZIP
+        </button>
+      </div>
       </div><!-- /favicon section -->
       </div><!-- /right column -->
     </div><!-- /grid wrapper -->
@@ -5162,7 +5170,7 @@ async function downloadAvatarZip(btn) {
   btn.innerHTML = 'Generating…';
 
   const avatars = [
-    { bg: '#8AF161', logo: 'images/logos/HCNJ_lockup_teal.svg',      name: 'avatar-teal-on-green.png' },
+    { bg: '#003230', logo: 'images/logos/HCNJ_lockup_teal.svg',      name: 'avatar-teal-on-deep-teal.png' },
     { bg: '#74FBD7', logo: 'images/logos/HCNJ_lockup_deep-teal.svg', name: 'avatar-deep-teal-on-teal.png' },
     { bg: '#6B1262', logo: 'images/logos/HCNJ_lockup_teal.svg',      name: 'avatar-teal-on-purple.png' },
     { bg: '#0004F5', logo: 'images/logos/HCNJ_lockup_teal.svg',      name: 'avatar-teal-on-blue.png' },
