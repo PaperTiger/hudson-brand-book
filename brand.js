@@ -88,6 +88,7 @@ const BRAND = {
   ──────────────────────────────────────────────────────────────── */
   colors: {
     primary: [
+<<<<<<< HEAD
       { name: "Accent",   hex: "#74FBD7", textColor: "#000913" },
       { name: "Primary",  hex: "#003230", textColor: "#74FBD7" },
       { name: "Charcoal", hex: "#000913", textColor: "#FFFFFF" },
@@ -100,6 +101,20 @@ const BRAND = {
       { name: "Green",  hex: "#8AF161", textColor: "#000913" },
       { name: "Red",    hex: "#EB254D", textColor: "#000913" },
       { name: "Gray",   hex: "#E3E3E3", textColor: "#000913", outline: "1px solid #C8C8C8" },
+=======
+      { name: "Liberty Green", hex: "#74FBD7", textColor: "#000913" },
+      { name: "Deep Teal",     hex: "#003230", textColor: "#74FBD7" },
+      { name: "Charcoal",      hex: "#000913", textColor: "#FFFFFF" },
+      { name: "White",         hex: "#FFFFFF", textColor: "#000913" },
+    ],
+    secondary: [
+      { name: "Hudson Blue",  hex: "#0004F5", textColor: "#74FBD7" },
+      { name: "Purple",       hex: "#6B1262", textColor: "#FFFFFF" },
+      { name: "Flag Yellow",  hex: "#EBE825", textColor: "#000913" },
+      { name: "Green",        hex: "#8AF161", textColor: "#000913" },
+      { name: "Amaranth",     hex: "#EB254D", textColor: "#000913" },
+      { name: "Gray",         hex: "#E3E3E3", textColor: "#000913", outline: "1px solid #C8C8C8" },
+>>>>>>> develop
     ],
   },
 
@@ -149,9 +164,11 @@ const BRAND = {
           label: "Full logo", id: "logo-horizontal",
           groupId: "nav-full-logo-group", subId: "nav-full-logo-sub",
           children: [
-            { label: "Horizontal", id: "logo-horizontal" },
-            { label: "Stacked",    id: "logo-stacked" },
-            { label: "Text only",  id: "logo-text-only" },
+            { label: "Horizontal",   id: "logo-horizontal" },
+            { label: "Stacked",      id: "logo-stacked" },
+            { label: "Text lockup",  id: "logo-text-only" },
+            { label: "Text only",    id: "logo-text-only-small" },
+            { label: "Size guide",   id: "logo-size-guide" },
           ],
         },
         { label: "H logo mark", id: "h-logo-mark" },
@@ -162,10 +179,12 @@ const BRAND = {
             { label: "Horizontal",    id: "hcnj-horizontal" },
             { label: "Text lockup",   id: "hcnj-text-lockup" },
             { label: "Text only",     id: "hcnj-text-only" },
+            { label: "Size guide",    id: "hcnj-size-guide" },
           ],
         },
         { label: "Avatar &amp; favicon", id: "logo-avatar" },
         { label: "What to avoid", id: "logo-avoid" },
+        { label: "Co-sponsorship lockup", id: "logo-cosponsor" },
       ],
     },
     {
