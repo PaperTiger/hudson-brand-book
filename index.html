@@ -5216,6 +5216,56 @@ async function downloadAvatarZip(btn) {
   btn.disabled = false;
   btn.innerHTML = original;
 }
+
+async function downloadFaviconZip(btn) {
+  const original = btn.innerHTML;
+  btn.disabled = true;
+  btn.innerHTML = 'Generating…';
+
+  const SIZES = [16, 32, 48, 64, 128, 256];
+  const variants = [
+    { folder: 'light', logo: 'images/logos/H_black.svg', bg: '#FFFFFF' },
+    { folder: 'dark',  logo: 'images/logos/H_white.svg', bg: '#000913' },
+  ];
+
+  const zip = new JSZip();
+
+  for (const v of variants) {
+    const img = await new Promise((resolve, reject) => {
+      const i = new Image();
+      i.onload = () => resolve(i);
+      i.onerror = reject;
+      i.src = v.logo;
+    });
+
+    for (const size of SIZES) {
+      const canvas = document.createElement('canvas');
+      canvas.width = size;
+      canvas.height = size;
+      const ctx = canvas.getContext('2d');
+      ctx.fillStyle = v.bg;
+      ctx.fillRect(0, 0, size, size);
+      const logoSize = size * 0.80;
+      const offset = (size - logoSize) / 2;
+      ctx.drawImage(img, offset, offset, logoSize, logoSize);
+      const blob = await new Promise(res => canvas.toBlob(res, 'image/png'));
+      zip.file(`${v.folder}/favicon-${size}.png`, blob);
+    }
+  }
+
+  const zipBlob = await zip.generateAsync({ type: 'blob' });
+  const url = URL.createObjectURL(zipBlob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'hcnj-favicons.zip';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+
+  btn.disabled = false;
+  btn.innerHTML = original;
+}
 </script>
 
 </body>
