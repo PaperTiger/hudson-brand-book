@@ -43,24 +43,15 @@
         display: block !important;
         page-break-after: always;
         break-after: page;
-        page-break-inside: avoid;
         min-height: unset !important;
         overflow: visible !important;
       }
-      .cover-page { display: flex !important; min-height: 100vh; }
-
-      /* Cover page — full page */
-      .cover-page { page-break-after: always; break-after: page; }
-
-      /* Intro pages — constrain height to one page */
-      .intro-layout {
-        height: auto !important;
-        min-height: 100vh;
-        page-break-inside: avoid;
+      /* No blank trailing page after the last one */
+      .page:last-of-type {
+        page-break-after: avoid !important;
+        break-after: avoid !important;
       }
-
-      /* Hero areas — don't break across pages */
-      .hero { page-break-inside: avoid; break-inside: avoid; }
+      .cover-page { display: flex !important; }
 
       /* Section content — remove screen-only max-width constraint */
       .section-content { max-width: 100% !important; }
@@ -68,12 +59,55 @@
       /* Don't print interactive download buttons */
       a[download] { display: none !important; }
 
-      /* Ensure grids and images render at full size */
+      /* Ensure images render correctly */
       img { max-width: 100% !important; }
 
       /* Typography — keep headings with their content */
       h1, h2, h3, .section-title { page-break-after: avoid; break-after: avoid; }
       p { orphans: 3; widows: 3; }
+
+      /* ── Fix: preserve grid layouts (mobile CSS can trigger at print widths) */
+      .photo-layout {
+        display: grid !important;
+        flex-direction: unset !important;
+        grid-template-columns: 280px 1fr !important;
+        gap: 0 64px !important;
+        padding: 56px 48px 80px !important;
+      }
+
+      /* ── Fix: icon grid — keep 6-col grid */
+      [style*="grid-template-columns:repeat(6, 1fr)"] {
+        display: grid !important;
+        grid-template-columns: repeat(6, 1fr) !important;
+      }
+
+      /* ── Fix: color palette — 3 columns on print */
+      #primary-palette-grid {
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 0 !important;
+      }
+      #secondary-palette-grid {
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 0 !important;
+      }
+
+      /* ── Fix: color pathways — scale to fit page width */
+      .resp-inset {
+        overflow: visible !important;
+        margin: 0 0 48px !important;
+      }
+      .resp-inset > div {
+        overflow: visible !important;
+        transform: scale(0.65);
+        transform-origin: top left;
+        width: 154% !important;
+      }
+
+      /* ── Fix: combo grid logos — smaller in print */
+      .combo-grid img {
+        max-height: 55% !important;
+        max-width: 55% !important;
+      }
     }
   </style>
 
@@ -5333,6 +5367,9 @@ async function downloadFaviconZip(btn) {
   const overlay  = () => document.querySelector('.sidebar-overlay');
   const pageNavs = () => document.querySelectorAll('.page-nav');
 
+  // Track elements hidden for print so we can restore them
+  let hiddenForPrint = [];
+
   window.addEventListener('beforeprint', function () {
     pages().forEach(p => {
       p.style.display = p.classList.contains('cover-page') ? 'flex' : 'block';
@@ -5342,6 +5379,16 @@ async function downloadFaviconZip(btn) {
     [sidebar(), mHeader(), overlay(), hamburger].forEach(el => { if (el) el.style.display = 'none'; });
     pageNavs().forEach(el => el.style.display = 'none');
     document.querySelector('.main').style.marginLeft = '0';
+
+    // Hide "Approved color combinations" sections on logo pages (5-col grids + their label)
+    hiddenForPrint = [];
+    document.querySelectorAll('[style*="grid-template-columns:repeat(5,1fr)"]').forEach(grid => {
+      const parent = grid.parentElement;
+      if (parent) {
+        parent.style.display = 'none';
+        hiddenForPrint.push(parent);
+      }
+    });
   });
 
   window.addEventListener('afterprint', function () {
@@ -5353,6 +5400,10 @@ async function downloadFaviconZip(btn) {
     [sidebar(), mHeader(), overlay(), hamburger].forEach(el => { if (el) el.style.removeProperty('display'); });
     pageNavs().forEach(el => el.style.removeProperty('display'));
     document.querySelector('.main').style.removeProperty('margin-left');
+
+    // Restore hidden color combination sections
+    hiddenForPrint.forEach(el => el.style.removeProperty('display'));
+    hiddenForPrint = [];
   });
 })();
 </script>
