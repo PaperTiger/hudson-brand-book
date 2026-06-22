@@ -5447,6 +5447,11 @@ if (location.search.includes('print')) {
     document.querySelectorAll('[style*="grid-template-columns:repeat(5,1fr)"]').forEach(grid => {
       if (grid.parentElement) grid.parentElement.style.display = 'none';
     });
+    // Force 6-col icon grid (inline style !important beats CSS rule !important)
+    document.querySelectorAll('[style*="grid-template-columns:repeat(6, 1fr)"]').forEach(grid => {
+      grid.style.setProperty('grid-template-columns', 'repeat(6, 1fr)', 'important');
+      grid.style.setProperty('width', '100%', 'important');
+    });
   });
 }
 </script>
