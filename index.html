@@ -20,6 +20,61 @@
                height: 100dvh; z-index: 200; }
     .main { margin-left: var(--sidebar-w, 248px); flex: 1; min-height: 100dvh; }
     .section-content { max-width: 900px; }
+
+    /* ─── Print stylesheet ───────────────────────────────────── */
+    @media print {
+      /* Ensure backgrounds and colors print */
+      *, *::before, *::after {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+
+      /* Reset layout — no sidebar, full width */
+      body { display: block !important; margin: 0; background: white; }
+      .sidebar,
+      .mobile-header,
+      .sidebar-overlay,
+      .skip-link,
+      .page-nav { display: none !important; }
+      .main { margin-left: 0 !important; width: 100% !important; min-height: unset; }
+
+      /* Show ALL pages, each on its own printed page */
+      .page {
+        display: block !important;
+        page-break-after: always;
+        break-after: page;
+        page-break-inside: avoid;
+        min-height: unset !important;
+        overflow: visible !important;
+      }
+      .cover-page { display: flex !important; min-height: 100vh; }
+
+      /* Cover page — full page */
+      .cover-page { page-break-after: always; break-after: page; }
+
+      /* Intro pages — constrain height to one page */
+      .intro-layout {
+        height: auto !important;
+        min-height: 100vh;
+        page-break-inside: avoid;
+      }
+
+      /* Hero areas — don't break across pages */
+      .hero { page-break-inside: avoid; break-inside: avoid; }
+
+      /* Section content — remove screen-only max-width constraint */
+      .section-content { max-width: 100% !important; }
+
+      /* Don't print interactive download buttons */
+      a[download] { display: none !important; }
+
+      /* Ensure grids and images render at full size */
+      img { max-width: 100% !important; }
+
+      /* Typography — keep headings with their content */
+      h1, h2, h3, .section-title { page-break-after: avoid; break-after: avoid; }
+      p { orphans: 3; widows: 3; }
+    }
   </style>
 
   <script src="https://cdn.tailwindcss.com"></script>
