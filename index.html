@@ -5338,7 +5338,8 @@ async function downloadFaviconZip(btn) {
       p.style.display = p.classList.contains('cover-page') ? 'flex' : 'block';
       p.style.pageBreakAfter = 'always';
     });
-    [sidebar(), mHeader(), overlay()].forEach(el => { if (el) el.style.display = 'none'; });
+    const hamburger = document.getElementById('hamburger');
+    [sidebar(), mHeader(), overlay(), hamburger].forEach(el => { if (el) el.style.display = 'none'; });
     pageNavs().forEach(el => el.style.display = 'none');
     document.querySelector('.main').style.marginLeft = '0';
   });
@@ -5348,7 +5349,8 @@ async function downloadFaviconZip(btn) {
       p.style.removeProperty('display');
       p.style.removeProperty('page-break-after');
     });
-    [sidebar(), mHeader(), overlay()].forEach(el => { if (el) el.style.removeProperty('display'); });
+    const hamburger = document.getElementById('hamburger');
+    [sidebar(), mHeader(), overlay(), hamburger].forEach(el => { if (el) el.style.removeProperty('display'); });
     pageNavs().forEach(el => el.style.removeProperty('display'));
     document.querySelector('.main').style.removeProperty('margin-left');
   });
