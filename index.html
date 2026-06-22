@@ -5324,6 +5324,37 @@ async function downloadFaviconZip(btn) {
 }
 </script>
 
+<script>
+// ── Print: show all pages, hide chrome ───────────────────────
+(function () {
+  const pages    = () => document.querySelectorAll('.page');
+  const sidebar  = () => document.getElementById('sidebar');
+  const mHeader  = () => document.querySelector('.mobile-header');
+  const overlay  = () => document.querySelector('.sidebar-overlay');
+  const pageNavs = () => document.querySelectorAll('.page-nav');
+
+  window.addEventListener('beforeprint', function () {
+    pages().forEach(p => {
+      p.style.display = p.classList.contains('cover-page') ? 'flex' : 'block';
+      p.style.pageBreakAfter = 'always';
+    });
+    [sidebar(), mHeader(), overlay()].forEach(el => { if (el) el.style.display = 'none'; });
+    pageNavs().forEach(el => el.style.display = 'none');
+    document.querySelector('.main').style.marginLeft = '0';
+  });
+
+  window.addEventListener('afterprint', function () {
+    pages().forEach(p => {
+      p.style.removeProperty('display');
+      p.style.removeProperty('page-break-after');
+    });
+    [sidebar(), mHeader(), overlay()].forEach(el => { if (el) el.style.removeProperty('display'); });
+    pageNavs().forEach(el => el.style.removeProperty('display'));
+    document.querySelector('.main').style.removeProperty('margin-left');
+  });
+})();
+</script>
+
 </body>
 </html>
 
