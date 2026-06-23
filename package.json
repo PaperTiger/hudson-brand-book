@@ -1,0 +1,25 @@
+{
+  "name": "hudson-brand-book",
+  "version": "1.0.0",
+  "description": "A self-contained digital brand book for Hudson County, NJ. Built as a single HTML file with a fixed sidebar navigation and fully responsive layout — no build tools or dependencies required.",
+  "main": "brand.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PaperTiger/hudson-brand-book.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/PaperTiger/hudson-brand-book/issues"
+  },
+  "homepage": "https://github.com/PaperTiger/hudson-brand-book#readme",
+  "dependencies": {
+    "pdf-lib": "^1.17.1",
+    "playwright-core": "^1.61.0"
+  }
+}
