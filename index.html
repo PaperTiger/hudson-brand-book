@@ -113,6 +113,22 @@
         max-height: 55% !important;
         max-width: 55% !important;
       }
+      /* Hide section-label headings on logo pages */
+      .section-label { display: none !important; }
+      /* Hide download buttons */
+      a[download], button { display: none !important; }
+      /* Avatars: 2-column grid */
+      #logo-avatar [style*="display:flex; flex-wrap:wrap"] {
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 32px !important;
+      }
+      /* Reduce heading font sizes */
+      .section-title { font-size: 28px !important; }
+      h1 { font-size: 36px !important; }
+      h2 { font-size: 24px !important; }
+      h3 { font-size: 18px !important; }
+      .section-body p { font-size: 13px !important; line-height: 1.6 !important; }
     }
 
     /* ── Print-mode (screen version of print styles, activated via ?print URL param) */
@@ -176,6 +192,23 @@
       max-height: 55% !important;
       max-width: 55% !important;
     }
+    /* Hide section-label headings on logo pages */
+    body.print-mode .section-label { display: none !important; }
+    /* Hide all download buttons (both <a download> and <button> variants) */
+    body.print-mode a[download],
+    body.print-mode button { display: none !important; }
+    /* Avatars: 2-column grid */
+    body.print-mode #logo-avatar [style*="display:flex; flex-wrap:wrap"] {
+      display: grid !important;
+      grid-template-columns: repeat(2, 1fr) !important;
+      gap: 32px !important;
+    }
+    /* Reduce heading font sizes */
+    body.print-mode .section-title { font-size: 28px !important; }
+    body.print-mode h1 { font-size: 36px !important; }
+    body.print-mode h2 { font-size: 24px !important; }
+    body.print-mode h3 { font-size: 18px !important; }
+    body.print-mode .section-body p { font-size: 13px !important; line-height: 1.6 !important; }
   </style>
 
   <script src="https://cdn.tailwindcss.com"></script>
