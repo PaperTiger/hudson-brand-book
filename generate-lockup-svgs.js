@@ -42,8 +42,10 @@ const variants = [
   { name: 'liberty-green', bg: '#74FBD7', textColor: '#003230' },
   { name: 'deep-teal',     bg: '#003230', textColor: '#74FBD7' },
   { name: 'white',         bg: '#FFFFFF', textColor: '#000913' },
-  { name: 'hudson-blue',   bg: '#0004F5', textColor: '#FFFFFF' },
-  { name: 'purple',        bg: '#6B1262', textColor: '#74FBD7' },
+  { name: 'hudson-blue',      bg: '#0004F5', textColor: '#FFFFFF' },
+  { name: 'purple',           bg: '#6B1262', textColor: '#74FBD7' },
+  { name: 'deep-teal-green',  bg: '#003230', textColor: '#8AF161' },
+  { name: 'flag-yellow',      bg: '#EBE825', textColor: '#000913' },
 ];
 
 for (const { name, bg, textColor } of variants) {
