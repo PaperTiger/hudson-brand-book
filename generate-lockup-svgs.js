@@ -73,4 +73,4 @@ for (const { name, bg, textColor } of variants) {
   console.log(`✓ CE-lockup-${name}.svg  (${kb} KB)`);
 }
 
-console.log('\nDone — 6 composite lockup SVGs generated.');
+console.log('\nDone — 8 composite lockup SVGs generated.');
