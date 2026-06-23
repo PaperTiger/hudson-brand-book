@@ -8,7 +8,7 @@ const path = require('path');
 const dir = path.join(__dirname, 'images/logos');
 
 // Read and base64-encode the headshot PNG
-const headshotB64 = fs.readFileSync(path.join(dir, 'CE-headshot.png')).toString('base64');
+const headshotB64 = fs.readFileSync(path.join(dir, 'CE-headshot-nobg.png')).toString('base64');
 const headshotDataUri = `data:image/png;base64,${headshotB64}`;
 
 // Read the text lockup SVG and extract just the inner content (paths)
