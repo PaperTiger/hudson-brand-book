@@ -214,6 +214,8 @@
 
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script>
     tailwind.config = {
       theme: {
@@ -1385,9 +1387,9 @@
 
   <!-- Print button -->
   <div style="padding:16px 20px; border-top:1px solid var(--light-gray); margin-top:auto;">
-    <button id="print-section-btn" onclick="printCurrentSection()" style="display:inline-flex; align-items:center; gap:8px; width:100%; background:transparent; border:1px solid var(--light-gray); color:var(--charcoal); font-family:'Founders Grotesk',sans-serif; font-size:12px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; padding:10px 16px; cursor:pointer;">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
-      Print this page
+    <button id="print-section-btn" onclick="downloadSectionPDF()" style="display:inline-flex; align-items:center; gap:8px; width:100%; background:transparent; border:1px solid var(--light-gray); color:var(--charcoal); font-family:'Founders Grotesk',sans-serif; font-size:12px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; padding:10px 16px; cursor:pointer;">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      Download PDF
     </button>
   </div>
 
@@ -2401,8 +2403,7 @@
 
 
   <!-- ── HCNY DOME LOGO (hidden — launch later) ───────────────── -->
-  <!-- HIDDEN: remove comment tags to re-enable
-  <div class="page" tabindex="-1" id="dome-logo">
+  <div class="page" tabindex="-1" id="dome-logo" style="display:none !important;">
 
     <div style="background:var(--teal); border-bottom:1px solid var(--deep-teal); padding:60px 80px; display:flex; align-items:center; justify-content:center; min-height:320px;">
       <img src="images/logos/dome-logo_deep-teal.svg" alt="HCNY dome logo" style="max-width:700px; width:100%; height:auto;">
@@ -2453,7 +2454,6 @@
     </div>
 
   </div>
-  END HIDDEN -->
 
 
   <!-- ── HCNJ FULL ─────────────────────────────────────────────── -->
@@ -5630,60 +5630,69 @@ if (location.search.includes('print')) {
 </script>
 
 <script>
-// ── Print: show all pages, hide chrome ───────────────────────
-(function () {
-  const pages    = () => document.querySelectorAll('.page');
-  const sidebar  = () => document.getElementById('sidebar');
-  const mHeader  = () => document.querySelector('.mobile-header');
-  const overlay  = () => document.querySelector('.sidebar-overlay');
-  const pageNavs = () => document.querySelectorAll('.page-nav');
+// ── PDF download: capture active section with html2canvas + jsPDF ─
+window.downloadSectionPDF = async function () {
+  const btn        = document.getElementById('print-section-btn');
+  const activePage = document.querySelector('.page.active');
+  if (!activePage) return;
 
-  // Track elements hidden for print so we can restore them
-  let hiddenForPrint = [];
-  let printTargetId = null;
+  const origBtnHTML = btn.innerHTML;
+  btn.innerHTML  = '<span style="opacity:.6">Generating…</span>';
+  btn.disabled   = true;
 
-  function applyPrintStyles() {
-    const activePage = printTargetId
-      ? document.getElementById(printTargetId)
-      : document.querySelector('.page.active');
+  // Hide chrome so it doesn't bleed into the capture
+  const sidebar  = document.getElementById('sidebar');
+  const mHeader  = document.querySelector('.mobile-header');
+  const overlay  = document.querySelector('.sidebar-overlay');
+  const hamburger= document.getElementById('hamburger');
+  const pageNavs = document.querySelectorAll('.page-nav');
+  const main     = document.querySelector('.main');
 
-    pages().forEach(p => {
-      if (activePage && p !== activePage) {
-        p.style.display = 'none';
-        hiddenForPrint.push(p);
-      } else {
-        p.style.display = p.classList.contains('cover-page') ? 'flex' : 'block';
-      }
+  const chrome = [sidebar, mHeader, overlay, hamburger].filter(Boolean);
+  chrome.forEach(el => el.style.visibility = 'hidden');
+  pageNavs.forEach(el => el.style.visibility = 'hidden');
+  const prevMargin = main.style.marginLeft;
+  main.style.marginLeft = '0';
+
+  try {
+    const canvas = await html2canvas(activePage, {
+      scale: 2,
+      useCORS: true,
+      allowTaint: true,
+      scrollX: 0,
+      scrollY: -window.scrollY,
+      width: activePage.scrollWidth,
+      height: activePage.scrollHeight,
+      windowWidth: 1280,
     });
-    const hamburger = document.getElementById('hamburger');
-    [sidebar(), mHeader(), overlay(), hamburger].forEach(el => { if (el) el.style.display = 'none'; });
-    pageNavs().forEach(el => el.style.display = 'none');
-    document.querySelector('.main').style.marginLeft = '0';
-  }
 
-  function restorePrintStyles() {
-    hiddenForPrint.forEach(el => el.style.removeProperty('display'));
-    hiddenForPrint = [];
-    pages().forEach(p => {
-      p.style.removeProperty('display');
-      p.style.removeProperty('page-break-after');
+    const { jsPDF } = window.jspdf;
+    // Convert px → pt (72pt/inch at 96dpi); divide by scale factor (2)
+    const pxToPt = 72 / 96;
+    const pdfW   = (canvas.width  / 2) * pxToPt;
+    const pdfH   = (canvas.height / 2) * pxToPt;
+
+    const pdf = new jsPDF({
+      orientation: pdfW > pdfH ? 'l' : 'p',
+      unit: 'pt',
+      format: [pdfW, pdfH],
+      compress: true,
     });
-    const hamburger = document.getElementById('hamburger');
-    [sidebar(), mHeader(), overlay(), hamburger].forEach(el => { if (el) el.style.removeProperty('display'); });
-    pageNavs().forEach(el => el.style.removeProperty('display'));
-    document.querySelector('.main').style.removeProperty('margin-left');
-    printTargetId = null;
+
+    pdf.addImage(canvas.toDataURL('image/jpeg', 0.92), 'JPEG', 0, 0, pdfW, pdfH);
+    pdf.save(`hudson-brand-${activePage.id || 'page'}.pdf`);
+
+  } catch (err) {
+    console.error('PDF generation failed:', err);
+    alert('PDF generation failed — see console for details.');
+  } finally {
+    chrome.forEach(el => el.style.visibility = '');
+    pageNavs.forEach(el => el.style.visibility = '');
+    main.style.marginLeft = prevMargin;
+    btn.innerHTML = origBtnHTML;
+    btn.disabled  = false;
   }
-
-  window.printCurrentSection = function() {
-    const active = document.querySelector('.page.active');
-    printTargetId = active ? active.id : null;
-    window.print();
-  };
-
-  window.addEventListener('beforeprint', applyPrintStyles);
-  window.addEventListener('afterprint', restorePrintStyles);
-})();
+};
 </script>
 
 </body>
