@@ -11,6 +11,7 @@
     /* Hide all pages; show only the active one */
     .page { display: none; }
     .page.active { display: block; }
+    .page.active:not(.cover-page) { padding-bottom: 80px; }
     .cover-page.active { display: flex; }
 
     /* Establish the flex shell so the active page already has the right
