@@ -214,7 +214,7 @@
 
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://unpkg.com/html-to-image/dist/html-to-image.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script>
     tailwind.config = {
@@ -5630,7 +5630,7 @@ if (location.search.includes('print')) {
 </script>
 
 <script>
-// ── PDF download: capture active section with html2canvas + jsPDF ─
+// ── PDF download: capture active section with html-to-image + jsPDF ─
 window.downloadSectionPDF = async function () {
   const btn        = document.getElementById('print-section-btn');
   const activePage = document.querySelector('.page.active');
@@ -5647,7 +5647,7 @@ window.downloadSectionPDF = async function () {
   const pageNavs  = document.querySelectorAll('.page-nav');
   const main      = document.querySelector('.main');
 
-  // Hide all chrome with display:none so html2canvas excludes them entirely
+  // Hide all chrome with display:none so html-to-image excludes them entirely
   const prevSidebarDisplay = sidebar ? sidebar.style.display : '';
   if (sidebar) sidebar.style.display = 'none';
   const chrome = [mHeader, overlay, hamburger].filter(Boolean);
@@ -5659,7 +5659,7 @@ window.downloadSectionPDF = async function () {
   const prevMargin = main ? main.style.marginLeft : '';
   if (main) main.style.marginLeft = '0';
 
-  // Scroll to top so html2canvas captures the element from its actual top
+  // Scroll to top so html-to-image captures the element from its actual top
   const origScrollY = window.scrollY;
   window.scrollTo(0, 0);
 
@@ -5670,15 +5670,10 @@ window.downloadSectionPDF = async function () {
     const captureW = activePage.offsetWidth;
     const captureH = activePage.scrollHeight;
 
-    const canvas = await html2canvas(activePage, {
-      scale: 2,
-      useCORS: true,
-      allowTaint: true,
-      scrollX: 0,
-      scrollY: 0,
-      width:       captureW,
-      height:      captureH,
-      windowWidth: captureW,
+    const canvas = await htmlToImage.toCanvas(activePage, {
+      pixelRatio: 2,
+      width:      captureW,
+      height:     captureH,
     });
 
     const { jsPDF } = window.jspdf;
