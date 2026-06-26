@@ -114,6 +114,13 @@ const BRAND = {
         },
         { label: "H logo mark", id: "h-logo-mark" },
         {
+          label: "Marketing logos", id: "dome-logo",
+          groupId: "nav-marketing-logos-group", subId: "nav-marketing-logos-sub",
+          children: [
+            { label: "HCNY dome logo", id: "dome-logo" },
+          ],
+        },
+        {
           label: "HCNJ logo", id: "hcnj-horizontal",
           groupId: "nav-hcnj-group", subId: "nav-hcnj-sub",
           children: [

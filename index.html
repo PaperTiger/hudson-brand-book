@@ -17,7 +17,8 @@
        available width before CDN processes — prevents scroll-breaking reflow */
     body { display: flex; min-height: 100dvh; overflow-x: hidden; }
     .sidebar { width: var(--sidebar-w, 248px); position: fixed; top: 0; left: 0;
-               height: 100dvh; z-index: 200; }
+               height: 100dvh; z-index: 200; display: flex; flex-direction: column; }
+    #nav-groups { flex: 1; overflow-y: auto; }
     .main { margin-left: var(--sidebar-w, 248px); flex: 1; min-height: 100dvh; }
     .section-content { max-width: 900px; }
 
@@ -1382,6 +1383,14 @@
   <!-- Nav groups rendered by brand.js -->
   <div id="nav-groups"></div>
 
+  <!-- Print button -->
+  <div style="padding:16px 20px; border-top:1px solid var(--light-gray); margin-top:auto;">
+    <button id="print-section-btn" onclick="printCurrentSection()" style="display:inline-flex; align-items:center; gap:8px; width:100%; background:transparent; border:1px solid var(--light-gray); color:var(--charcoal); font-family:'Founders Grotesk',sans-serif; font-size:12px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; padding:10px 16px; cursor:pointer;">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+      Print this page
+    </button>
+  </div>
+
 </nav>
 
 
@@ -2389,6 +2398,60 @@
 
   </div>
 
+
+
+  <!-- ── HCNY DOME LOGO ───────────────────────────────────────── -->
+  <div class="page" tabindex="-1" id="dome-logo">
+
+    <div style="background:var(--teal); border-bottom:1px solid var(--deep-teal); padding:60px 80px; display:flex; align-items:center; justify-content:center; min-height:320px;">
+      <img src="images/logos/dome-logo_deep-teal.svg" alt="HCNY dome logo" style="max-width:700px; width:100%; height:auto;">
+    </div>
+
+    <div class="section-content">
+      <div class="section-label">Marketing logos</div>
+      <h2 class="section-title">HCNY dome logo</h2>
+      <div class="section-body">
+        <p>The HCNY dome logo combines the floral dome mark with the full Craig Guy wordmark. The dome icon draws from historic county architectural motifs and serves as a distinctive graphic element for official communications, event materials, and co-branded applications.</p>
+        <p>Use this lockup when a more expressive identity is appropriate: invitations, campaign materials, event signage, and contexts where the full wordmark benefits from an accompanying graphic device.</p>
+      </div>
+      <a href="images/logos/dome-logo_deep-teal.svg" download style="display:inline-flex; align-items:center; gap:8px; background:var(--charcoal); color:var(--white); font-family:'Founders Grotesk',sans-serif; font-size:13px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; padding:12px 20px; text-decoration:none; margin-top:24px;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Download logo
+      </a>
+    </div>
+
+    <!-- Approved color combinations -->
+    <div style="margin:0 32px 80px; border-top:1px solid var(--light-gray); padding-top:48px;">
+      <div style="font-size:11px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--charcoal); margin-bottom:24px;">Approved color combinations</div>
+      <div class="combo-grid" style="display:grid; grid-template-columns:repeat(3,1fr); gap:0;">
+        <div style="background:#74FBD7; padding:32px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:16px;">
+          <img src="images/logos/dome-logo_deep-teal.svg" alt="" style="width:100%; height:auto;">
+          <div style="font-size:11px; color:#003230; text-align:center; line-height:1.4;">Deep Teal on Liberty Green</div>
+        </div>
+        <div style="background:#003230; padding:32px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:16px;">
+          <img src="images/logos/dome-logo_teal.svg" alt="" style="width:100%; height:auto;">
+          <div style="font-size:11px; color:#74FBD7; text-align:center; line-height:1.4;">Liberty Green on Deep Teal</div>
+        </div>
+        <div style="background:#003230; padding:32px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:16px;">
+          <img src="images/logos/dome-logo_green.svg" alt="" style="width:100%; height:auto;">
+          <div style="font-size:11px; color:#8AF161; text-align:center; line-height:1.4;">Green on Deep Teal</div>
+        </div>
+        <div style="background:#FFFFFF; padding:32px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:16px;">
+          <img src="images/logos/dome-logo_black.svg" alt="" style="width:100%; height:auto;">
+          <div style="font-size:11px; color:#000913; text-align:center; line-height:1.4;">Charcoal on White</div>
+        </div>
+        <div style="background:#000913; padding:32px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:16px;">
+          <img src="images/logos/dome-logo_white.svg" alt="" style="width:100%; height:auto;">
+          <div style="font-size:11px; color:#FFFFFF; text-align:center; line-height:1.4;">White on Charcoal</div>
+        </div>
+        <div style="background:#EBE825; padding:32px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:16px;">
+          <img src="images/logos/dome-logo_black.svg" alt="" style="width:100%; height:auto;">
+          <div style="font-size:11px; color:#000913; text-align:center; line-height:1.4;">Charcoal on Flag Yellow</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
 
 
   <!-- ── HCNJ FULL ─────────────────────────────────────────────── -->
@@ -5575,29 +5638,30 @@ if (location.search.includes('print')) {
 
   // Track elements hidden for print so we can restore them
   let hiddenForPrint = [];
+  let printTargetId = null;
 
-  window.addEventListener('beforeprint', function () {
+  function applyPrintStyles() {
+    const activePage = printTargetId
+      ? document.getElementById(printTargetId)
+      : document.querySelector('.page.active');
+
     pages().forEach(p => {
-      p.style.display = p.classList.contains('cover-page') ? 'flex' : 'block';
-      p.style.pageBreakAfter = 'always';
+      if (activePage && p !== activePage) {
+        p.style.display = 'none';
+        hiddenForPrint.push(p);
+      } else {
+        p.style.display = p.classList.contains('cover-page') ? 'flex' : 'block';
+      }
     });
     const hamburger = document.getElementById('hamburger');
     [sidebar(), mHeader(), overlay(), hamburger].forEach(el => { if (el) el.style.display = 'none'; });
     pageNavs().forEach(el => el.style.display = 'none');
     document.querySelector('.main').style.marginLeft = '0';
+  }
 
-    // Hide "Approved color combinations" sections on logo pages (5-col grids + their label)
+  function restorePrintStyles() {
+    hiddenForPrint.forEach(el => el.style.removeProperty('display'));
     hiddenForPrint = [];
-    document.querySelectorAll('[style*="grid-template-columns:repeat(5,1fr)"]').forEach(grid => {
-      const parent = grid.parentElement;
-      if (parent) {
-        parent.style.display = 'none';
-        hiddenForPrint.push(parent);
-      }
-    });
-  });
-
-  window.addEventListener('afterprint', function () {
     pages().forEach(p => {
       p.style.removeProperty('display');
       p.style.removeProperty('page-break-after');
@@ -5606,11 +5670,17 @@ if (location.search.includes('print')) {
     [sidebar(), mHeader(), overlay(), hamburger].forEach(el => { if (el) el.style.removeProperty('display'); });
     pageNavs().forEach(el => el.style.removeProperty('display'));
     document.querySelector('.main').style.removeProperty('margin-left');
+    printTargetId = null;
+  }
 
-    // Restore hidden color combination sections
-    hiddenForPrint.forEach(el => el.style.removeProperty('display'));
-    hiddenForPrint = [];
-  });
+  window.printCurrentSection = function() {
+    const active = document.querySelector('.page.active');
+    printTargetId = active ? active.id : null;
+    window.print();
+  };
+
+  window.addEventListener('beforeprint', applyPrintStyles);
+  window.addEventListener('afterprint', restorePrintStyles);
 })();
 </script>
 
