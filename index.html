@@ -5640,34 +5640,48 @@ window.downloadSectionPDF = async function () {
   btn.innerHTML  = '<span style="opacity:.6">Generating…</span>';
   btn.disabled   = true;
 
-  // Hide chrome so it doesn't bleed into the capture
-  const sidebar  = document.getElementById('sidebar');
-  const mHeader  = document.querySelector('.mobile-header');
-  const overlay  = document.querySelector('.sidebar-overlay');
-  const hamburger= document.getElementById('hamburger');
-  const pageNavs = document.querySelectorAll('.page-nav');
-  const main     = document.querySelector('.main');
+  const sidebar   = document.getElementById('sidebar');
+  const mHeader   = document.querySelector('.mobile-header');
+  const overlay   = document.querySelector('.sidebar-overlay');
+  const hamburger = document.getElementById('hamburger');
+  const pageNavs  = document.querySelectorAll('.page-nav');
+  const main      = document.querySelector('.main');
 
-  const chrome = [sidebar, mHeader, overlay, hamburger].filter(Boolean);
+  // Hide all chrome with display:none so html2canvas excludes them entirely
+  const prevSidebarDisplay = sidebar ? sidebar.style.display : '';
+  if (sidebar) sidebar.style.display = 'none';
+  const chrome = [mHeader, overlay, hamburger].filter(Boolean);
   chrome.forEach(el => el.style.visibility = 'hidden');
-  pageNavs.forEach(el => el.style.visibility = 'hidden');
-  const prevMargin = main.style.marginLeft;
-  main.style.marginLeft = '0';
+  // Hide page-nav pagination bars (display:none so they don't appear in capture)
+  const prevPageNavDisplays = Array.from(pageNavs).map(el => el.style.display);
+  pageNavs.forEach(el => el.style.display = 'none');
+
+  const prevMargin = main ? main.style.marginLeft : '';
+  if (main) main.style.marginLeft = '0';
+
+  // Scroll to top so html2canvas captures the element from its actual top
+  const origScrollY = window.scrollY;
+  window.scrollTo(0, 0);
+
+  // Wait two frames for layout, scroll, and paint to settle
+  await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
 
   try {
+    const captureW = activePage.offsetWidth;
+    const captureH = activePage.scrollHeight;
+
     const canvas = await html2canvas(activePage, {
       scale: 2,
       useCORS: true,
       allowTaint: true,
       scrollX: 0,
-      scrollY: -window.scrollY,
-      width: activePage.scrollWidth,
-      height: activePage.scrollHeight,
-      windowWidth: 1280,
+      scrollY: 0,
+      width:       captureW,
+      height:      captureH,
+      windowWidth: captureW,
     });
 
     const { jsPDF } = window.jspdf;
-    // Convert px → pt (72pt/inch at 96dpi); divide by scale factor (2)
     const pxToPt = 72 / 96;
     const pdfW   = (canvas.width  / 2) * pxToPt;
     const pdfH   = (canvas.height / 2) * pxToPt;
@@ -5686,9 +5700,11 @@ window.downloadSectionPDF = async function () {
     console.error('PDF generation failed:', err);
     alert('PDF generation failed — see console for details.');
   } finally {
+    if (sidebar) sidebar.style.display = prevSidebarDisplay;
     chrome.forEach(el => el.style.visibility = '');
-    pageNavs.forEach(el => el.style.visibility = '');
-    main.style.marginLeft = prevMargin;
+    pageNavs.forEach((el, i) => el.style.display = prevPageNavDisplays[i]);
+    if (main) main.style.marginLeft = prevMargin;
+    window.scrollTo(0, origScrollY);
     btn.innerHTML = origBtnHTML;
     btn.disabled  = false;
   }
