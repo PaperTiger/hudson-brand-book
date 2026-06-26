@@ -9,7 +9,7 @@ const BRAND = {
     nameLine1:        "Hudson County,",
     nameLine2:        "New Jersey",
     title:            "Brand guidelines",
-    version:          "Version 1.0",
+    version:          "Version 1.1",
     date:             "June 2026",
     preparedBy:       "Paper Tiger",
     sidebarLogoImage: "images/logos/HCNJ_text_deep-teal.svg",
@@ -113,13 +113,7 @@ const BRAND = {
           ],
         },
         { label: "H logo mark", id: "h-logo-mark" },
-        {
-          label: "Marketing logos", id: "dome-logo",
-          groupId: "nav-marketing-logos-group", subId: "nav-marketing-logos-sub",
-          children: [
-            { label: "HCNY dome logo", id: "dome-logo" },
-          ],
-        },
+        // Marketing logos hidden — launch later
         {
           label: "HCNJ logo", id: "hcnj-horizontal",
           groupId: "nav-hcnj-group", subId: "nav-hcnj-sub",
