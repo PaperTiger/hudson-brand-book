@@ -5671,9 +5671,10 @@ window.downloadSectionPDF = async function () {
     const captureH = activePage.scrollHeight;
 
     const canvas = await htmlToImage.toCanvas(activePage, {
-      pixelRatio: 2,
-      width:      captureW,
-      height:     captureH,
+      pixelRatio:       2,
+      width:            captureW,
+      height:           captureH,
+      backgroundColor:  '#ffffff',
     });
 
     const { jsPDF } = window.jspdf;
