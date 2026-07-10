@@ -127,7 +127,6 @@ const BRAND = {
         { label: "Avatar &amp; favicon", id: "logo-avatar" },
         { label: "What to avoid", id: "logo-avoid" },
         { label: "Co-sponsorship lockup", id: "logo-cosponsor" },
-        { label: "Headshot lockup", id: "logo-headshot" },
       ],
     },
     {
