@@ -82,6 +82,11 @@ The mark follows the nav group and page that shows it:
 The `HCNJ logo` nav group collapses into the `hcnj` family prefix rather than
 repeating, so its marks carry a `-logo` suffix instead of a third segment.
 
+**Every new logo file must follow this convention.** When a logo is added,
+give it a stem derived from the nav group and page that will show it, before
+writing any HTML that references it. No exceptions — the two files below are
+grandfathered, not precedent.
+
 `hcnj_seal_*` and `hcnj_wordmark-small_*` render on primary-brand pages despite
 the `hcnj` prefix — the prefix tracks the artwork, not the page. Note the
 "Text only" page under **Full logo** shows HCNJ artwork.
@@ -89,10 +94,49 @@ the `hcnj` prefix — the prefix tracks the artwork, not the page. Note the
 Two files sit outside the convention on purpose: `CE-lockup.svg` (gitignored)
 and `Group 1597880486.svg` (unreferenced, unknown provenance).
 
-The site references SVGs only; the PNGs exist for `downloads/HCNJ-logos.zip`.
-That zip also carries **CMYK `.eps`** files which cannot be regenerated from the
-SVG masters here — after an artwork swap its `.eps` files are stale until new
-ones are exported from Illustrator.
+## The downloads ZIP
+
+The site references SVGs only. The PNGs exist solely for
+`downloads/HCNJ-logos.zip`, which is what the public actually downloads.
+
+**Always regenerate the ZIP when a logo is added, replaced, or renamed.** It is
+not built from `images/logos/` at request time — it is a checked-in binary, so
+it silently keeps serving the old artwork and old filenames until rebuilt. Its
+layout is `00 - Logos/<Group>/{RGB,CMYK}/<stem>.<ext>`, three files per variant:
+`.svg` and `.png` under `RGB/`, `.eps` under `CMYK/`.
+
+Rebuild it after any logo change:
+
+1. Regenerate the SVG + PNG variants (`generate-*-variants.js`).
+2. Regenerate the EPS: `node generate-eps-variants.js <stem>...`.
+3. Inject all three formats into the ZIP under the matching group folder, and
+   rename entries if the stems changed. (There is no one-shot repack script yet
+   — do it in a short Node/Python pass, then `unzip -t` to confirm integrity.)
+
+### About the CMYK EPS files — they ARE regenerable
+
+Earlier notes here claimed the `.eps` files were true press separations that
+only Illustrator could produce. That was wrong. They are **script-generated**:
+each carries `%%Creator: HCNJ SVG-to-CMYK-EPS converter` and is a flat
+PostScript dump of the SVG's paths under one `setcmykcolor`. `generate-eps-
+variants.js` reproduces them, and its output is **byte-for-byte identical** to
+every non-stale EPS already in the ZIP (verified across all 6 unchanged logo
+families), so it is safe to regenerate any of them.
+
+Two things the converter does that aren't obvious from the SVG:
+
+- **The CMYK is naive, not profile-aware.** It is the same integer-percent
+  `hexToCmyk` formula as `brand.js` — no ICC profile, no rendering intent. Out-
+  of-gamut brand colors like Liberty Green just take whatever that formula
+  yields. Fine for this project because the existing EPS were made the same way;
+  if the county's printer ever needs real separations, that's an Illustrator
+  export, not this script.
+- **The `black` variant is rich black `#000913` (Charcoal), not `#000000`.** The
+  SVG's `fill="black"` is only for on-screen RGB; every EPS in the ZIP uses
+  `C:100 M:53 Y:0 K:93`, and the generator matches that.
+
+The loose `images/logos/*.eps` the script writes are transient build artifacts
+(gitignored) — the ZIP is their only home.
 
 ## Verifying a logo change — do not skip
 
