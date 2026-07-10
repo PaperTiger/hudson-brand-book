@@ -1,9 +1,23 @@
-# Hudson County Brand Book — working notes
+# Hudson County Brand Book, working notes
 
 Single-file HTML brand book (`index.html`, ~5700 lines) with a `brand.js` nav layer.
 No build step. Served locally via the `brand-book` preview server (port 8743).
 
 Deploys to GitHub Pages from the `develop` branch of `PaperTiger/hudson-brand-book`.
+
+## Writing style
+
+**No em dashes, ever.** Not in page copy, headings, alt text, labels, code
+comments, commit messages, or these notes. Use commas, colons, parentheses, or
+separate sentences instead. This applies to everything in the project.
+
+**Sentence case** for all UI text: nav labels, section labels, page titles, and
+in-copy references to pages (e.g. "Craig Guy lockups", "Lockup with seal &
+portrait", "HCNJ lockup"). The one exception is proper nouns, which stay
+capitalized: brand color names ("Deep Teal", "Liberty Green", "Hudson Blue",
+"Flag Yellow", "Charcoal", "Amaranth", "Purple"), "Craig Guy", "County
+Executive", and "HCNJ". So color-combination captions read "Deep Teal on
+Liberty Green".
 
 ## Deploying
 
@@ -11,13 +25,13 @@ Push from **GitHub Desktop**, not the CLI. Rapid CLI pushes get deployments
 cancelled/superseded by Pages throttling. Claude should commit but leave the
 push to the user unless asked otherwise.
 
-After a successful deploy, the Pages CDN can lag a few minutes — hard-refresh
+After a successful deploy, the Pages CDN can lag a few minutes, hard-refresh
 (Cmd+Shift+R) before concluding a change didn't ship.
 
 ## Replacing logo artwork
 
 New master artwork arrives in `Hudson County/<name>/` as a single black-fill
-SVG plus a PNG. **That folder is tracked** — `.gitignore` covers only
+SVG plus a PNG. **That folder is tracked**, `.gitignore` covers only
 `sync.config.json`, `node_modules/`, `hudson-brand-book.pdf`, and
 `CE-lockup.svg`. It sits in the repo, and it also lives inside iCloud Drive, so
 Finder/iCloud activity can stage spurious deletions there. Check `git status`
@@ -34,7 +48,7 @@ string-replaces `fill="black"` with each brand color, writes the five
 Copy either script's shape for other logos.
 
 **PNG scale:** use `deviceScaleFactor` + `screenshot({ scale: 'device' })`.
-Playwright's `scale: 'css'` renders at 1x no matter the viewport — the stacked
+Playwright's `scale: 'css'` renders at 1x no matter the viewport, the stacked
 script's `const scale = 2` was dead code, which is why
 `hudson-county_full-logo_stacked_*.png` shipped at 674px wide instead of ~3000px like
 other assets. The text-lockup script targets `TARGET_WIDTH = 3000`.
@@ -84,11 +98,11 @@ repeating, so its marks carry a `-logo` suffix instead of a third segment.
 
 **Every new logo file must follow this convention.** When a logo is added,
 give it a stem derived from the nav group and page that will show it, before
-writing any HTML that references it. No exceptions — the two files below are
+writing any HTML that references it. No exceptions, the two files below are
 grandfathered, not precedent.
 
 `hcnj_seal_*` and `hcnj_wordmark-small_*` render on primary-brand pages despite
-the `hcnj` prefix — the prefix tracks the artwork, not the page. Note the
+the `hcnj` prefix, the prefix tracks the artwork, not the page. Note the
 "Text only" page under **Full logo** shows HCNJ artwork.
 
 Two files sit outside the convention on purpose: `CE-lockup.svg` (gitignored)
@@ -100,7 +114,7 @@ The site references SVGs only. The PNGs exist solely for
 `downloads/HCNJ-logos.zip`, which is what the public actually downloads.
 
 **Always regenerate the ZIP when a logo is added, replaced, or renamed.** It is
-not built from `images/logos/` at request time — it is a checked-in binary, so
+not built from `images/logos/` at request time, it is a checked-in binary, so
 it silently keeps serving the old artwork and old filenames until rebuilt. Its
 layout is `00 - Logos/<Group>/{RGB,CMYK}/<stem>.<ext>`, three files per variant:
 `.svg` and `.png` under `RGB/`, `.eps` under `CMYK/`.
@@ -111,9 +125,9 @@ Rebuild it after any logo change:
 2. Regenerate the EPS: `node generate-eps-variants.js <stem>...`.
 3. Inject all three formats into the ZIP under the matching group folder, and
    rename entries if the stems changed. (There is no one-shot repack script yet
-   — do it in a short Node/Python pass, then `unzip -t` to confirm integrity.)
+  , do it in a short Node/Python pass, then `unzip -t` to confirm integrity.)
 
-### About the CMYK EPS files — they ARE regenerable
+### About the CMYK EPS files, they ARE regenerable
 
 Earlier notes here claimed the `.eps` files were true press separations that
 only Illustrator could produce. That was wrong. They are **script-generated**:
@@ -126,7 +140,7 @@ families), so it is safe to regenerate any of them.
 Two things the converter does that aren't obvious from the SVG:
 
 - **The CMYK is naive, not profile-aware.** It is the same integer-percent
-  `hexToCmyk` formula as `brand.js` — no ICC profile, no rendering intent. Out-
+  `hexToCmyk` formula as `brand.js`, no ICC profile, no rendering intent. Out-
   of-gamut brand colors like Liberty Green just take whatever that formula
   yields. Fine for this project because the existing EPS were made the same way;
   if the county's printer ever needs real separations, that's an Illustrator
@@ -136,9 +150,9 @@ Two things the converter does that aren't obvious from the SVG:
   `C:100 M:53 Y:0 K:93`, and the generator matches that.
 
 The loose `images/logos/*.eps` the script writes are transient build artifacts
-(gitignored) — the ZIP is their only home.
+(gitignored), the ZIP is their only home.
 
-## Verifying a logo change — do not skip
+## Verifying a logo change, do not skip
 
 New artwork often has different proportions than what it replaces, which breaks
 layouts that were tuned to the old aspect ratio. Two bugs both hid above 768px
@@ -154,7 +168,7 @@ viewport width:
    `--cs-x` in px, calibrated to the logo's rendered size. A mobile override
    (`.cs-logo-box img { max-width:100% !important }`) let the logo grow past
    that calibrated size while `x` stayed fixed, so the diagram no longer showed
-   `x = cap height of the H`. Removed in `d4b9914` — each image's own inline
+   `x = cap height of the H`. Removed in `d4b9914`, each image's own inline
    `max-width` + `width:100%` already caps *and* shrinks correctly.
 
 So after any logo change, check in the browser preview at **320px, ~700px, and
@@ -162,7 +176,7 @@ desktop**:
 
 - every swatch / background-combination grid showing that logo, scrolled to the
   bottom of the tiles, for clipped artwork or captions
-- that logo's **Clearspace** diagram — confirm `x` still looks proportional to
+- that logo's **Clearspace** diagram, confirm `x` still looks proportional to
   the logo's own lettering, not merely that nothing overflows
 
 The `.cs-logo-box img` inline `max-width` (160px / 280px / etc.) is per-logo
@@ -174,13 +188,13 @@ page likely needs recalibrating too.
 The sidebar "Download PDF" button captures the active `.page.active` section
 via `html-to-image` + `jsPDF`. Full writeup, including the five bugs it works
 around, is in [`pdf-download-button.md`](pdf-download-button.md). Notably:
-**do not swap back to html2canvas** — v1.4.1 throws on the CSS `color()`
+**do not swap back to html2canvas**, v1.4.1 throws on the CSS `color()`
 function modern browsers emit.
 
 ## Hidden content
 
 The HCNJ dome logo page (`#dome-logo`) is built but hidden pending launch:
 `style="display:none !important"` on the page div, and its nav entry is
-commented out in `brand.js`. Hide sections this way — an HTML comment wrapper
+commented out in `brand.js`. Hide sections this way, an HTML comment wrapper
 breaks, because the section contains nested `<!-- -->` comments that close it
 early.

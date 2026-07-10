@@ -18,17 +18,17 @@ const BRAND = {
 
   /* ── Type specimen copy ───────────────────────────────────── */
   specimens: {
-    // Display — Founders Grotesk Condensed Bold
+    // Display - Founders Grotesk Condensed Bold
     display96:  "HCNJ",
     display73:  "Hudson County",
     display64:  "Government that works",
     display48:  "For every community in New Jersey",
-    // Headlines — Founders Grotesk Semibold
+    // Headlines - Founders Grotesk Semibold
     headline42: "Essential county services",
     headline32: "Services for 700,000 residents",
     headline24: "Connecting people to their county government",
     headline21: "Accessible government starts with clear communication",
-    // Body — Founders Grotesk Text (and fallback fonts)
+    // Body - Founders Grotesk Text (and fallback fonts)
     body18:     "Hudson County provides essential services to more than 700,000 residents.",
     body16:     "Hudson County provides essential services to more than 700,000 residents across 12 municipalities. Every document, every sign, every screen is a chance to make that relationship clearer and more trusted.",
     body14:     "Hudson County provides essential services to more than 700,000 residents across 12 municipalities. Every document, every sign, every screen is a chance to make that relationship clearer and more trusted. The brand must function at every size, from street signage to digital interfaces.",
@@ -113,7 +113,7 @@ const BRAND = {
           ],
         },
         { label: "H logo mark", id: "h-logo-mark" },
-        // Marketing logos hidden — launch later
+        // Marketing logos hidden - launch later
         {
           label: "HCNJ logo", id: "hcnj-horizontal",
           groupId: "nav-hcnj-group", subId: "nav-hcnj-sub",
@@ -124,9 +124,6 @@ const BRAND = {
             { label: "Size guide",    id: "hcnj-size-guide" },
           ],
         },
-        { label: "Avatar &amp; favicon", id: "logo-avatar" },
-        { label: "What to avoid", id: "logo-avoid" },
-        { label: "Co-sponsorship lockup", id: "logo-cosponsor" },
         {
           label: "Craig Guy lockups", id: "cg-full-lockup",
           groupId: "nav-cg-group", subId: "nav-cg-sub",
@@ -138,6 +135,9 @@ const BRAND = {
             { label: "Size guide", id: "cg-size-guide" },
           ],
         },
+        { label: "Avatar &amp; favicon", id: "logo-avatar" },
+        { label: "Co-sponsorship lockup", id: "logo-cosponsor" },
+        { label: "What to avoid", id: "logo-avoid" },
       ],
     },
     {
@@ -214,7 +214,7 @@ const BRAND = {
 
 
 /* ─────────────────────────────────────────────────────────────────
-   Initialisation — runs before the nav/routing script
+   Initialisation - runs before the nav/routing script
 ───────────────────────────────────────────────────────────────── */
 (function init() {
   injectTokens();
