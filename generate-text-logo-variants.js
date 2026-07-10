@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // Regenerates the 5 text-lockup color variants (SVG + PNG) from the new
-// master artwork, replacing images/logos/hudson-county_text-lockup_*.{svg,png}
+// master artwork, replacing images/logos/hudson-county_full-logo_text-lockup_*.{svg,png}
 // Usage: node generate-text-logo-variants.js
 
 const fs   = require('fs');
@@ -9,7 +9,7 @@ const { chromium } = require('playwright-core');
 
 const masterPath = path.join(__dirname, 'Hudson County', 'HC - Full Text', 'Logo-full-text.svg');
 const outDir     = path.join(__dirname, 'images', 'logos');
-const stem       = 'hudson-county_text-lockup';
+const stem       = 'hudson-county_full-logo_text-lockup';
 
 // Downloadable PNGs are rendered to roughly this width, matching the other
 // logo assets in images/logos/. SVGs are resolution-independent.

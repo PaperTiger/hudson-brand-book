@@ -36,7 +36,7 @@ Copy either script's shape for other logos.
 **PNG scale:** use `deviceScaleFactor` + `screenshot({ scale: 'device' })`.
 Playwright's `scale: 'css'` renders at 1x no matter the viewport — the stacked
 script's `const scale = 2` was dead code, which is why
-`hudson-county_stacked_*.png` shipped at 674px wide instead of ~3000px like the
+`hudson-county_full-logo_stacked_*.png` shipped at 674px wide instead of ~3000px like
 other assets. The text-lockup script targets `TARGET_WIDTH = 3000`.
 
 Brand colors used for variants:
@@ -58,18 +58,33 @@ Keep the master artwork if a variant ever needs regenerating.
 
 ## Logo file naming
 
-Every file in `images/logos/` follows `<family>_<mark>_<color>.<ext>` —
-all lowercase, `_` between segments, `-` within a segment.
+Filenames mirror the sidebar nav: `<family>_<mark>_<color>.<ext>`, all
+lowercase, `_` between segments and `-` within a segment. Color always comes
+last.
 
-| Family         | Marks                                            |
-|----------------|--------------------------------------------------|
-| `hudson-county`| `horizontal`, `stacked`, `text-lockup`           |
-| `hcnj`         | `horizontal`, `text-lockup`, `text-only`, `seal`, `wordmark-small` |
-| `craig-guy`    | `headshot-lockup`, `text-lockup`, `headshot`     |
-| *(no family)*  | `h-mark`, `dome`                                 |
+The mark follows the nav group and page that shows it:
+
+| Nav group / page              | File stem                              |
+|-------------------------------|----------------------------------------|
+| Full logo → Horizontal        | `hudson-county_full-logo_horizontal`   |
+| Full logo → Stacked           | `hudson-county_full-logo_stacked`      |
+| Full logo → Text lockup       | `hudson-county_full-logo_text-lockup`  |
+| Full logo → Text only         | `hcnj_wordmark-small`                  |
+| County seal                   | `hcnj_seal`                            |
+| H logo mark                   | `h-mark`                               |
+| HCNJ logo → Horizontal        | `hcnj_horizontal-logo`                 |
+| HCNJ logo → Text lockup       | `hcnj_text-lockup-logo`                |
+| HCNJ logo → Text only         | `hcnj_text-only-logo`                  |
+| Headshot lockup               | `craig-guy_headshot-lockup`            |
+| Co-sponsorship lockup         | `craig-guy_text-lockup`                |
+| *(hidden)* HCNJ dome logo     | `dome`                                 |
+
+The `HCNJ logo` nav group collapses into the `hcnj` family prefix rather than
+repeating, so its marks carry a `-logo` suffix instead of a third segment.
 
 `hcnj_seal_*` and `hcnj_wordmark-small_*` render on primary-brand pages despite
-the `hcnj` prefix — the prefix tracks the artwork, not the page.
+the `hcnj` prefix — the prefix tracks the artwork, not the page. Note the
+"Text only" page under **Full logo** shows HCNJ artwork.
 
 Two files sit outside the convention on purpose: `CE-lockup.svg` (gitignored)
 and `Group 1597880486.svg` (unreferenced, unknown provenance).

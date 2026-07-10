@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // Regenerates the 5 stacked-logo color variants (SVG + PNG) from the new
-// master artwork, replacing images/logos/hudson-county_stacked_*.{svg,png}
+// master artwork, replacing images/logos/hudson-county_full-logo_stacked_*.{svg,png}
 // Usage: node generate-stacked-logo-variants.js
 
 const fs   = require('fs');
@@ -35,7 +35,7 @@ function extractViewBoxSize(svg) {
 
   for (const { name, color } of variants) {
     const svg = masterRaw.replace(/fill="black"/g, `fill="${color}"`);
-    const svgOut = path.join(outDir, `hudson-county_stacked_${name}.svg`);
+    const svgOut = path.join(outDir, `hudson-county_full-logo_stacked_${name}.svg`);
     fs.writeFileSync(svgOut, svg);
 
     // Render PNG at 2x scale on a transparent background
@@ -50,13 +50,13 @@ function extractViewBoxSize(svg) {
       <body>${svg}</body></html>
     `);
     const el = await page.$('svg');
-    const pngOut = path.join(outDir, `hudson-county_stacked_${name}.png`);
+    const pngOut = path.join(outDir, `hudson-county_full-logo_stacked_${name}.png`);
     await el.screenshot({ path: pngOut, omitBackground: true, scale: 'css' });
     await page.close();
 
     const svgKb = (Buffer.byteLength(svg) / 1024).toFixed(0);
     const pngKb = (fs.statSync(pngOut).size / 1024).toFixed(0);
-    console.log(`✓ hudson-county_stacked_${name}.svg (${svgKb} KB) / .png (${pngKb} KB)`);
+    console.log(`✓ hudson-county_full-logo_stacked_${name}.svg (${svgKb} KB) / .png (${pngKb} KB)`);
   }
 
   await browser.close();

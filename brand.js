@@ -12,7 +12,7 @@ const BRAND = {
     version:          "Version 1.1",
     date:             "June 2026",
     preparedBy:       "Paper Tiger",
-    sidebarLogoImage: "images/logos/hcnj_text-only_deep-teal.svg",
+    sidebarLogoImage: "images/logos/hcnj_text-only-logo_deep-teal.svg",
     coverSealImage:   "images/logos/hcnj_seal_deep-teal.svg",
   },
 
