@@ -572,8 +572,11 @@
         padding: 12px !important;
         touch-action: pan-y;
       }
-      /* Scale down large logos inside the diagram */
-      .cs-logo-box img { max-width: 100% !important; }
+      /* Each logo's own inline max-width (160px/280px/etc.) already caps its
+         size and shrinks via width:100% if the container is narrower — this
+         keeps the logo-to-x ratio correct at every viewport. A max-width:100%
+         override here breaks that ratio by letting the logo grow past its
+         calibrated size while x stays fixed. */
 
       /* ─── Fix #3: Hero images fill properly ─────────────────── */
       .page > [style*="padding:80px"] img {
