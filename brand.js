@@ -132,6 +132,10 @@ const BRAND = {
           groupId: "nav-cg-group", subId: "nav-cg-sub",
           children: [
             { label: "Full lockup", id: "cg-full-lockup" },
+            { label: "Lockup with seal", id: "cg-seal-lockup" },
+            { label: "Lockup with seal &amp; portrait", id: "cg-seal-portrait-lockup" },
+            { label: "HCNJ lockup", id: "cg-hcnj-lockup" },
+            { label: "Size guide", id: "cg-size-guide" },
           ],
         },
       ],
