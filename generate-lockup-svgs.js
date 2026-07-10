@@ -8,11 +8,11 @@ const path = require('path');
 const dir = path.join(__dirname, 'images/logos');
 
 // Read and base64-encode the headshot PNG
-const headshotB64 = fs.readFileSync(path.join(dir, 'CE-headshot.png')).toString('base64');
+const headshotB64 = fs.readFileSync(path.join(dir, 'craig-guy_headshot.png')).toString('base64');
 const headshotDataUri = `data:image/png;base64,${headshotB64}`;
 
 // Read the text lockup SVG and extract just the inner content (paths)
-const textSvgRaw = fs.readFileSync(path.join(dir, 'CG-text-lockup.svg'), 'utf8');
+const textSvgRaw = fs.readFileSync(path.join(dir, 'craig-guy_text-lockup.svg'), 'utf8');
 // Strip the outer <svg> wrapper — keep everything between first > and </svg>
 const innerPaths = textSvgRaw
   .replace(/^<svg[^>]*>/, '')
@@ -32,7 +32,7 @@ const PHOTO_R = PHOTO_D / 2; // radius
 const GAP = 40;              // gap between photo and text
 const TEXT_X = PHOTO_D + GAP;
 const TEXT_W = VW - TEXT_X;  // remaining width for text
-// CG-text-lockup.svg is 747×167 — scale to fit TEXT_W × VH with vertical centering
+// craig-guy_text-lockup.svg is 747×167 — scale to fit TEXT_W × VH with vertical centering
 const TEXT_SCALE = Math.min(TEXT_W / 747, VH / 167);
 const TEXT_H = 167 * TEXT_SCALE;
 const TEXT_Y = (VH - TEXT_H) / 2;
@@ -67,10 +67,10 @@ for (const { name, bg, textColor } of variants) {
   </g>
 </svg>`;
 
-  const outPath = path.join(dir, `CE-lockup-${name}.svg`);
+  const outPath = path.join(dir, `craig-guy_headshot-lockup_${name}.svg`);
   fs.writeFileSync(outPath, svg);
   const kb = (Buffer.byteLength(svg) / 1024).toFixed(0);
-  console.log(`✓ CE-lockup-${name}.svg  (${kb} KB)`);
+  console.log(`✓ craig-guy_headshot-lockup_${name}.svg  (${kb} KB)`);
 }
 
 console.log('\nDone — 8 composite lockup SVGs generated.');

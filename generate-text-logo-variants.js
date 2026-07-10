@@ -1,14 +1,19 @@
 #!/usr/bin/env node
-// Regenerates the 5 stacked-logo color variants (SVG + PNG) from the new
-// master artwork, replacing images/logos/hudson-county_stacked_*.{svg,png}
-// Usage: node generate-stacked-logo-variants.js
+// Regenerates the 5 text-lockup color variants (SVG + PNG) from the new
+// master artwork, replacing images/logos/hudson-county_text-lockup_*.{svg,png}
+// Usage: node generate-text-logo-variants.js
 
 const fs   = require('fs');
 const path = require('path');
 const { chromium } = require('playwright-core');
 
-const masterPath = path.join(__dirname, 'Hudson County', 'Hudson County - Stacked', 'logo-stacked.svg');
-const outDir      = path.join(__dirname, 'images', 'logos');
+const masterPath = path.join(__dirname, 'Hudson County', 'HC - Full Text', 'Logo-full-text.svg');
+const outDir     = path.join(__dirname, 'images', 'logos');
+const stem       = 'hudson-county_text-lockup';
+
+// Downloadable PNGs are rendered to roughly this width, matching the other
+// logo assets in images/logos/. SVGs are resolution-independent.
+const TARGET_WIDTH = 3000;
 
 const masterRaw = fs.readFileSync(masterPath, 'utf8');
 
@@ -35,13 +40,16 @@ function extractViewBoxSize(svg) {
 
   for (const { name, color } of variants) {
     const svg = masterRaw.replace(/fill="black"/g, `fill="${color}"`);
-    const svgOut = path.join(outDir, `hudson-county_stacked_${name}.svg`);
-    fs.writeFileSync(svgOut, svg);
+    fs.writeFileSync(path.join(outDir, `${stem}_${name}.svg`), svg);
 
-    // Render PNG at 2x scale on a transparent background
-    const scale = 2;
-    const page  = await browser.newPage({ viewport: { width: Math.ceil(w), height: Math.ceil(h) } });
-    await page.setViewportSize({ width: Math.ceil(w), height: Math.ceil(h) });
+    // Render PNG on a transparent background, upscaled to TARGET_WIDTH so the
+    // downloadable asset matches the ~3000px-wide originals. deviceScaleFactor
+    // + scale:'device' is what actually applies the upscale — scale:'css'
+    // silently renders at 1x regardless of viewport.
+    const page = await browser.newPage({
+      viewport: { width: Math.ceil(w), height: Math.ceil(h) },
+      deviceScaleFactor: TARGET_WIDTH / w,
+    });
     await page.setContent(`
       <html><head><style>
         html,body{margin:0;padding:0;background:transparent;}
@@ -50,15 +58,15 @@ function extractViewBoxSize(svg) {
       <body>${svg}</body></html>
     `);
     const el = await page.$('svg');
-    const pngOut = path.join(outDir, `hudson-county_stacked_${name}.png`);
-    await el.screenshot({ path: pngOut, omitBackground: true, scale: 'css' });
+    const pngOut = path.join(outDir, `${stem}_${name}.png`);
+    await el.screenshot({ path: pngOut, omitBackground: true, scale: 'device' });
     await page.close();
 
     const svgKb = (Buffer.byteLength(svg) / 1024).toFixed(0);
     const pngKb = (fs.statSync(pngOut).size / 1024).toFixed(0);
-    console.log(`✓ hudson-county_stacked_${name}.svg (${svgKb} KB) / .png (${pngKb} KB)`);
+    console.log(`✓ ${stem}_${name}.svg (${svgKb} KB) / .png (${pngKb} KB)`);
   }
 
   await browser.close();
-  console.log('\nDone — 5 stacked logo variants regenerated.');
+  console.log('\nDone — 5 text lockup variants regenerated.');
 })();
