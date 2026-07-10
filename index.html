@@ -5826,6 +5826,18 @@
     if (parent) parent.setAttribute('aria-expanded', open ? 'true' : 'false');
   }
 
+  const cgChildIds = new Set(['cg-full-lockup','cg-seal-lockup','cg-seal-portrait-lockup','cg-hcnj-lockup','cg-size-guide']);
+  const cgGroup = document.getElementById('nav-cg-group');
+  const cgSub   = document.getElementById('nav-cg-sub');
+
+  function setCgExpanded(open) {
+    if (!cgGroup || !cgSub) return;
+    cgGroup.classList.toggle('open', open);
+    cgSub.classList.toggle('open', open);
+    const parent = cgGroup.querySelector('.nav-parent');
+    if (parent) parent.setAttribute('aria-expanded', open ? 'true' : 'false');
+  }
+
   const landscapeChildIds = new Set(['photo-landscape-examples','photo-landscape-dos','photo-landscape-donts']);
   const landscapeGroup = document.getElementById('nav-landscape-group');
   const landscapeSub   = document.getElementById('nav-landscape-sub');
@@ -5895,6 +5907,7 @@
     if (fgChildIds.has(targetId)) setFgExpanded(true);
     if (fullLogoChildIds.has(targetId)) setFullLogoExpanded(true);
     if (hcnjChildIds.has(targetId)) setHcnjExpanded(true);
+    if (cgChildIds.has(targetId)) setCgExpanded(true);
     if (landscapeChildIds.has(targetId)) setLandscapeExpanded(true);
     if (communityPhotoChildIds.has(targetId)) setCommunityPhotoExpanded(true);
     // On mobile, open the section containing the active nav link
@@ -5940,6 +5953,10 @@
         const isOpen = hcnjGroup && hcnjGroup.classList.contains('open');
         setHcnjExpanded(!isOpen);
       }
+      if (target === 'cg-full-lockup') {
+        const isOpen = cgGroup && cgGroup.classList.contains('open');
+        setCgExpanded(!isOpen);
+      }
       if (target === 'photo-landscape-examples') {
         const isOpen = landscapeGroup && landscapeGroup.classList.contains('open');
         setLandscapeExpanded(!isOpen);
@@ -5965,6 +5982,8 @@
         setFullLogoExpanded(!fullLogoGroup.classList.contains('open'));
       } else if (expandable.id === 'nav-hcnj-group') {
         setHcnjExpanded(!hcnjGroup.classList.contains('open'));
+      } else if (expandable.id === 'nav-cg-group') {
+        setCgExpanded(!cgGroup.classList.contains('open'));
       } else if (expandable.id === 'nav-landscape-group') {
         setLandscapeExpanded(!landscapeGroup.classList.contains('open'));
       } else if (expandable.id === 'nav-community-photo-group') {
