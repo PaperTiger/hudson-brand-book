@@ -5965,6 +5965,10 @@
         const isOpen = communityPhotoGroup && communityPhotoGroup.classList.contains('open');
         setCommunityPhotoExpanded(!isOpen);
       }
+      // On mobile, tapping a group's parent link expands the sub-list only —
+      // it does not navigate or close the drawer, so the user can pick a child.
+      // (The per-group toggles above have already run.)
+      if (link.classList.contains('nav-parent') && window.innerWidth <= 768) return;
       showPage(target, true);
     });
   });
