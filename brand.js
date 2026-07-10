@@ -127,6 +127,13 @@ const BRAND = {
         { label: "Avatar &amp; favicon", id: "logo-avatar" },
         { label: "What to avoid", id: "logo-avoid" },
         { label: "Co-sponsorship lockup", id: "logo-cosponsor" },
+        {
+          label: "Craig Guy Lockups", id: "cg-full-lockup",
+          groupId: "nav-cg-group", subId: "nav-cg-sub",
+          children: [
+            { label: "Full lockup", id: "cg-full-lockup" },
+          ],
+        },
       ],
     },
     {
