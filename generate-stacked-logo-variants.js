@@ -7,7 +7,7 @@ const fs   = require('fs');
 const path = require('path');
 const { chromium } = require('playwright-core');
 
-const masterPath = path.join(__dirname, 'Hudson County', 'Hudson County - Stacked', 'logo-stacked.svg');
+const masterPath = path.join(__dirname, 'Hudson County', 'HC - Stacked 2', 'HC - logo-stacked.svg');
 const outDir      = path.join(__dirname, 'images', 'logos');
 
 const masterRaw = fs.readFileSync(masterPath, 'utf8');
