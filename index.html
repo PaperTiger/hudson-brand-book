@@ -1356,6 +1356,11 @@
       .masonry-grid { columns: 2; }
     }
 
+    /* Bumper examples gallery: 3 columns on desktop, 2 on tablet and mobile (never 1) */
+    @media (max-width: 1024px) {
+      .bumper-grid { grid-template-columns: repeat(2, 1fr) !important; }
+    }
+
     } /* end @layer components */
   </style>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -3995,7 +4000,7 @@
       </div>
     </div>
 
-    <div class="resp-grid-3col" style="display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin:0 32px 56px;">
+    <div class="bumper-grid" style="display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin:0 32px 56px;">
       <img src="images/bumper-examples/bumper-1.png" alt="Bumper example on a County notice" style="width:100%; height:auto; display:block; border:1px solid var(--light-gray);">
       <img src="images/bumper-examples/bumper-2.png" alt="Bumper example on a County notice" style="width:100%; height:auto; display:block; border:1px solid var(--light-gray);">
       <img src="images/bumper-examples/bumper-3.png" alt="Bumper example on a County notice" style="width:100%; height:auto; display:block; border:1px solid var(--light-gray);">
