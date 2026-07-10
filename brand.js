@@ -128,7 +128,7 @@ const BRAND = {
         { label: "What to avoid", id: "logo-avoid" },
         { label: "Co-sponsorship lockup", id: "logo-cosponsor" },
         {
-          label: "Craig Guy Lockups", id: "cg-full-lockup",
+          label: "Craig Guy lockups", id: "cg-full-lockup",
           groupId: "nav-cg-group", subId: "nav-cg-sub",
           children: [
             { label: "Full lockup", id: "cg-full-lockup" },
