@@ -108,24 +108,44 @@ the `hcnj` prefix, the prefix tracks the artwork, not the page. Note the
 Two files sit outside the convention on purpose: `CE-lockup.svg` (gitignored)
 and `Group 1597880486.svg` (unreferenced, unknown provenance).
 
-## The downloads ZIP
+## The downloads ZIPs
 
-The site references SVGs only. The PNGs exist solely for
-`downloads/HCNJ-logos.zip`, which is what the public actually downloads.
+The site references SVGs only. The PNGs (and EPS) exist solely for the download
+ZIPs, which are what the public actually downloads. As of the split, each logo
+section downloads its own ZIP instead of one big `HCNJ-logos.zip` (removed):
 
-**Always regenerate the ZIP when a logo is added, replaced, or renamed.** It is
-not built from `images/logos/` at request time, it is a checked-in binary, so
-it silently keeps serving the old artwork and old filenames until rebuilt. Its
-layout is `00 - Logos/<Group>/{RGB,CMYK}/<stem>.<ext>`, three files per variant:
-`.svg` and `.png` under `RGB/`, `.eps` under `CMYK/`.
+| Section (nav)        | Button on pages                                   | ZIP                              | Stems |
+|----------------------|---------------------------------------------------|----------------------------------|-------|
+| Full logo            | Horizontal, Stacked, Text lockup, Text only       | `downloads/full-logos.zip`       | `hudson-county_full-logo_{horizontal,stacked,text-lockup}` |
+| County seal          | County seal                                       | `downloads/county-seal.zip`      | `hcnj_seal` |
+| HCNJ logo            | Horizontal, Text lockup, Text only                | `downloads/hcnj-logos.zip`       | `hcnj_{horizontal-logo,text-lockup-logo,text-only-logo}` |
+| H logo mark          | H logo mark                                       | `downloads/h-logo.zip`           | `h-mark` |
+| Craig Guy lockups    | Full / Seal / Seal & portrait / HCNJ lockup       | `downloads/craig-guy-lockups.zip`| `craig-guy_{full-lockup,seal-lockup,seal-portrait-lockup,hcnj-lockup}` |
 
-Rebuild it after any logo change:
+Avatar & favicon download their own ZIPs generated client-side (`hcnj-avatars.zip`,
+`hcnj-favicons.zip`) - not static files. Co-sponsorship has no download button.
+`hcnj_wordmark-small` (Full logo "Text only") is deliberately not in any ZIP: it
+has only 2 SVG variants and no PNG/EPS. Fonts and icons have their own separate
+ZIPs (`HCNJ-fonts.zip`, `hudson-county-icon-set.zip`).
+
+**Always rebuild the affected section ZIP when a logo is added, replaced, or
+renamed.** The ZIPs are checked-in binaries, not built at request time, so they
+silently keep serving stale artwork until rebuilt. Internal layout per ZIP:
+one folder per mark (human-readable name, e.g. `Text lockup/`) with `.svg` +
+`.png` under `RGB/` and `.eps` under `CMYK/`. Single-mark ZIPs (county seal, H)
+skip the mark folder and put `RGB/` and `CMYK/` at the root.
+
+**macOS case-insensitivity:** the new `hcnj-logos.zip` collides on disk with the
+old `HCNJ-logos.zip`. The old one is deleted; don't recreate a differently-cased
+name for an existing ZIP.
+
+Rebuild after any logo change:
 
 1. Regenerate the SVG + PNG variants (`generate-*-variants.js`).
-2. Regenerate the EPS: `node generate-eps-variants.js <stem>...`.
-3. Inject all three formats into the ZIP under the matching group folder, and
-   rename entries if the stems changed. (There is no one-shot repack script yet
-  , do it in a short Node/Python pass, then `unzip -t` to confirm integrity.)
+2. Regenerate the EPS: `node generate-eps-variants.js <stem>...` (skip the three
+   photo lockups - see below - they can't produce EPS).
+3. Repack the section ZIP from `images/logos/` in a short Node/Python pass, then
+   `unzip -t` to confirm integrity. (There is no one-shot repack script yet.)
 
 ### About the CMYK EPS files, they ARE regenerable
 
@@ -151,6 +171,12 @@ Two things the converter does that aren't obvious from the SVG:
 
 The loose `images/logos/*.eps` the script writes are transient build artifacts
 (gitignored), the ZIP is their only home.
+
+**Photo lockups can't be EPS.** Three Craig Guy lockups (`craig-guy_full-lockup`,
+`craig-guy_seal-portrait-lockup`, `craig-guy_hcnj-lockup`) embed a raster
+headshot as a `<pattern>` image, so the flat path-dump converter can't render
+them. Their ZIP entries are RGB (`.svg` + `.png`) only, no CMYK. Only the
+pure-vector `craig-guy_seal-lockup` gets EPS.
 
 ## Verifying a logo change, do not skip
 
