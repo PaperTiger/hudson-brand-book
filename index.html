@@ -1636,7 +1636,7 @@
       </div>
       <div style="order:1; display:flex; justify-content:center; align-items:center;">
         <div class="cs-outer">
-          <div class="cs-zone" style="--cs-x: 32px;">
+          <div class="cs-zone" data-cs-cap="0.112667" style="--cs-x: 32px;">
             <div class="cs-logo-box">
               <img src="images/logos/hudson-county_horizontal_black.svg" alt="Hudson County full logo, horizontal" style="max-width:280px; width:100%; height:auto; display:block;">
             </div>
@@ -1776,7 +1776,7 @@
       </div>
       <div style="order:1; display:flex; justify-content:center; align-items:center;">
         <div class="cs-outer">
-          <div class="cs-zone" style="--cs-x: 32px;">
+          <div class="cs-zone" data-cs-cap="0.219585" style="--cs-x: 35px;">
             <div class="cs-logo-box">
               <img src="images/logos/hudson-county_stacked_black.svg" alt="Hudson County stacked logo" style="max-width:160px; width:100%; height:auto; display:block;">
             </div>
@@ -1916,7 +1916,7 @@
       </div>
       <div style="order:1; display:flex; justify-content:center; align-items:center;">
         <div class="cs-outer">
-          <div class="cs-zone" style="--cs-x: 60px;">
+          <div class="cs-zone" data-cs-cap="0.220667" style="--cs-x: 62px;">
             <div class="cs-logo-box">
               <img src="images/logos/hudson-county_text-lockup_black.svg" alt="Hudson County logo, text only" style="max-width:280px; width:100%; height:auto; display:block;">
             </div>
@@ -5335,6 +5335,34 @@
     overlay.classList.remove('open');
   }
 
+  /* Clearspace x must equal the cap height of the "H" in HUDSON at whatever
+     size the logo actually renders — the inline --cs-x is only correct at the
+     image's calibrated max-width. data-cs-cap is capHeight / artworkWidth.
+     The padding is part of the logo box's available width, so setting --cs-x
+     changes the width it was derived from; iterate to a fixed point. */
+  function syncClearspace() {
+    document.querySelectorAll('.cs-zone[data-cs-cap]').forEach(zone => {
+      const img = zone.querySelector('.cs-logo-box img');
+      if (!img || !img.naturalWidth) return;
+      const cap = parseFloat(zone.dataset.csCap);
+      for (let i = 0; i < 4; i++) {
+        const w = img.getBoundingClientRect().width;
+        if (!w) return;                       // page hidden — recompute when shown
+        zone.style.setProperty('--cs-x', (cap * w).toFixed(2) + 'px');
+      }
+    });
+  }
+
+  let csFrame = 0;
+  function scheduleClearspaceSync() {
+    cancelAnimationFrame(csFrame);
+    csFrame = requestAnimationFrame(syncClearspace);
+  }
+  window.addEventListener('resize', scheduleClearspaceSync);
+  window.addEventListener('load', syncClearspace);
+  document.querySelectorAll('.cs-zone[data-cs-cap] .cs-logo-box img')
+    .forEach(img => img.addEventListener('load', scheduleClearspaceSync));
+
   function showPage(targetId, pushState) {
     if (!validIds.has(targetId)) targetId = 'home';
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
@@ -5372,6 +5400,7 @@
     const mLogo = document.getElementById('mobile-logo');
     if (mLogo) mLogo.src = BRAND.meta.sidebarLogoImage;
     closeSidebar();
+    syncClearspace();
   }
 
   links.forEach(link => {
