@@ -133,6 +133,7 @@ const BRAND = {
             { label: "Lockup with seal &amp; portrait", id: "cg-seal-portrait-lockup" },
             { label: "HCNJ lockup", id: "cg-hcnj-lockup" },
             { label: "Size guide", id: "cg-size-guide" },
+            { label: "Bumper examples", id: "cg-bumper-examples" },
           ],
         },
         { label: "Avatar &amp; favicon", id: "logo-avatar" },
