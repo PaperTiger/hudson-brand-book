@@ -216,7 +216,43 @@ document.querySelectorAll('.cs-zone[data-cs-cap] .cs-logo-box img')
 
 ## 4. Computing `data-cs-cap` for a logo
 
-Run in the browser console with the SVG reachable by URL:
+Use the script. `measure-clearspace.js` in this repo takes any SVG and prints
+the ratio, and it handles the traps below without hand-tuning:
+
+```bash
+node measure-clearspace.js images/logos/my-logo_black.svg --render-width 280
+```
+
+It renders the SVG in headless Chromium, measures every drawable shape,
+clusters them into lines of type, and reports the cap height of the tallest
+real line as a ratio. `--render-width` also prints the calibrated inline
+`--cs-x` fallback. Add `--json` to script it, `--x-range a,b` to restrict the
+search to a horizontal slice of the artwork.
+
+It only needs `playwright-core`, so it ports to any project that already
+renders artwork (most brand books do). Read the picked cluster's
+`glyphs matched` and `cap band spans x` before trusting the number.
+
+### Cap height is not ink extent
+
+The script reports the **median glyph height**, which is the height of a
+flat-topped letter such as H, E or N. Round letters (O, C, S, U) are cut
+slightly taller so they do not read as small, so the line's total ink extent
+runs 1 to 3% above the true cap height.
+
+That matters when reconciling against an older number. Values measured with the
+console snippet below are ink extents, so they sit 1 to 3% high. The script
+prints `ratio_inkExtent` alongside, purely so you can confirm you are looking at
+the same piece of geometry before switching to the cap-height number. A 1 to 3%
+difference in clearspace is visually irrelevant, so do not churn existing
+diagrams over it, but do not expect the two methods to agree exactly either.
+
+### Fallback: the browser console
+
+If Node is not available, this does the same job with more hand-holding. Note
+that it uses `getBBox`, which reports a shape's own user space and silently
+ignores a transform on an ancestor `<g>`. The script uses
+`getBoundingClientRect` instead, which is transform-safe.
 
 ```js
 const url = 'logo_black.svg';
@@ -258,16 +294,25 @@ host.remove();
 
 Use `ratio_fullCap` or `ratio_halfCap` depending on how your spec defines `x`.
 
-### Two traps that will give you a wrong number
+### Three traps that will give you a wrong number
 
 - **Signatures and seals hijack the measurement.** A script flourish is often
   the single tallest path in the file, so "tallest glyph" grabs it instead of
-  the cap letters. Constrain by x-position (`minX` / `maxX`) to isolate the
-  letters, and prefer a *cluster* of same-height glyphs (`glyphsMatched` should
-  be roughly the number of cap letters, not 1) over the single tallest path.
+  the cap letters. This is not theoretical: the Craig Guy full lockup in this
+  book shipped with `data-cs-cap="0.050527"`, which is half the height of the
+  *signature*, not half the cap height of the C in CRAIG. It renders about 1.8x
+  more clearspace than its own caption specifies. The script avoids this by
+  requiring a cluster of at least 3 equal-height shapes on a shared baseline; a
+  signature is one or two paths and gets skipped. With the console snippet,
+  constrain by x-position (`minX` / `maxX`) instead.
+- **Two lines of type merge into one.** HUDSON and COUNTY share a cap height but
+  sit on different baselines. Group on height alone and they become one cluster
+  whose extent spans both lines plus the leading, roughly doubling the answer.
+  The script requires a shared top edge as well as a shared height.
 - **Merged paths.** Some exports merge all letters into one compound path. Then
-  `glyphsMatched` is 1 legitimately and the bbox height is the cap height. Sanity
-  check the number against the artwork's proportions before trusting it.
+  `glyphs matched` is 1 legitimately and the bbox height is the cap height. The
+  script reports `confidence: low` in this case. Sanity check the number against
+  the artwork's proportions before trusting it.
 
 **Always verify visually afterward.** Render the diagram and confirm the gap
 reads as clearly one (or half) cap height. The measurement is a starting point,
