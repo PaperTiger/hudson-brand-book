@@ -1,9 +1,10 @@
 #!/usr/bin/env node
 // Converts each images/logos/<stem>_<color>.svg into a CMYK EPS matching the
-// format the original "HCNJ SVG-to-CMYK-EPS converter" produced. The EPS files
-// are NOT true press-profiled separations — they use the same naive
-// hex->CMYK formula as brand.js (hexToCmyk), so they regenerate losslessly
-// from the SVG masters.
+// format the original "HCNJ SVG-to-CMYK-EPS converter" produced. CMYK values
+// come from the PRINT_CMYK table below (shared with brand.js): sRGB converted
+// through the U.S. Web Coated (SWOP) v2 profile, relative colorimetric intent
+// with black point compensation (Adobe's default conversion). The old naive
+// hex->CMYK inversion gave green hues no yellow, so they printed blue.
 //
 // Usage: node generate-eps-variants.js <stem>...
 //   e.g. node generate-eps-variants.js hudson-county_full-logo_text-lockup
@@ -13,9 +14,8 @@ const fs   = require('fs');
 const path = require('path');
 
 // Print color per variant. The `black` variant maps to Charcoal, not #000000:
-// the original converter used a rich black for print, and every existing EPS
-// follows suit (C:100 M:53 Y:0 K:93). The SVG's fill="black" is only correct
-// for on-screen RGB.
+// the converter uses a rich black for print. The SVG's fill="black" is only
+// correct for on-screen RGB.
 const COLORS = {
   black:       '#000913',
   'deep-teal': '#003230',
@@ -25,15 +25,22 @@ const COLORS = {
 };
 const outDir = path.join(__dirname, 'images', 'logos');
 
-// Same math as brand.js hexToCmyk — mathematical, not profile-aware — rounded
-// to whole percent to match the original converter's output.
+// Whole-percent CMYK per hex, same table as brand.js PRINT_CMYK. Values were
+// produced by converting sRGB through USWebCoatedSWOP.icc via littlecms
+// (relative colorimetric + black point compensation). Regenerate with the
+// same profile and settings if the palette ever changes.
+const PRINT_CMYK = {
+  '#000913': [78, 70, 62, 83],  // Charcoal rich black
+  '#003230': [89, 56, 67, 62],  // Deep Teal
+  '#74FBD7': [43, 0, 29, 0],    // Liberty Green
+  '#8AF161': [44, 0, 85, 0],    // Green
+  '#FFFFFF': [0, 0, 0, 0],      // White
+};
+
 function hexToCmyk(hex) {
-  const n = parseInt(hex.replace('#', ''), 16);
-  const r = ((n >> 16) & 255) / 255, g = ((n >> 8) & 255) / 255, b = (n & 255) / 255;
-  const k = 1 - Math.max(r, g, b);
-  if (k === 1) return [0, 0, 0, 100];
-  const pc = v => Math.round(((1 - v - k) / (1 - k)) * 100);
-  return [pc(r), pc(g), pc(b), Math.round(k * 100)];
+  const cmyk = PRINT_CMYK[hex.toUpperCase()];
+  if (!cmyk) throw new Error(`no PRINT_CMYK entry for ${hex}`);
+  return cmyk;
 }
 
 const f4 = v => v.toFixed(4);

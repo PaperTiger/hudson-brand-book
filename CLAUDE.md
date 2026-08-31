@@ -153,21 +153,28 @@ Earlier notes here claimed the `.eps` files were true press separations that
 only Illustrator could produce. That was wrong. They are **script-generated**:
 each carries `%%Creator: HCNJ SVG-to-CMYK-EPS converter` and is a flat
 PostScript dump of the SVG's paths under one `setcmykcolor`. `generate-eps-
-variants.js` reproduces them, and its output is **byte-for-byte identical** to
-every non-stale EPS already in the ZIP (verified across all 6 unchanged logo
-families), so it is safe to regenerate any of them.
+variants.js` reproduces them, so it is safe to regenerate any of them. (Its
+output was verified byte-for-byte against the pre-existing EPS before the
+CMYK values were switched to profile-converted ones; every EPS in the ZIPs
+now carries the new values.)
 
 Two things the converter does that aren't obvious from the SVG:
 
-- **The CMYK is naive, not profile-aware.** It is the same integer-percent
-  `hexToCmyk` formula as `brand.js`, no ICC profile, no rendering intent. Out-
-  of-gamut brand colors like Liberty Green just take whatever that formula
-  yields. Fine for this project because the existing EPS were made the same way;
-  if the county's printer ever needs real separations, that's an Illustrator
-  export, not this script.
+- **The CMYK comes from a fixed profile-converted table, not a formula.** The
+  `PRINT_CMYK` table (duplicated in `brand.js` and `generate-eps-variants.js`)
+  holds sRGB converted through U.S. Web Coated (SWOP) v2, relative colorimetric
+  intent with black point compensation (Adobe's default conversion), computed
+  via Python Pillow/littlecms against
+  `/Applications/Affinity.app/Contents/Resources/USWebCoatedSWOP.icc`. The
+  original naive inversion formula gave green hues zero yellow, so Deep Teal
+  (`C100 M0 Y4 K80`) and Liberty Green (`C54 M0 Y14 K2`) printed blue; the
+  table values (`C89 M56 Y67 K62`, `C43 M0 Y29 K0`) stay green. If the palette
+  ever changes, recompute with the same profile and settings and update both
+  copies of the table.
 - **The `black` variant is rich black `#000913` (Charcoal), not `#000000`.** The
-  SVG's `fill="black"` is only for on-screen RGB; every EPS in the ZIP uses
-  `C:100 M:53 Y:0 K:93`, and the generator matches that.
+  SVG's `fill="black"` is only for on-screen RGB; every EPS uses the Charcoal
+  SWOP value `C:78 M:70 Y:62 K:83` (total ink 293%, under SWOP's 300% limit).
+  Before the profile fix it was the naive `C:100 M:53 Y:0 K:93`.
 
 The loose `images/logos/*.eps` the script writes are transient build artifacts
 (gitignored), the ZIP is their only home.

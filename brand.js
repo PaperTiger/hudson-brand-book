@@ -332,8 +332,30 @@ function hexToRgb(hex) {
   ];
 }
 
-/* Convert hex color to CMYK array (mathematical, not profile-aware) */
+/* Print CMYK per brand color, converted from sRGB through the
+   U.S. Web Coated (SWOP) v2 profile (relative colorimetric intent with
+   black point compensation, Adobe's default conversion). The old
+   mathematical inversion gave green hues no yellow component, so they
+   printed blue. */
+/* Look up the profile-converted CMYK for a brand color; fall back to the
+   mathematical inversion for any hex not in the table. The table lives
+   inside the function so callers that run before this point in the file
+   still work (function declarations hoist, const does not). */
 function hexToCmyk(hex) {
+  const PRINT_CMYK = {
+    "#74FBD7": [43, 0, 29, 0],    /* Liberty Green */
+    "#003230": [89, 56, 67, 62],  /* Deep Teal */
+    "#000913": [78, 70, 62, 83],  /* Charcoal */
+    "#FFFFFF": [0, 0, 0, 0],      /* White */
+    "#0004F5": [88, 78, 0, 0],    /* Hudson Blue */
+    "#6B1262": [62, 100, 29, 18], /* Purple */
+    "#EBE825": [11, 0, 96, 0],    /* Flag Yellow */
+    "#8AF161": [44, 0, 85, 0],    /* Green */
+    "#EB254D": [1, 97, 65, 0],    /* Amaranth */
+    "#E3E3E3": [9, 8, 8, 0],      /* Gray */
+  };
+  const known = PRINT_CMYK[hex.toUpperCase()];
+  if (known) return known;
   const [r, g, b] = hexToRgb(hex).map(v => v / 255);
   const k = 1 - Math.max(r, g, b);
   if (k === 1) return [0, 0, 0, 100];
