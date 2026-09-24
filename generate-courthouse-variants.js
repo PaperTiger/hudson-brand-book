@@ -16,7 +16,7 @@ const outDir     = path.join(__dirname, 'images', 'illustrations');
 const stem       = 'courthouse';
 
 // Artwork bounds in artboard units, measured from the alpha channel of the
-// 6250px courthouse.png in the download ZIP (49.2, 294.7 to 1450.8, 1205.3),
+// original 6250px square courthouse.png export (49.2, 294.7 to 1450.8, 1205.3),
 // padded by 2 units so round stroke caps aren't clipped. Remeasure if the
 // master artwork changes.
 const VIEWBOX = '47 292 1406 916';
