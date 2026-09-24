@@ -175,21 +175,12 @@ const BRAND = {
       items: [
         { label: "Introduction", id: "photo-intro" },
         {
-          label: "Landscapes", id: "photo-landscape-examples",
-          groupId: "nav-landscape-group", subId: "nav-landscape-sub",
+          label: "Photo usage", id: "photo-landscape-examples",
+          groupId: "nav-photo-usage-group", subId: "nav-photo-usage-sub",
           children: [
-            { label: "Examples",  id: "photo-landscape-examples" },
-            { label: "Dos",       id: "photo-landscape-dos" },
-            { label: "Don'ts",    id: "photo-landscape-donts" },
-          ],
-        },
-        {
-          label: "Community", id: "photo-community-examples",
-          groupId: "nav-community-photo-group", subId: "nav-community-photo-sub",
-          children: [
-            { label: "Examples",  id: "photo-community-examples" },
-            { label: "Dos",       id: "photo-community-dos" },
-            { label: "Don'ts",    id: "photo-community-donts" },
+            { label: "Landscape examples", id: "photo-landscape-examples" },
+            { label: "Community examples", id: "photo-community-examples" },
+            { label: "Dos &amp; don'ts",   id: "photo-dos-donts" },
           ],
         },
         { label: "Stock photos",            id: "media-stock-photos" },
