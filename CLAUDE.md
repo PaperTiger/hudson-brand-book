@@ -125,9 +125,10 @@ section downloads its own ZIP instead of one big `HCNJ-logos.zip` (removed):
 The Media > Stock photos page offers `downloads/HCNJ-stock-photos.zip` (all 16 PNGs as
 supplied) plus a per-photo download of each full-res PNG from `downloads/stock-photos/hcnj-stock_<name>.png`.
 The grid shows 1200px WebP copies from `images/stock-photos/`. The Media > HCNJ video page
-plays a 1600px, 30fps, faststart copy (`images/media/hcnj-video_web.mp4`, about 3 MB) and
-downloads the full master `downloads/HCNJ-video.mp4`. Regenerate the web copies with ffmpeg
-if either source changes.
+plays a client-supplied preview copy (`images/media/hcnj-video_web.mp4`, about 6 MB) and
+downloads the full 2478x1080 master `downloads/HCNJ-video.mp4`. The preview is stored as
+1920x1080 with a 413:320 pixel aspect flag, so browsers display it at 2478x1080. ffmpeg frame
+grabs ignore that flag, so scale to 1600x698 when making the poster.
 
 The Media > Courthouse illustration page downloads `downloads/courthouse-illustration.zip`
 (`.ai`, `.svg`, `.png`, `.jpg` as supplied, one `courthouse-illustration/` folder).
