@@ -8,7 +8,7 @@ A self-contained digital brand book for Hudson County, NJ. Built as a single HTM
 - **HCNJ Logo** — Horizontal, text lockup, and text-only variations
 - **Color** — Primary and secondary palettes, approved color combinations, usage pathways
 - **Typography** — Founders Grotesk family overview, usage rules, type scale, fallback fonts, what to avoid
-- **Photography** — Landscape and community photography dos and don'ts
+- **Media**: Photography dos and don'ts, stock photos, HCNJ video, courthouse illustration, and icon library
 - **Applications** — Swag, merchandise, and in-the-wild brand usage examples
 - **Icons** — Icon library
 

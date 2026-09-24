@@ -1352,6 +1352,23 @@
     }
     .masonry-grid .masonry-placeholder span { opacity: 0.3; }
 
+    /* Stock photo tiles: masonry item with a per-photo high-res download */
+    .stock-item { position: relative; margin: 0 0 10px; break-inside: avoid; }
+    .masonry-grid .stock-item img { margin-bottom: 0; }
+    .stock-dl {
+      position: absolute; right: 10px; bottom: 10px;
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--charcoal); color: var(--white);
+      font-family: 'Founders Grotesk', sans-serif; font-size: 11px; font-weight: 600;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      padding: 8px 12px; text-decoration: none;
+    }
+    .stock-dl svg { width: 12px; height: 12px; }
+    @media (max-width: 768px) {
+      .stock-dl { right: 6px; bottom: 6px; padding: 7px; }
+      .stock-dl span { display: none; }
+    }
+
     @media (max-width: 1439px) {
       .masonry-grid { columns: 2; }
     }
@@ -5152,12 +5169,12 @@
     <div class="portrait-intro" style="display:grid; grid-template-columns:1fr 1fr; height:100dvh; overflow:hidden;">
       <!-- Left: intro content -->
       <div style="display:flex; flex-direction:column; padding:32px; box-sizing:border-box;">
-        <div style="font-size:11px; font-weight:600; letter-spacing:0.13em; text-transform:uppercase; color:var(--charcoal);">Photography</div>
+        <div style="font-size:11px; font-weight:600; letter-spacing:0.13em; text-transform:uppercase; color:var(--charcoal);">Media</div>
         <p style="font-family:'Founders Grotesk',sans-serif; font-weight:400; font-size:clamp(24px,3.2vw,48px); line-height:1.0; letter-spacing:-0.02em; color:var(--charcoal); max-width:720px; margin:48px 0 0;">Photography that earns its place.</p>
         <div style="flex:1;"></div>
         <div style="max-width:480px;">
           <!-- TODO: Update for new client -->
-          <p style="font-family:'Founders Grotesk Text',sans-serif; font-size:18px; line-height:var(--lh-body); color:var(--charcoal); margin:0;">Hudson County's photography direction is documentary in spirit, grounded in the daily life of the county and the communities that make it. Imagery is not used to project aspiration or sell a vision. It is used to reflect reality honestly, and in doing so, build trust.</p>
+          <p style="font-family:'Founders Grotesk Text',sans-serif; font-size:18px; line-height:var(--lh-body); color:var(--charcoal); margin:0;">Hudson County's photography direction is documentary in spirit, grounded in the daily life of the county and the communities that make it. Imagery is not used to project aspiration or sell a vision. It is used to reflect reality honestly, and in doing so, build trust. This section also covers the stock photo library, the HCNJ video, the courthouse illustration, and the icon library.</p>
         </div>
       </div>
       <!-- Right: portrait image -->
@@ -5171,7 +5188,7 @@
   <!-- ── LANDSCAPE: EXAMPLES ──────────────────────────────────── -->
   <div class="page" tabindex="-1" id="photo-landscape-examples">
     <div class="section-content">
-      <div class="section-label">Photography: Landscapes</div>
+      <div class="section-label">Media: Landscapes</div>
       <h2 class="section-title">Examples</h2>
       <div class="section-body">
         <p>Scenic and environmental photography of Hudson County, from the built environment and civic spaces to the lush parks, flowering landscapes, and natural fauna woven throughout the county. Use across print collateral, digital backgrounds, and report covers.</p>
@@ -5206,7 +5223,7 @@
     <div class="photo-layout" style="display:grid; grid-template-columns:280px 1fr; gap:0 64px; padding:56px 48px 80px; box-sizing:border-box; align-items:start;">
 
       <div>
-        <div class="section-label" style="margin-bottom:20px;">Photography</div>
+        <div class="section-label" style="margin-bottom:20px;">Media</div>
         <h2 class="section-title" style="margin-bottom:24px;">Landscape: dos</h2>
         <div class="section-body">
           <p>These are guiding principles when creating landscape photography assets. They're not hard and fast rules, but a starting point for shooting imagery used in print or digital collateral.</p>
@@ -5285,7 +5302,7 @@
     <div class="photo-layout" style="display:grid; grid-template-columns:280px 1fr; gap:0 64px; padding:56px 48px 80px; box-sizing:border-box; align-items:start;">
 
       <div>
-        <div class="section-label" style="margin-bottom:20px;">Photography</div>
+        <div class="section-label" style="margin-bottom:20px;">Media</div>
         <h2 class="section-title" style="margin-bottom:24px;">Landscape: don'ts</h2>
         <div class="section-body">
           <p>Avoid photography choices that undermine authenticity, flatten the county's character, or project an aspirational image that does not reflect the lived experience of Hudson County residents.</p>
@@ -5362,7 +5379,7 @@
   <!-- ── COMMUNITY: EXAMPLES ──────────────────────────────────── -->
   <div class="page" tabindex="-1" id="photo-community-examples">
     <div class="section-content">
-      <div class="section-label">Photography: Community</div>
+      <div class="section-label">Media: Community</div>
       <h2 class="section-title">Examples</h2>
       <div class="section-body">
         <p>Documentary photography of Hudson County residents, employees, and community members in their own environments. Candid, unposed, and rooted in real moments. These images set the standard for community photography across county communications.</p>
@@ -5384,7 +5401,7 @@
     <div class="photo-layout" style="display:grid; grid-template-columns:280px 1fr; gap:0 64px; padding:56px 48px 80px; box-sizing:border-box; align-items:start;">
 
       <div>
-        <div class="section-label" style="margin-bottom:20px;">Photography</div>
+        <div class="section-label" style="margin-bottom:20px;">Media</div>
         <h2 class="section-title" style="margin-bottom:24px;">Community: dos</h2>
         <div class="section-body">
           <p>Community photography should reflect Hudson County's actual residents, at work, at rest, and in service. Documentary instincts over casting. Real moments over posed compositions.</p>
@@ -5483,7 +5500,7 @@
     <div class="photo-layout" style="display:grid; grid-template-columns:280px 1fr; gap:0 64px; padding:56px 48px 80px; box-sizing:border-box; align-items:start;">
 
       <div>
-        <div class="section-label" style="margin-bottom:20px;">Photography</div>
+        <div class="section-label" style="margin-bottom:20px;">Media</div>
         <h2 class="section-title" style="margin-bottom:24px;">Community: don'ts</h2>
         <div class="section-body">
           <p>Avoid community photography that looks manufactured, performs diversity, or positions the county as aspirational rather than accountable. These approaches erode trust.</p>
@@ -5593,7 +5610,115 @@
   </div>
 
 
-  <!-- ── ILLUSTRATION: COURTHOUSE ─────────────────────────────── -->
+  <!-- ── MEDIA: STOCK PHOTOS ──────────────────────────────────── -->
+  <div class="page" tabindex="-1" id="media-stock-photos">
+    <div class="section-content">
+      <div class="section-label">Media</div>
+      <h2 class="section-title">Stock photos</h2>
+      <div class="section-body">
+        <p>A curated library of approved Hudson County photography: landmarks, waterfronts, neighborhoods, and nature from across the county. Every image is available at full resolution for print and digital.</p>
+        <p>Use the button on any photo to download that image as a high-res PNG, or download the full set at once.</p>
+      </div>
+      <a href="downloads/HCNJ-stock-photos.zip" download style="display:inline-flex; align-items:center; gap:8px; background:var(--charcoal); color:var(--white); font-family:'Founders Grotesk',sans-serif; font-size:13px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; padding:12px 20px; text-decoration:none; margin-top:24px;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Download all photos (96 MB)
+      </a>
+    </div>
+    <div style="margin:0 32px 80px;">
+      <div class="masonry-grid">
+        <figure class="stock-item">
+          <img src="images/stock-photos/hcnj-stock_street-mural.webp" alt="Street mural" width="1200" height="802">
+          <a class="stock-dl" href="downloads/stock-photos/hcnj-stock_street-mural.png" download aria-label="Download Street mural (high-res PNG)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg><span>High-res</span></a>
+        </figure>
+        <figure class="stock-item">
+          <img src="images/stock-photos/hcnj-stock_food-trucks.webp" alt="Food trucks" width="1200" height="802">
+          <a class="stock-dl" href="downloads/stock-photos/hcnj-stock_food-trucks.png" download aria-label="Download Food trucks (high-res PNG)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg><span>High-res</span></a>
+        </figure>
+        <figure class="stock-item">
+          <img src="images/stock-photos/hcnj-stock_courthouse-exterior.webp" alt="Courthouse exterior" width="1200" height="676">
+          <a class="stock-dl" href="downloads/stock-photos/hcnj-stock_courthouse-exterior.png" download aria-label="Download Courthouse exterior (high-res PNG)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg><span>High-res</span></a>
+        </figure>
+        <figure class="stock-item">
+          <img src="images/stock-photos/hcnj-stock_waterfront-terminal.webp" alt="Waterfront terminal" width="1200" height="800">
+          <a class="stock-dl" href="downloads/stock-photos/hcnj-stock_waterfront-terminal.png" download aria-label="Download Waterfront terminal (high-res PNG)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg><span>High-res</span></a>
+        </figure>
+        <figure class="stock-item">
+          <img src="images/stock-photos/hcnj-stock_terminal-and-skyline.webp" alt="Terminal and skyline" width="1200" height="800">
+          <a class="stock-dl" href="downloads/stock-photos/hcnj-stock_terminal-and-skyline.png" download aria-label="Download Terminal and skyline (high-res PNG)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg><span>High-res</span></a>
+        </figure>
+        <figure class="stock-item">
+          <img src="images/stock-photos/hcnj-stock_terminal-interior.webp" alt="Terminal interior" width="1200" height="800">
+          <a class="stock-dl" href="downloads/stock-photos/hcnj-stock_terminal-interior.png" download aria-label="Download Terminal interior (high-res PNG)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg><span>High-res</span></a>
+        </figure>
+        <figure class="stock-item">
+          <img src="images/stock-photos/hcnj-stock_great-hall.webp" alt="Great hall" width="1200" height="1200">
+          <a class="stock-dl" href="downloads/stock-photos/hcnj-stock_great-hall.png" download aria-label="Download Great hall (high-res PNG)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg><span>High-res</span></a>
+        </figure>
+        <figure class="stock-item">
+          <img src="images/stock-photos/hcnj-stock_skyline-sunset.webp" alt="Skyline at sunset" width="1200" height="800">
+          <a class="stock-dl" href="downloads/stock-photos/hcnj-stock_skyline-sunset.png" download aria-label="Download Skyline at sunset (high-res PNG)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg><span>High-res</span></a>
+        </figure>
+        <figure class="stock-item">
+          <img src="images/stock-photos/hcnj-stock_bayonne-bridge.webp" alt="Bayonne Bridge" width="1200" height="600">
+          <a class="stock-dl" href="downloads/stock-photos/hcnj-stock_bayonne-bridge.png" download aria-label="Download Bayonne Bridge (high-res PNG)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg><span>High-res</span></a>
+        </figure>
+        <figure class="stock-item">
+          <img src="images/stock-photos/hcnj-stock_van-vorst-park-brownstones.webp" alt="Van Vorst Park brownstones" width="1200" height="1200">
+          <a class="stock-dl" href="downloads/stock-photos/hcnj-stock_van-vorst-park-brownstones.png" download aria-label="Download Van Vorst Park brownstones (high-res PNG)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg><span>High-res</span></a>
+        </figure>
+        <figure class="stock-item">
+          <img src="images/stock-photos/hcnj-stock_courthouse-rotunda.webp" alt="Courthouse rotunda" width="1200" height="796">
+          <a class="stock-dl" href="downloads/stock-photos/hcnj-stock_courthouse-rotunda.png" download aria-label="Download Courthouse rotunda (high-res PNG)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg><span>High-res</span></a>
+        </figure>
+        <figure class="stock-item">
+          <img src="images/stock-photos/hcnj-stock_waterfront-park.webp" alt="Waterfront park" width="1200" height="1598">
+          <a class="stock-dl" href="downloads/stock-photos/hcnj-stock_waterfront-park.png" download aria-label="Download Waterfront park (high-res PNG)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg><span>High-res</span></a>
+        </figure>
+        <figure class="stock-item">
+          <img src="images/stock-photos/hcnj-stock_butterfly.webp" alt="Butterfly" width="1200" height="900">
+          <a class="stock-dl" href="downloads/stock-photos/hcnj-stock_butterfly.png" download aria-label="Download Butterfly (high-res PNG)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg><span>High-res</span></a>
+        </figure>
+        <figure class="stock-item">
+          <img src="images/stock-photos/hcnj-stock_bridge-at-night.webp" alt="Bridge at night" width="1200" height="800">
+          <a class="stock-dl" href="downloads/stock-photos/hcnj-stock_bridge-at-night.png" download aria-label="Download Bridge at night (high-res PNG)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg><span>High-res</span></a>
+        </figure>
+        <figure class="stock-item">
+          <img src="images/stock-photos/hcnj-stock_marsh-reeds.webp" alt="Marsh reeds" width="1200" height="800">
+          <a class="stock-dl" href="downloads/stock-photos/hcnj-stock_marsh-reeds.png" download aria-label="Download Marsh reeds (high-res PNG)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg><span>High-res</span></a>
+        </figure>
+        <figure class="stock-item">
+          <img src="images/stock-photos/hcnj-stock_soccer-stadium.webp" alt="Soccer stadium" width="1200" height="1600">
+          <a class="stock-dl" href="downloads/stock-photos/hcnj-stock_soccer-stadium.png" download aria-label="Download Soccer stadium (high-res PNG)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg><span>High-res</span></a>
+        </figure>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ── MEDIA: HCNJ VIDEO ─────────────────────────────────────── -->
+  <div class="page" tabindex="-1" id="media-hcnj-video">
+
+    <div style="background:var(--white); border-bottom:1px solid var(--light-gray); padding:64px 80px; display:flex; align-items:center; justify-content:center;">
+      <video src="images/media/hcnj-video_web.mp4" poster="images/media/hcnj-video_poster.webp" autoplay muted loop playsinline aria-label="HCNJ letters masked with a video of Hudson County landscapes" style="width:100%; max-width:1100px; height:auto; display:block;"></video>
+    </div>
+
+    <div class="section-content">
+      <div class="section-label">Media</div>
+      <h2 class="section-title">HCNJ video</h2>
+      <div class="section-body">
+        <p>The HCNJ letters act as a window onto the county. Landscape footage of Hudson County's parks, waterfronts, and wildlife plays behind the letterforms, so the name itself is filled with the places it represents.</p>
+        <p>Use the video as an opener or closer for presentations, event screens, social posts, and digital displays. The download is the full-resolution master (2478 &times; 1080, 14 seconds, no audio).</p>
+      </div>
+      <a href="downloads/HCNJ-video.mp4" download style="display:inline-flex; align-items:center; gap:8px; background:var(--charcoal); color:var(--white); font-family:'Founders Grotesk',sans-serif; font-size:13px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; padding:12px 20px; text-decoration:none; margin-top:24px;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Download video (40 MB)
+      </a>
+    </div>
+
+  </div>
+
+
+  <!-- ── MEDIA: COURTHOUSE ILLUSTRATION ─────────────────────────────── -->
   <div class="page" tabindex="-1" id="illustration-courthouse">
 
     <div style="background:var(--teal); border-bottom:1px solid var(--deep-teal); padding:80px; display:flex; align-items:center; justify-content:center; min-height:480px;">
@@ -5601,8 +5726,8 @@
     </div>
 
     <div class="section-content">
-      <div class="section-label">Illustration</div>
-      <h2 class="section-title">Courthouse</h2>
+      <div class="section-label">Media</div>
+      <h2 class="section-title">Courthouse illustration</h2>
       <div class="section-body">
         <p>The courthouse illustration is a detailed line drawing of the historic Hudson County Courthouse in Jersey City, the William J. Brennan Courthouse. Its Beaux-Arts facade, from the domed cupola to the columned portico and grand front steps, is one of the most recognizable civic landmarks in the county.</p>
         <p>The illustration adds a sense of place and heritage to Hudson County communications. It is a supporting graphic, not a logo: it works alongside the identity to evoke history, civic pride, and the institutions of county government, and never stands in for the County Seal or the full logo.</p>
@@ -5790,7 +5915,7 @@
 
 
   <!-- ── ICONOGRAPHY INTRO ─────────────────────────────────── -->
-  <div class="page" tabindex="-1" id="icon-intro">
+  <div class="page" tabindex="-1" id="icon-intro" style="display:none !important;">
     <div class="intro-layout">
       <div style="font-size:11px; font-weight:600; letter-spacing:0.13em; text-transform:uppercase; color:var(--charcoal);">Iconography</div>
       <p class="intro-statement">Inspired by our logo and sans-serif typeface Founders, our iconography utilizes simple forms to efficiently communicate ideas.</p>
@@ -5808,7 +5933,7 @@
 
       <!-- Left: label, title, body, download button -->
       <div>
-        <div class="section-label" style="margin-bottom:20px;">Iconography</div>
+        <div class="section-label" style="margin-bottom:20px;">Media</div>
         <h2 class="section-title" style="margin-bottom:24px;">Icon library</h2>
         <div class="section-body" style="margin-bottom:32px;">
           <p>A growing set of icons designed to extend the Hudson County brand into digital and print interfaces. Each icon is optimized for use at 24px and above, with consistent stroke weights derived from the primary typeface.</p>

@@ -122,7 +122,14 @@ section downloads its own ZIP instead of one big `HCNJ-logos.zip` (removed):
 | H logo mark          | H logo mark                                       | `downloads/h-logo.zip`           | `h-mark` |
 | Craig Guy lockups    | Full / Seal / Seal & portrait / HCNJ lockup       | `downloads/craig-guy-lockups.zip`| `craig-guy_{full-lockup,seal-lockup,seal-portrait-lockup,hcnj-lockup}` |
 
-The Illustration > Courthouse page downloads `downloads/courthouse-illustration.zip`
+The Media > Stock photos page offers `downloads/HCNJ-stock-photos.zip` (all 16 PNGs as
+supplied) plus a per-photo download of each full-res PNG from `downloads/stock-photos/hcnj-stock_<name>.png`.
+The grid shows 1200px WebP copies from `images/stock-photos/`. The Media > HCNJ video page
+plays a 1600px, 30fps, faststart copy (`images/media/hcnj-video_web.mp4`, about 3 MB) and
+downloads the full master `downloads/HCNJ-video.mp4`. Regenerate the web copies with ffmpeg
+if either source changes.
+
+The Media > Courthouse illustration page downloads `downloads/courthouse-illustration.zip`
 (`.ai`, `.svg`, `.png`, `.jpg` as supplied, one `courthouse-illustration/` folder).
 The page itself shows recolored, viewBox-cropped SVGs in `images/illustrations/courthouse_<color>.svg`,
 built by `generate-courthouse-variants.js` from the master in

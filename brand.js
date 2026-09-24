@@ -171,7 +171,7 @@ const BRAND = {
       ],
     },
     {
-      group: "Photography",
+      group: "Media",
       items: [
         { label: "Introduction", id: "photo-intro" },
         {
@@ -192,12 +192,10 @@ const BRAND = {
             { label: "Don'ts",    id: "photo-community-donts" },
           ],
         },
-      ],
-    },
-    {
-      group: "Illustration",
-      items: [
-        { label: "Courthouse", id: "illustration-courthouse" },
+        { label: "Stock photos",            id: "media-stock-photos" },
+        { label: "HCNJ video",              id: "media-hcnj-video" },
+        { label: "Courthouse illustration", id: "illustration-courthouse" },
+        { label: "Icon library",            id: "icon-library" },
       ],
     },
     {
@@ -207,13 +205,6 @@ const BRAND = {
         { label: "Swag",          id: "app-swag" },
         { label: "Signage",       id: "app-signage" },
         { label: "Digital media", id: "app-digital" },
-      ],
-    },
-    {
-      group: "Iconography",
-      items: [
-        { label: "Introduction",  id: "icon-intro" },
-        { label: "Icon library",  id: "icon-library" },
       ],
     },
   ],
