@@ -122,6 +122,13 @@ section downloads its own ZIP instead of one big `HCNJ-logos.zip` (removed):
 | H logo mark          | H logo mark                                       | `downloads/h-logo.zip`           | `h-mark` |
 | Craig Guy lockups    | Full / Seal / Seal & portrait / HCNJ lockup       | `downloads/craig-guy-lockups.zip`| `craig-guy_{full-lockup,seal-lockup,seal-portrait-lockup,hcnj-lockup}` |
 
+The Illustration > Courthouse page downloads `downloads/courthouse-illustration.zip`
+(`.ai`, `.svg`, `.png`, `.jpg` as supplied, one `courthouse-illustration/` folder).
+The page itself shows recolored, viewBox-cropped SVGs in `images/illustrations/courthouse_<color>.svg`,
+built by `generate-courthouse-variants.js` from the master in
+`Hudson County/Courthouse illustration/`. The master is `stroke="#000"` line art, not
+`fill="black"`, and its crop box is hardcoded in the script.
+
 Avatar & favicon download their own ZIPs generated client-side (`hcnj-avatars.zip`,
 `hcnj-favicons.zip`) - not static files. Co-sponsorship has no download button.
 `hcnj_wordmark-small` (Full logo "Text only") is deliberately not in any ZIP: it

@@ -195,6 +195,12 @@ const BRAND = {
       ],
     },
     {
+      group: "Illustration",
+      items: [
+        { label: "Courthouse", id: "illustration-courthouse" },
+      ],
+    },
+    {
       group: "Applications",
       items: [
         { label: "Introduction",  id: "app-intro" },
